@@ -1,8 +1,14 @@
 (() => {
   const data = window.TIMELINE_DATA || { stats:{}, experience_timeline:[], release_timeline:[] };
   const mediaAssets = Array.isArray(window.MEDIA_ASSETS) ? window.MEDIA_ASSETS : [];
+  const chapter = window.CHAPTER_2026_06 || null;
   const events = [...(data.experience_timeline || [])].sort((a,b) => new Date(a.occurred_at_start) - new Date(b.occurred_at_start));
-  const spreads = [{kind:'intro'}, ...events.map(event => ({kind:'event', event}))];
+  const chapterEventIds = new Set(chapter?.event_ids || []);
+
+  const spreads = [{kind:'intro'}];
+  if (chapter) spreads.push({kind:'chapter', chapter});
+  events.forEach(event => spreads.push({kind:'event', event}));
+
   let current = 0;
   let mobileSide = 'left';
   let flipping = false;
@@ -23,10 +29,12 @@
   const drawerTitle = $('#drawerTitle');
   const indexDialog = $('#indexDialog');
   const indexList = $('#indexList');
+  const mobileTabs = $('#mobileTabs');
 
   const isMobile = () => window.innerWidth <= 820;
   const pad = n => String(n).padStart(2,'0');
   const esc = s => String(s ?? '').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+  const cleanText = text => (text || '').replace(/\s+/g,' ').trim();
   const fmtShort = value => {
     if (!value) return '';
     const d = new Date(value);
@@ -37,7 +45,6 @@
     const d = new Date(value);
     return Number.isNaN(d.getTime()) ? value : `${d.getFullYear()}.${pad(d.getMonth()+1)}.${pad(d.getDate())}`;
   };
-  const cleanText = text => (text || '').replace(/\s+/g,' ').trim();
 
   function displayEventDate(event) {
     const start = event.occurred_at_start;
@@ -62,7 +69,10 @@
   }
 
   function typeLabel(value) {
-    const map = { magazine:'杂志拍摄', shooting:'拍摄', live:'直播', concert:'演出', travel:'出行', daily:'日常', interview:'采访', event:'事件' };
+    const map = {
+      magazine:'杂志拍摄', shooting:'拍摄', live:'直播', concert:'演出', travel:'出行',
+      daily:'日常', interview:'采访', social:'公开记录', other:'档案节点', event:'事件'
+    };
     return map[value] || value || '事件';
   }
 
@@ -72,19 +82,17 @@
     return (data.release_timeline || []).filter(p => (p.linked_event_ids || []).includes(id)).sort((a,b) => new Date(a.published_at) - new Date(b.published_at));
   }
 
-  function localAssets(event) {
+  function assetsFor(event, roles=null) {
     return mediaAssets
-      .filter(a => a.event_id === event.event_id && a.local_path)
+      .filter(a => a.event_id === event.event_id && a.local_path && (!roles || roles.includes(a.display_role || 'gallery')))
       .sort((a,b) => (Number(a.sort_order)||0) - (Number(b.sort_order)||0));
   }
 
-  function eventImages(event) {
-    const local = localAssets(event).map(a => ({ src:a.local_path, caption:a.caption || '', local:true }));
-    if (local.length) return local;
+  function fallbackImages(event) {
     const urls = [];
     for (const p of linkedPosts(event)) {
       for (const u of (p.image_urls || [])) {
-        if (u && !urls.some(item => item.src === u)) urls.push({src:u, caption:'关联公开物料', local:false});
+        if (u && !urls.some(item => item.local_path === u)) urls.push({local_path:u, caption:'关联公开物料', asset_type:'image', remote:true});
         if (urls.length >= 3) return urls;
       }
     }
@@ -109,6 +117,35 @@
     </div>`;
   }
 
+  function mediaFigure(asset, i=0, compact=false) {
+    const cls = compact ? 'source-media-card' : `memory-photo photo-${i+1}`;
+    const tape = compact ? '' : `<span class="tape tape-${i+1}"></span>`;
+    const caption = asset.caption ? `<figcaption>${esc(asset.caption)}</figcaption>` : '';
+    if ((asset.asset_type || '').toLowerCase() === 'video') {
+      return `<figure class="${cls} video-card">${tape}
+        <video controls playsinline preload="metadata" ${asset.poster_path ? `poster="${esc(asset.poster_path)}"` : ''}>
+          <source src="${esc(asset.local_path)}" type="video/mp4">
+        </video>${caption}</figure>`;
+    }
+    return `<figure class="${cls}">${tape}
+      <img src="${esc(asset.local_path)}" alt="${esc(asset.caption || '事件素材')}" ${asset.remote ? 'referrerpolicy="no-referrer"' : ''} loading="lazy">${caption}</figure>`;
+  }
+
+  function memoryGallery(event) {
+    let assets = assetsFor(event, ['cover','gallery']);
+    if (!assets.length && (event.tags || []).includes('clue')) assets = assetsFor(event, ['evidence']);
+    if (!assets.length) assets = fallbackImages(event);
+    if (!assets.length) return '';
+    const show = assets.slice(0,3);
+    return `<div class="memory-gallery ${show.length===1?'single':''}" aria-label="事件素材">${show.map((a,i)=>mediaFigure(a,i)).join('')}</div>`;
+  }
+
+  function sourceMedia(event) {
+    const assets = assetsFor(event, ['source']);
+    if (!assets.length) return '';
+    return `<div class="source-media"><div class="source-media-label">LOCAL SOURCE · 本地来源截图</div>${assets.slice(0,2).map(a=>mediaFigure(a,0,true)).join('')}</div>`;
+  }
+
   function introLeft() {
     return `<span class="hand-date">ARCHIVE 00</span>
       <h2 class="intro-title">一本关于<br>“发生”与“被看见”的手账</h2>
@@ -118,93 +155,128 @@
         <div class="legend-item"><span class="legend-badge pink">精确</span><span>公开资料可以确认具体日期。</span></div>
         <div class="legend-item"><span class="legend-badge gold">范围</span><span>事件持续数日，保留开始与结束时间。</span></div>
         <div class="legend-item"><span class="legend-badge mix">约 / 推定</span><span>根据采访、造型、行程或其他公开证据推定，不写成确定事实。</span></div>
-      </div>
-      <span class="page-number">01</span>`;
+      </div><span class="page-number">01</span>`;
   }
 
   function introRight() {
     const s = data.stats || {};
-    return `<span class="right-kicker">HOW TO READ · V0.2</span>
-      <h2 class="right-title">先把真实照片放进来，再继续长大。</h2>
-      <p class="right-sub">这一版开始使用粉 #FF8AA1 与金 #FFE25B，并把本地素材与事件建立连接。</p>
+    return `<span class="right-kicker">HOW TO READ · V0.3</span>
+      <h2 class="right-title">从几个 demo，走进第一个完整月份。</h2>
+      <p class="right-sub">V0.3 先把 2026 年 6 月做成完整章节：主图、直播截图、视频、公开帖子与证据线索开始分层展示。</p>
       <div class="stat-grid">
-        <div class="stat-card"><div class="stat-num">${esc(s.events ?? events.length)}</div><div class="stat-label">现实事件</div></div>
-        <div class="stat-card"><div class="stat-num">${esc(s.posts ?? (data.release_timeline||[]).length)}</div><div class="stat-label">公开发布记录</div></div>
-        <div class="stat-card"><div class="stat-num">${esc(s.post_event_links ?? 0)}</div><div class="stat-label">事件—帖子关联</div></div>
-        <div class="stat-card"><div class="stat-num">${esc(mediaAssets.filter(a=>a.event_id).length)}</div><div class="stat-label">已挂入本地图片</div></div>
+        <div class="stat-card"><div class="stat-num">${esc(s.chapter_events ?? 14)}</div><div class="stat-label">六月章节节点</div></div>
+        <div class="stat-card"><div class="stat-num">${esc(s.posts ?? (data.release_timeline||[]).length)}</div><div class="stat-label">完整公开发布库</div></div>
+        <div class="stat-card"><div class="stat-num">${esc(mediaAssets.filter(a=>a.event_id && chapterEventIds.has(a.event_id)).length)}</div><div class="stat-label">六月本地素材</div></div>
+        <div class="stat-card"><div class="stat-num">2</div><div class="stat-label">阅读时间：现实 / 公开</div></div>
       </div>
-      <div class="quote-card">“同一张照片，有它被拍下的那一天，也有我们终于看见它的那一天。”</div>
+      <div class="quote-card">“一整个月连续翻下来，才知道哪些页面值得做成故事，哪些只应该留作证据。”</div>
       <span class="page-number">02</span>`;
   }
 
-  function imageGallery(event) {
-    const images = eventImages(event);
-    if (!images.length) return '';
-    const show = images.slice(0,3);
-    return `<div class="memory-gallery ${show.length === 1 ? 'single' : ''}" aria-label="事件照片">
-      ${show.map((img,i) => `<figure class="memory-photo photo-${i+1}">
-        <span class="tape tape-${i+1}"></span>
-        <img src="${esc(img.src)}" alt="${esc(img.caption || event.title)}" ${img.local ? '' : 'referrerpolicy="no-referrer"'} loading="lazy">
-        ${img.caption ? `<figcaption>${esc(img.caption)}</figcaption>` : ''}
-      </figure>`).join('')}
+  function chapterLeft(ch, pageNo) {
+    return `<div class="chapter-page">
+      <span class="chapter-eyebrow">CHAPTER 01 · REAL TIME</span>
+      <div class="chapter-month">06</div>
+      <div class="chapter-year">2026</div>
+      <h2>${esc(ch.subtitle || '六月')}</h2>
+      <p>${esc(ch.description || '')}</p>
+      <div class="chapter-stickers"><span>LIVE</span><span>PHOTO</span><span>MAGAZINE</span><span>DAILY</span></div>
+      <div class="chapter-note">粉色记录靠近，金色标记线索。<br>从这一章开始，手账按现实时间连续展开。</div>
+      <span class="page-number">${pad(pageNo)}</span>
     </div>`;
   }
 
+  function chapterRight(ch, pageNo) {
+    const chapterEvents = events.filter(e => chapterEventIds.has(e.event_id));
+    return `<span class="right-kicker">CHAPTER INDEX · ${chapterEvents.length} NODES</span>
+      <h2 class="right-title">六月，先从这些节点开始。</h2>
+      <p class="right-sub">不是把每条帖子都变成一页，而是先建立现实事件，再把公开记录挂回它们身上。</p>
+      <div class="chapter-list">${chapterEvents.map((e,i)=>`<button type="button" class="chapter-list-row" data-jump-event="${esc(e.event_id)}"><span>${esc(displayEventDate(e).replace(/^2026\./,''))}</span><b>${esc(e.title)}</b><em>${esc(typeLabel(e.event_type))}</em></button>`).join('')}</div>
+      <span class="page-number">${pad(pageNo)}</span>`;
+  }
+
+  function clueLeft(event, pageNo) {
+    const evidence = assetsFor(event, ['evidence']);
+    return `<span class="hand-date">LOCATION CLUE · 公开线索</span>
+      <div class="clue-sheet">
+        <div class="clue-pin">06.12</div>
+        <h2>${esc(event.title)}</h2>
+        <div class="clue-route"><span>北京</span><i>→</i><span>山东</span><i>→</i><span>安徽</span></div>
+        <p>${esc(event.description || '')}</p>
+        <div class="clue-warning">IP 属地是平台公开字段，只记录其变化，不直接等同于真实行程。</div>
+      </div>
+      ${evidence.length ? `<div class="clue-evidence">${mediaFigure(evidence[0],0,true)}</div>` : ''}
+      <span class="page-number">${pad(pageNo)}</span>`;
+  }
+
   function eventLeft(event, pageNo) {
+    if ((event.tags || []).includes('clue')) return clueLeft(event,pageNo);
     const [precisionText, precisionClass] = precisionLabel(event);
-    const tags = (event.tags || []).map(t => `<span class="tag">${esc(t)}</span>`).join('');
-    const note = event.date_precision === 'inferred' || event.evidence_note ? `<div class="info-note"><div class="note-title">时间依据</div>${esc(event.evidence_note || '该时间来自公开资料推定，后续可继续补充证据。')}</div>` : '';
+    const tags = (event.tags || []).filter(t=>t!=='clue').map(t => `<span class="tag">${esc(t)}</span>`).join('');
+    const note = event.date_precision === 'inferred' || event.evidence_note ? `<div class="info-note"><div class="note-title">${event.date_precision==='inferred'?'时间依据':'档案备注'}</div>${esc(event.evidence_note || '该时间来自公开资料推定，后续可继续补充证据。')}</div>` : '';
     return `<span class="hand-date">REAL TIME · ${esc(typeLabel(event.event_type))}</span>
       <div class="event-date">${esc(displayEventDate(event))}</div>
       <h2 class="event-title">${esc(event.title)}</h2>
       <div class="event-meta">
         <span class="tag ${precisionClass}">${esc(precisionText)}</span>
         <span class="tag ${event.confidence === 'confirmed' ? 'confirmed' : ''}">${esc(confidenceLabel(event.confidence))}</span>
-        ${event.location_text ? `<span class="tag location">⌖ ${esc(event.location_text)}</span>` : ''}
-        ${tags}
+        ${event.location_text ? `<span class="tag location">⌖ ${esc(event.location_text)}</span>` : ''}${tags}
       </div>
       <div class="event-rule"></div>
-      <p class="event-desc">${esc(event.description || '这一天的细节还在继续补全。')}</p>
-      ${note}
+      <p class="event-desc">${esc(event.description || '这一天的细节还在继续补全。')}</p>${note}
       <div class="participants">参与：${esc((event.participants || []).join('、') || '待补充')}</div>
-      ${imageGallery(event)}
-      <span class="page-number">${pad(pageNo)}</span>`;
+      ${memoryGallery(event)}<span class="page-number">${pad(pageNo)}</span>`;
   }
 
   function eventRight(event, pageNo) {
     const posts = linkedPosts(event);
+    const sources = sourceMedia(event);
+    const clue = (event.tags || []).includes('clue');
     if (!posts.length) {
-      return `<span class="right-kicker">RELEASE TIME</span>
-        <h2 class="right-title">后来，我们什么时候看见它？</h2>
-        <p class="right-sub">这个现实事件已经建立，但暂时还没有关联公开发布记录。</p>
-        <div class="empty-state"><div><div class="seal">待续</div><div>等待后续物料与事件建立连接。</div></div></div>
+      return `<span class="right-kicker">${clue?'EVIDENCE NOTE':'RELEASE TIME'}</span>
+        <h2 class="right-title">${clue?'这是一条线索，不是一段被确认的行程。':'后来，我们什么时候看见它？'}</h2>
+        <p class="right-sub">${clue?'保留平台公开字段与原截图，等待它与更多事件、帖子或公开资料交叉核验。':'这个现实事件已经建立，但暂时还没有关联到公开发布数据库中的帖子。'}</p>
+        ${sources || `<div class="empty-state"><div><div class="seal">待续</div><div>等待后续物料与事件建立连接。</div></div></div>`}
         <span class="page-number">${pad(pageNo)}</span>`;
     }
     const visible = posts.slice(0, Math.min(posts.length, 5));
     return `<span class="right-kicker">RELEASE TIME · ${posts.length} RECORD${posts.length>1?'S':''}</span>
       <h2 class="right-title">后来，我们看见了这些。</h2>
-      <p class="right-sub">从现实发生，到社交平台公开，中间可能隔着几小时、几天，甚至更久。</p>
-      <div class="release-line">${visible.map(releaseItem).join('')}</div>
+      <p class="right-sub">公开记录按发布时间排列；它们可以与现实发生同日，也可能晚几小时、几天甚至更久。</p>
+      <div class="release-line">${visible.map(releaseItem).join('')}</div>${sources}
       ${posts.length > visible.length ? `<button class="archive-button" type="button" data-open-drawer="${esc(event.event_id)}">打开物料抽屉 · ${posts.length} 条</button>` : ''}
       <span class="page-number">${pad(pageNo)}</span>`;
+  }
+
+  function tabLabels(item) {
+    if (item.kind === 'intro') return ['说明页','统计页'];
+    if (item.kind === 'chapter') return ['章节页','目录页'];
+    if ((item.event.tags || []).includes('clue')) return ['线索页','证据页'];
+    return ['经历页','公开页'];
+  }
+
+  function syncMobileTabs() {
+    const item = spreads[current];
+    const labels = tabLabels(item);
+    const buttons = mobileTabs.querySelectorAll('button');
+    buttons[0].textContent = labels[0];
+    buttons[1].textContent = labels[1];
+    buttons.forEach(btn => btn.classList.toggle('active', btn.dataset.side === mobileSide));
   }
 
   function updateNavState() {
     if (isMobile()) {
       const firstPage = current === 0 && mobileSide === 'left';
       const lastPage = current === spreads.length - 1 && mobileSide === 'right';
-      prevBtn.disabled = firstPage;
-      nextBtn.disabled = lastPage;
+      prevBtn.disabled = firstPage; nextBtn.disabled = lastPage;
       const pageIndex = current * 2 + (mobileSide === 'right' ? 2 : 1);
       pageCounter.textContent = `${pad(pageIndex)} / ${pad(spreads.length * 2)}`;
-      prevBtn.setAttribute('aria-label', mobileSide === 'right' ? '返回经历页' : '上一页');
-      nextBtn.setAttribute('aria-label', mobileSide === 'left' ? '查看公开页' : '下一页');
+      prevBtn.setAttribute('aria-label', mobileSide === 'right' ? '返回左页' : '上一页');
+      nextBtn.setAttribute('aria-label', mobileSide === 'left' ? '查看右页' : '下一页');
     } else {
-      prevBtn.disabled = current === 0;
-      nextBtn.disabled = current === spreads.length - 1;
+      prevBtn.disabled = current === 0; nextBtn.disabled = current === spreads.length - 1;
       pageCounter.textContent = `${pad(current+1)} / ${pad(spreads.length)}`;
-      prevBtn.setAttribute('aria-label','上一事件');
-      nextBtn.setAttribute('aria-label','下一事件');
+      prevBtn.setAttribute('aria-label','上一事件'); nextBtn.setAttribute('aria-label','下一事件');
     }
   }
 
@@ -212,184 +284,79 @@
     const item = spreads[current];
     if (!preserveSide) mobileSide = 'left';
     spread.classList.toggle('mobile-right', mobileSide === 'right');
+    spread.classList.toggle('chapter-spread', item.kind === 'chapter');
+    spread.classList.toggle('clue-spread', item.kind === 'event' && (item.event.tags || []).includes('clue'));
     syncMobileTabs();
+    const base = current * 2 + 1;
     if (item.kind === 'intro') {
-      leftPage.innerHTML = introLeft();
-      rightPage.innerHTML = introRight();
-      rangeLabel.textContent = 'ARCHIVE · START';
+      leftPage.innerHTML = introLeft(); rightPage.innerHTML = introRight(); rangeLabel.textContent = 'ARCHIVE · START';
+    } else if (item.kind === 'chapter') {
+      leftPage.innerHTML = chapterLeft(item.chapter,base); rightPage.innerHTML = chapterRight(item.chapter,base+1); rangeLabel.textContent = '2026 · 06 · CHAPTER 01';
     } else {
-      const base = current * 2 + 1;
-      leftPage.innerHTML = eventLeft(item.event, base);
-      rightPage.innerHTML = eventRight(item.event, base + 1);
+      leftPage.innerHTML = eventLeft(item.event,base); rightPage.innerHTML = eventRight(item.event,base+1);
       const d = new Date(item.event.occurred_at_start);
       rangeLabel.textContent = Number.isNaN(d.getTime()) ? 'REAL TIME' : `${d.getFullYear()} · ${String(d.getMonth()+1).padStart(2,'0')}`;
     }
-    updateNavState();
-    renderRail();
+    updateNavState(); renderRail();
   }
 
   function renderRail() {
-    railTrack.innerHTML = spreads.map((item,i) => `<div class="rail-dot-wrap ${i===current?'active':''}" data-jump="${i}" title="${item.kind==='intro'?'开始':esc(item.event.title)}"><span class="rail-dot"></span></div>`).join('');
+    railTrack.innerHTML = spreads.map((item,i) => {
+      const title = item.kind==='intro' ? '开始' : item.kind==='chapter' ? `${item.chapter.title} · 章节页` : item.event.title;
+      const special = item.kind==='chapter' ? ' chapter-dot' : '';
+      return `<div class="rail-dot-wrap ${i===current?'active':''}${special}" data-jump="${i}" title="${esc(title)}"><span class="rail-dot"></span></div>`;
+    }).join('');
   }
 
   function flipToSpread(target, dir, side='left') {
     if (flipping || target < 0 || target >= spreads.length) return;
-    flipping = true;
-    spread.classList.add(dir > 0 ? 'flip-next' : 'flip-prev');
-    setTimeout(() => {
-      current = target;
-      mobileSide = side;
-      render({preserveSide:true});
-    }, 315);
+    flipping = true; spread.classList.add(dir > 0 ? 'flip-next' : 'flip-prev');
+    setTimeout(() => { current = target; mobileSide = side; render({preserveSide:true}); }, 315);
     setTimeout(() => { spread.classList.remove('flip-next','flip-prev'); flipping = false; }, 700);
   }
 
-  function goSpread(dir) {
-    flipToSpread(current + dir, dir, 'left');
-  }
-
+  function goSpread(dir) { flipToSpread(current + dir, dir, 'left'); }
   function goPage(dir) {
     if (!isMobile()) return goSpread(dir);
     if (flipping) return;
     if (dir > 0) {
-      if (mobileSide === 'left') {
-        mobileSide = 'right';
-        spread.classList.add('mobile-right');
-        syncMobileTabs();
-        updateNavState();
-        return;
-      }
+      if (mobileSide === 'left') { mobileSide='right'; spread.classList.add('mobile-right'); syncMobileTabs(); updateNavState(); return; }
       if (current < spreads.length - 1) flipToSpread(current + 1, 1, 'left');
       return;
     }
-    if (mobileSide === 'right') {
-      mobileSide = 'left';
-      spread.classList.remove('mobile-right');
-      syncMobileTabs();
-      updateNavState();
-      return;
-    }
+    if (mobileSide === 'right') { mobileSide='left'; spread.classList.remove('mobile-right'); syncMobileTabs(); updateNavState(); return; }
     if (current > 0) flipToSpread(current - 1, -1, 'right');
   }
 
   function openDrawer(eventId) {
-    const event = events.find(e => e.event_id === eventId);
-    if (!event) return;
-    const posts = linkedPosts(event);
-    drawerTitle.textContent = `${event.title} · ${posts.length} 条公开记录`;
+    const event = events.find(e => e.event_id === eventId); if (!event) return;
+    const posts = linkedPosts(event); drawerTitle.textContent = `${event.title} · ${posts.length} 条公开记录`;
     drawerList.innerHTML = posts.map(p => {
       const text = cleanText(p.text || p.title || '无公开文案');
-      return `<div class="drawer-post">
-        <div><div>${platformChip(p.platform)}</div><div class="release-date" style="margin-top:7px">${esc(fmtYearDate(p.published_at))}</div></div>
-        <div><div class="owner">${esc(p.owner || '')}</div><div class="release-text" style="-webkit-line-clamp:4;margin-top:5px">${esc(text)}</div></div>
-        <div>${p.post_url ? `<a href="${esc(p.post_url)}" target="_blank" rel="noreferrer">原帖 ↗</a>` : ''}</div>
-      </div>`;
-    }).join('');
-    drawer.showModal();
+      return `<div class="drawer-post"><div><div>${platformChip(p.platform)}</div><div class="release-date" style="margin-top:7px">${esc(fmtYearDate(p.published_at))}</div></div><div><div class="owner">${esc(p.owner || '')}</div><div class="release-text" style="-webkit-line-clamp:4;margin-top:5px">${esc(text)}</div></div><div>${p.post_url ? `<a href="${esc(p.post_url)}" target="_blank" rel="noreferrer">原帖 ↗</a>` : ''}</div></div>`;
+    }).join(''); drawer.showModal();
   }
 
+  function findSpreadByEventId(eventId) { return spreads.findIndex(s => s.kind==='event' && s.event.event_id===eventId); }
   function buildIndex() {
-    indexList.innerHTML = events.map((e,i) => `<div class="index-row" data-event-index="${i+1}">
-      <div class="index-date">${esc(displayEventDate(e))}</div>
-      <div><div class="index-title">${esc(e.title)}</div><div class="owner" style="margin-top:5px">${esc(e.location_text || '')}</div></div>
-      <span class="index-type">${esc(typeLabel(e.event_type))}</span>
-    </div>`).join('');
+    indexList.innerHTML = events.map(e => `<div class="index-row" data-event-id="${esc(e.event_id)}"><div class="index-date">${esc(displayEventDate(e))}</div><div><div class="index-title">${esc(e.title)}</div><div class="owner" style="margin-top:5px">${esc(e.location_text || '')}</div></div><span class="index-type">${esc(typeLabel(e.event_type))}</span></div>`).join('');
   }
 
-  function syncMobileTabs() {
-    document.querySelectorAll('#mobileTabs button').forEach(btn => btn.classList.toggle('active', btn.dataset.side === mobileSide));
-  }
+  $('#openBook').addEventListener('click', () => { landing.classList.add('opening'); setTimeout(()=>{ landing.style.display='none'; reader.classList.add('visible'); reader.setAttribute('aria-hidden','false'); render(); },860); });
+  $('#closeBook').addEventListener('click', () => { reader.classList.remove('visible'); reader.setAttribute('aria-hidden','true'); setTimeout(()=>{ reader.style.display=''; landing.style.display='grid'; landing.classList.remove('opening'); current=0; mobileSide='left'; },350); });
+  prevBtn.addEventListener('click',()=>goPage(-1)); nextBtn.addEventListener('click',()=>goPage(1));
 
-  $('#openBook').addEventListener('click', () => {
-    landing.classList.add('opening');
-    setTimeout(() => {
-      landing.style.display = 'none';
-      reader.classList.add('visible');
-      reader.setAttribute('aria-hidden','false');
-      render();
-    }, 860);
-  });
-
-  $('#closeBook').addEventListener('click', () => {
-    reader.classList.remove('visible');
-    reader.setAttribute('aria-hidden','true');
-    setTimeout(() => {
-      reader.style.display = '';
-      landing.style.display = 'grid';
-      landing.classList.remove('opening');
-      current = 0;
-      mobileSide = 'left';
-    }, 350);
-  });
-
-  prevBtn.addEventListener('click', () => goPage(-1));
-  nextBtn.addEventListener('click', () => goPage(1));
-
-  railTrack.addEventListener('click', e => {
-    const hit = e.target.closest('[data-jump]');
-    if (!hit || flipping) return;
-    const target = Number(hit.dataset.jump);
-    if (target === current) {
-      mobileSide = 'left';
-      spread.classList.remove('mobile-right');
-      syncMobileTabs();
-      updateNavState();
-      return;
-    }
-    flipToSpread(target, target > current ? 1 : -1, 'left');
-  });
-
+  railTrack.addEventListener('click', e => { const hit=e.target.closest('[data-jump]'); if(!hit||flipping)return; const target=Number(hit.dataset.jump); if(target===current){mobileSide='left';spread.classList.remove('mobile-right');syncMobileTabs();updateNavState();return;} flipToSpread(target,target>current?1:-1,'left'); });
   document.body.addEventListener('click', e => {
-    const btn = e.target.closest('[data-open-drawer]');
-    if (btn) openDrawer(btn.dataset.openDrawer);
+    const drawerBtn=e.target.closest('[data-open-drawer]'); if(drawerBtn) openDrawer(drawerBtn.dataset.openDrawer);
+    const jumpEvent=e.target.closest('[data-jump-event]'); if(jumpEvent){ const target=findSpreadByEventId(jumpEvent.dataset.jumpEvent); if(target>=0) flipToSpread(target,target>current?1:-1,'left'); }
   });
-
-  $('#drawerClose').addEventListener('click', () => drawer.close());
-  $('#indexBtn').addEventListener('click', () => { buildIndex(); indexDialog.showModal(); });
-  $('#indexClose').addEventListener('click', () => indexDialog.close());
-  indexList.addEventListener('click', e => {
-    const row = e.target.closest('[data-event-index]');
-    if (!row) return;
-    current = Number(row.dataset.eventIndex);
-    mobileSide = 'left';
-    indexDialog.close();
-    render({preserveSide:true});
-  });
-
-  document.addEventListener('keydown', e => {
-    if (!reader.classList.contains('visible')) return;
-    if (e.key === 'ArrowRight') goPage(1);
-    if (e.key === 'ArrowLeft') goPage(-1);
-    if (e.key === 'Escape') { if (drawer.open) drawer.close(); if (indexDialog.open) indexDialog.close(); }
-  });
-
-  $('#mobileTabs').addEventListener('click', e => {
-    const btn = e.target.closest('button[data-side]');
-    if (!btn) return;
-    mobileSide = btn.dataset.side;
-    spread.classList.toggle('mobile-right', mobileSide === 'right');
-    syncMobileTabs();
-    updateNavState();
-  });
-
-  let touchX = null;
-  spread.addEventListener('touchstart', e => { touchX = e.changedTouches[0].clientX; }, {passive:true});
-  spread.addEventListener('touchend', e => {
-    if (touchX == null) return;
-    const dx = e.changedTouches[0].clientX - touchX;
-    touchX = null;
-    if (Math.abs(dx) < 48) return;
-    goPage(dx < 0 ? 1 : -1);
-  }, {passive:true});
-
-  window.addEventListener('resize', () => {
-    if (!isMobile()) {
-      mobileSide = 'left';
-      spread.classList.remove('mobile-right');
-      syncMobileTabs();
-    }
-    updateNavState();
-  });
-
+  $('#drawerClose').addEventListener('click',()=>drawer.close());
+  $('#indexBtn').addEventListener('click',()=>{buildIndex();indexDialog.showModal();}); $('#indexClose').addEventListener('click',()=>indexDialog.close());
+  indexList.addEventListener('click',e=>{const row=e.target.closest('[data-event-id]');if(!row)return;const target=findSpreadByEventId(row.dataset.eventId);if(target<0)return;current=target;mobileSide='left';indexDialog.close();render({preserveSide:true});});
+  document.addEventListener('keydown',e=>{if(!reader.classList.contains('visible'))return;if(e.key==='ArrowRight')goPage(1);if(e.key==='ArrowLeft')goPage(-1);if(e.key==='Escape'){if(drawer.open)drawer.close();if(indexDialog.open)indexDialog.close();}});
+  mobileTabs.addEventListener('click',e=>{const btn=e.target.closest('button[data-side]');if(!btn)return;mobileSide=btn.dataset.side;spread.classList.toggle('mobile-right',mobileSide==='right');syncMobileTabs();updateNavState();});
+  let touchX=null; spread.addEventListener('touchstart',e=>{touchX=e.changedTouches[0].clientX;},{passive:true}); spread.addEventListener('touchend',e=>{if(touchX==null)return;const dx=e.changedTouches[0].clientX-touchX;touchX=null;if(Math.abs(dx)<48)return;goPage(dx<0?1:-1);},{passive:true});
+  window.addEventListener('resize',()=>{if(!isMobile()){mobileSide='left';spread.classList.remove('mobile-right');syncMobileTabs();}updateNavState();});
   buildIndex();
 })();
