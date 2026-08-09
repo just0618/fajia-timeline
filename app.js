@@ -179,9 +179,9 @@
 
   function introRight() {
     const s = data.stats || {};
-    return `<span class="right-kicker">HOW TO READ · V0.4</span>
+    return `<span class="right-kicker">HOW TO READ · V0.4.1</span>
       <h2 class="right-title">从几个 demo，走进第一个完整月份。</h2>
-      <p class="right-sub">V0.4 不再强迫每个事件都有“后来”：直播、原始公开、双时间线、线索与单页经历会使用不同阅读模式。</p>
+      <p class="right-sub">不同事件使用不同页面：直播保留直播记录，公开节点保留原始发布，双时间事件展示后续物料；暂未补齐的页面则直接标记“待补充”。</p>
       <div class="stat-grid">
         <div class="stat-card"><div class="stat-num">${esc(s.chapter_events ?? 14)}</div><div class="stat-label">六月章节节点</div></div>
         <div class="stat-card"><div class="stat-num">${esc(s.posts ?? (data.release_timeline||[]).length)}</div><div class="stat-label">完整公开发布库</div></div>
@@ -266,11 +266,10 @@
 
     if (mode === 'live_record') {
       const visible = posts.slice(0,3);
-      return `<span class="right-kicker">LIVE RECORD · 同步发生 / 同步被看见</span>
-        <h2 class="right-title">当时，我们就在看这一刻。</h2>
-        <p class="right-sub">直播不强行制造“后来才被看见”的时间差。右页保留现场影像；若同日或之后还有公开帖子，再作为补充记录附在下面。</p>
+      return `<span class="right-kicker">LIVE RECORD · 直播记录</span>
+        <h2 class="right-title">直播记录</h2>
         ${recordGallery(event,'LIVE RECORD · 直播记录')}
-        ${visible.length ? `<div class="followup-block"><div class="followup-label">同日 / 后续公开记录</div><div class="release-line compact-release">${visible.map(releaseItem).join('')}</div></div>` : ''}
+        ${visible.length ? `<div class="followup-block"><div class="followup-label">同日 / 后续公开记录</div><div class="release-line compact-release">${visible.map(releaseItem).join('')}</div></div>` : (!sources ? `<div class="pending-strip">公开记录待补充</div>` : '')}
         ${sources}
         ${posts.length > visible.length ? `<button class="archive-button" type="button" data-open-drawer="${esc(event.event_id)}">打开物料抽屉 · ${posts.length} 条</button>` : ''}
         <span class="page-number">${pad(pageNo)}</span>`;
@@ -288,17 +287,17 @@
     }
 
     if (mode === 'experience_only') {
-      return `<span class="right-kicker">ARCHIVE NOTE · 留白</span>
-        <h2 class="right-title">这一页不强行补一个“后来”。</h2>
-        <p class="right-sub">当前只确认现实事件本身。以后若找到可核验的后续公开记录，再自然补进来。</p>
-        <div class="experience-quiet"><span>REAL TIME</span><b>${esc(displayEventDate(event))}</b><em>${esc(event.title)}</em></div>
+      return `<span class="right-kicker">ARCHIVE NOTE · 待补充</span>
+        <div class="pending-page"><span>待补充</span><small>后续材料待补充</small></div>
         <span class="page-number">${pad(pageNo)}</span>`;
     }
 
     const visible = posts.slice(0, Math.min(posts.length, 5));
-    return `<span class="right-kicker">RELEASE TIME · ${posts.length} RECORD${posts.length>1?'S':''}</span>
+    const releaseKicker = posts.length ? `RELEASE TIME · ${posts.length} RECORD${posts.length>1?'S':''}` : (sources ? 'RELEASE MATERIAL · 待关联' : 'RELEASE TIME · 待补充');
+    const releaseSub = posts.length ? '公开记录按发布时间排列。' : (sources ? '公开物料已经保留，原帖关联待补充。' : '后续公开材料待补充。');
+    return `<span class="right-kicker">${releaseKicker}</span>
       <h2 class="right-title">后来，我们看见了这些。</h2>
-      <p class="right-sub">只有“现实先发生、公开后到来”的事件才使用这一页。公开记录按发布时间排列。</p>
+      <p class="right-sub">${releaseSub}</p>
       ${visible.length ? `<div class="release-line">${visible.map(releaseItem).join('')}</div>` : ''}${sources}
       ${posts.length > visible.length ? `<button class="archive-button" type="button" data-open-drawer="${esc(event.event_id)}">打开物料抽屉 · ${posts.length} 条</button>` : ''}
       <span class="page-number">${pad(pageNo)}</span>`;

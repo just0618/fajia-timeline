@@ -159,12 +159,12 @@
     "date": "2026-06-17",
     "event_id": "evt_20260617_story_back",
     "event_title": "凌晨限时日常 · 贺嘉述背影",
-    "asset_id": "asset_0617_story_video",
-    "local_path": "media/2026/06/0617_story_back/video-01.mp4",
-    "asset_type": "video",
+    "asset_id": "asset_0617_story_image",
+    "local_path": "media/2026/06/0617_story_back/poster.jpg",
+    "asset_type": "image",
     "display_role": "cover",
     "is_cover": true,
-    "caption": "凌晨限时日常视频记录",
+    "caption": "凌晨限时日常记录",
     "rights_status": "not_recorded"
   },
   {

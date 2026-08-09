@@ -158,12 +158,11 @@
     "rights_status": "not_recorded"
   },
   {
-    "asset_id": "asset_0617_story_video",
+    "asset_id": "asset_0617_story_image",
     "event_id": "evt_20260617_story_back",
-    "local_path": "media/2026/06/0617_story_back/video-01.mp4",
-    "poster_path": "media/2026/06/0617_story_back/poster.jpg",
-    "asset_type": "video",
-    "caption": "凌晨限时日常视频记录",
+    "local_path": "media/2026/06/0617_story_back/poster.jpg",
+    "asset_type": "image",
+    "caption": "凌晨限时日常记录",
     "is_cover": true,
     "sort_order": 1,
     "display_role": "cover",

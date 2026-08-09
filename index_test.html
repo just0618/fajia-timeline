@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="theme-color" content="#FF8AA1" />
-  <title>法嘉时间档案 · V0.4.1</title>
+  <title>法嘉时间档案 · V0.4</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -31,7 +31,7 @@
     <section class="reader" id="reader" aria-hidden="true">
       <header class="reader-bar">
         <div>
-          <div class="tiny-label">FAJIA TIME ARCHIVE · V0.4.1</div>
+          <div class="tiny-label">FAJIA TIME ARCHIVE · V0.4</div>
           <h1>法嘉时间档案</h1>
         </div>
         <div class="reader-actions">
@@ -95,5 +95,5 @@
   <script src="data/timeline-data.js"></script>
   <script src="data/media-assets.js"></script>
   <script src="app.js"></script>
-</body>
+<script>setTimeout(()=>document.getElementById("openBook").click(),100); setTimeout(()=>{const rows=[...document.querySelectorAll(".chapter-list-row")]; const x=rows.find(r=>r.textContent.includes("遇见")); if(x)x.click();},1500);</script></body>
 </html>
