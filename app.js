@@ -1,5 +1,6 @@
 (() => {
   const data = window.TIMELINE_DATA || { stats:{}, experience_timeline:[], release_timeline:[] };
+  const mediaAssets = Array.isArray(window.MEDIA_ASSETS) ? window.MEDIA_ASSETS : [];
   const events = [...(data.experience_timeline || [])].sort((a,b) => new Date(a.occurred_at_start) - new Date(b.occurred_at_start));
   const spreads = [{kind:'intro'}, ...events.map(event => ({kind:'event', event}))];
   let current = 0;
@@ -23,6 +24,7 @@
   const indexDialog = $('#indexDialog');
   const indexList = $('#indexList');
 
+  const isMobile = () => window.innerWidth <= 820;
   const pad = n => String(n).padStart(2,'0');
   const esc = s => String(s ?? '').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
   const fmtShort = value => {
@@ -47,8 +49,8 @@
 
   function precisionLabel(event) {
     if (event.date_precision === 'inferred') return ['推定时间','inferred'];
-    if (event.date_precision === 'range') return ['日期范围',''];
-    return ['精确日期',''];
+    if (event.date_precision === 'range') return ['日期范围','range'];
+    return ['精确日期','exact'];
   }
 
   function confidenceLabel(value) {
@@ -70,12 +72,20 @@
     return (data.release_timeline || []).filter(p => (p.linked_event_ids || []).includes(id)).sort((a,b) => new Date(a.published_at) - new Date(b.published_at));
   }
 
+  function localAssets(event) {
+    return mediaAssets
+      .filter(a => a.event_id === event.event_id && a.local_path)
+      .sort((a,b) => (Number(a.sort_order)||0) - (Number(b.sort_order)||0));
+  }
+
   function eventImages(event) {
+    const local = localAssets(event).map(a => ({ src:a.local_path, caption:a.caption || '', local:true }));
+    if (local.length) return local;
     const urls = [];
     for (const p of linkedPosts(event)) {
       for (const u of (p.image_urls || [])) {
-        if (u && !urls.includes(u)) urls.push(u);
-        if (urls.length >= 2) return urls;
+        if (u && !urls.some(item => item.src === u)) urls.push({src:u, caption:'关联公开物料', local:false});
+        if (urls.length >= 3) return urls;
       }
     }
     return urls;
@@ -103,38 +113,46 @@
     return `<span class="hand-date">ARCHIVE 00</span>
       <h2 class="intro-title">一本关于<br>“发生”与“被看见”的手账</h2>
       <div class="event-rule"></div>
-      <p class="intro-copy">这里不把社交平台发布时间等同于事情真正发生的时间。左页记录他们经历了什么，右页记录这些片段后来什么时候被公开。</p>
+      <p class="intro-copy">这里不把社交平台发布时间等同于事情真正发生的时间。经历页记录他们什么时候经历了什么，公开页记录这些片段后来什么时候被看见。</p>
       <div class="legend">
-        <div class="legend-item"><span class="legend-badge">精确</span><span>公开资料可以确认具体日期。</span></div>
-        <div class="legend-item"><span class="legend-badge">范围</span><span>事件持续数日，保留开始与结束时间。</span></div>
-        <div class="legend-item"><span class="legend-badge">约 / 推定</span><span>根据采访、造型、行程或其他公开证据推定，不写成确定事实。</span></div>
+        <div class="legend-item"><span class="legend-badge pink">精确</span><span>公开资料可以确认具体日期。</span></div>
+        <div class="legend-item"><span class="legend-badge gold">范围</span><span>事件持续数日，保留开始与结束时间。</span></div>
+        <div class="legend-item"><span class="legend-badge mix">约 / 推定</span><span>根据采访、造型、行程或其他公开证据推定，不写成确定事实。</span></div>
       </div>
       <span class="page-number">01</span>`;
   }
 
   function introRight() {
     const s = data.stats || {};
-    return `<span class="right-kicker">HOW TO READ</span>
-      <h2 class="right-title">现在，我们已经有了一张可以继续生长的底图。</h2>
-      <p class="right-sub">V0.1 只验证书本、双页、翻页和“事件 → 后续公开物料”的关系。</p>
+    return `<span class="right-kicker">HOW TO READ · V0.2</span>
+      <h2 class="right-title">先把真实照片放进来，再继续长大。</h2>
+      <p class="right-sub">这一版开始使用粉 #FF8AA1 与金 #FFE25B，并把本地素材与事件建立连接。</p>
       <div class="stat-grid">
         <div class="stat-card"><div class="stat-num">${esc(s.events ?? events.length)}</div><div class="stat-label">现实事件</div></div>
         <div class="stat-card"><div class="stat-num">${esc(s.posts ?? (data.release_timeline||[]).length)}</div><div class="stat-label">公开发布记录</div></div>
         <div class="stat-card"><div class="stat-num">${esc(s.post_event_links ?? 0)}</div><div class="stat-label">事件—帖子关联</div></div>
-        <div class="stat-card"><div class="stat-num">${esc(s.evidence ?? 0)}</div><div class="stat-label">正式证据记录</div></div>
+        <div class="stat-card"><div class="stat-num">${esc(mediaAssets.filter(a=>a.event_id).length)}</div><div class="stat-label">已挂入本地图片</div></div>
       </div>
       <div class="quote-card">“同一张照片，有它被拍下的那一天，也有我们终于看见它的那一天。”</div>
       <span class="page-number">02</span>`;
   }
 
+  function imageGallery(event) {
+    const images = eventImages(event);
+    if (!images.length) return '';
+    const show = images.slice(0,3);
+    return `<div class="memory-gallery ${show.length === 1 ? 'single' : ''}" aria-label="事件照片">
+      ${show.map((img,i) => `<figure class="memory-photo photo-${i+1}">
+        <span class="tape tape-${i+1}"></span>
+        <img src="${esc(img.src)}" alt="${esc(img.caption || event.title)}" ${img.local ? '' : 'referrerpolicy="no-referrer"'} loading="lazy">
+        ${img.caption ? `<figcaption>${esc(img.caption)}</figcaption>` : ''}
+      </figure>`).join('')}
+    </div>`;
+  }
+
   function eventLeft(event, pageNo) {
     const [precisionText, precisionClass] = precisionLabel(event);
-    const images = eventImages(event);
     const tags = (event.tags || []).map(t => `<span class="tag">${esc(t)}</span>`).join('');
-    const polaroids = images.length ? `<div class="polaroid-stack">
-      ${images[0] ? `<div class="polaroid one"><span class="tape"></span><img src="${esc(images[0])}" alt="关联公开物料" referrerpolicy="no-referrer"></div>` : ''}
-      ${images[1] ? `<div class="polaroid two"><span class="tape"></span><img src="${esc(images[1])}" alt="关联公开物料" referrerpolicy="no-referrer"></div>` : ''}
-    </div>` : '';
     const note = event.date_precision === 'inferred' || event.evidence_note ? `<div class="info-note"><div class="note-title">时间依据</div>${esc(event.evidence_note || '该时间来自公开资料推定，后续可继续补充证据。')}</div>` : '';
     return `<span class="hand-date">REAL TIME · ${esc(typeLabel(event.event_type))}</span>
       <div class="event-date">${esc(displayEventDate(event))}</div>
@@ -142,14 +160,14 @@
       <div class="event-meta">
         <span class="tag ${precisionClass}">${esc(precisionText)}</span>
         <span class="tag ${event.confidence === 'confirmed' ? 'confirmed' : ''}">${esc(confidenceLabel(event.confidence))}</span>
-        ${event.location_text ? `<span class="tag">⌖ ${esc(event.location_text)}</span>` : ''}
+        ${event.location_text ? `<span class="tag location">⌖ ${esc(event.location_text)}</span>` : ''}
         ${tags}
       </div>
       <div class="event-rule"></div>
       <p class="event-desc">${esc(event.description || '这一天的细节还在继续补全。')}</p>
       ${note}
       <div class="participants">参与：${esc((event.participants || []).join('、') || '待补充')}</div>
-      ${polaroids}
+      ${imageGallery(event)}
       <span class="page-number">${pad(pageNo)}</span>`;
   }
 
@@ -171,10 +189,29 @@
       <span class="page-number">${pad(pageNo)}</span>`;
   }
 
-  function render() {
+  function updateNavState() {
+    if (isMobile()) {
+      const firstPage = current === 0 && mobileSide === 'left';
+      const lastPage = current === spreads.length - 1 && mobileSide === 'right';
+      prevBtn.disabled = firstPage;
+      nextBtn.disabled = lastPage;
+      const pageIndex = current * 2 + (mobileSide === 'right' ? 2 : 1);
+      pageCounter.textContent = `${pad(pageIndex)} / ${pad(spreads.length * 2)}`;
+      prevBtn.setAttribute('aria-label', mobileSide === 'right' ? '返回经历页' : '上一页');
+      nextBtn.setAttribute('aria-label', mobileSide === 'left' ? '查看公开页' : '下一页');
+    } else {
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === spreads.length - 1;
+      pageCounter.textContent = `${pad(current+1)} / ${pad(spreads.length)}`;
+      prevBtn.setAttribute('aria-label','上一事件');
+      nextBtn.setAttribute('aria-label','下一事件');
+    }
+  }
+
+  function render({preserveSide=false} = {}) {
     const item = spreads[current];
-    mobileSide = 'left';
-    spread.classList.remove('mobile-right');
+    if (!preserveSide) mobileSide = 'left';
+    spread.classList.toggle('mobile-right', mobileSide === 'right');
     syncMobileTabs();
     if (item.kind === 'intro') {
       leftPage.innerHTML = introLeft();
@@ -187,9 +224,7 @@
       const d = new Date(item.event.occurred_at_start);
       rangeLabel.textContent = Number.isNaN(d.getTime()) ? 'REAL TIME' : `${d.getFullYear()} · ${String(d.getMonth()+1).padStart(2,'0')}`;
     }
-    pageCounter.textContent = `${pad(current+1)} / ${pad(spreads.length)}`;
-    prevBtn.disabled = current === 0;
-    nextBtn.disabled = current === spreads.length - 1;
+    updateNavState();
     renderRail();
   }
 
@@ -197,14 +232,44 @@
     railTrack.innerHTML = spreads.map((item,i) => `<div class="rail-dot-wrap ${i===current?'active':''}" data-jump="${i}" title="${item.kind==='intro'?'开始':esc(item.event.title)}"><span class="rail-dot"></span></div>`).join('');
   }
 
-  function go(dir) {
-    if (flipping) return;
-    const target = current + dir;
-    if (target < 0 || target >= spreads.length) return;
+  function flipToSpread(target, dir, side='left') {
+    if (flipping || target < 0 || target >= spreads.length) return;
     flipping = true;
     spread.classList.add(dir > 0 ? 'flip-next' : 'flip-prev');
-    setTimeout(() => { current = target; render(); }, 315);
+    setTimeout(() => {
+      current = target;
+      mobileSide = side;
+      render({preserveSide:true});
+    }, 315);
     setTimeout(() => { spread.classList.remove('flip-next','flip-prev'); flipping = false; }, 700);
+  }
+
+  function goSpread(dir) {
+    flipToSpread(current + dir, dir, 'left');
+  }
+
+  function goPage(dir) {
+    if (!isMobile()) return goSpread(dir);
+    if (flipping) return;
+    if (dir > 0) {
+      if (mobileSide === 'left') {
+        mobileSide = 'right';
+        spread.classList.add('mobile-right');
+        syncMobileTabs();
+        updateNavState();
+        return;
+      }
+      if (current < spreads.length - 1) flipToSpread(current + 1, 1, 'left');
+      return;
+    }
+    if (mobileSide === 'right') {
+      mobileSide = 'left';
+      spread.classList.remove('mobile-right');
+      syncMobileTabs();
+      updateNavState();
+      return;
+    }
+    if (current > 0) flipToSpread(current - 1, -1, 'right');
   }
 
   function openDrawer(eventId) {
@@ -253,21 +318,25 @@
       landing.style.display = 'grid';
       landing.classList.remove('opening');
       current = 0;
+      mobileSide = 'left';
     }, 350);
   });
 
-  prevBtn.addEventListener('click', () => go(-1));
-  nextBtn.addEventListener('click', () => go(1));
+  prevBtn.addEventListener('click', () => goPage(-1));
+  nextBtn.addEventListener('click', () => goPage(1));
+
   railTrack.addEventListener('click', e => {
     const hit = e.target.closest('[data-jump]');
     if (!hit || flipping) return;
     const target = Number(hit.dataset.jump);
-    if (target === current) return;
-    const dir = target > current ? 1 : -1;
-    flipping = true;
-    spread.classList.add(dir > 0 ? 'flip-next' : 'flip-prev');
-    setTimeout(() => { current = target; render(); }, 315);
-    setTimeout(() => { spread.classList.remove('flip-next','flip-prev'); flipping = false; }, 700);
+    if (target === current) {
+      mobileSide = 'left';
+      spread.classList.remove('mobile-right');
+      syncMobileTabs();
+      updateNavState();
+      return;
+    }
+    flipToSpread(target, target > current ? 1 : -1, 'left');
   });
 
   document.body.addEventListener('click', e => {
@@ -282,14 +351,15 @@
     const row = e.target.closest('[data-event-index]');
     if (!row) return;
     current = Number(row.dataset.eventIndex);
+    mobileSide = 'left';
     indexDialog.close();
-    render();
+    render({preserveSide:true});
   });
 
   document.addEventListener('keydown', e => {
     if (!reader.classList.contains('visible')) return;
-    if (e.key === 'ArrowRight') go(1);
-    if (e.key === 'ArrowLeft') go(-1);
+    if (e.key === 'ArrowRight') goPage(1);
+    if (e.key === 'ArrowLeft') goPage(-1);
     if (e.key === 'Escape') { if (drawer.open) drawer.close(); if (indexDialog.open) indexDialog.close(); }
   });
 
@@ -299,6 +369,7 @@
     mobileSide = btn.dataset.side;
     spread.classList.toggle('mobile-right', mobileSide === 'right');
     syncMobileTabs();
+    updateNavState();
   });
 
   let touchX = null;
@@ -308,12 +379,17 @@
     const dx = e.changedTouches[0].clientX - touchX;
     touchX = null;
     if (Math.abs(dx) < 48) return;
-    if (window.innerWidth <= 820) {
-      if (dx < 0 && mobileSide === 'left') { mobileSide='right'; spread.classList.add('mobile-right'); syncMobileTabs(); return; }
-      if (dx > 0 && mobileSide === 'right') { mobileSide='left'; spread.classList.remove('mobile-right'); syncMobileTabs(); return; }
-    }
-    go(dx < 0 ? 1 : -1);
+    goPage(dx < 0 ? 1 : -1);
   }, {passive:true});
+
+  window.addEventListener('resize', () => {
+    if (!isMobile()) {
+      mobileSide = 'left';
+      spread.classList.remove('mobile-right');
+      syncMobileTabs();
+    }
+    updateNavState();
+  });
 
   buildIndex();
 })();
