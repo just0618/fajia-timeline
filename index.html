@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#e8dcc8" />
+  <title>法嘉时间档案 · V0.1</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="ambient ambient-a"></div>
+  <div class="ambient ambient-b"></div>
+
+  <main class="app" id="app">
+    <section class="landing" id="landing" aria-label="打开法嘉时间档案">
+      <div class="closed-book" id="closedBook">
+        <div class="book-shadow"></div>
+        <button class="cover" id="openBook" type="button" aria-label="打开时间档案">
+          <span class="cover-thread"></span>
+          <span class="cover-kicker">FAJIA · TIME ARCHIVE</span>
+          <span class="cover-title">法嘉时间档案</span>
+          <span class="cover-subtitle">现实发生时间 × 公开发布时刻</span>
+          <span class="cover-stamp">2025.10 — NOW</span>
+          <span class="cover-note">点击翻开</span>
+        </button>
+        <div class="page-block"></div>
+      </div>
+    </section>
+
+    <section class="reader" id="reader" aria-hidden="true">
+      <header class="reader-bar">
+        <div>
+          <div class="tiny-label">FAJIA TIME ARCHIVE · V0.1</div>
+          <h1>法嘉时间档案</h1>
+        </div>
+        <div class="reader-actions">
+          <button class="ghost-btn" id="indexBtn" type="button">事件索引</button>
+          <button class="ghost-btn" id="closeBook" type="button">合上档案</button>
+        </div>
+      </header>
+
+      <div class="book-shell" id="bookShell">
+        <div class="book-edge left-edge"></div>
+        <div class="book-edge right-edge"></div>
+        <div class="book-spine"></div>
+
+        <div class="spread" id="spread" aria-live="polite">
+          <article class="paper-page left-page" id="leftPage"></article>
+          <article class="paper-page right-page" id="rightPage"></article>
+          <div class="flip-sheet" id="flipSheet" aria-hidden="true"></div>
+        </div>
+
+        <button class="page-nav prev" id="prevBtn" type="button" aria-label="上一页">‹</button>
+        <button class="page-nav next" id="nextBtn" type="button" aria-label="下一页">›</button>
+      </div>
+
+      <div class="mobile-tabs" id="mobileTabs" aria-label="移动端页面切换">
+        <button type="button" class="active" data-side="left">经历页</button>
+        <button type="button" data-side="right">公开页</button>
+      </div>
+
+      <footer class="timeline-rail">
+        <div class="rail-copy">
+          <span id="pageCounter">01 / 05</span>
+          <span id="rangeLabel">2026 · SUMMER</span>
+        </div>
+        <div class="rail-track" id="railTrack"></div>
+      </footer>
+    </section>
+  </main>
+
+  <dialog class="drawer" id="postDrawer">
+    <div class="drawer-head">
+      <div>
+        <span class="tiny-label">RELEASE ARCHIVE</span>
+        <h2 id="drawerTitle">相关公开记录</h2>
+      </div>
+      <button class="drawer-close" id="drawerClose" type="button">×</button>
+    </div>
+    <div class="drawer-list" id="drawerList"></div>
+  </dialog>
+
+  <dialog class="index-dialog" id="indexDialog">
+    <div class="drawer-head">
+      <div>
+        <span class="tiny-label">EVENT INDEX</span>
+        <h2>现实事件索引</h2>
+      </div>
+      <button class="drawer-close" id="indexClose" type="button">×</button>
+    </div>
+    <div class="index-list" id="indexList"></div>
+  </dialog>
+
+  <script src="data/timeline-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
