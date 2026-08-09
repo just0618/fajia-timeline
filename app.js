@@ -57,7 +57,8 @@
   function chapterStatus(ch) {
     const count = eventsForChapter(ch).length;
     if (ch.phase === 'planned') return '框架已建 · 内容待整理';
-    if (ch.phase === 'ready') return `${count} 个现有现实节点 · 当前示范章`;
+    if (ch.id === 'part-03' && ch.phase === 'ready') return `${count} 个正式现实节点 · 五月已收口`;
+    if (ch.phase === 'ready') return `${count} 个现有现实节点 · 已完成一轮整理`;
     return `${count} 个现有现实节点 · 待完整反推`;
   }
 
@@ -117,6 +118,7 @@
   function confidenceLabel(value) {
     if (value === 'confirmed') return '已确认';
     if (value === 'high') return '较高可信度';
+    if (value === 'medium_high') return '较高可信度 · 待补官方源';
     if (value === 'medium') return '中等可信度';
     if (value === 'low') return '低可信度';
     return value || '未标注';
@@ -124,7 +126,9 @@
 
   function typeLabel(value) {
     const map = {
-      magazine:'杂志拍摄', shooting:'拍摄', live:'直播', concert:'演出', travel:'出行',
+      magazine:'杂志拍摄', shooting:'拍摄', live:'直播', live_trip:'出行 · 直播', concert:'演出', travel:'出行',
+      private_itinerary:'私人行程', public_milestone:'公开里程碑', personal_milestone:'个人节点', music_release:'音乐上线',
+      online_interaction:'线上互动', offline_event:'线下活动', public_moment:'公开日常',
       daily:'日常', interview:'采访', social:'公开记录', other:'档案节点', event:'事件'
     };
     return map[value] || value || '事件';
@@ -266,7 +270,7 @@
         <span>${esc(ch.theme)}</span>
         ${count ? `<span>${count} NODES</span>` : '<span>TO FILL</span>'}
       </div>
-      <div class="chapter-note">这一版先确认“怎么读一本书”。<br>主题名、封面图与章节专属装饰以后再填。</div>
+      <div class="chapter-note">${ch.id === 'part-03' ? '五月事件集已经完成第一轮收口。<br>这一章开始用正式数据检验整本手账的阅读方式。' : '这一版先确认“怎么读一本书”。<br>主题名、封面图与章节专属装饰以后再填。'}</div>
       <button class="back-to-map" type="button" data-back-hub>← 返回五章总时间轴</button>
       <span class="page-number">${pad(pageNo)}</span>
     </div>`;
@@ -286,8 +290,8 @@
     }
     return `<span class="right-kicker">CHAPTER INDEX · ${chapterEvents.length} NODES</span>
       <h2 class="right-title">${esc(ch.range)} · 现实时间轴</h2>
-      <p class="right-sub">${ch.id === 'part-04' ? '六月先作为成熟示范章。' : '现有节点先进入框架，下一轮仍需按完整公开库核验与补齐。'}</p>
-      <div class="chapter-list">${chapterEvents.map(e=>`<button type="button" class="chapter-list-row ${e.status === 'draft' ? 'is-draft' : ''}" data-jump-event="${esc(e.event_id)}"><span>${esc(displayEventDate(e).replace(/^2026\./,''))}</span><b>${esc(e.title)}</b><em>${esc(e.status === 'draft' ? '待核验' : typeLabel(e.event_type))}</em></button>`).join('')}</div>
+      <p class="right-sub">${ch.id === 'part-03' ? '五月正式事件集 V1：现实节点按发生时间排序；未知拍摄日仍留在公开档案层。' : ch.id === 'part-04' ? '六月先作为成熟示范章。' : '现有节点先进入框架，下一轮仍需按完整公开库核验与补齐。'}</p>
+      <div class="chapter-list">${chapterEvents.map(e=>`<button type="button" class="chapter-list-row ${e.status === 'draft' ? 'is-draft' : ''} ${eventMode(e)==='text_only_sensitive'?'is-private':''}" data-jump-event="${esc(e.event_id)}"><span>${esc(displayEventDate(e).replace(/^2026\./,''))}</span><b>${esc(e.title)}</b><em>${esc(eventMode(e)==='text_only_sensitive' ? '私人行程 · 仅文本' : e.confidence==='medium_high' ? '待补官方源' : typeLabel(e.event_type))}</em></button>`).join('')}</div>
       <span class="page-number">${pad(pageNo)}</span>`;
   }
   function clueLeft(event, pageNo) {
@@ -310,8 +314,9 @@
     const [precisionText, precisionClass] = precisionLabel(event);
     const tags = (event.tags || []).filter(t=>t!=='clue' && !String(t).startsWith('display:') && t!=='original_post' && t!=='public_only').map(t => `<span class="tag">${esc(t)}</span>`).join('');
     const note = event.date_precision === 'inferred' || event.evidence_note ? `<div class="info-note"><div class="note-title">${event.date_precision==='inferred'?'时间依据':'档案备注'}</div>${esc(event.evidence_note || '该时间来自公开资料推定，后续可继续补充证据。')}</div>` : '';
-    const kicker = mode === 'original_post' ? 'PUBLIC MOMENT · 公开节点' : 'REAL TIME · ' + typeLabel(event.event_type);
-    const gallery = mode === 'live_record' ? '' : memoryGallery(event);
+    const kicker = mode === 'original_post' ? 'PUBLIC MOMENT · 公开节点' : mode === 'text_only_sensitive' ? 'REAL TIME · 私人行程' : 'REAL TIME · ' + typeLabel(event.event_type);
+    const privacyNote = mode === 'text_only_sensitive' ? `<div class="privacy-note"><b>档案边界</b><span>该节点仅保留日期与城市级信息；不展示非公开跟拍影像，不记录精确站点、车次与具体时刻。</span></div>` : '';
+    const gallery = (mode === 'live_record' || mode === 'text_only_sensitive') ? '' : memoryGallery(event);
     return `<span class="hand-date">${esc(kicker)}</span>
       <div class="event-date">${esc(displayEventDate(event))}</div>
       <h2 class="event-title">${esc(event.title)}</h2>
@@ -321,7 +326,7 @@
         ${event.location_text ? `<span class="tag location">⌖ ${esc(event.location_text)}</span>` : ''}${tags}
       </div>
       <div class="event-rule"></div>
-      <p class="event-desc">${esc(event.description || '这一天的细节还在继续补全。')}</p>${note}
+      <p class="event-desc">${esc(event.description || '这一天的细节还在继续补全。')}</p>${privacyNote}${note}
       <div class="participants">参与：${esc((event.participants || []).join('、') || '待补充')}</div>
       ${gallery}<span class="page-number">${pad(pageNo)}</span>`;
   }
@@ -337,6 +342,17 @@
         <h2 class="right-title">这是一条线索，不是一段被确认的行程。</h2>
         <p class="right-sub">保留平台公开字段与原截图，等待它与更多事件、帖子或公开资料交叉核验。</p>
         ${sources || `<div class="evidence-quiet">证据已保留在档案层；当前没有额外的来源截图需要展示。</div>`}
+        <span class="page-number">${pad(pageNo)}</span>`;
+    }
+
+    if (mode === 'text_only_sensitive') {
+      return `<span class="right-kicker">ARCHIVE BOUNDARY · 隐私边界</span>
+        <h2 class="right-title">这段行程，只留下必要的坐标。</h2>
+        <p class="right-sub">事件本身保留在历史时间轴里，但不把非公开私人行程的跟拍影像继续做成可传播素材。</p>
+        <div class="privacy-boundary-card">
+          <span>保留</span><b>日期 · 城市级节点 · 参与者</b>
+          <span>不展示</span><b>站拍照片 · 精确站点 · 车次 · 具体时刻 · 跟拍来源</b>
+        </div>
         <span class="page-number">${pad(pageNo)}</span>`;
     }
 
@@ -385,6 +401,7 @@
     if (item.kind === 'chapter') return ['章节页','时间轴'];
     if ((item.event.tags || []).includes('clue')) return ['线索页','证据页'];
     const mode = eventMode(item.event);
+    if (mode === 'text_only_sensitive') return ['经历页','隐私边界'];
     if (mode === 'live_record') return ['经历页','直播记录'];
     if (mode === 'original_post') return ['节点页','原始公开'];
     if (mode === 'experience_only') return ['经历页',''];
@@ -470,7 +487,7 @@
     }
     railTrack.innerHTML = spreads.map((item,i) => {
       const title = item.kind==='chapter' ? `${item.chapter.range} · 章节页` : item.event.title;
-      const special = item.kind==='chapter' ? ' chapter-dot' : '';
+      const special = item.kind==='chapter' ? ' chapter-dot' : item.kind==='event' && eventMode(item.event)==='text_only_sensitive' ? ' private-dot' : item.kind==='event' && eventMode(item.event)==='original_post' ? ' public-dot' : '';
       return `<div class="rail-dot-wrap ${i===current?'active':''}${special}" data-jump="${i}" title="${esc(title)}"><span class="rail-dot"></span></div>`;
     }).join('');
   }
