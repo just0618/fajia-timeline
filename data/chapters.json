@@ -1,0 +1,62 @@
+[
+  {
+    "id": "part-01",
+    "part": "PART 01",
+    "range": "10.10 — 杀青",
+    "short": "10.10—杀青",
+    "title": "第一章",
+    "theme": "主题待定",
+    "phase": "planned",
+    "color": "pink",
+    "month_prefix": null,
+    "description": "从第一次进入同一段拍摄时间开始。章节结构先保留，事件与证据后续统一核验。"
+  },
+  {
+    "id": "part-02",
+    "part": "PART 02",
+    "range": "杀青后 — 剧播前",
+    "short": "杀青后—剧播前",
+    "title": "第二章",
+    "theme": "主题待定",
+    "phase": "planned",
+    "color": "gold",
+    "month_prefix": null,
+    "description": "拍摄结束以后，到作品正式播出之前。先保留章节位置，后续再补全公开记录与现实节点。"
+  },
+  {
+    "id": "part-03",
+    "part": "PART 03",
+    "range": "2026 · 05",
+    "short": "五月",
+    "title": "五月",
+    "theme": "主题待定",
+    "phase": "working",
+    "color": "pink",
+    "month_prefix": "2026-05",
+    "description": "五月试做章。现阶段先把已有现实节点放进框架，下一轮按完整官方发布库重新反推。"
+  },
+  {
+    "id": "part-04",
+    "part": "PART 04",
+    "range": "2026 · 06",
+    "short": "六月",
+    "title": "六月",
+    "theme": "当前示范章",
+    "phase": "ready",
+    "color": "gold",
+    "month_prefix": "2026-06",
+    "description": "六月是目前最完整的试验章：直播、拍摄、行程、公开节点与线索均按现实发生时间连续排列。"
+  },
+  {
+    "id": "part-05",
+    "part": "PART 05",
+    "range": "2026 · 07",
+    "short": "七月",
+    "title": "七月",
+    "theme": "主题待定",
+    "phase": "working",
+    "color": "pink",
+    "month_prefix": "2026-07",
+    "description": "七月先建立章节框架。已有节点先放入，后续从全部官方公开内容反推并补齐现实事件。"
+  }
+]

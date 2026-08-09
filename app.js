@@ -1,14 +1,27 @@
 (() => {
   const data = window.TIMELINE_DATA || { stats:{}, experience_timeline:[], release_timeline:[] };
   const mediaAssets = Array.isArray(window.MEDIA_ASSETS) ? window.MEDIA_ASSETS : [];
-  const chapter = window.CHAPTER_2026_06 || null;
-  const events = [...(data.experience_timeline || [])].sort((a,b) => new Date(a.occurred_at_start) - new Date(b.occurred_at_start));
-  const chapterEventIds = new Set(chapter?.event_ids || []);
+  const allEvents = [...(data.experience_timeline || [])].sort((a,b) => new Date(a.occurred_at_start) - new Date(b.occurred_at_start));
 
-  const spreads = [{kind:'intro'}];
-  if (chapter) spreads.push({kind:'chapter', chapter});
-  events.forEach(event => spreads.push({kind:'event', event}));
+  const chapters = Array.isArray(window.ARCHIVE_CHAPTERS) && window.ARCHIVE_CHAPTERS.length
+    ? window.ARCHIVE_CHAPTERS.map(ch => ({
+        ...ch,
+        eventFilter: ch.month_prefix
+          ? (e => String(e.occurred_at_start || '').startsWith(ch.month_prefix))
+          : (() => false)
+      }))
+    : [
+        {id:'part-01',part:'PART 01',range:'10.10 — 杀青',short:'10.10—杀青',title:'第一章',theme:'主题待定',phase:'planned',color:'pink',description:'章节结构先保留，事件与证据后续统一核验。',eventFilter:()=>false},
+        {id:'part-02',part:'PART 02',range:'杀青后 — 剧播前',short:'杀青后—剧播前',title:'第二章',theme:'主题待定',phase:'planned',color:'gold',description:'章节结构先保留，事件与证据后续统一核验。',eventFilter:()=>false},
+        {id:'part-03',part:'PART 03',range:'2026 · 05',short:'五月',title:'五月',theme:'主题待定',phase:'working',color:'pink',description:'五月试做章。',eventFilter:e=>String(e.occurred_at_start||'').startsWith('2026-05')},
+        {id:'part-04',part:'PART 04',range:'2026 · 06',short:'六月',title:'六月',theme:'当前示范章',phase:'ready',color:'gold',description:'六月是目前最完整的试验章。',eventFilter:e=>String(e.occurred_at_start||'').startsWith('2026-06')},
+        {id:'part-05',part:'PART 05',range:'2026 · 07',short:'七月',title:'七月',theme:'主题待定',phase:'working',color:'pink',description:'七月先建立章节框架。',eventFilter:e=>String(e.occurred_at_start||'').startsWith('2026-07')}
+      ];
 
+  let view = 'hub';
+  let activeChapter = null;
+  let activeEvents = [];
+  let spreads = [{kind:'hub'}];
   let current = 0;
   let mobileSide = 'left';
   let flipping = false;
@@ -30,6 +43,47 @@
   const indexDialog = $('#indexDialog');
   const indexList = $('#indexList');
   const mobileTabs = $('#mobileTabs');
+  const indexBtn = $('#indexBtn');
+  const chaptersBtn = $('#chaptersBtn');
+
+  function eventsForChapter(ch) {
+    return allEvents.filter(ch.eventFilter).sort((a,b) => new Date(a.occurred_at_start) - new Date(b.occurred_at_start));
+  }
+
+  function setChapterTheme(ch) {
+    document.body.dataset.chapter = ch ? ch.id : 'hub';
+  }
+
+  function chapterStatus(ch) {
+    const count = eventsForChapter(ch).length;
+    if (ch.phase === 'planned') return '框架已建 · 内容待整理';
+    if (ch.phase === 'ready') return `${count} 个现有现实节点 · 当前示范章`;
+    return `${count} 个现有现实节点 · 待完整反推`;
+  }
+
+  function openChapter(chapterId) {
+    const ch = chapters.find(item => item.id === chapterId);
+    if (!ch) return;
+    activeChapter = ch;
+    activeEvents = eventsForChapter(ch);
+    spreads = [{kind:'chapter', chapter:ch}, ...activeEvents.map(event => ({kind:'event', event}))];
+    view = 'chapter';
+    current = 0;
+    mobileSide = 'left';
+    setChapterTheme(ch);
+    render({preserveSide:true});
+  }
+
+  function openHub() {
+    activeChapter = null;
+    activeEvents = [];
+    spreads = [{kind:'hub'}];
+    view = 'hub';
+    current = 0;
+    mobileSide = 'left';
+    setChapterTheme(null);
+    render({preserveSide:true});
+  }
 
   const isMobile = () => window.innerWidth <= 820;
   const pad = n => String(n).padStart(2,'0');
@@ -165,55 +219,77 @@
     return `<div class="record-gallery"><div class="record-gallery-label">${esc(label)}</div>${assets.slice(0,3).map((a,i)=>mediaFigure(a,i,true)).join('')}</div>`;
   }
 
-  function introLeft() {
-    return `<span class="hand-date">ARCHIVE 00</span>
-      <h2 class="intro-title">一本关于<br>“发生”与“被看见”的手账</h2>
-      <div class="event-rule"></div>
-      <p class="intro-copy">这里不把社交平台发布时间等同于事情真正发生的时间。经历页记录他们什么时候经历了什么，公开页记录这些片段后来什么时候被看见。</p>
-      <div class="legend">
-        <div class="legend-item"><span class="legend-badge pink">精确</span><span>公开资料可以确认具体日期。</span></div>
-        <div class="legend-item"><span class="legend-badge gold">范围</span><span>事件持续数日，保留开始与结束时间。</span></div>
-        <div class="legend-item"><span class="legend-badge mix">约 / 推定</span><span>根据采访、造型、行程或其他公开证据推定，不写成确定事实。</span></div>
-      </div><span class="page-number">01</span>`;
+
+  function hubLeft(pageNo=1) {
+    return `<div class="archive-map-intro">
+      <span class="hand-date">ARCHIVE MAP · 目录</span>
+      <h2 class="hub-title">先看整本书，<br>再选择一段时间。</h2>
+      <p class="hub-copy">时间档案不再把几十个事件平铺成一条长列表。整本书先分成五个章节，每章再沿现实发生时间展开。</p>
+      <div class="method-flow" aria-label="时间线整理方法">
+        <span>全部官方发布</span><i>→</i><span>提取线索</span><i>→</i><span>建立现实事件</span><i>→</i><span>按现实时间排序</span>
+      </div>
+      <div class="hub-rule"></div>
+      <p class="hub-note">公开发布时间保留在证据层；只有能够确认或合理推定的现实事件，才进入主时间轴。</p>
+      <div class="hub-key"><span class="key-pink"></span> 粉 · 章节/互动 <span class="key-gold"></span> 金 · 时间/线索</div>
+      <span class="page-number">${pad(pageNo)}</span>
+    </div>`;
   }
 
-  function introRight() {
-    const s = data.stats || {};
-    return `<span class="right-kicker">HOW TO READ · V0.4.1</span>
-      <h2 class="right-title">从几个 demo，走进第一个完整月份。</h2>
-      <p class="right-sub">不同事件使用不同页面：直播保留直播记录，公开节点保留原始发布，双时间事件展示后续物料；暂未补齐的页面则直接标记“待补充”。</p>
-      <div class="stat-grid">
-        <div class="stat-card"><div class="stat-num">${esc(s.chapter_events ?? 14)}</div><div class="stat-label">六月章节节点</div></div>
-        <div class="stat-card"><div class="stat-num">${esc(s.posts ?? (data.release_timeline||[]).length)}</div><div class="stat-label">完整公开发布库</div></div>
-        <div class="stat-card"><div class="stat-num">${esc(mediaAssets.filter(a=>a.event_id && chapterEventIds.has(a.event_id)).length)}</div><div class="stat-label">六月本地素材</div></div>
-        <div class="stat-card"><div class="stat-num">2</div><div class="stat-label">阅读时间：现实 / 公开</div></div>
+  function hubRight(pageNo=2) {
+    return `<span class="right-kicker">FIVE PARTS · 总时间轴</span>
+      <h2 class="right-title">选择你想看的那一段。</h2>
+      <p class="right-sub">现阶段先试做 5、6、7 月；前两章保留位置，等事件与证据整理完成后再填内容和主题。</p>
+      <div class="chapter-axis">
+        ${chapters.map((ch,i) => `
+          <button class="chapter-axis-node ${ch.phase}" type="button" data-open-chapter="${esc(ch.id)}">
+            <span class="axis-dot"></span>
+            <span class="axis-part">${esc(ch.part)}</span>
+            <strong>${esc(ch.range)}</strong>
+            <small>${esc(chapterStatus(ch))}</small>
+          </button>`).join('')}
       </div>
-      <div class="quote-card">“一整个月连续翻下来，才知道哪些页面值得做成故事，哪些只应该留作证据。”</div>
-      <span class="page-number">02</span>`;
+      <div class="theme-promise">每个 Part 的主题名与章节视觉先留空；等内容稳定后，再按这一段真正发生的事情来命名。</div>
+      <span class="page-number">${pad(pageNo)}</span>`;
   }
 
   function chapterLeft(ch, pageNo) {
-    return `<div class="chapter-page">
-      <span class="chapter-eyebrow">CHAPTER 01 · REAL TIME</span>
-      <div class="chapter-month">06</div>
-      <div class="chapter-year">2026</div>
-      <h2>${esc(ch.subtitle || '六月')}</h2>
-      <p>${esc(ch.description || '')}</p>
-      <div class="chapter-stickers"><span>LIVE</span><span>PHOTO</span><span>MAGAZINE</span><span>DAILY</span></div>
-      <div class="chapter-note">粉色记录靠近，金色标记线索。<br>从这一章开始，手账按现实时间连续展开。</div>
+    const count = eventsForChapter(ch).length;
+    const month = ch.id === 'part-03' ? '05' : ch.id === 'part-04' ? '06' : ch.id === 'part-05' ? '07' : '—';
+    return `<div class="chapter-page v05-chapter">
+      <span class="chapter-eyebrow">${esc(ch.part)} · REAL TIME</span>
+      <div class="chapter-month">${esc(month)}</div>
+      <div class="chapter-year">${esc(ch.range)}</div>
+      <h2>${esc(ch.title)}</h2>
+      <p>${esc(ch.description)}</p>
+      <div class="chapter-stickers">
+        <span>${ch.phase === 'ready' ? 'DEMO' : 'FRAME'}</span>
+        <span>${esc(ch.theme)}</span>
+        ${count ? `<span>${count} NODES</span>` : '<span>TO FILL</span>'}
+      </div>
+      <div class="chapter-note">这一版先确认“怎么读一本书”。<br>主题名、封面图与章节专属装饰以后再填。</div>
+      <button class="back-to-map" type="button" data-back-hub>← 返回五章总时间轴</button>
       <span class="page-number">${pad(pageNo)}</span>
     </div>`;
   }
 
   function chapterRight(ch, pageNo) {
-    const chapterEvents = events.filter(e => chapterEventIds.has(e.event_id));
+    const chapterEvents = eventsForChapter(ch);
+    if (!chapterEvents.length) {
+      return `<span class="right-kicker">CHAPTER INDEX · FRAME ONLY</span>
+        <h2 class="right-title">${esc(ch.range)}</h2>
+        <p class="right-sub">章节位置已经建立，这一轮不为了填满页面而制造事件。</p>
+        <div class="chapter-empty">
+          <span>待整理</span>
+          <p>后续从全部官方发布记录出发，反推现实发生日期，再把正式事件放进这里。</p>
+        </div>
+        <span class="page-number">${pad(pageNo)}</span>`;
+    }
     return `<span class="right-kicker">CHAPTER INDEX · ${chapterEvents.length} NODES</span>
-      <h2 class="right-title">六月，先从这些节点开始。</h2>
-      <p class="right-sub">不是把每条帖子都变成一页，而是先建立现实事件，再把公开记录挂回它们身上。</p>
-      <div class="chapter-list">${chapterEvents.map((e,i)=>`<button type="button" class="chapter-list-row" data-jump-event="${esc(e.event_id)}"><span>${esc(displayEventDate(e).replace(/^2026\./,''))}</span><b>${esc(e.title)}</b><em>${esc(typeLabel(e.event_type))}</em></button>`).join('')}</div>
+      <h2 class="right-title">${esc(ch.range)} · 现实时间轴</h2>
+      <p class="right-sub">${ch.id === 'part-04' ? '六月先作为成熟示范章。' : '现有节点先进入框架，下一轮仍需按完整公开库核验与补齐。'}</p>
+      <div class="chapter-list">${chapterEvents.map(e=>`<button type="button" class="chapter-list-row ${e.status === 'draft' ? 'is-draft' : ''}" data-jump-event="${esc(e.event_id)}"><span>${esc(displayEventDate(e).replace(/^2026\./,''))}</span><b>${esc(e.title)}</b><em>${esc(e.status === 'draft' ? '待核验' : typeLabel(e.event_type))}</em></button>`).join('')}</div>
       <span class="page-number">${pad(pageNo)}</span>`;
   }
-
   function clueLeft(event, pageNo) {
     const evidence = assetsFor(event, ['evidence']);
     return `<span class="hand-date">LOCATION CLUE · 公开线索</span>
@@ -303,9 +379,10 @@
       <span class="page-number">${pad(pageNo)}</span>`;
   }
 
+
   function tabLabels(item) {
-    if (item.kind === 'intro') return ['说明页','统计页'];
-    if (item.kind === 'chapter') return ['章节页','目录页'];
+    if (item.kind === 'hub') return ['章节说明','五章总览'];
+    if (item.kind === 'chapter') return ['章节页','时间轴'];
     if ((item.event.tags || []).includes('clue')) return ['线索页','证据页'];
     const mode = eventMode(item.event);
     if (mode === 'live_record') return ['经历页','直播记录'];
@@ -341,6 +418,8 @@
   }
 
   function updateNavState() {
+    indexBtn.hidden = view !== 'chapter' || !activeEvents.length;
+    chaptersBtn.hidden = view === 'hub';
     if (isMobile()) {
       const firstPage = current === 0 && mobileSide === 'left';
       const lastItem = current === spreads.length - 1;
@@ -352,7 +431,7 @@
     } else {
       prevBtn.disabled = current === 0; nextBtn.disabled = current === spreads.length - 1;
       pageCounter.textContent = `${pad(current+1)} / ${pad(spreads.length)}`;
-      prevBtn.setAttribute('aria-label','上一事件'); nextBtn.setAttribute('aria-label','下一事件');
+      prevBtn.setAttribute('aria-label','上一页'); nextBtn.setAttribute('aria-label','下一页');
     }
   }
 
@@ -360,25 +439,37 @@
     const item = spreads[current];
     if (!preserveSide) mobileSide = 'left';
     spread.classList.toggle('mobile-right', mobileSide === 'right');
-    spread.classList.toggle('chapter-spread', item.kind === 'chapter');
+    spread.classList.toggle('chapter-spread', item.kind === 'chapter' || item.kind === 'hub');
+    spread.classList.toggle('hub-spread', item.kind === 'hub');
     spread.classList.toggle('clue-spread', item.kind === 'event' && (item.event.tags || []).includes('clue'));
     syncMobileTabs();
     const base = current * 2 + 1;
-    if (item.kind === 'intro') {
-      leftPage.innerHTML = introLeft(); rightPage.innerHTML = introRight(); rangeLabel.textContent = 'ARCHIVE · START';
+
+    if (item.kind === 'hub') {
+      leftPage.innerHTML = hubLeft(base);
+      rightPage.innerHTML = hubRight(base+1);
+      rangeLabel.textContent = 'ARCHIVE MAP · 05 PARTS';
     } else if (item.kind === 'chapter') {
-      leftPage.innerHTML = chapterLeft(item.chapter,base); rightPage.innerHTML = chapterRight(item.chapter,base+1); rangeLabel.textContent = '2026 · 06 · CHAPTER 01';
+      leftPage.innerHTML = chapterLeft(item.chapter,base);
+      rightPage.innerHTML = chapterRight(item.chapter,base+1);
+      rangeLabel.textContent = `${item.chapter.part} · ${item.chapter.range}`;
     } else {
-      leftPage.innerHTML = eventLeft(item.event,base); rightPage.innerHTML = eventRight(item.event,base+1);
+      leftPage.innerHTML = eventLeft(item.event,base);
+      rightPage.innerHTML = eventRight(item.event,base+1);
       const d = new Date(item.event.occurred_at_start);
-      rangeLabel.textContent = Number.isNaN(d.getTime()) ? 'REAL TIME' : `${d.getFullYear()} · ${String(d.getMonth()+1).padStart(2,'0')}`;
+      rangeLabel.textContent = Number.isNaN(d.getTime()) ? (activeChapter?.range || 'REAL TIME') : `${activeChapter?.part || ''} · ${d.getFullYear()} · ${String(d.getMonth()+1).padStart(2,'0')}`;
     }
-    updateNavState(); renderRail();
+    updateNavState();
+    renderRail();
   }
 
   function renderRail() {
+    if (view === 'hub') {
+      railTrack.innerHTML = chapters.map(ch => `<button type="button" class="rail-chapter" data-open-chapter="${esc(ch.id)}" title="${esc(ch.range)}"><span>${esc(ch.part.replace('PART ',''))}</span><b>${esc(ch.short)}</b></button>`).join('');
+      return;
+    }
     railTrack.innerHTML = spreads.map((item,i) => {
-      const title = item.kind==='intro' ? '开始' : item.kind==='chapter' ? `${item.chapter.title} · 章节页` : item.event.title;
+      const title = item.kind==='chapter' ? `${item.chapter.range} · 章节页` : item.event.title;
       const special = item.kind==='chapter' ? ' chapter-dot' : '';
       return `<div class="rail-dot-wrap ${i===current?'active':''}${special}" data-jump="${i}" title="${esc(title)}"><span class="rail-dot"></span></div>`;
     }).join('');
@@ -409,7 +500,7 @@
   }
 
   function openDrawer(eventId) {
-    const event = events.find(e => e.event_id === eventId); if (!event) return;
+    const event = allEvents.find(e => e.event_id === eventId); if (!event) return;
     const posts = linkedPosts(event); drawerTitle.textContent = `${event.title} · ${posts.length} 条公开记录`;
     drawerList.innerHTML = posts.map(p => {
       const text = cleanText(p.text || p.title || '无公开文案');
@@ -417,26 +508,99 @@
     }).join(''); drawer.showModal();
   }
 
+
   function findSpreadByEventId(eventId) { return spreads.findIndex(s => s.kind==='event' && s.event.event_id===eventId); }
   function buildIndex() {
-    indexList.innerHTML = events.map(e => `<div class="index-row" data-event-id="${esc(e.event_id)}"><div class="index-date">${esc(displayEventDate(e))}</div><div><div class="index-title">${esc(e.title)}</div><div class="owner" style="margin-top:5px">${esc(e.location_text || '')}</div></div><span class="index-type">${esc(typeLabel(e.event_type))}</span></div>`).join('');
+    indexList.innerHTML = activeEvents.map(e => `<div class="index-row" data-event-id="${esc(e.event_id)}"><div class="index-date">${esc(displayEventDate(e))}</div><div><div class="index-title">${esc(e.title)}</div><div class="owner" style="margin-top:5px">${esc(e.location_text || '')}</div></div><span class="index-type">${esc(e.status === 'draft' ? '待核验' : typeLabel(e.event_type))}</span></div>`).join('');
   }
 
-  $('#openBook').addEventListener('click', () => { landing.classList.add('opening'); setTimeout(()=>{ landing.style.display='none'; reader.classList.add('visible'); reader.setAttribute('aria-hidden','false'); render(); },860); });
-  $('#closeBook').addEventListener('click', () => { reader.classList.remove('visible'); reader.setAttribute('aria-hidden','true'); setTimeout(()=>{ reader.style.display=''; landing.style.display='grid'; landing.classList.remove('opening'); current=0; mobileSide='left'; },350); });
-  prevBtn.addEventListener('click',()=>goPage(-1)); nextBtn.addEventListener('click',()=>goPage(1));
-
-  railTrack.addEventListener('click', e => { const hit=e.target.closest('[data-jump]'); if(!hit||flipping)return; const target=Number(hit.dataset.jump); if(target===current){mobileSide='left';spread.classList.remove('mobile-right');syncMobileTabs();updateNavState();return;} flipToSpread(target,target>current?1:-1,'left'); });
-  document.body.addEventListener('click', e => {
-    const drawerBtn=e.target.closest('[data-open-drawer]'); if(drawerBtn) openDrawer(drawerBtn.dataset.openDrawer);
-    const jumpEvent=e.target.closest('[data-jump-event]'); if(jumpEvent){ const target=findSpreadByEventId(jumpEvent.dataset.jumpEvent); if(target>=0) flipToSpread(target,target>current?1:-1,'left'); }
+  $('#openBook').addEventListener('click', () => {
+    landing.classList.add('opening');
+    setTimeout(()=>{
+      landing.style.display='none';
+      reader.classList.add('visible');
+      reader.setAttribute('aria-hidden','false');
+      openHub();
+    },860);
   });
+
+  $('#closeBook').addEventListener('click', () => {
+    reader.classList.remove('visible');
+    reader.setAttribute('aria-hidden','true');
+    setTimeout(()=>{
+      reader.style.display='';
+      landing.style.display='grid';
+      landing.classList.remove('opening');
+      view='hub'; activeChapter=null; activeEvents=[]; spreads=[{kind:'hub'}];
+      current=0; mobileSide='left'; setChapterTheme(null);
+    },350);
+  });
+
+  chaptersBtn.addEventListener('click', openHub);
+  prevBtn.addEventListener('click',()=>goPage(-1));
+  nextBtn.addEventListener('click',()=>goPage(1));
+
+  railTrack.addEventListener('click', e => {
+    const chapterHit = e.target.closest('[data-open-chapter]');
+    if (chapterHit) { openChapter(chapterHit.dataset.openChapter); return; }
+    const hit=e.target.closest('[data-jump]');
+    if(!hit||flipping)return;
+    const target=Number(hit.dataset.jump);
+    if(target===current){mobileSide='left';spread.classList.remove('mobile-right');syncMobileTabs();updateNavState();return;}
+    flipToSpread(target,target>current?1:-1,'left');
+  });
+
+  document.body.addEventListener('click', e => {
+    const chapterBtn=e.target.closest('[data-open-chapter]');
+    if(chapterBtn){ openChapter(chapterBtn.dataset.openChapter); return; }
+    const hubBtn=e.target.closest('[data-back-hub]');
+    if(hubBtn){ openHub(); return; }
+    const drawerBtn=e.target.closest('[data-open-drawer]');
+    if(drawerBtn) openDrawer(drawerBtn.dataset.openDrawer);
+    const jumpEvent=e.target.closest('[data-jump-event]');
+    if(jumpEvent){
+      const target=findSpreadByEventId(jumpEvent.dataset.jumpEvent);
+      if(target>=0) flipToSpread(target,target>current?1:-1,'left');
+    }
+  });
+
   $('#drawerClose').addEventListener('click',()=>drawer.close());
-  $('#indexBtn').addEventListener('click',()=>{buildIndex();indexDialog.showModal();}); $('#indexClose').addEventListener('click',()=>indexDialog.close());
-  indexList.addEventListener('click',e=>{const row=e.target.closest('[data-event-id]');if(!row)return;const target=findSpreadByEventId(row.dataset.eventId);if(target<0)return;current=target;mobileSide='left';indexDialog.close();render({preserveSide:true});});
-  document.addEventListener('keydown',e=>{if(!reader.classList.contains('visible'))return;if(e.key==='ArrowRight')goPage(1);if(e.key==='ArrowLeft')goPage(-1);if(e.key==='Escape'){if(drawer.open)drawer.close();if(indexDialog.open)indexDialog.close();}});
-  mobileTabs.addEventListener('click',e=>{const btn=e.target.closest('button[data-side]');if(!btn||btn.hidden)return;if(btn.dataset.side==='right'&&!hasRightPage(spreads[current]))return;mobileSide=btn.dataset.side;spread.classList.toggle('mobile-right',mobileSide==='right');syncMobileTabs();updateNavState();});
-  let touchX=null; spread.addEventListener('touchstart',e=>{touchX=e.changedTouches[0].clientX;},{passive:true}); spread.addEventListener('touchend',e=>{if(touchX==null)return;const dx=e.changedTouches[0].clientX-touchX;touchX=null;if(Math.abs(dx)<48)return;goPage(dx<0?1:-1);},{passive:true});
-  window.addEventListener('resize',()=>{if(!isMobile()){mobileSide='left';spread.classList.remove('mobile-right');syncMobileTabs();}updateNavState();});
-  buildIndex();
+  indexBtn.addEventListener('click',()=>{buildIndex();indexDialog.showModal();});
+  $('#indexClose').addEventListener('click',()=>indexDialog.close());
+  indexList.addEventListener('click',e=>{
+    const row=e.target.closest('[data-event-id]'); if(!row)return;
+    const target=findSpreadByEventId(row.dataset.eventId); if(target<0)return;
+    current=target; mobileSide='left'; indexDialog.close(); render({preserveSide:true});
+  });
+
+  document.addEventListener('keydown',e=>{
+    if(!reader.classList.contains('visible'))return;
+    if(e.key==='ArrowRight')goPage(1);
+    if(e.key==='ArrowLeft')goPage(-1);
+    if(e.key==='Escape'){if(drawer.open)drawer.close();if(indexDialog.open)indexDialog.close();}
+  });
+
+  mobileTabs.addEventListener('click',e=>{
+    const btn=e.target.closest('button[data-side]'); if(!btn||btn.hidden)return;
+    if(btn.dataset.side==='right'&&!hasRightPage(spreads[current]))return;
+    mobileSide=btn.dataset.side;
+    spread.classList.toggle('mobile-right',mobileSide==='right');
+    syncMobileTabs(); updateNavState();
+  });
+
+  let touchX=null;
+  spread.addEventListener('touchstart',e=>{touchX=e.changedTouches[0].clientX;},{passive:true});
+  spread.addEventListener('touchend',e=>{
+    if(touchX==null)return;
+    const dx=e.changedTouches[0].clientX-touchX; touchX=null;
+    if(Math.abs(dx)<48)return;
+    goPage(dx<0?1:-1);
+  },{passive:true});
+
+  window.addEventListener('resize',()=>{
+    if(!isMobile()){mobileSide='left';spread.classList.remove('mobile-right');syncMobileTabs();}
+    updateNavState();
+  });
+
+  setChapterTheme(null);
 })();
