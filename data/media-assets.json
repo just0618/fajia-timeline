@@ -13,7 +13,7 @@
   },
   {
     "asset_id": "asset_0603_live",
-    "event_id": "evt_20260603_tolerance_live",
+    "event_id": "evt_b0ef0653994a",
     "local_path": "media/2026/06/0603_tolerance_live/cover.JPG",
     "asset_type": "image",
     "caption": "容忍度挑战直播记录",
@@ -37,15 +37,17 @@
   },
   {
     "asset_id": "asset_0610_polaroid",
-    "event_id": "evt_20260610_polaroid_live",
+    "event_id": null,
     "local_path": "media/2026/06/0610_polaroid_live/cover.jpg",
     "asset_type": "image",
-    "caption": "翻转拍立得",
-    "is_cover": true,
+    "caption": "6月10日公开的翻转拍立得素材（实际拍摄日期未知）",
+    "is_cover": false,
     "sort_order": 1,
-    "display_role": "cover",
+    "display_role": "public_archive",
     "source_status": "source_url_pending",
-    "rights_status": "not_recorded"
+    "rights_status": "not_recorded",
+    "actual_date_unknown": true,
+    "public_date": "2026-06-10"
   },
   {
     "asset_id": "asset_0610_live",
@@ -53,9 +55,9 @@
     "local_path": "media/2026/06/0610_polaroid_live/gallery-01.JPG",
     "asset_type": "image",
     "caption": "6月10日直播记录",
-    "is_cover": false,
-    "sort_order": 2,
-    "display_role": "gallery",
+    "is_cover": true,
+    "sort_order": 1,
+    "display_role": "cover",
     "source_status": "source_url_pending",
     "rights_status": "not_recorded"
   },
@@ -170,7 +172,7 @@
   },
   {
     "asset_id": "asset_0619_live",
-    "event_id": "evt_20260619_perfume_live",
+    "event_id": "evt_575fe2255782",
     "local_path": "media/2026/06/0619_perfume_live/cover.JPG",
     "asset_type": "image",
     "caption": "香水直播记录",
