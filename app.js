@@ -2,6 +2,8 @@
   const data = window.TIMELINE_DATA || { stats:{}, experience_timeline:[], release_timeline:[] };
   const mediaAssets = Array.isArray(window.MEDIA_ASSETS) ? window.MEDIA_ASSETS : [];
   const allEvents = [...(data.experience_timeline || [])].sort((a,b) => new Date(a.occurred_at_start) - new Date(b.occurred_at_start));
+  const publicInteractions = [...(data.public_interactions || [])].sort((a,b) => new Date(a.occurred_at) - new Date(b.occurred_at));
+  const interactionById = new Map(publicInteractions.map(item => [item.interaction_id, item]));
 
   const chapters = Array.isArray(window.ARCHIVE_CHAPTERS) && window.ARCHIVE_CHAPTERS.length
     ? window.ARCHIVE_CHAPTERS.map(ch => ({
@@ -46,8 +48,52 @@
   const indexBtn = $('#indexBtn');
   const chaptersBtn = $('#chaptersBtn');
 
+  function isInteractionEvent(event) {
+    return event?.event_type === 'online_interaction';
+  }
+
+  function interactionDate(item) {
+    return String(item?.occurred_at || '').slice(0,10);
+  }
+
+  function interactionsForChapter(ch) {
+    if (!ch) return [];
+    const prefix = ch.month_prefix || (ch.id === 'part-03' ? '2026-05' : ch.id === 'part-04' ? '2026-06' : ch.id === 'part-05' ? '2026-07' : '');
+    if (!prefix) return [];
+    return publicInteractions.filter(item => String(item.occurred_at || '').startsWith(prefix));
+  }
+
   function eventsForChapter(ch) {
-    return allEvents.filter(ch.eventFilter).sort((a,b) => new Date(a.occurred_at_start) - new Date(b.occurred_at_start));
+    return allEvents
+      .filter(ch.eventFilter)
+      .filter(event => !isInteractionEvent(event))
+      .sort((a,b) => new Date(a.occurred_at_start) - new Date(b.occurred_at_start));
+  }
+
+  function isAttachedInteraction(item) {
+    const links = Array.isArray(item?.event_links) ? item.event_links : [];
+    if (links.some(link => {
+      const event = allEvents.find(e => e.event_id === link.event_id);
+      return event && !isInteractionEvent(event);
+    })) return true;
+    if (links.length) return false;
+    return Boolean(hostEventForDate(interactionDate(item)));
+  }
+
+  function standaloneInteractionsForChapter(ch) {
+    return interactionsForChapter(ch).filter(item => !isAttachedInteraction(item));
+  }
+
+  function chapterTimelineItems(ch) {
+    const eventItems = eventsForChapter(ch).map(event => ({kind:'event', date:String(event.occurred_at_start || ''), event}));
+    const interactionItems = standaloneInteractionsForChapter(ch).map(interaction => ({kind:'interaction', date:String(interaction.occurred_at || ''), interaction}));
+    return [...eventItems, ...interactionItems].sort((a,b) => {
+      const da = new Date(a.date).getTime();
+      const db = new Date(b.date).getTime();
+      if (da !== db) return da - db;
+      if (a.kind !== b.kind) return a.kind === 'event' ? -1 : 1;
+      return 0;
+    });
   }
 
   function setChapterTheme(ch) {
@@ -56,8 +102,9 @@
 
   function chapterStatus(ch) {
     const count = eventsForChapter(ch).length;
+    const interactionCount = interactionsForChapter(ch).length;
     if (ch.phase === 'planned') return '框架已建 · 内容待整理';
-    if (ch.id === 'part-03' && ch.phase === 'ready') return `${count} 个正式现实节点 · 五月已收口`;
+    if (ch.id === 'part-03' && ch.phase === 'ready') return `${count} 个主轴节点 · ${interactionCount} 条公开互动`;
     if (ch.phase === 'ready') return `${count} 个现有现实节点 · 已完成一轮整理`;
     return `${count} 个现有现实节点 · 待完整反推`;
   }
@@ -187,6 +234,59 @@
     </div>`;
   }
 
+  function interactionSourceLink(item, label='查看整理来源 ↗') {
+    const href = item?.source_url || item?.source_post_url;
+    return href ? `<a class="interaction-source" href="${esc(href)}" target="_blank" rel="noreferrer">${esc(label)}</a>` : '';
+  }
+
+  function interactionMeta(item) {
+    const participants = Array.isArray(item?.participants) ? item.participants.join('、') : '';
+    const platform = cleanText(item?.platform || 'PUBLIC');
+    return [platform, participants].filter(Boolean).join(' · ');
+  }
+
+  function interactionCard(item, {sticker=false} = {}) {
+    if (!item) return '';
+    const cls = sticker ? 'interaction-card interaction-sticker' : 'interaction-card';
+    const summary = cleanText(item.summary || '公开互动记录。');
+    return `<button class="${cls}" type="button" data-open-interaction="${esc(item.interaction_id)}">
+      <span class="interaction-kicker">PUBLIC INTERACTION · ${esc(fmtShort(item.occurred_at))}</span>
+      <strong>${esc(item.title || '公开互动')}</strong>
+      <small>${esc(interactionMeta(item))}</small>
+      <p>${esc(summary)}</p>
+      <i>展开记录 ↗</i>
+    </button>`;
+  }
+
+  function hostEventForDate(date) {
+    return allEvents
+      .filter(event => !isInteractionEvent(event) && String(event.occurred_at_start || '').slice(0,10) === date)
+      .sort((a,b) => new Date(a.occurred_at_start) - new Date(b.occurred_at_start))[0] || null;
+  }
+
+  function interactionsForEvent(event) {
+    const eventId = event?.event_id;
+    const date = String(event?.occurred_at_start || '').slice(0,10);
+    if (!eventId || !date) return [];
+    return publicInteractions.filter(item => {
+      const links = Array.isArray(item.event_links) ? item.event_links : [];
+      if (links.some(link => link.event_id === eventId)) return true;
+      if (links.length) return false;
+      if (interactionDate(item) !== date) return false;
+      const host = hostEventForDate(date);
+      return host?.event_id === eventId;
+    });
+  }
+
+  function interactionNotes(event) {
+    const items = interactionsForEvent(event);
+    if (!items.length) return '';
+    return `<section class="event-interactions">
+      <div class="event-interactions-label">PUBLIC INTERACTION · 公开互动旁注</div>
+      <div class="event-interactions-grid">${items.map((item,i)=>interactionCard(item,{sticker:i===0})).join('')}</div>
+    </section>`;
+  }
+
   function mediaFigure(asset, i=0, compact=false) {
     const cls = compact ? 'source-media-card' : `memory-photo photo-${i+1}`;
     const tape = compact ? '' : `<span class="tape tape-${i+1}"></span>`;
@@ -268,7 +368,7 @@
       <div class="chapter-stickers">
         <span>${ch.phase === 'ready' ? 'DEMO' : 'FRAME'}</span>
         <span>${esc(ch.theme)}</span>
-        ${count ? `<span>${count} NODES</span>` : '<span>TO FILL</span>'}
+        ${count ? `<span>${count} MAIN${interactionsForChapter(ch).length ? ` · ${interactionsForChapter(ch).length} NOTES` : ''}</span>` : '<span>TO FILL</span>'}
       </div>
       <div class="chapter-note">${ch.id === 'part-03' ? '五月事件集已经完成第一轮收口。<br>这一章开始用正式数据检验整本手账的阅读方式。' : '这一版先确认“怎么读一本书”。<br>主题名、封面图与章节专属装饰以后再填。'}</div>
       <button class="back-to-map" type="button" data-back-hub>← 返回五章总时间轴</button>
@@ -278,7 +378,9 @@
 
   function chapterRight(ch, pageNo) {
     const chapterEvents = eventsForChapter(ch);
-    if (!chapterEvents.length) {
+    const chapterInteractions = interactionsForChapter(ch);
+    const timelineItems = chapterTimelineItems(ch);
+    if (!chapterEvents.length && !chapterInteractions.length) {
       return `<span class="right-kicker">CHAPTER INDEX · FRAME ONLY</span>
         <h2 class="right-title">${esc(ch.range)}</h2>
         <p class="right-sub">章节位置已经建立，这一轮不为了填满页面而制造事件。</p>
@@ -288,10 +390,20 @@
         </div>
         <span class="page-number">${pad(pageNo)}</span>`;
     }
-    return `<span class="right-kicker">CHAPTER INDEX · ${chapterEvents.length} NODES</span>
-      <h2 class="right-title">${esc(ch.range)} · 现实时间轴</h2>
-      <p class="right-sub">${ch.id === 'part-03' ? '五月正式事件集 V1：现实节点按发生时间排序；未知拍摄日仍留在公开档案层。' : ch.id === 'part-04' ? '六月先作为成熟示范章。' : '现有节点先进入框架，下一轮仍需按完整公开库核验与补齐。'}</p>
-      <div class="chapter-list">${chapterEvents.map(e=>`<button type="button" class="chapter-list-row ${e.status === 'draft' ? 'is-draft' : ''} ${eventMode(e)==='text_only_sensitive'?'is-private':''}" data-jump-event="${esc(e.event_id)}"><span>${esc(displayEventDate(e).replace(/^2026\./,''))}</span><b>${esc(e.title)}</b><em>${esc(eventMode(e)==='text_only_sensitive' ? '私人行程 · 仅文本' : e.confidence==='medium_high' ? '待补官方源' : typeLabel(e.event_type))}</em></button>`).join('')}</div>
+    const rows = timelineItems.map(item => {
+      if (item.kind === 'interaction') {
+        const interaction = item.interaction;
+        return `<button type="button" class="chapter-list-row is-interaction" data-open-interaction="${esc(interaction.interaction_id)}"><span>${esc(fmtShort(interaction.occurred_at))}</span><b>${esc(interaction.title)}</b><em>公开互动 · 旁注</em></button>`;
+      }
+      const e = item.event;
+      const interactionCount = interactionsForEvent(e).length;
+      const baseLabel = eventMode(e)==='text_only_sensitive' ? '私人行程 · 仅文本' : e.confidence==='medium_high' ? '待补官方源' : typeLabel(e.event_type);
+      return `<button type="button" class="chapter-list-row ${e.status === 'draft' ? 'is-draft' : ''} ${eventMode(e)==='text_only_sensitive'?'is-private':''} ${interactionCount?'has-interaction-note':''}" data-jump-event="${esc(e.event_id)}"><span>${esc(displayEventDate(e).replace(/^2026\./,''))}</span><b>${esc(e.title)}</b><em>${esc(baseLabel + (interactionCount ? ' · +互动旁注' : ''))}</em></button>`;
+    }).join('');
+    return `<span class="right-kicker">CHAPTER INDEX · ${chapterEvents.length} MAIN · ${chapterInteractions.length} NOTES</span>
+      <h2 class="right-title">${esc(ch.range)} · 主轴与公开互动</h2>
+      <p class="right-sub">${ch.id === 'part-03' ? '主轴仍按实际发生时间排序；评论、回复与空降降一级显示为公开互动旁注，不再与直播、出行抢同一视觉权重。' : ch.id === 'part-04' ? '六月先作为成熟示范章。' : '现有节点先进入框架，下一轮仍需按完整公开库核验与补齐。'}</p>
+      <div class="chapter-list">${rows}</div>
       <span class="page-number">${pad(pageNo)}</span>`;
   }
   function clueLeft(event, pageNo) {
@@ -353,6 +465,7 @@
           <span>保留</span><b>日期 · 城市级节点 · 参与者</b>
           <span>不展示</span><b>站拍照片 · 精确站点 · 车次 · 具体时刻 · 跟拍来源</b>
         </div>
+        ${interactionNotes(event)}
         <span class="page-number">${pad(pageNo)}</span>`;
     }
 
@@ -364,6 +477,7 @@
         ${visible.length ? `<div class="followup-block"><div class="followup-label">同日 / 后续公开记录</div><div class="release-line compact-release">${visible.map(releaseItem).join('')}</div></div>` : (!sources ? `<div class="pending-strip">公开记录待补充</div>` : '')}
         ${sources}
         ${posts.length > visible.length ? `<button class="archive-button" type="button" data-open-drawer="${esc(event.event_id)}">打开物料抽屉 · ${posts.length} 条</button>` : ''}
+        ${interactionNotes(event)}
         <span class="page-number">${pad(pageNo)}</span>`;
     }
 
@@ -375,6 +489,7 @@
         ${visible.length ? `<div class="release-line">${visible.map(releaseItem).join('')}</div>` : `<div class="evidence-quiet">原始公开记录尚未与帖子库建立链接；本页不会把空缺写成“待续”。</div>`}
         ${sources}
         ${posts.length > visible.length ? `<button class="archive-button" type="button" data-open-drawer="${esc(event.event_id)}">打开物料抽屉 · ${posts.length} 条</button>` : ''}
+        ${interactionNotes(event)}
         <span class="page-number">${pad(pageNo)}</span>`;
     }
 
@@ -392,6 +507,7 @@
       <p class="right-sub">${releaseSub}</p>
       ${visible.length ? `<div class="release-line">${visible.map(releaseItem).join('')}</div>` : ''}${sources}
       ${posts.length > visible.length ? `<button class="archive-button" type="button" data-open-drawer="${esc(event.event_id)}">打开物料抽屉 · ${posts.length} 条</button>` : ''}
+      ${interactionNotes(event)}
       <span class="page-number">${pad(pageNo)}</span>`;
   }
 
@@ -485,10 +601,28 @@
       railTrack.innerHTML = chapters.map(ch => `<button type="button" class="rail-chapter" data-open-chapter="${esc(ch.id)}" title="${esc(ch.range)}"><span>${esc(ch.part.replace('PART ',''))}</span><b>${esc(ch.short)}</b></button>`).join('');
       return;
     }
-    railTrack.innerHTML = spreads.map((item,i) => {
+    const railItems = [
+      {kind:'chapter', date:'0000-00-00', spreadIndex:0, chapter:activeChapter},
+      ...spreads.slice(1).map((item,i)=>({kind:'event', date:String(item.event.occurred_at_start || ''), spreadIndex:i+1, event:item.event})),
+      ...standaloneInteractionsForChapter(activeChapter).map(interaction=>({kind:'interaction', date:String(interaction.occurred_at || ''), interaction}))
+    ].sort((a,b)=>{
+      if (a.kind === 'chapter') return -1;
+      if (b.kind === 'chapter') return 1;
+      const da = new Date(a.date).getTime();
+      const db = new Date(b.date).getTime();
+      if (da !== db) return da-db;
+      if (a.kind !== b.kind) return a.kind === 'event' ? -1 : 1;
+      return 0;
+    });
+    railTrack.innerHTML = railItems.map(item => {
+      if (item.kind === 'interaction') {
+        return `<button type="button" class="rail-dot-wrap interaction-dot" data-open-interaction="${esc(item.interaction.interaction_id)}" title="${esc(fmtShort(item.interaction.occurred_at) + ' · ' + item.interaction.title)}"><span class="rail-dot"></span></button>`;
+      }
       const title = item.kind==='chapter' ? `${item.chapter.range} · 章节页` : item.event.title;
+      const hasInteraction = item.kind==='event' && interactionsForEvent(item.event).length;
       const special = item.kind==='chapter' ? ' chapter-dot' : item.kind==='event' && eventMode(item.event)==='text_only_sensitive' ? ' private-dot' : item.kind==='event' && eventMode(item.event)==='original_post' ? ' public-dot' : '';
-      return `<div class="rail-dot-wrap ${i===current?'active':''}${special}" data-jump="${i}" title="${esc(title)}"><span class="rail-dot"></span></div>`;
+      const noteClass = hasInteraction ? ' has-interaction-dot' : '';
+      return `<button type="button" class="rail-dot-wrap ${item.spreadIndex===current?'active':''}${special}${noteClass}" data-jump="${item.spreadIndex}" title="${esc(title)}"><span class="rail-dot"></span></button>`;
     }).join('');
   }
 
@@ -526,9 +660,37 @@
   }
 
 
+  function openInteractionDrawer(interactionId) {
+    const item = interactionById.get(interactionId); if (!item) return;
+    const meta = interactionMeta(item);
+    const links = Array.isArray(item.event_links) ? item.event_links : [];
+    const relationRows = links.map(link => {
+      const event = allEvents.find(e => e.event_id === link.event_id);
+      return `<div class="interaction-relation"><span>${esc(link.relation_type || 'related')}</span><b>${esc(event?.title || link.event_id)}</b><small>${esc(link.note || '')}</small></div>`;
+    }).join('');
+    const specialTitle = interactionDate(item) === '2026-05-29' ? '那天，他们回答了什么？' : item.title;
+    drawerTitle.textContent = specialTitle;
+    drawerList.innerHTML = `<article class="interaction-detail">
+      <div class="interaction-detail-top"><span class="interaction-kicker">PUBLIC INTERACTION · ${esc(fmtYearDate(item.occurred_at))}</span><span class="interaction-platform">${esc(meta)}</span></div>
+      <h3>${esc(item.title)}</h3>
+      <p>${esc(cleanText(item.summary || '公开互动记录。'))}</p>
+      ${item.metadata?.boundary ? `<div class="interaction-boundary">${esc(item.metadata.boundary)}</div>` : ''}
+      ${relationRows ? `<div class="interaction-relations"><div class="interaction-section-label">与主轴的关系</div>${relationRows}</div>` : ''}
+      ${interactionSourceLink(item)}
+    </article>`;
+    drawer.showModal();
+  }
+
   function findSpreadByEventId(eventId) { return spreads.findIndex(s => s.kind==='event' && s.event.event_id===eventId); }
   function buildIndex() {
-    indexList.innerHTML = activeEvents.map(e => `<div class="index-row" data-event-id="${esc(e.event_id)}"><div class="index-date">${esc(displayEventDate(e))}</div><div><div class="index-title">${esc(e.title)}</div><div class="owner" style="margin-top:5px">${esc(e.location_text || '')}</div></div><span class="index-type">${esc(e.status === 'draft' ? '待核验' : typeLabel(e.event_type))}</span></div>`).join('');
+    indexList.innerHTML = chapterTimelineItems(activeChapter).map(item => {
+      if (item.kind === 'interaction') {
+        const x = item.interaction;
+        return `<div class="index-row is-interaction" data-interaction-id="${esc(x.interaction_id)}"><div class="index-date">${esc(fmtYearDate(x.occurred_at))}</div><div><div class="index-title">${esc(x.title)}</div><div class="owner" style="margin-top:5px">PUBLIC INTERACTION</div></div><span class="index-type">旁注</span></div>`;
+      }
+      const e = item.event;
+      return `<div class="index-row" data-event-id="${esc(e.event_id)}"><div class="index-date">${esc(displayEventDate(e))}</div><div><div class="index-title">${esc(e.title)}</div><div class="owner" style="margin-top:5px">${esc(e.location_text || '')}</div></div><span class="index-type">${esc(e.status === 'draft' ? '待核验' : typeLabel(e.event_type))}</span></div>`;
+    }).join('');
   }
 
   $('#openBook').addEventListener('click', () => {
@@ -560,6 +722,8 @@
   railTrack.addEventListener('click', e => {
     const chapterHit = e.target.closest('[data-open-chapter]');
     if (chapterHit) { openChapter(chapterHit.dataset.openChapter); return; }
+    const interactionHit = e.target.closest('[data-open-interaction]');
+    if (interactionHit) { openInteractionDrawer(interactionHit.dataset.openInteraction); return; }
     const hit=e.target.closest('[data-jump]');
     if(!hit||flipping)return;
     const target=Number(hit.dataset.jump);
@@ -574,6 +738,8 @@
     if(hubBtn){ openHub(); return; }
     const drawerBtn=e.target.closest('[data-open-drawer]');
     if(drawerBtn) openDrawer(drawerBtn.dataset.openDrawer);
+    const interactionBtn=e.target.closest('[data-open-interaction]');
+    if(interactionBtn){ openInteractionDrawer(interactionBtn.dataset.openInteraction); return; }
     const jumpEvent=e.target.closest('[data-jump-event]');
     if(jumpEvent){
       const target=findSpreadByEventId(jumpEvent.dataset.jumpEvent);
@@ -585,6 +751,8 @@
   indexBtn.addEventListener('click',()=>{buildIndex();indexDialog.showModal();});
   $('#indexClose').addEventListener('click',()=>indexDialog.close());
   indexList.addEventListener('click',e=>{
+    const interactionRow=e.target.closest('[data-interaction-id]');
+    if(interactionRow){ indexDialog.close(); openInteractionDrawer(interactionRow.dataset.interactionId); return; }
     const row=e.target.closest('[data-event-id]'); if(!row)return;
     const target=findSpreadByEventId(row.dataset.eventId); if(target<0)return;
     current=target; mobileSide='left'; indexDialog.close(); render({preserveSide:true});

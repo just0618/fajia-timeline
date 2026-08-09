@@ -1,14 +1,15 @@
 {
   "schema_version": "0.14.1",
-  "generated_at": "2026-08-09T06:36:25+00:00",
+  "generated_at": "2026-08-09T10:14:09+00:00",
   "stats": {
     "posts": 323,
-    "events": 41,
-    "post_event_links": 70,
-    "linked_unique_posts": 63,
-    "unlinked_posts": 260,
-    "media_assets": 23,
-    "evidence": 40
+    "events": 56,
+    "post_event_links": 79,
+    "linked_unique_posts": 72,
+    "unlinked_posts": 251,
+    "media_assets": 26,
+    "evidence": 57,
+    "public_interactions": 4
   },
   "experience_timeline": [
     {
@@ -2025,23 +2026,30 @@
     },
     {
       "event_id": "evt_46e423c24de9",
-      "title": "北京高铁站相关公开节点",
-      "event_type": "travel",
+      "title": "贺嘉述 杭州→北京 · 法宣阁接站",
+      "event_type": "private_itinerary",
       "occurred_at_start": "2026-05-04",
       "occurred_at_end": null,
       "date_precision": "exact",
-      "confidence": "medium",
-      "location_text": "北京",
-      "description": "整理记录 5月4日出现北京高铁站相关公开素材。",
-      "evidence_note": "由外部整理候选池转入；来源：豆瓣整理：杀青后时间线",
-      "status": "draft",
+      "confidence": "high",
+      "location_text": "杭州→北京",
+      "description": "5月4日，贺嘉述由杭州前往北京，法宣阁接站。该节点属于私人行程，档案仅保留日期、城市级路线与参与者；不展示非公开跟拍影像、具体车站、车次及精确时刻。",
+      "evidence_note": "语义校正：移动主体为贺嘉述，法宣阁为接站者。05.03公开互动中可见贺嘉述位置信息为浙江、法宣阁为北京，仅作为次日行程的前序公开线索，不据此推断因果或精确位置。",
+      "status": "confirmed",
       "created_at": "2026-08-09T03:21:55+00:00",
-      "updated_at": "2026-08-09T03:22:03+00:00",
+      "updated_at": "2026-08-09T10:14:08+00:00",
       "participants": [
-        "法宣阁",
-        "贺嘉述"
+        "贺嘉述",
+        "法宣阁"
       ],
-      "tags": [],
+      "tags": [
+        "PART03",
+        "2026年5月",
+        "私人行程",
+        "仅文本",
+        "不展示跟拍素材",
+        "display:text_only_sensitive"
+      ],
       "linked_posts": [],
       "evidence": [
         {
@@ -2054,10 +2062,1049 @@
           "confidence": "medium",
           "observed_at": null,
           "created_at": "2026-08-09T03:21:55+00:00"
+        },
+        {
+          "evidence_id": "evd_8580916ab73e",
+          "event_id": "evt_46e423c24de9",
+          "evidence_type": "manual_archive",
+          "source_url": null,
+          "source_post_url": null,
+          "note": "已人工确认5月4日杭州→北京行程存在；因来源涉及私人行程跟拍，档案只保留城市级文本节点。",
+          "confidence": "high",
+          "observed_at": null,
+          "created_at": "2026-08-09T10:14:08+00:00"
         }
       ],
       "media_assets": [],
-      "display_mode": "experience_only"
+      "display_mode": "text_only_sensitive"
+    },
+    {
+      "event_id": "evt_20260508_double_helix_premiere",
+      "title": "《双程》首播",
+      "event_type": "public_milestone",
+      "occurred_at_start": "2026-05-08",
+      "occurred_at_end": null,
+      "date_precision": "exact",
+      "confidence": "confirmed",
+      "location_text": null,
+      "description": "《双程》于5月8日首播，进入剧播期。",
+      "evidence_note": "双程官方 Instagram 当日明确发布“今日首播”。",
+      "status": "confirmed",
+      "created_at": "2026-08-09T10:14:08+00:00",
+      "updated_at": "2026-08-09T10:14:08+00:00",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "tags": [
+        "PART03",
+        "2026年5月",
+        "首播",
+        "双程",
+        "公开节点",
+        "display:original_post"
+      ],
+      "linked_posts": [
+        {
+          "platform": "instagram",
+          "owner": "双程官方",
+          "role": "drama_official",
+          "post_url": "https://www.instagram.com/p/DYEFNOfTykh/",
+          "post_id": "DYEFNOfTykh",
+          "published_at": "2026-05-08T12:05:01+08:00",
+          "published_at_raw": "2026-05-08T04:05:01.000Z",
+          "title": null,
+          "text": "爱上不自觉追随你的目光\n今日首播，静待奔赴\nLove is the gaze that follows you unconsciously.\nPremieres today, awaiting our destined encounter.\n@faxuange @hejiashu1010\n#双程 #法宣阁 #贺嘉述\n13周",
+          "media_type": "image",
+          "public_ip_region": null,
+          "location_text": null,
+          "extra_json": "{\"instagram_media_pk\": null, \"author_username\": \"doublehelix2026\", \"like_count\": \"2958\", \"comment_count\": \"14\", \"repost_count\": null, \"coauthors\": [], \"carousel_media_count\": null, \"video_duration_seconds\": null, \"drama_filter_match\": true, \"drama_filter_basis\": \"caption_requires_both_#法宣阁_#贺嘉述\", \"source_page_url\": \"https://www.instagram.com/p/DYEFNOfTykh/\", \"embedded_json_found\": false}",
+          "relation_type": "documents",
+          "link_confidence": "confirmed",
+          "link_note": "双程官方当日首播帖",
+          "image_urls": [
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.82787-19/671800956_17923619202289001_3694783349077523885_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmV4cGVyaW1lbnRhbCJ9&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_cat=105&_nc_oc=Q6cZ2gEdVYPtSld7R64nCwjcBTl9O5ma5qduG2BmGEpInrzkPMG5IWq8XZ2XCl44Lw-mlJE&_nc_ohc=7UG3A-Ev-KYQ7kNvwE-K2tS&_nc_gid=fXRlBa4L6HKjZPJmQ86nxQ&edm=AONqaaQBAAAA&ccb=7-5&oh=00_AQHKZvwPkajcnshm_rm3lnfMammJVta_cBvJLnMFQ6-r0g&oe=6A7D2EA3&_nc_sid=4e3341",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/688917375_992385797095458_2073841867117632994_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=100&ig_cache_key=Mzg5ODE1MDk5ODIxMDkxNzUxMw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=s72cn12Bh2QQ7kNvwHviz6t&_nc_oc=Adrqptoz2ano18DNw-4fgRYt0a2T05kezxJRCYBkFl5u0u2UO8cgW0SltC-doFnG1Kk&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=hRO5e6tSi-UyhZVg6FJYLQ&_nc_ss=7a22e&oh=00_AQERZSHHvNJruYC_Ov8NwvsgxLTwPIk7swn17id91PmSgQ&oe=6A7D2789",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/701470294_1422185672999027_1936291559977773088_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=100&ig_cache_key=Mzg5ODEyMDc2NjA5NTQ4MzI5Mw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=t0ucAmVYzgcQ7kNvwGNcarJ&_nc_oc=Adqsmz-daCwj7cjF_yjpn0iFJlvDLIm09nJEekaKsAUzw-LbKY_ZMBmYu9WPGJ6oK7A&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=hRO5e6tSi-UyhZVg6FJYLQ&_nc_ss=7a22e&oh=00_AQGk560g-M2NjhT988_Nk44UTxc-dxbEdAU9X6iKfDkYDw&oe=6A7D367C",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/700135265_916392931413821_1502562296256347490_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=103&ig_cache_key=Mzg5ODEwODA1MjA2OTYyOTQ2Ng%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=rn4EJmwEf8cQ7kNvwEEpjzb&_nc_oc=Adqu9y7PrfkQvxFfGF2AS1-DiZhBMSGiL8zOnZGu_WP5Sdtyp-lXc7u6Q6vnrne7XaU&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=hRO5e6tSi-UyhZVg6FJYLQ&_nc_ss=7a22e&oh=00_AQF4Vnw_LtqFdgGLWnIE3kiy32aj3zM2j659XNlfswS-zg&oe=6A7D4AB1",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/696221271_1283995777224032_1344474899528222699_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=102&ig_cache_key=Mzg5ODA0ODIxNzk5MDk0NzYyNg%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=FEDZ9jliHD4Q7kNvwFp9Noy&_nc_oc=AdrZ1j5ohHCSuoJZ7oZKx51QI4_u2FlD3Qm3_EFtLCxxNlwiPvRt25SsUMtxLfzXtXo&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=hRO5e6tSi-UyhZVg6FJYLQ&_nc_ss=7a22e&oh=00_AQFpDek1B_ovahsuilg6kXvZ78TBOwz0lOjFCmJJ-LvJKw&oe=6A7D4128",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/698593917_1554098092944826_8454912768161027960_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=104&ig_cache_key=Mzg5NzQ0MjM0NzA3ODc4NzI4Ng%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=Sl6lYptdQwsQ7kNvwFZ7kM7&_nc_oc=Ado8CE7C0gwN2Uy_ML7LMw-FxLjX1Jx8bw9-rzWOPS-vFjUZ1XSWktZcmzo15nsJjjY&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=hRO5e6tSi-UyhZVg6FJYLQ&_nc_ss=7a22e&oh=00_AQF9q6frUaf4Z7X8liZOFyMVC_9qDc7yZtxP3xz15pP9-g&oe=6A7D2E06",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/698283610_2035424170661351_7246836870079453972_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=105&ig_cache_key=Mzg5NzQ0MTAyOTA2ODk4Mzk3OQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=FlKY06XA4RwQ7kNvwGn7vAS&_nc_oc=Adpo9i82QQL3vH7mHkaO7Kl-fCXpZRo2GD_o9kVeCsv5MlDx7OJll5NDE897Oc5Fhok&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=hRO5e6tSi-UyhZVg6FJYLQ&_nc_ss=7a22e&oh=00_AQH7o8qM_Rou1Gua4-xc768RSutgOg_jAhrtHeSJN67zbA&oe=6A7D189A",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/672373116_2474331149708837_8136008738935963994_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=102&ig_cache_key=Mzg5NzM2NDEwOTk4ODE1OTk4Mg%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=dPxbcwNq284Q7kNvwG--500&_nc_oc=AdodspUdMIl_ALIGcwqObjvSw5wMQXF6Gld7H8uWrEW4g6SHc4SHNZP1A4LJfKSaxQo&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=hRO5e6tSi-UyhZVg6FJYLQ&_nc_ss=7a22e&oh=00_AQHBWFwHxCSn-MP3GptN3gkCFeE2GeJHpYjkhtEpVJ8RSg&oe=6A7D2D93",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/695760306_3644581759032673_7611588358821281317_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=105&ig_cache_key=Mzg5NzM0MzkyODcxNjc3MzU2Ng%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=crCnPK7hzW8Q7kNvwG4sGpV&_nc_oc=AdpRX_Vn16cGM4NbkHBl-Q0M-JemuYTaX5aM9COFt5L5WKfLoV9ki-zF8QEGBaJni3c&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=hRO5e6tSi-UyhZVg6FJYLQ&_nc_ss=7a22e&oh=00_AQGVbsgcMskvJXxBlqWbWVzYlYF4LfTvVYKQM1Zl1QfUgA&oe=6A7D3BBC",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/699545047_1357297166217867_3967066717377820112_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=110&ig_cache_key=Mzg5NjY5NzYwNzM5MTc3NzA2Nw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=Sb2w8gqige0Q7kNvwEfYPwP&_nc_oc=Ado9F0JYPfFlDVjTdqxO02mkwxpJE_i5W01qDP_dFZTzbT5g_6uBj55i1vN1x3Nh-yQ&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=hRO5e6tSi-UyhZVg6FJYLQ&_nc_ss=7a22e&oh=00_AQGy6v794UqU0_RS_3UCBvesO2Lr8q6C90vd0gFyL0ONQQ&oe=6A7D3CAB",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/695781615_3152260984978409_6867122080967870988_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=103&ig_cache_key=Mzg5NjY5MTE1NzQ5MTc1MDgwMA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=_SMPBGc_RuwQ7kNvwGpR4th&_nc_oc=AdqvH48qE0Nwzj6gstO4DSRSWkbZCwjDkk8XmR6QSRUSEp3KOVJSeHDWyKahbtrXzWM&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=hRO5e6tSi-UyhZVg6FJYLQ&_nc_ss=7a22e&oh=00_AQEkyCXCm-o9VO4gBWMyaWcyks8quRi63rAEPfRDvSpp-A&oe=6A7D39CD",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/687772973_873300885786827_3639894044340888657_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=107&ig_cache_key=Mzg5NjY4MDcwNDc0OTExNjMyMQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=KKG0UwBYEoIQ7kNvwGfDSMT&_nc_oc=AdpMsvLh6Lr1cAnokUNr56dBTpezBI00wRTn_S9XynMLCQwoCA4ouWpYCjybOb0dc3E&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=hRO5e6tSi-UyhZVg6FJYLQ&_nc_ss=7a22e&oh=00_AQF5L1vyjRMiIpRkK_HoEEMDbfWaN-y9AYhyJOCPypeKdQ&oe=6A7D1D73",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/695709316_1280085253784351_2194647901808735844_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=106&ig_cache_key=Mzg5NjU3MjMwNTEwMzMzNzA2Mg%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ohc=dPDb17sjP2oQ7kNvwH2SpBg&_nc_oc=Adpfdgc7ENHSYV4x0jyCbgHgftkKE9EINUGS3RwfmhhvnhMFdqqmCvMajsashDH-3LA&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=hRO5e6tSi-UyhZVg6FJYLQ&_nc_ss=7a22e&oh=00_AQGCoLAgYJqvRcwg47Y4JDtYhAXTaJQX0ab4TXU3QVmY-g&oe=6A7D3067",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.82787-15/696272931_18099288601911808_4854914567713752958_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=110&ig_cache_key=Mzg5NTg2NDMwMDQwMzY5OTI2Mw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTQ0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=wcKG3uF9-QkQ7kNvwFrPHLz&_nc_oc=AdrNTb9CcP0U-9cQXGZAtV2mauDtg2TgXAHpyI8pmsBr8vyahloy8v6nv6J0ikTJNiA&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=OYSAYgoTckyx_ma62Ei6hQ&_nc_ss=7a22e&oh=00_AQEjIsHtFHFS83zM_lJtgn1Yg7GPtUcm-YbDYbkVe9bXZQ&oe=6A7D380F",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/696512280_1854060941957585_5777670454198213809_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=102&ig_cache_key=Mzg5NTg0NzI2NDQ1OTc2NzMxNQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ohc=hTrQAw1Nny4Q7kNvwFHlMV3&_nc_oc=AdrnRq1LnOgVZczKQp19jnC3Sd1RrvGlUFBSlHUBC-fUmthAcSKDxvWpCiPuXK-NecA&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=OYSAYgoTckyx_ma62Ei6hQ&_nc_ss=7a22e&oh=00_AQGo55UUZf9qPSRJ7MYPh5vo8sE5dRlKxPV9Jz1WjqaA9g&oe=6A7D1AE8",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.82787-15/695763506_18098959393911808_7706497277738477464_n.jpg?stp=dst-jpg_e35_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0uaW1hZ2VfdXJsZ2VuLjE0NDAuc2RyLnJlZ3VsYXJfcGhvdG8uYzIifQ&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_cat=104&_nc_oc=Q6cZ2gE0t3bggSSmxIQDX81aXbalZ7kJwKm9c01dsKh1GHby6BWA1DsijB_0qhaB8uqBBOs&_nc_ohc=WlM1rRYulB8Q7kNvwFxzcv_&_nc_gid=OYSAYgoTckyx_ma62Ei6hQ&edm=APs17CUBAAAA&ccb=7-5&ig_cache_key=Mzg5NDYxODYwMjg0MjQwNjUyMA%3D%3D.3-ccb7-5&oh=00_AQFunEwzFtfX7E2j--5T5prYJ-_2ddZ3rIf9Z8bvQpFsGQ&oe=6A7D4CBF&_nc_sid=10d13b",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/671275633_966651622906250_8723272911297549761_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=100&ig_cache_key=Mzg5NDYwOTE4MzE5ODQ0MzM2OQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ohc=wQgq3VZa53IQ7kNvwHIpS4U&_nc_oc=Adp4K4ib-e9d-z0NTIP1HU51O3aYhQaLARUW2SXHvi58X99VE_cYFiOJTmQDWoEvB24&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=OYSAYgoTckyx_ma62Ei6hQ&_nc_ss=7a22e&oh=00_AQEcdlncAObDllSWdth0ruyikskZmLRWPM3uR4HEMJnOgA&oe=6A7D437E",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t39.30808-6/689492428_1610304327765320_5607766714068805294_n.jpg?stp=dst-jpg_e35_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0uaW1hZ2VfdXJsZ2VuLjEwODAuc2RyLnJlZ3VsYXJfcGhvdG8uYzIifQ&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_cat=108&_nc_oc=Q6cZ2gE0t3bggSSmxIQDX81aXbalZ7kJwKm9c01dsKh1GHby6BWA1DsijB_0qhaB8uqBBOs&_nc_ohc=f4D3V9GBf8UQ7kNvwEmqsF5&_nc_gid=OYSAYgoTckyx_ma62Ei6hQ&edm=APs17CUAAAAA&ccb=7-5&ig_cache_key=Mzg5NDYwMzUwMTEwODc1NTg0Mg%3D%3D.3-ccb7-5&oh=00_AQFwNJpQG5mO7z2RTtH5nhCsiYqkeQDgkJYW8y65mKtEyg&oe=6A7D2B6C&_nc_sid=10d13b",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/686968227_973908168863222_4664493495741932039_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=107&ig_cache_key=Mzg5NDUxODU0NTA3NzcwNDMyMQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ohc=mDlzQtLajxIQ7kNvwHgLLba&_nc_oc=Ado6H8drEdu6EhU4Zm5esJZ51Z_AkER_IWjiV9vQqoX-GI4MPlBeSK1AyaPuSRVTZ4g&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=OYSAYgoTckyx_ma62Ei6hQ&_nc_ss=7a22e&oh=00_AQEeAqM-cbk4NZL6_TYx_YSdKqHK-E5sk_mZsERrcwc8tg&oe=6A7D3808",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/686384935_1304686921612696_1135691721366801630_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=111&ig_cache_key=Mzg5NDQ4MjMzOTU3OTkwNDA1Nw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=lO8GNjhnP0UQ7kNvwHesXxx&_nc_oc=AdrcFlaeIj4khNj_t1S2EVcIMTXPi3O4rWywTog7M2w9vf3o7rFey2_qFHpsMAArRUM&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=OYSAYgoTckyx_ma62Ei6hQ&_nc_ss=7a22e&oh=00_AQEs0vZltqTvXo6bfFvQkBTXbPVZw93z3UVv6RejpW-UbA&oe=6A7D204A",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/686933872_844551435366755_7777160386314952896_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=100&ig_cache_key=Mzg5NDQ4MTM2ODU1NjU1ODc2NA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ohc=befU2EwbmHgQ7kNvwHDHn_m&_nc_oc=AdqfplXrPktIXbJEkiFvY3y81DBsbLvcAqvkdB96qDJpAhzgqvEYcwsqslanmQ6nPuE&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=OYSAYgoTckyx_ma62Ei6hQ&_nc_ss=7a22e&oh=00_AQFwfbpDYHYRytqYgA-Rjn7IfNMEgi5k3uUkYB3-91dMEg&oe=6A7D3696",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/687038042_1278452307779804_7358489751360304860_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=101&ig_cache_key=Mzg5NDA0MDA1NzI3ODA3MDY3OQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=8NOJEfZLNdcQ7kNvwHLE79N&_nc_oc=Adq-puGlIpc1RkFG679jP375zcdhF_bR4O_0SvmmJP0WBCcADDSdgyHDZ9-6xoF8rlo&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=OYSAYgoTckyx_ma62Ei6hQ&_nc_ss=7a22e&oh=00_AQG5kSEQjRBxO99yp4MK6bB4n9bgHwBM12xgRCgCwYajvg&oe=6A7D4A70",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/686290781_1944660539501983_3969447329371357738_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=102&ig_cache_key=Mzg5Mzk1MzMyNjAxNzExODU1OA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=ts64wX0dSUgQ7kNvwG4FdCO&_nc_oc=AdqwVasZc9UOh6Q3F05droSv5uqO6Y_sf_Dr9BErTz6NYhEXNJacKvWAyc8msDeanho&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=OYSAYgoTckyx_ma62Ei6hQ&_nc_ss=7a22e&oh=00_AQEBxcPnjuuVUJBk3UUyQ_5Hc1QSiX77QYhYo_cyOvHnAQ&oe=6A7D421E",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/685812268_1760452648658872_4828447966878080254_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=101&ig_cache_key=Mzg5MzgwODI1NjczNTQwMzM2Ng%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=lF3UdHacwEMQ7kNvwE7w9tv&_nc_oc=AdoUpmXgx8ZyMNId7IcS-XMcgsKPAX1nP3Gk3-bactgPQd9kOCFk71I4oBrVigFt0So&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=OYSAYgoTckyx_ma62Ei6hQ&_nc_ss=7a22e&oh=00_AQHWGBFFluBDX37e21OlfTsmO23auKexsDXpQhFVmmS66g&oe=6A7D3648",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/686481712_949577094352291_1743055794915609500_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=100&ig_cache_key=Mzg5Mzc5MTM4MjAwMTcwMDM1MQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=vw5Jm8W2PB8Q7kNvwGGJGXN&_nc_oc=Adq0AaahRIwiZyp6YAnhOFuVoslUl0PIlC6w_Yaspo_dA6Dkx6XaomJPXfV5hGKwWNA&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=OYSAYgoTckyx_ma62Ei6hQ&_nc_ss=7a22e&oh=00_AQGCBbdJ8zrGR1owzZZjr-_039JDKE-xb9XvDzISSssoRw&oe=6A7D2AA3",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/687861165_1362871712445824_5764411089085364455_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=107&ig_cache_key=Mzg5MzIzNTYwNTY3NTU4MzgzMw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=sAKWVfWskAQQ7kNvwExgS1l&_nc_oc=Adqjv3baBwKYUXV3SNXcHgJpm22M9gXbIvRSx_L7xSl7NwUTH8fIidf3X7Vw8oBLrls&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=l7mnEl0y8BuX8xaSSBza6g&_nc_ss=7a22e&oh=00_AQGNOvErZ_pBWyYMRsXwzXWeaUMixGx4uISXLSwfgLKjGg&oe=6A7D4AE8",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/686420588_27521989114060690_4513202131012360098_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=111&ig_cache_key=Mzg5MzIyOTMwNzU1MDYzMzE4MQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=rcBdrN8IV3YQ7kNvwGZTKmM&_nc_oc=AdoQ4c5Iqi_DCLQeM0olMVkmeA2lYf_14Ptbaj1PQavTetyCwFmlrLGSfKnpnsBNzHY&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=l7mnEl0y8BuX8xaSSBza6g&_nc_ss=7a22e&oh=00_AQFN59zqfDguKKYOVLxoP2-Iu6_iwfte27lawqNHH-Beyg&oe=6A7D2C0A",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/685980667_1619292572684052_1471195773887377433_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=109&ig_cache_key=Mzg5MzAxNTUyOTQwMzk0MTgwOQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=crQU60A_pNAQ7kNvwEZDEdc&_nc_oc=AdrDKSKR_iiHhf9V4yLKaXnBhuvSaIRk4T9QV1PgyAI6nxO8hdAFf57gKCWx-POAFX8&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=l7mnEl0y8BuX8xaSSBza6g&_nc_ss=7a22e&oh=00_AQFZzEIhYXuZhraVFpv5rz3Ei1Fy67CoLGRqEepirPrmSg&oe=6A7D29AC",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/694452723_1154824640105810_7759966764351983816_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=108&ig_cache_key=Mzg5MzAxMzE3NTM2NzU2NDAzMQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=B53sF7_PAmEQ7kNvwETmLcr&_nc_oc=Adoxmh0N9zMeoMFVNB3AkVTpGCy0RnZwLssSHNiZPq7LT9OxSBmZoVWmnHVI7UBNpDY&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=l7mnEl0y8BuX8xaSSBza6g&_nc_ss=7a22e&oh=00_AQGrW96oB0yTmyfQ0pNZzaLFGQzx_flxKawBNRdyPkPfig&oe=6A7D29CA",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.82787-15/689003764_18098319541911808_2442231509305298942_n.jpg?stp=dst-jpg_e35_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0uaW1hZ2VfdXJsZ2VuLjE0NDAuc2RyLnJlZ3VsYXJfcGhvdG8uYzIifQ&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_cat=104&_nc_oc=Q6cZ2gFtAeL0XYhGm3zFef3FkPn__uguY258oKAEdxw7B467oGwGgfpC509ezbQpsaZEzZk&_nc_ohc=X7m8_2GLbqIQ7kNvwHMLp7o&_nc_gid=l7mnEl0y8BuX8xaSSBza6g&edm=APs17CUBAAAA&ccb=7-5&ig_cache_key=Mzg5MjUwMjExNDU3MjQ0ODY5Ng%3D%3D.3-ccb7-5&oh=00_AQFsztLyKh1N9YGAAcYxyAdqIg0cTTOxxB63KXtL2mpGxw&oe=6A7D4E60&_nc_sid=10d13b",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/688909148_1744615820303429_8609159821622256020_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=101&ig_cache_key=Mzg5MjI1ODg3NzA5ODM3MTM2MQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ohc=2sF549rAt3QQ7kNvwE5gpr5&_nc_oc=Adp88gdjdMhoxVHqHnJWGZ09Tg05l9yRT4Pw-WhE6OpC2fjzqzSsYBV91Y4jQ-wsdQs&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=l7mnEl0y8BuX8xaSSBza6g&_nc_ss=7a22e&oh=00_AQHtV6_fJgP2pxsdfpkp2GCv_-Ot5lmLx56K-nLBUj_ziw&oe=6A7D206D",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/689213327_1690029992000336_7008333967114673258_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=100&ig_cache_key=Mzg5MjI1NjQzODk0OTM1ODMwMw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&_nc_aid=0&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ohc=TUpEKnmXW4MQ7kNvwEK_cAn&_nc_oc=AdqmJNtOYAHKsVJGMjBtU4FNuNqzUHDGugOF4GwZ9Hj6tDMJ9rAOg0n57HeKQhMrtbg&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=l7mnEl0y8BuX8xaSSBza6g&_nc_ss=7a22e&oh=00_AQHjWF6c25o4mOaiKqepjvHUVoEzP9lOJGlaEeBtNjdj5w&oe=6A7D3906",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t39.30808-6/695095422_1607209641408122_1924272379568109852_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=103&ig_cache_key=Mzg5MjI1MjU3OTcxNjQ0OTQwOA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMjA0OC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=51LPpL16H9sQ7kNvwGGAsQh&_nc_oc=AdpNCXotDRkNWcSwHTe7ohGwsI1bmZe8MCPymPNQ1nrG9B5XaE4FNRvNcvq4m0DAVaU&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=l7mnEl0y8BuX8xaSSBza6g&_nc_ss=7a22e&oh=00_AQEj_n0z0xTJX_OALLidIHFbgDusj7Sg614IWsfE0B-gbA&oe=6A7D37BB",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.82787-15/691824683_18098192338911808_3959081052959555682_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=106&ig_cache_key=Mzg5MjE5MzIyMjk5MTIyODI2NQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTQ0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=j3-a2ZpQNlQQ7kNvwF3yyXN&_nc_oc=Adqxh6EoO1a1r8wzfcPA3AjfnT7MlfCCV7F4f9cykVb3rFZ2s3bhzC9IspL5bXo1DWA&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=l7mnEl0y8BuX8xaSSBza6g&_nc_ss=7a22e&oh=00_AQHscpmKWx3MYL8xK2s0JGbgZpPPr5xboC83dwu92INulw&oe=6A7D259A",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/695738068_997441092962526_5633239918563236230_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=103&ig_cache_key=Mzg5MTU1MjEzNzU2MDI3MTA0MA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=1JFvDRQ-EgAQ7kNvwGrzLkc&_nc_oc=AdpU6oXP9zzk4IlAweB5YGsJiq-YpzZ5TWWzZADcRRkq32dRmMwwuqgPC8_qa6a3sZQ&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=l7mnEl0y8BuX8xaSSBza6g&_nc_ss=7a22e&oh=00_AQGGKaTDMyJteVRoUayRUHTFRchM78ss6Tsvg3T80w00rA&oe=6A7D4A62",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/693333735_1301616234747348_1368809268667620847_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=102&ig_cache_key=Mzg5MTU0Mzc1NTgwNTgxNTQ1OA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=kG7W_mrCZZYQ7kNvwFHmINv&_nc_oc=Ado6sRhRNRg5NCZ1tW8Cr0qChiqlzY9S4JBtxkZbJjrnkpVD5Zaa_Kaq9bWnQD2IR10&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=l7mnEl0y8BuX8xaSSBza6g&_nc_ss=7a22e&oh=00_AQEA9kPVHp410Rdcn7pmRoeOA3poFBbtw58pOdkvtimVxQ&oe=6A7D49A2",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/684917447_2536635786794033_4182828008765602283_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=102&ig_cache_key=Mzg5MDgwNDI1NTM0MzEwNzI1OQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ohc=LN3me6UpY2wQ7kNvwHtub8p&_nc_oc=AdpvKtewCEcH22mE9DRBdgUbU_QghdDK4Ly9YkhYMCzDE_2_6zqQYiDM4CHYU9VY9ms&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=l7mnEl0y8BuX8xaSSBza6g&_nc_ss=7a22e&oh=00_AQH-l0y0FC1Di3bb0V1OEVhmEo_tRO9urlh_TangGlbALg&oe=6A7D4136",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/684870572_1632924491148447_5367594530764929835_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=103&ig_cache_key=Mzg5MDE4NDU3ODY5Mjg1MTk5OQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=yWpKRT3GywcQ7kNvwFMAP-T&_nc_oc=AdrwfHEyBfCXyKvKRa-U7xI6iZ-Xlh1PCNX1kzZsn-AFZrcrkzMXgEHZ_y0rD23LdTI&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=Ds0EW_LmMvmr_FB_LzRZdQ&_nc_ss=7a22e&oh=00_AQG-U2_c3p8HV12jysMrhwbb_H3iFuRhlS2lc9ECT7rw9A&oe=6A7D4244",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/684147863_1203625631717008_8918054645764859566_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=110&ig_cache_key=Mzg5MDE2MjQ5NTk3NzMwMDg1Nw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=rkg0IMxojEgQ7kNvwErkqbG&_nc_oc=AdotuCjkTegsCLINuR0F8sZWrk7cA1btgh_FBAmt7ls0xEVOrs1h-JDwErPjPRUX7xo&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=Ds0EW_LmMvmr_FB_LzRZdQ&_nc_ss=7a22e&oh=00_AQEygiS6e9jJhuIjURsM8CAxM6cAxQ87y35akUZxU1_jtw&oe=6A7D4CEB",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/683454166_1504606934386546_7816962482204566067_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=107&ig_cache_key=Mzg4OTA1MTMyMDE1MDEyMzk5NQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=7BAMj4YUmxwQ7kNvwGPa-1f&_nc_oc=AdpN-ViG6z9JTQDQUiUNfehCY7fvRyUw1zE8bDIv0OH59RRBiSvO-i7J__a0ZqWyOLk&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=Ds0EW_LmMvmr_FB_LzRZdQ&_nc_ss=7a22e&oh=00_AQH_mCBvP9qlxV7GkJctW4y6PcKOj6sfXFrVBi5xXAgyGw&oe=6A7D4475",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/683474609_3452142678274357_814673523745971623_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=100&ig_cache_key=Mzg4ODk3NjgzMzEwOTAzOTM4Nw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=2_jmAx-9S2EQ7kNvwGHnJcQ&_nc_oc=AdomogSs2V3BpFoab_YEw055LXfvfn4UrusyNpWRv3UPz5B8ltjhiU63_u7CpMAPKiU&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=Ds0EW_LmMvmr_FB_LzRZdQ&_nc_ss=7a22e&oh=00_AQGCdkNybLgrmULrTCQ6g8QR7As0fK_Z4cyy3TnzlViWmg&oe=6A7D28AD",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.82787-15/682709272_18096803203911808_226019796280471061_n.jpg?stp=dst-jpg_e35_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0uaW1hZ2VfdXJsZ2VuLjE0NDAuc2RyLnJlZ3VsYXJfcGhvdG8uYzIifQ&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_cat=104&_nc_oc=Q6cZ2gGXHVXlNiICunvu_1-QrzWRuEC9a3m7EklQsK7g81a2_oL-aXL5eRX-nMZ9h-EIHdw&_nc_ohc=Ld4gAIyA1BIQ7kNvwGpBN4k&_nc_gid=Ds0EW_LmMvmr_FB_LzRZdQ&edm=APs17CUBAAAA&ccb=7-5&ig_cache_key=Mzg4ODYzMDAyMTI0MjAyMjcwNg%3D%3D.3-ccb7-5&oh=00_AQHyPPFqd939XBPw4cwVOZp-jUEdI7AVy5lVWww6wn2MTw&oe=6A7D2478&_nc_sid=10d13b",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/684190025_1618983762703934_2413027857616452139_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=107&ig_cache_key=Mzg4NzkxODY2MzE4NDE0NDA5OQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ohc=Zsd_tYiwalEQ7kNvwEdSpHC&_nc_oc=AdospXOX7RjxowjrrRK0TKti0LbZrIuq7nrqvLMYFT730hPIBScokEEvzBq-y_ndpsQ&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=Ds0EW_LmMvmr_FB_LzRZdQ&_nc_ss=7a22e&oh=00_AQFHRyYfJ3tSQlq_heKrywIVYH5gJkMc5v-fxctKabaNgg&oe=6A7D2C8A",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/683128826_1101471762904362_4921390794327876596_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=107&ig_cache_key=Mzg4NzkxNzM5ODY0MzE5NDA1NQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=n6GV8Qz-GaYQ7kNvwHK2zAm&_nc_oc=AdosDXP3ABrWG5122Hko_3U5Bi0pNXzbGa90HzTg2T4hEyFwa0RYTE2Bl2UkE7XZijc&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=Ds0EW_LmMvmr_FB_LzRZdQ&_nc_ss=7a22e&oh=00_AQE9wC1PYcQZEB-NjuMQxRGs37soBNJhdVL--h8TNP5d5A&oe=6A7D3869",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/682422883_1358792486304357_800431781441797147_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=110&ig_cache_key=Mzg4NzE4MzA3MDg5ODI3NDM2MQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ohc=YbPxMteeNjoQ7kNvwEyaY3d&_nc_oc=AdrEINRVw8rYYSPyWlPrjmArFtwIY15G2PT1Zo7dOeCYSO29K8UkMApaup23cpEmrBE&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=Ds0EW_LmMvmr_FB_LzRZdQ&_nc_ss=7a22e&oh=00_AQEyMjfOckSYRup-ReEbLjT5HYEeT1pYhyiNxkm3MLuVoA&oe=6A7D2AC6",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/684215353_1460892058366338_3533076741570428047_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=108&ig_cache_key=Mzg4NzE4MDUzMzg4OTYzMDE4Mg%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ohc=Kzj62iJL60EQ7kNvwEBPHi4&_nc_oc=AdoIelPp2q8XIirdoxdvUgw3GEnM4DinRkWgrlJZfE4UlADnNBKns4xDXkl-qO7FKFI&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=Ds0EW_LmMvmr_FB_LzRZdQ&_nc_ss=7a22e&oh=00_AQGLrIP7jjfqZ0akOn_FWwjBgmzQ4iFgCLWlFZwptzluGQ&oe=6A7D330D",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/685539543_1641903770288909_1266088756218028791_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=106&ig_cache_key=Mzg4NjQ1NTk3MDkxODA1NDY5MA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=CWX3wE-rtj4Q7kNvwEFlSCL&_nc_oc=AdqVSjC32sd31m7FHJKp93nMfGmoRhgnw2zsEUurr4cXn4AzaAa-2j3xDyhrZ7DhnZA&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=Ds0EW_LmMvmr_FB_LzRZdQ&_nc_ss=7a22e&oh=00_AQGjTrmwbBZm3tr6D9V82PUZtBD3WNEeW-Zwabx-Yyhjog&oe=6A7D1F53",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/684186557_961572703393517_3288516481638340343_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=106&ig_cache_key=Mzg4NTA5MDcxNTA5NzM4MTY5OQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=IWNo8WjQVIYQ7kNvwETH7v6&_nc_oc=Adq0u81SCLVELoFMLDXTnP9LTaXOJgJQpb_N9BVradOZn5Yyc_suqlYwQtpyO3SVJWE&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=Ds0EW_LmMvmr_FB_LzRZdQ&_nc_ss=7a22e&oh=00_AQGP1M6P95VLnswzVmBmiGDgiCEphEaFIEiDeMk7IZD3hA&oe=6A7D3C2B",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.82787-15/682391387_18095288989911808_8367023109879577492_n.jpg?stp=dst-jpg_e35_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0uaW1hZ2VfdXJsZ2VuLjE0NDAuc2RyLnJlZ3VsYXJfcGhvdG8uYzIifQ&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_cat=104&_nc_oc=Q6cZ2gGXHVXlNiICunvu_1-QrzWRuEC9a3m7EklQsK7g81a2_oL-aXL5eRX-nMZ9h-EIHdw&_nc_ohc=P1PAyMQSRLUQ7kNvwEZlVvB&_nc_gid=Ds0EW_LmMvmr_FB_LzRZdQ&edm=APs17CUBAAAA&ccb=7-5&ig_cache_key=Mzg4NTAwMjYyODEyMDI5Mjc4OQ%3D%3D.3-ccb7-5&oh=00_AQHDHsyrEZgBMx8GoHU-UPsixejXhB5DZF9sk4oHmka50w&oe=6A7D4F9A&_nc_sid=10d13b",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.82787-19/671800956_17923619202289001_3694783349077523885_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_cat=104&ccb=7-5&_nc_sid=f7ccc5&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=nA6P_FNqdaoQ7kNvwG9pUhK&_nc_oc=AdoRnFDXyvi2qLUz3V-knf_Ihp00acitfKmOg9MnpBuol0pNhBdqIihwnSy5O-YHVJw&_nc_zt=24&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=nbQUFwWCVAkk8oyKr921hA&_nc_ss=796a8&oh=00_AQGsFEzCg_7trsEWcTbUx-6A1MvGniDqXCfOFANubmKBwA&oe=6A7D2EA3",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/696221271_1283995777224032_1344474899528222699_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=102&ig_cache_key=Mzg5ODA0ODIxNzk5MDk0NzYyNg%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=FEDZ9jliHD4Q7kNvwFp9Noy&_nc_oc=AdrZ1j5ohHCSuoJZ7oZKx51QI4_u2FlD3Qm3_EFtLCxxNlwiPvRt25SsUMtxLfzXtXo&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=49EhE_K3we73dA95-Tpz-Q&_nc_ss=7a22e&oh=00_AQEYql0IJq9uIrWoJYcnUpS2zR6H2rfas-0PZMj26LsnaA&oe=6A7D4128",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/698593917_1554098092944826_8454912768161027960_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=104&ig_cache_key=Mzg5NzQ0MjM0NzA3ODc4NzI4Ng%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=Sl6lYptdQwsQ7kNvwFZ7kM7&_nc_oc=Ado8CE7C0gwN2Uy_ML7LMw-FxLjX1Jx8bw9-rzWOPS-vFjUZ1XSWktZcmzo15nsJjjY&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=49EhE_K3we73dA95-Tpz-Q&_nc_ss=7a22e&oh=00_AQFlo7VdpqNyAQ2WgPU1QPA2dcqDy4pWLKFQwafJsowRDQ&oe=6A7D2E06",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/698283610_2035424170661351_7246836870079453972_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=105&ig_cache_key=Mzg5NzQ0MTAyOTA2ODk4Mzk3OQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=FlKY06XA4RwQ7kNvwGn7vAS&_nc_oc=Adpo9i82QQL3vH7mHkaO7Kl-fCXpZRo2GD_o9kVeCsv5MlDx7OJll5NDE897Oc5Fhok&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=49EhE_K3we73dA95-Tpz-Q&_nc_ss=7a22e&oh=00_AQHX1CNGqcdRmp7FxPSWtRPCh1zMm16fc8UWqzEjh4dnEQ&oe=6A7D189A",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/672373116_2474331149708837_8136008738935963994_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=102&ig_cache_key=Mzg5NzM2NDEwOTk4ODE1OTk4Mg%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=dPxbcwNq284Q7kNvwG--500&_nc_oc=AdodspUdMIl_ALIGcwqObjvSw5wMQXF6Gld7H8uWrEW4g6SHc4SHNZP1A4LJfKSaxQo&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=49EhE_K3we73dA95-Tpz-Q&_nc_ss=7a22e&oh=00_AQFxTnNKG5ZOgmBXKTbCE6in_V926pi33Hu52l3QLlIlZg&oe=6A7D2D93",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/695760306_3644581759032673_7611588358821281317_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=105&ig_cache_key=Mzg5NzM0MzkyODcxNjc3MzU2Ng%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=crCnPK7hzW8Q7kNvwG4sGpV&_nc_oc=AdpRX_Vn16cGM4NbkHBl-Q0M-JemuYTaX5aM9COFt5L5WKfLoV9ki-zF8QEGBaJni3c&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=49EhE_K3we73dA95-Tpz-Q&_nc_ss=7a22e&oh=00_AQEfHuQ3oniGBm-z18jI-bQyZC7CgJEXuH6C_lMKzca-Jg&oe=6A7D3BBC",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/699545047_1357297166217867_3967066717377820112_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=110&ig_cache_key=Mzg5NjY5NzYwNzM5MTc3NzA2Nw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=Sb2w8gqige0Q7kNvwEfYPwP&_nc_oc=Ado9F0JYPfFlDVjTdqxO02mkwxpJE_i5W01qDP_dFZTzbT5g_6uBj55i1vN1x3Nh-yQ&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=49EhE_K3we73dA95-Tpz-Q&_nc_ss=7a22e&oh=00_AQHRp-mFZr0Z7mGk3bWcJ5zIGe1HCu1fSshqWF0KvoUEHA&oe=6A7D3CAB",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/695781615_3152260984978409_6867122080967870988_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=103&ig_cache_key=Mzg5NjY5MTE1NzQ5MTc1MDgwMA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=_SMPBGc_RuwQ7kNvwGpR4th&_nc_oc=AdqvH48qE0Nwzj6gstO4DSRSWkbZCwjDkk8XmR6QSRUSEp3KOVJSeHDWyKahbtrXzWM&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=49EhE_K3we73dA95-Tpz-Q&_nc_ss=7a22e&oh=00_AQGE_lMu_A1GeLVV40JDcBbHB0lSCuYo5teLVw7zcZXLBw&oe=6A7D39CD",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/687772973_873300885786827_3639894044340888657_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=107&ig_cache_key=Mzg5NjY4MDcwNDc0OTExNjMyMQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=KKG0UwBYEoIQ7kNvwGfDSMT&_nc_oc=AdpMsvLh6Lr1cAnokUNr56dBTpezBI00wRTn_S9XynMLCQwoCA4ouWpYCjybOb0dc3E&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=49EhE_K3we73dA95-Tpz-Q&_nc_ss=7a22e&oh=00_AQG0-KQ0G3sdkcMN4G4WpK64MDwEC5qt5GzlniRoTw349g&oe=6A7D1D73",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/695709316_1280085253784351_2194647901808735844_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=106&ig_cache_key=Mzg5NjU3MjMwNTEwMzMzNzA2Mg%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ohc=dPDb17sjP2oQ7kNvwH2SpBg&_nc_oc=Adpfdgc7ENHSYV4x0jyCbgHgftkKE9EINUGS3RwfmhhvnhMFdqqmCvMajsashDH-3LA&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=49EhE_K3we73dA95-Tpz-Q&_nc_ss=7a22e&oh=00_AQHP4zlm_2UtUScGOeBzn3EIrd9dakgKhu93TG7jpOU4lA&oe=6A7D3067",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.82787-15/696272931_18099288601911808_4854914567713752958_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=110&ig_cache_key=Mzg5NTg2NDMwMDQwMzY5OTI2Mw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTQ0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=wcKG3uF9-QkQ7kNvwFrPHLz&_nc_oc=AdrNTb9CcP0U-9cQXGZAtV2mauDtg2TgXAHpyI8pmsBr8vyahloy8v6nv6J0ikTJNiA&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=s1oa_l_TU0_MZpW1a1kAJQ&_nc_ss=7a22e&oh=00_AQHU98VORbW8JcCSWVsURbHhDzQjAAiz2j6od78_4tG1FQ&oe=6A7D380F",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/696512280_1854060941957585_5777670454198213809_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=102&ig_cache_key=Mzg5NTg0NzI2NDQ1OTc2NzMxNQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ohc=hTrQAw1Nny4Q7kNvwFHlMV3&_nc_oc=AdrnRq1LnOgVZczKQp19jnC3Sd1RrvGlUFBSlHUBC-fUmthAcSKDxvWpCiPuXK-NecA&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=s1oa_l_TU0_MZpW1a1kAJQ&_nc_ss=7a22e&oh=00_AQHJLVR-iB02iH-n6H3M9VfznwdoHb83CR40J7JuLGt2NA&oe=6A7D1AE8",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.82787-15/695763506_18098959393911808_7706497277738477464_n.jpg?stp=dst-jpg_e35_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0uaW1hZ2VfdXJsZ2VuLjE0NDAuc2RyLnJlZ3VsYXJfcGhvdG8uYzIifQ&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_cat=104&_nc_oc=Q6cZ2gH5FG3_oHY5DDIo1c7O8xL9cTLHv_jwsQuaQwlkzZecdcL23XCj9U6MGvDrxoorqCY&_nc_ohc=WlM1rRYulB8Q7kNvwFxzcv_&_nc_gid=s1oa_l_TU0_MZpW1a1kAJQ&edm=APs17CUBAAAA&ccb=7-5&ig_cache_key=Mzg5NDYxODYwMjg0MjQwNjUyMA%3D%3D.3-ccb7-5&oh=00_AQFgR1UX1P-OMzpsCfw2c416JHUQvX0NsLk1DndXgsl5jw&oe=6A7D147F&_nc_sid=10d13b",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/671275633_966651622906250_8723272911297549761_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=100&ig_cache_key=Mzg5NDYwOTE4MzE5ODQ0MzM2OQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ohc=wQgq3VZa53IQ7kNvwHIpS4U&_nc_oc=Adp4K4ib-e9d-z0NTIP1HU51O3aYhQaLARUW2SXHvi58X99VE_cYFiOJTmQDWoEvB24&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=s1oa_l_TU0_MZpW1a1kAJQ&_nc_ss=7a22e&oh=00_AQFEEmDHv_wiU0IUZH3o69_05VQpQKgNOQCqaKbQpeEpGA&oe=6A7D437E",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t39.30808-6/689492428_1610304327765320_5607766714068805294_n.jpg?stp=dst-jpg_e35_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0uaW1hZ2VfdXJsZ2VuLjEwODAuc2RyLnJlZ3VsYXJfcGhvdG8uYzIifQ&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_cat=108&_nc_oc=Q6cZ2gH5FG3_oHY5DDIo1c7O8xL9cTLHv_jwsQuaQwlkzZecdcL23XCj9U6MGvDrxoorqCY&_nc_ohc=f4D3V9GBf8UQ7kNvwEmqsF5&_nc_gid=s1oa_l_TU0_MZpW1a1kAJQ&edm=APs17CUAAAAA&ccb=7-5&ig_cache_key=Mzg5NDYwMzUwMTEwODc1NTg0Mg%3D%3D.3-ccb7-5&oh=00_AQG8AwftUdU2HqhhnpnJEZv5VT2uqlNaYXcBR8WobAnngA&oe=6A7D2B6C&_nc_sid=10d13b",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/686968227_973908168863222_4664493495741932039_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=107&ig_cache_key=Mzg5NDUxODU0NTA3NzcwNDMyMQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ohc=mDlzQtLajxIQ7kNvwHgLLba&_nc_oc=Ado6H8drEdu6EhU4Zm5esJZ51Z_AkER_IWjiV9vQqoX-GI4MPlBeSK1AyaPuSRVTZ4g&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=s1oa_l_TU0_MZpW1a1kAJQ&_nc_ss=7a22e&oh=00_AQFv78pOkowUL5cCXAiKSo1fZOSL2fEZnFpEpEdTenHdTQ&oe=6A7D3808",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/686384935_1304686921612696_1135691721366801630_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=111&ig_cache_key=Mzg5NDQ4MjMzOTU3OTkwNDA1Nw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=lO8GNjhnP0UQ7kNvwHesXxx&_nc_oc=AdrcFlaeIj4khNj_t1S2EVcIMTXPi3O4rWywTog7M2w9vf3o7rFey2_qFHpsMAArRUM&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=s1oa_l_TU0_MZpW1a1kAJQ&_nc_ss=7a22e&oh=00_AQEyBRacoEctAJLH5hm8tLPLdfykzQ0QuZkof8teyQhEig&oe=6A7D204A",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/686933872_844551435366755_7777160386314952896_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=100&ig_cache_key=Mzg5NDQ4MTM2ODU1NjU1ODc2NA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ohc=befU2EwbmHgQ7kNvwHDHn_m&_nc_oc=AdqfplXrPktIXbJEkiFvY3y81DBsbLvcAqvkdB96qDJpAhzgqvEYcwsqslanmQ6nPuE&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=s1oa_l_TU0_MZpW1a1kAJQ&_nc_ss=7a22e&oh=00_AQHyWbWRkTmp_8YqusuuNouc2-9i5owiB9_bihshOtQsVg&oe=6A7D3696",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/687038042_1278452307779804_7358489751360304860_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=101&ig_cache_key=Mzg5NDA0MDA1NzI3ODA3MDY3OQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=8NOJEfZLNdcQ7kNvwHLE79N&_nc_oc=Adq-puGlIpc1RkFG679jP375zcdhF_bR4O_0SvmmJP0WBCcADDSdgyHDZ9-6xoF8rlo&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=s1oa_l_TU0_MZpW1a1kAJQ&_nc_ss=7a22e&oh=00_AQEjaARJlqnKc2-xXDDmca1lsMPWEPlIWTSsALQ2jptptQ&oe=6A7D4A70",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/686290781_1944660539501983_3969447329371357738_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=102&ig_cache_key=Mzg5Mzk1MzMyNjAxNzExODU1OA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=ts64wX0dSUgQ7kNvwG4FdCO&_nc_oc=AdqwVasZc9UOh6Q3F05droSv5uqO6Y_sf_Dr9BErTz6NYhEXNJacKvWAyc8msDeanho&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=s1oa_l_TU0_MZpW1a1kAJQ&_nc_ss=7a22e&oh=00_AQEvld4JFr-D6csWLuDjIps9vrIU5frnslfR3qnu68W0mw&oe=6A7D421E",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/685812268_1760452648658872_4828447966878080254_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=101&ig_cache_key=Mzg5MzgwODI1NjczNTQwMzM2Ng%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=lF3UdHacwEMQ7kNvwE7w9tv&_nc_oc=AdoUpmXgx8ZyMNId7IcS-XMcgsKPAX1nP3Gk3-bactgPQd9kOCFk71I4oBrVigFt0So&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=s1oa_l_TU0_MZpW1a1kAJQ&_nc_ss=7a22e&oh=00_AQFMCbcM_kEn8odf2glWqUAumoFIwrMfYXtDdhMIDykArw&oe=6A7D3648",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/686481712_949577094352291_1743055794915609500_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=100&ig_cache_key=Mzg5Mzc5MTM4MjAwMTcwMDM1MQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=vw5Jm8W2PB8Q7kNvwGGJGXN&_nc_oc=Adq0AaahRIwiZyp6YAnhOFuVoslUl0PIlC6w_Yaspo_dA6Dkx6XaomJPXfV5hGKwWNA&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=s1oa_l_TU0_MZpW1a1kAJQ&_nc_ss=7a22e&oh=00_AQHQ4DVPaqNBSjB1Fp7En4hRpdCJb9SpwfwwfQ47iGtSxA&oe=6A7D2AA3",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/687861165_1362871712445824_5764411089085364455_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=107&ig_cache_key=Mzg5MzIzNTYwNTY3NTU4MzgzMw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=sAKWVfWskAQQ7kNvwExgS1l&_nc_oc=Adqjv3baBwKYUXV3SNXcHgJpm22M9gXbIvRSx_L7xSl7NwUTH8fIidf3X7Vw8oBLrls&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=H0enMvvyQcBtTgPUwOYgiA&_nc_ss=7a22e&oh=00_AQGCQDT-iwTqAv_ti7HexMO-bUYID0slGi0Eo3BHkzNzfQ&oe=6A7D4AE8",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/686420588_27521989114060690_4513202131012360098_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=111&ig_cache_key=Mzg5MzIyOTMwNzU1MDYzMzE4MQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=rcBdrN8IV3YQ7kNvwGZTKmM&_nc_oc=AdoQ4c5Iqi_DCLQeM0olMVkmeA2lYf_14Ptbaj1PQavTetyCwFmlrLGSfKnpnsBNzHY&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=H0enMvvyQcBtTgPUwOYgiA&_nc_ss=7a22e&oh=00_AQHuuDEGKzc01jcWj5X9AuFPbvgBD5T66M8hCTDV2bibkA&oe=6A7D2C0A",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/685980667_1619292572684052_1471195773887377433_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=109&ig_cache_key=Mzg5MzAxNTUyOTQwMzk0MTgwOQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=crQU60A_pNAQ7kNvwEZDEdc&_nc_oc=AdrDKSKR_iiHhf9V4yLKaXnBhuvSaIRk4T9QV1PgyAI6nxO8hdAFf57gKCWx-POAFX8&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=H0enMvvyQcBtTgPUwOYgiA&_nc_ss=7a22e&oh=00_AQGUjKiRuxUYnpmarCMz99HvfmnkdBqPyPebqL9bx58r2g&oe=6A7D29AC",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/694452723_1154824640105810_7759966764351983816_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=108&ig_cache_key=Mzg5MzAxMzE3NTM2NzU2NDAzMQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=B53sF7_PAmEQ7kNvwETmLcr&_nc_oc=Adoxmh0N9zMeoMFVNB3AkVTpGCy0RnZwLssSHNiZPq7LT9OxSBmZoVWmnHVI7UBNpDY&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=H0enMvvyQcBtTgPUwOYgiA&_nc_ss=7a22e&oh=00_AQEZaFwnTSqWqIk_peEOaIcwsiRbPivb9Z4yhXjK4GO-eg&oe=6A7D29CA",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.82787-15/689003764_18098319541911808_2442231509305298942_n.jpg?stp=dst-jpg_e35_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0uaW1hZ2VfdXJsZ2VuLjE0NDAuc2RyLnJlZ3VsYXJfcGhvdG8uYzIifQ&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_cat=104&_nc_oc=Q6cZ2gF9egrMoXisTWkbQLbr1Jc8dFpEc1cuT6giqp_VCMABKMMp5wyYFVumRNmVY9DiVss&_nc_ohc=X7m8_2GLbqIQ7kNvwHMLp7o&_nc_gid=H0enMvvyQcBtTgPUwOYgiA&edm=APs17CUBAAAA&ccb=7-5&ig_cache_key=Mzg5MjUwMjExNDU3MjQ0ODY5Ng%3D%3D.3-ccb7-5&oh=00_AQHri3-2DNqej6mPwTM_EO8DWjfsX79SP9OhavUyQIMjGg&oe=6A7D1620&_nc_sid=10d13b",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/688909148_1744615820303429_8609159821622256020_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=101&ig_cache_key=Mzg5MjI1ODg3NzA5ODM3MTM2MQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ohc=2sF549rAt3QQ7kNvwE5gpr5&_nc_oc=Adp88gdjdMhoxVHqHnJWGZ09Tg05l9yRT4Pw-WhE6OpC2fjzqzSsYBV91Y4jQ-wsdQs&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=H0enMvvyQcBtTgPUwOYgiA&_nc_ss=7a22e&oh=00_AQFVhzTgC9oteyWR3FJsqEkc91MIsGwCyT2YcoaCpb_tiw&oe=6A7D206D",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/689213327_1690029992000336_7008333967114673258_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=100&ig_cache_key=Mzg5MjI1NjQzODk0OTM1ODMwMw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&_nc_aid=0&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ohc=TUpEKnmXW4MQ7kNvwEK_cAn&_nc_oc=AdqmJNtOYAHKsVJGMjBtU4FNuNqzUHDGugOF4GwZ9Hj6tDMJ9rAOg0n57HeKQhMrtbg&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=H0enMvvyQcBtTgPUwOYgiA&_nc_ss=7a22e&oh=00_AQEQH19926R25o1BY-VkDQhVywqemLIWGq6dZCyPH9Gc0Q&oe=6A7D3906",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t39.30808-6/695095422_1607209641408122_1924272379568109852_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=103&ig_cache_key=Mzg5MjI1MjU3OTcxNjQ0OTQwOA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMjA0OC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=51LPpL16H9sQ7kNvwGGAsQh&_nc_oc=AdpNCXotDRkNWcSwHTe7ohGwsI1bmZe8MCPymPNQ1nrG9B5XaE4FNRvNcvq4m0DAVaU&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=H0enMvvyQcBtTgPUwOYgiA&_nc_ss=7a22e&oh=00_AQFZVO9r_TaweNsBodF84RuvHiKg-1kHYEbnqVpJzyEX2A&oe=6A7D37BB",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.82787-15/691824683_18098192338911808_3959081052959555682_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=106&ig_cache_key=Mzg5MjE5MzIyMjk5MTIyODI2NQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTQ0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=j3-a2ZpQNlQQ7kNvwF3yyXN&_nc_oc=Adqxh6EoO1a1r8wzfcPA3AjfnT7MlfCCV7F4f9cykVb3rFZ2s3bhzC9IspL5bXo1DWA&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=H0enMvvyQcBtTgPUwOYgiA&_nc_ss=7a22e&oh=00_AQHGN5HceS7xoYwYMhr6PBqCgom9ERfo3TV3czDPiCzHcg&oe=6A7D259A",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/695738068_997441092962526_5633239918563236230_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=103&ig_cache_key=Mzg5MTU1MjEzNzU2MDI3MTA0MA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=1JFvDRQ-EgAQ7kNvwGrzLkc&_nc_oc=AdpU6oXP9zzk4IlAweB5YGsJiq-YpzZ5TWWzZADcRRkq32dRmMwwuqgPC8_qa6a3sZQ&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=H0enMvvyQcBtTgPUwOYgiA&_nc_ss=7a22e&oh=00_AQEP1hOEex8rHgyORfuwoT7sKeem9QKypd0-_YS-rmqcyg&oe=6A7D4A62",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/693333735_1301616234747348_1368809268667620847_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=102&ig_cache_key=Mzg5MTU0Mzc1NTgwNTgxNTQ1OA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=kG7W_mrCZZYQ7kNvwFHmINv&_nc_oc=Ado6sRhRNRg5NCZ1tW8Cr0qChiqlzY9S4JBtxkZbJjrnkpVD5Zaa_Kaq9bWnQD2IR10&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=H0enMvvyQcBtTgPUwOYgiA&_nc_ss=7a22e&oh=00_AQHbwk9sv9-X_KWNoMd3qLpodav4kcUxYrhgrcDlOyihiQ&oe=6A7D49A2",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/684917447_2536635786794033_4182828008765602283_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=102&ig_cache_key=Mzg5MDgwNDI1NTM0MzEwNzI1OQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ohc=LN3me6UpY2wQ7kNvwHtub8p&_nc_oc=AdpvKtewCEcH22mE9DRBdgUbU_QghdDK4Ly9YkhYMCzDE_2_6zqQYiDM4CHYU9VY9ms&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=H0enMvvyQcBtTgPUwOYgiA&_nc_ss=7a22e&oh=00_AQFrJVksmMMP9O7W799Jhscu6UDbVBTKbMl0HLj0Ebb15w&oe=6A7D4136",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/684870572_1632924491148447_5367594530764929835_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=103&ig_cache_key=Mzg5MDE4NDU3ODY5Mjg1MTk5OQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=yWpKRT3GywcQ7kNvwFMAP-T&_nc_oc=AdrwfHEyBfCXyKvKRa-U7xI6iZ-Xlh1PCNX1kzZsn-AFZrcrkzMXgEHZ_y0rD23LdTI&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=3L5zukaZ3SUfYMv4YSBcKg&_nc_ss=7a22e&oh=00_AQEOrmDGhIiEICOPh0HudQjs-ZMfvteRiX6WL09PeGb3bw&oe=6A7D4244",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/684147863_1203625631717008_8918054645764859566_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=110&ig_cache_key=Mzg5MDE2MjQ5NTk3NzMwMDg1Nw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=rkg0IMxojEgQ7kNvwErkqbG&_nc_oc=AdotuCjkTegsCLINuR0F8sZWrk7cA1btgh_FBAmt7ls0xEVOrs1h-JDwErPjPRUX7xo&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=3L5zukaZ3SUfYMv4YSBcKg&_nc_ss=7a22e&oh=00_AQGgYmyST3rkmDjwAFiS0AJTjof82BPRfVqAlkcugKsz1w&oe=6A7D14AB",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/683454166_1504606934386546_7816962482204566067_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=107&ig_cache_key=Mzg4OTA1MTMyMDE1MDEyMzk5NQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=7BAMj4YUmxwQ7kNvwGPa-1f&_nc_oc=AdpN-ViG6z9JTQDQUiUNfehCY7fvRyUw1zE8bDIv0OH59RRBiSvO-i7J__a0ZqWyOLk&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=3L5zukaZ3SUfYMv4YSBcKg&_nc_ss=7a22e&oh=00_AQE8Ahx4p8GTSnNQTW0AYY151ZP_XWbbEVhHPxQM4kpSig&oe=6A7D4475",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/683474609_3452142678274357_814673523745971623_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=100&ig_cache_key=Mzg4ODk3NjgzMzEwOTAzOTM4Nw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=2_jmAx-9S2EQ7kNvwGHnJcQ&_nc_oc=AdomogSs2V3BpFoab_YEw055LXfvfn4UrusyNpWRv3UPz5B8ltjhiU63_u7CpMAPKiU&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=3L5zukaZ3SUfYMv4YSBcKg&_nc_ss=7a22e&oh=00_AQH-TfuC7B1zkoerHLkdINYBsgldM8AA-VpVah05WzOAfA&oe=6A7D28AD",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.82787-15/682709272_18096803203911808_226019796280471061_n.jpg?stp=dst-jpg_e35_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0uaW1hZ2VfdXJsZ2VuLjE0NDAuc2RyLnJlZ3VsYXJfcGhvdG8uYzIifQ&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_cat=104&_nc_oc=Q6cZ2gHDPbwRGLZaxTg3eG-oz9YtPOCDrkaugOw7ef8k85qFG4fAJSh5upxwZ7wxOcqZFK0&_nc_ohc=Ld4gAIyA1BIQ7kNvwGpBN4k&_nc_gid=3L5zukaZ3SUfYMv4YSBcKg&edm=APs17CUBAAAA&ccb=7-5&ig_cache_key=Mzg4ODYzMDAyMTI0MjAyMjcwNg%3D%3D.3-ccb7-5&oh=00_AQEIQzmYDA00iCI5wAjFmw-bjJhpUVFCgp-YGVR7X4chCA&oe=6A7D2478&_nc_sid=10d13b",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/684190025_1618983762703934_2413027857616452139_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=107&ig_cache_key=Mzg4NzkxODY2MzE4NDE0NDA5OQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ohc=Zsd_tYiwalEQ7kNvwEdSpHC&_nc_oc=AdospXOX7RjxowjrrRK0TKti0LbZrIuq7nrqvLMYFT730hPIBScokEEvzBq-y_ndpsQ&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=3L5zukaZ3SUfYMv4YSBcKg&_nc_ss=7a22e&oh=00_AQFVJ4J8chVbyvvC4wtIXl51W4spxlSIdqcaIwwNMQ0YNA&oe=6A7D2C8A",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/683128826_1101471762904362_4921390794327876596_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=107&ig_cache_key=Mzg4NzkxNzM5ODY0MzE5NDA1NQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=n6GV8Qz-GaYQ7kNvwHK2zAm&_nc_oc=AdosDXP3ABrWG5122Hko_3U5Bi0pNXzbGa90HzTg2T4hEyFwa0RYTE2Bl2UkE7XZijc&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=3L5zukaZ3SUfYMv4YSBcKg&_nc_ss=7a22e&oh=00_AQFUn4wI-Ekz3goakQ7lEqK6CB_0d9jggCBud79wDmJ04Q&oe=6A7D3869",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/682422883_1358792486304357_800431781441797147_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=110&ig_cache_key=Mzg4NzE4MzA3MDg5ODI3NDM2MQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ohc=YbPxMteeNjoQ7kNvwEyaY3d&_nc_oc=AdrEINRVw8rYYSPyWlPrjmArFtwIY15G2PT1Zo7dOeCYSO29K8UkMApaup23cpEmrBE&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=3L5zukaZ3SUfYMv4YSBcKg&_nc_ss=7a22e&oh=00_AQE6WEKVO_IsoHdaFEGiaOEwJ_d9RMnSC2R45G5Lj0nfiA&oe=6A7D2AC6",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/684215353_1460892058366338_3533076741570428047_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=108&ig_cache_key=Mzg4NzE4MDUzMzg4OTYzMDE4Mg%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ohc=Kzj62iJL60EQ7kNvwEBPHi4&_nc_oc=AdoIelPp2q8XIirdoxdvUgw3GEnM4DinRkWgrlJZfE4UlADnNBKns4xDXkl-qO7FKFI&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=3L5zukaZ3SUfYMv4YSBcKg&_nc_ss=7a22e&oh=00_AQHTMSJig2mW5_ZPAmZWm9Q1OjCLkQE_A8Pc-Mwg_2QBeQ&oe=6A7D330D",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/685539543_1641903770288909_1266088756218028791_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=106&ig_cache_key=Mzg4NjQ1NTk3MDkxODA1NDY5MA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=CWX3wE-rtj4Q7kNvwEFlSCL&_nc_oc=AdqVSjC32sd31m7FHJKp93nMfGmoRhgnw2zsEUurr4cXn4AzaAa-2j3xDyhrZ7DhnZA&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=3L5zukaZ3SUfYMv4YSBcKg&_nc_ss=7a22e&oh=00_AQEig1h7wxxEkCN3FwoHZLP_FRMq-UiTT6SD8vz61UV-bw&oe=6A7D1F53",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.71878-15/684186557_961572703393517_3288516481638340343_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=106&ig_cache_key=Mzg4NTA5MDcxNTA5NzM4MTY5OQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=IWNo8WjQVIYQ7kNvwETH7v6&_nc_oc=Adq0u81SCLVELoFMLDXTnP9LTaXOJgJQpb_N9BVradOZn5Yyc_suqlYwQtpyO3SVJWE&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_gid=3L5zukaZ3SUfYMv4YSBcKg&_nc_ss=7a22e&oh=00_AQGX2cn0rzEKePMK1OCsLIpS1HGRXnSRVAJtWon-5_X9Tw&oe=6A7D3C2B",
+            "https://scontent-tpe1-1.cdninstagram.com/v/t51.82787-15/682391387_18095288989911808_8367023109879577492_n.jpg?stp=dst-jpg_e35_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0uaW1hZ2VfdXJsZ2VuLjE0NDAuc2RyLnJlZ3VsYXJfcGhvdG8uYzIifQ&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_cat=104&_nc_oc=Q6cZ2gHDPbwRGLZaxTg3eG-oz9YtPOCDrkaugOw7ef8k85qFG4fAJSh5upxwZ7wxOcqZFK0&_nc_ohc=P1PAyMQSRLUQ7kNvwEZlVvB&_nc_gid=3L5zukaZ3SUfYMv4YSBcKg&edm=APs17CUBAAAA&ccb=7-5&ig_cache_key=Mzg4NTAwMjYyODEyMDI5Mjc4OQ%3D%3D.3-ccb7-5&oh=00_AQH5IOW4Ms-kfjUSGZXPuOeo79VGNtEziPP-NKFwzqlwIA&oe=6A7D175A&_nc_sid=10d13b"
+          ],
+          "video_urls": [
+            "blob:https://www.instagram.com/e2b78026-2a8d-4f7c-a5f9-91d8ca37a56f",
+            "blob:https://www.instagram.com/6ef99e1b-1eff-4d6e-ace2-80c2ee32216a"
+          ]
+        }
+      ],
+      "evidence": [],
+      "media_assets": [],
+      "display_mode": "original_post"
+    },
+    {
+      "event_id": "evt_20260510_thesis_stage",
+      "title": "论文相关节点：从“赶论文”到“干完一件大事”",
+      "event_type": "personal_milestone",
+      "occurred_at_start": "2026-05-10",
+      "occurred_at_end": null,
+      "date_precision": "exact",
+      "confidence": "medium_high",
+      "location_text": null,
+      "description": "5月10日凌晨，法宣阁公开提到“有人还在赶论文”；当日下午，贺嘉述发布“干完一件‘大事📑’”。两条记录高度指向论文相关进度，但不足以写成“正式提交毕业论文”。",
+      "evidence_note": "保留为论文进度状态链，不把“大事”直接等同于论文提交。",
+      "status": "draft",
+      "created_at": "2026-08-09T10:14:08+00:00",
+      "updated_at": "2026-08-09T10:14:08+00:00",
+      "participants": [
+        "贺嘉述",
+        "法宣阁"
+      ],
+      "tags": [
+        "PART03",
+        "2026年5月",
+        "论文",
+        "毕业",
+        "阶段性完成",
+        "推定",
+        "display:evidence"
+      ],
+      "linked_posts": [
+        {
+          "platform": "weibo",
+          "owner": "法宣阁",
+          "role": "individual",
+          "post_url": "https://weibo.com/1118449424/QED3Qynqs",
+          "post_id": "QED3Qynqs",
+          "published_at": "2026-05-10T01:13:00+08:00",
+          "published_at_raw": "2026-05-10 01:13",
+          "title": null,
+          "text": "有人还在赶论文 ​​​",
+          "media_type": "image",
+          "public_ip_region": "北京",
+          "location_text": null,
+          "extra_json": "{\"source_device\": \"来自 iPhone 16 Pro Max\", \"is_repost\": false, \"retweet_text\": null, \"engagement_raw\": \"700,674,6454\", \"repost_count_raw\": \"700\", \"comment_count_raw\": \"674\", \"like_count_raw\": \"6454\", \"view_count_raw\": null, \"video_duration_raw\": \"01:13\", \"video_direct_urls_ephemeral\": [], \"extraction_mode\": \"desktop_profile_card\", \"numeric_alias_url\": \"https://weibo.com/1118449424/5296832748193204\", \"public_ip_region_source\": \"weibo_detail_target_article_header\", \"detail_source_html_path\": \"E:\\\\fajia-timeline\\\\fajia-timeline-data\\\\data\\\\raw\\\\details\\\\weibo\\\\法宣阁\\\\QED3Qynqs.html.gz\", \"detail_final_url\": \"https://weibo.com/1118449424/5296832748193204\", \"detail_attempt_url\": \"https://weibo.com/1118449424/5296832748193204\", \"detail_enriched_at\": \"2026-08-08T10:55:54+00:00\", \"detail_enrichment_success\": true}",
+          "relation_type": "context",
+          "link_confidence": "high",
+          "link_note": "凌晨公开线索：有人还在赶论文",
+          "image_urls": [
+            "https://wx4.sinaimg.cn/orj360/42aa2f10ly1iczpxlzfx8j246c2rax6q.jpg"
+          ],
+          "video_urls": []
+        },
+        {
+          "platform": "weibo",
+          "owner": "贺嘉述",
+          "role": "individual",
+          "post_url": "https://weibo.com/8348577978/QEJrVFQSq",
+          "post_id": "QEJrVFQSq",
+          "published_at": "2026-05-10T17:29:00+08:00",
+          "published_at_raw": "2026-05-10 17:29",
+          "title": null,
+          "text": "干完一件“大事📑” ​​​",
+          "media_type": "video",
+          "public_ip_region": "北京",
+          "location_text": null,
+          "extra_json": "{\"source_device\": null, \"is_repost\": false, \"retweet_text\": null, \"engagement_raw\": \"314,632,3841\", \"repost_count_raw\": \"314\", \"comment_count_raw\": \"632\", \"like_count_raw\": \"3841\", \"view_count_raw\": null, \"video_duration_raw\": \"17:29\", \"video_direct_urls_ephemeral\": [\"https://livephoto.us.sinaimg.cn/002kzqM8jx08xwJflEVa0h0411001xHJ0k01.mov?Expires=1786190720&ssig=8AOdUD%2FT6G&KID=unistore,video\"], \"extraction_mode\": \"desktop_profile_card\", \"numeric_alias_url\": \"https://weibo.com/8348577978/5297078319974710\", \"public_ip_region_source\": \"weibo_detail_target_article_header\", \"detail_source_html_path\": \"E:\\\\fajia-timeline\\\\fajia-timeline-data\\\\data\\\\raw\\\\details\\\\weibo\\\\贺嘉述\\\\QEJrVFQSq.html.gz\", \"detail_final_url\": \"https://weibo.com/8348577978/5297078319974710\", \"detail_attempt_url\": \"https://weibo.com/8348577978/5297078319974710\", \"detail_enriched_at\": \"2026-08-08T11:07:24+00:00\", \"detail_enrichment_success\": true}",
+          "relation_type": "documents",
+          "link_confidence": "high",
+          "link_note": "当日下午：干完一件“大事📑”",
+          "image_urls": [
+            "https://wx1.sinaimg.cn/orj360/0096ZMvwly1id0i3t2f7gj33402c0b29.jpg",
+            "https://wx3.sinaimg.cn/orj360/0096ZMvwly1id0i3pdamyj33402c0kjl.jpg"
+          ],
+          "video_urls": [
+            "https://livephoto.us.sinaimg.cn/002kzqM8jx08xwJflEVa0h0411001xHJ0k01.mov?Expires=1786190720&ssig=8AOdUD%2FT6G&KID=unistore,video",
+            "https://livephoto.us.sinaimg.cn/002kzqM8jx08xwJflEVa0h0411001xHJ0k01.mov?Expires=1786190847&ssig=NOQjkhhdMw&KID=unistore,video"
+          ]
+        }
+      ],
+      "evidence": [],
+      "media_assets": [],
+      "display_mode": "evidence"
+    },
+    {
+      "event_id": "evt_20260514_little_hero_release",
+      "title": "双人歌曲《小英雄》上线",
+      "event_type": "music_release",
+      "occurred_at_start": "2026-05-14T10:30:00+08:00",
+      "occurred_at_end": null,
+      "date_precision": "exact",
+      "confidence": "confirmed",
+      "location_text": null,
+      "description": "法宣阁、贺嘉述双人歌曲《小英雄》于5月14日10:30上线。",
+      "evidence_note": "两人微博同步发布上线信息。",
+      "status": "confirmed",
+      "created_at": "2026-08-09T10:14:08+00:00",
+      "updated_at": "2026-08-09T10:14:08+00:00",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "tags": [
+        "PART03",
+        "2026年5月",
+        "音乐",
+        "小英雄",
+        "上线",
+        "display:original_post"
+      ],
+      "linked_posts": [
+        {
+          "platform": "weibo",
+          "owner": "法宣阁",
+          "role": "individual",
+          "post_url": "https://weibo.com/1118449424/QFipN5dvR",
+          "post_id": "QFipN5dvR",
+          "published_at": "2026-05-14T10:30:00+08:00",
+          "published_at_raw": "2026-05-14 10:30",
+          "title": null,
+          "text": "英雄有很多种，但我只想做属于你的那一个。\n\nQQ音乐：小英雄\n酷狗音乐：网页链接\n酷我音乐：网页链接\nJOOX：网页链接 ​​​",
+          "media_type": "text",
+          "public_ip_region": "北京",
+          "location_text": null,
+          "extra_json": "{\"source_device\": \"来自 iPhone 16\", \"is_repost\": false, \"retweet_text\": null, \"engagement_raw\": \"138,396,1928\", \"repost_count_raw\": \"138\", \"comment_count_raw\": \"396\", \"like_count_raw\": \"1928\", \"view_count_raw\": null, \"video_duration_raw\": \"10:30\", \"video_direct_urls_ephemeral\": [], \"extraction_mode\": \"desktop_profile_card\", \"numeric_alias_url\": \"https://weibo.com/1118449424/5298422391243587\", \"public_ip_region_source\": \"weibo_detail_target_article_header\", \"detail_source_html_path\": \"E:\\\\fajia-timeline\\\\fajia-timeline-data\\\\data\\\\raw\\\\details\\\\weibo\\\\法宣阁\\\\QFipN5dvR.html.gz\", \"detail_final_url\": \"https://weibo.com/1118449424/5298422391243587\", \"detail_attempt_url\": \"https://weibo.com/1118449424/5298422391243587\", \"detail_enriched_at\": \"2026-08-08T10:55:49+00:00\", \"detail_enrichment_success\": true}",
+          "relation_type": "documents",
+          "link_confidence": "confirmed",
+          "link_note": "法宣阁《小英雄》上线微博",
+          "image_urls": [],
+          "video_urls": []
+        },
+        {
+          "platform": "weibo",
+          "owner": "贺嘉述",
+          "role": "individual",
+          "post_url": "https://weibo.com/8348577978/QFipXxiAh",
+          "post_id": "QFipXxiAh",
+          "published_at": "2026-05-14T10:30:00+08:00",
+          "published_at_raw": "2026-05-14 10:30",
+          "title": null,
+          "text": "希望这份傻傻的勇气，成为你心里的浪漫🍃\n\nQQ音乐：小英雄\n酷狗音乐：网页链接\n酷我音乐：网页链接\nJOOX：网页链接 ​​​",
+          "media_type": "text",
+          "public_ip_region": "北京",
+          "location_text": null,
+          "extra_json": "{\"source_device\": null, \"is_repost\": false, \"retweet_text\": null, \"engagement_raw\": \"102,331,2205\", \"repost_count_raw\": \"102\", \"comment_count_raw\": \"331\", \"like_count_raw\": \"2205\", \"view_count_raw\": null, \"video_duration_raw\": \"10:30\", \"video_direct_urls_ephemeral\": [], \"extraction_mode\": \"desktop_profile_card\", \"numeric_alias_url\": \"https://weibo.com/8348577978/5298422497936265\", \"public_ip_region_source\": \"weibo_detail_target_article_header\", \"detail_source_html_path\": \"E:\\\\fajia-timeline\\\\fajia-timeline-data\\\\data\\\\raw\\\\details\\\\weibo\\\\贺嘉述\\\\QFipXxiAh.html.gz\", \"detail_final_url\": \"https://weibo.com/8348577978/5298422497936265\", \"detail_attempt_url\": \"https://weibo.com/8348577978/5298422497936265\", \"detail_enriched_at\": \"2026-08-08T11:07:19+00:00\", \"detail_enrichment_success\": true}",
+          "relation_type": "documents",
+          "link_confidence": "confirmed",
+          "link_note": "贺嘉述《小英雄》上线微博",
+          "image_urls": [],
+          "video_urls": []
+        }
+      ],
+      "evidence": [],
+      "media_assets": [],
+      "display_mode": "original_post"
+    },
+    {
+      "event_id": "evt_20260514_qqmusic_comment_drop",
+      "title": "《必选题》QQ音乐评论区空降",
+      "event_type": "online_interaction",
+      "occurred_at_start": "2026-05-14T19:00:00+08:00",
+      "occurred_at_end": null,
+      "date_precision": "exact",
+      "confidence": "confirmed",
+      "location_text": "线上 · QQ音乐",
+      "description": "《双程》主演于5月14日19:00空降《必选题》QQ音乐评论区互动。",
+      "evidence_note": "根据官方公开预告确认。",
+      "status": "confirmed",
+      "created_at": "2026-08-09T10:14:08+00:00",
+      "updated_at": "2026-08-09T10:14:08+00:00",
+      "participants": [
+        "孙政",
+        "吕思瞳",
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "tags": [
+        "PART03",
+        "2026年5月",
+        "线上互动",
+        "QQ音乐",
+        "必选题",
+        "display:live_record"
+      ],
+      "linked_posts": [],
+      "evidence": [
+        {
+          "evidence_id": "evd_6c5e6b45545d",
+          "event_id": "evt_20260514_qqmusic_comment_drop",
+          "evidence_type": "external_public_source",
+          "source_url": "https://www.sina.cn/media/8367472588",
+          "source_post_url": null,
+          "note": "公开预告确认5月14日19:00《必选题》QQ音乐评论区空降。",
+          "confidence": "confirmed",
+          "observed_at": null,
+          "created_at": "2026-08-09T10:14:08+00:00"
+        }
+      ],
+      "media_assets": [],
+      "display_mode": "live_record"
+    },
+    {
+      "event_id": "evt_20260514_double_live",
+      "title": "《双程》首播期法宣阁×贺嘉述双人直播",
+      "event_type": "live",
+      "occurred_at_start": "2026-05-14T21:00:00+08:00",
+      "occurred_at_end": null,
+      "date_precision": "exact",
+      "confidence": "confirmed",
+      "location_text": "线上",
+      "description": "《双程》首播期双人直播。",
+      "evidence_note": "公开直播安排明确列出5月14日21:00法宣阁、贺嘉述场。",
+      "status": "confirmed",
+      "created_at": "2026-08-09T10:14:08+00:00",
+      "updated_at": "2026-08-09T10:14:08+00:00",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "tags": [
+        "PART03",
+        "2026年5月",
+        "直播",
+        "双人",
+        "首播期",
+        "display:live_record"
+      ],
+      "linked_posts": [],
+      "evidence": [
+        {
+          "evidence_id": "evd_1c85687b2166",
+          "event_id": "evt_20260514_double_live",
+          "evidence_type": "external_public_source",
+          "source_url": "https://www.sina.cn/news/detail/5296662268349592.html",
+          "source_post_url": null,
+          "note": "公开直播安排确认5月14日21:00法宣阁、贺嘉述双人直播。",
+          "confidence": "confirmed",
+          "observed_at": null,
+          "created_at": "2026-08-09T10:14:08+00:00"
+        }
+      ],
+      "media_assets": [],
+      "display_mode": "live_record"
+    },
+    {
+      "event_id": "evt_20260515_joox_comment_drop",
+      "title": "《双程》主演空降 JOOX《必选题》评论区",
+      "event_type": "online_interaction",
+      "occurred_at_start": "2026-05-15T19:00:00+08:00",
+      "occurred_at_end": "2026-05-15T21:00:00+08:00",
+      "date_precision": "exact",
+      "confidence": "confirmed",
+      "location_text": "线上 · JOOX",
+      "description": "《双程》主演于5月15日19:00起空降 JOOX《必选题》评论区互动。",
+      "evidence_note": "JOOX 官方公开预告明确给出日期与时间。",
+      "status": "confirmed",
+      "created_at": "2026-08-09T10:14:08+00:00",
+      "updated_at": "2026-08-09T10:14:08+00:00",
+      "participants": [
+        "孙政",
+        "吕思瞳",
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "tags": [
+        "PART03",
+        "2026年5月",
+        "线上互动",
+        "JOOX",
+        "必选题",
+        "display:live_record"
+      ],
+      "linked_posts": [],
+      "evidence": [
+        {
+          "evidence_id": "evd_aabdb87cb0a9",
+          "event_id": "evt_20260515_joox_comment_drop",
+          "evidence_type": "external_public_source",
+          "source_url": "https://www.instagram.com/p/DYMaVjEFEmC/",
+          "source_post_url": null,
+          "note": "JOOX官方公开预告确认5月15日19:00评论区空降。",
+          "confidence": "confirmed",
+          "observed_at": null,
+          "created_at": "2026-08-09T10:14:08+00:00"
+        }
+      ],
+      "media_assets": [],
+      "display_mode": "live_record"
+    },
+    {
+      "event_id": "evt_20260517_cooking_live",
+      "title": "双人居家做饭直播",
+      "event_type": "live",
+      "occurred_at_start": "2026-05-17",
+      "occurred_at_end": null,
+      "date_precision": "exact",
+      "confidence": "medium_high",
+      "location_text": null,
+      "description": "5月17日双人居家做饭直播。",
+      "evidence_note": "现有完整/切片回放索引可确认直播存在；尚未找到稳定的官方原始预告，因此保留 medium_high 可信度。",
+      "status": "confirmed",
+      "created_at": "2026-08-09T10:14:08+00:00",
+      "updated_at": "2026-08-09T10:14:08+00:00",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "tags": [
+        "PART03",
+        "2026年5月",
+        "直播",
+        "双人",
+        "居家",
+        "做饭",
+        "待官方源",
+        "display:live_record"
+      ],
+      "linked_posts": [],
+      "evidence": [
+        {
+          "evidence_id": "evd_6f97b16bb5f2",
+          "event_id": "evt_20260517_cooking_live",
+          "evidence_type": "secondary_replay",
+          "source_url": "https://www.bilibili.com/video/BV1zq3T6nEyP/",
+          "source_post_url": null,
+          "note": "回放索引明确列出5月17日法宣阁、贺嘉述双人直播。",
+          "confidence": "medium_high",
+          "observed_at": null,
+          "created_at": "2026-08-09T10:14:08+00:00"
+        },
+        {
+          "evidence_id": "evd_4904d125c588",
+          "event_id": "evt_20260517_cooking_live",
+          "evidence_type": "secondary_replay",
+          "source_url": "https://www.douyin.com/zhuanti/7641481399064676361",
+          "source_post_url": null,
+          "note": "公开录屏聚合可辅助确认5月17日直播存在。",
+          "confidence": "medium",
+          "observed_at": null,
+          "created_at": "2026-08-09T10:14:08+00:00"
+        }
+      ],
+      "media_assets": [],
+      "display_mode": "live_record"
+    },
+    {
+      "event_id": "evt_20260518_tianjin_ferris_live",
+      "title": "天津出行 · 摩天轮直播",
+      "event_type": "live_trip",
+      "occurred_at_start": "2026-05-18",
+      "occurred_at_end": null,
+      "date_precision": "exact",
+      "confidence": "high",
+      "location_text": "天津（具体摩天轮待核验）",
+      "description": "5月18日两人在天津出行并进行摩天轮直播；直播中法宣阁对相关传闻作澄清，过程中出现约30秒黑屏。",
+      "evidence_note": "只记录“黑屏发生过”，不推断黑屏期间发生了什么。具体摩天轮疑似天津之眼，但现有公开画面不足以唯一确认，因此不写死具体点位。",
+      "status": "confirmed",
+      "created_at": "2026-08-09T10:14:08+00:00",
+      "updated_at": "2026-08-09T10:14:08+00:00",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "tags": [
+        "PART03",
+        "2026年5月",
+        "天津",
+        "出行",
+        "摩天轮",
+        "直播",
+        "澄清",
+        "display:live_record"
+      ],
+      "linked_posts": [
+        {
+          "platform": "douyin",
+          "owner": "法宣阁",
+          "role": "individual",
+          "post_url": "https://www.douyin.com/video/7642612693581908859",
+          "post_id": "7642612693581908859",
+          "published_at": "2026-05-22T00:00:00+08:00",
+          "published_at_raw": "5月22日",
+          "title": null,
+          "text": "怎么哄？在线等!急!",
+          "media_type": "video",
+          "public_ip_region": null,
+          "location_text": null,
+          "extra_json": "{\"capture_mode\": \"normal_edge_extension\", \"capture_kind\": \"douyin_detail_modal_recovered_from_raw\", \"recovered_by\": \"master_recovery_0.10.0.7\", \"detail_mode\": \"detail_modal_id\", \"post_resolution\": \"modal_id_query\", \"modal_id\": \"7642612693581908859\", \"source_page_url\": \"https://www.douyin.com/user/MS4wLjABAAAAVhSPpqPrGDxdz4eBuLlkAzrORIiS9mZFkaxARju-GvGBBvY5GSBLm1cH4Cwo92-1?from_tab_name=main&modal_id=7642612693581908859\", \"profile_route_key\": \"MS4wLjABAAAAVhSPpqPrGDxdz4eBuLlkAzrORIiS9mZFkaxARju-GvGBBvY5GSBLm1cH4Cwo92-1\", \"author_name\": \"法宣阁\", \"coauthored\": true, \"coauthor_text\": \"@法宣阁\", \"likes_raw\": \"4.7万\", \"likes\": 47000, \"comments_raw\": \"1244\", \"comments\": 1244, \"collects_raw\": \"1999\", \"collects\": 1999, \"shares_raw\": \"3151\", \"shares\": 3151, \"video_duration_seconds\": 6.545169, \"published_at_source\": \"visible_douyin_detail_date\", \"public_ip_region_source\": null}",
+          "relation_type": "possible_same_trip",
+          "link_confidence": "medium",
+          "link_note": "5月22日公开内容：疑似同次天津出行素材；不把5月22日等同于拍摄日",
+          "image_urls": [],
+          "video_urls": [
+            "https://p-pc-weboff.byteimg.com/tos-cn-i-9r5gewecjs/pwa/manifest.json",
+            "https://www.douyin.com/aweme/v1/web/solution/resource/list/?spot_keys=7359502129541449780_douyin_pc_tab&app_id=6383&update_version_code=170400&pc_client_type=1&pc_libra_divert=Windows&support_h265=1&support_dash=1&cpu_core_num=12&version_code=170400&version_name=17.4.0&cookie_enabled=true&screen_width=2560&screen_height=1440&browser_language=zh-CN&browser_platform=Win32&browser_name=Edge&browser_version=151.0.0.0&browser_online=true&engine_name=Blink&engine_version=151.0.0.0&os_name=Windows&os_version=10&device_memory=16&platform=PC&downlink=10&effective_type=4g&round_trip_time=0&webid=7668639081891530250&uifid=9909fc4602c90e11cbb1ca2fa8411678673d4386b8d7ca05c125f9fb0905826bb7f7d3b473e7910a4c2bbe1f3aef4bc8c20a1787f141e4f9106d303be4da3e371d33ad9c1bc02c8bfaa117700b3ba3a2f35b9b68a65bda62c17038ea9c82c0b0a957092b5e3ec82498be414f0f0d4d5ed9c587d6cdb569cb8d76586249be9006faa55c4d8bab88be21f5424ec8a19da5707574f70a12058bb9e55135150f4a53&msToken=bvYErWxKkg1oo0bbxwnsACZ7emlNUS0SUoRLNyeQhi4kClmhKf0SettqVykxFIprnylcDgQP002JgaKKdXo6tatXoS8eC9jF5eYDVtYxP8cZsgvQfagmjbf95FvDz9P9LnZRGulkBGXeWgElMuFxKjIYm-VxZPzBQ51fnkMUzrU9&a_bogus=xXUnk77JYqQfad%2FtuKcRtv3lY8gMrPSyUFiQbJ%2FPyxuYPXec8WN7QxCpbxoeRC6MxYpThoIHlj0AYdncuGUhZorpumkfSkkWgGI99U0oZqwdYliBENRxCu8LHJJPUcUFTAofJIRUA0OcIxK4EZaiUBl9SApJ4YipOHafdrRGx9tv6Ms9MNF%2FuPGDPXzP-R94Mf%3D%3D&verifyFp=verify_ms8t8zc9_PZ6dqsmI_Xda8_4fQc_8D7r_n6oSRuBLZwa4&fp=verify_ms8t8zc9_PZ6dqsmI_Xda8_4fQc_8D7r_n6oSRuBLZwa4",
+            "https://p-pc-weboff.byteimg.com/tos-cn-i-9r5gewecjs/bdms_1.0.1.19_fix.js",
+            "https://live.douyin.com/webcast/web/live/watermark/?watermark_key_list=%5B%7B%22watermark_uniq_idx%22%3A%22v4u%22%2C%22watermark_key%22%3A%22u_101690810124%22%2C%22algorithm%22%3A%22v4u%22%7D%2C%7B%22watermark_uniq_idx%22%3A%22v5p%22%2C%22watermark_key%22%3A%22u_101690810124%22%2C%22algorithm%22%3A%22v5p%22%7D%5D&device_info=%7B%22DeviceType%22%3A%22%22%2C%22OsType%22%3A%22Windows%22%2C%22OsVersion%22%3A%2210%22%2C%22BrowserType%22%3A%22Edge%22%2C%22BrowserVersion%22%3A%22151.0.0.0%22%2C%22ScreenModel%22%3A%222560*1440%22%7D&ignoreToast=true&device_platform=web&aid=6383&channel=channel_pc_web&live_id=1&app_name=douyin_web&language=zh-CN&cookie_enabled=true&screen_width=2560&screen_height=1440&browser_language=zh-CN&browser_platform=Win32&browser_name=Edge&browser_version=151.0.0.0&browser_online=true&engine_name=Blink&engine_version=151.0.0.0&os_name=Windows&os_version=10&cpu_core_num=12&device_memory=16&platform=PC&downlink=10&effective_type=4g&round_trip_time=0&msToken=bvYErWxKkg1oo0bbxwnsACZ7emlNUS0SUoRLNyeQhi4kClmhKf0SettqVykxFIprnylcDgQP002JgaKKdXo6tatXoS8eC9jF5eYDVtYxP8cZsgvQfagmjbf95FvDz9P9LnZRGulkBGXeWgElMuFxKjIYm-VxZPzBQ51fnkMUzrU9&a_bogus=O7U5k7W7mpRVPdFbmOnStfVUcW2ArTSypaiQSeITCNTNaXzaYmNJQPaprxLFmC6MouBzhoVHWj0lYxdcuzUiZKnpLmkDuZ0WgGAA9WXohqidYUkBLqfKCu8o9Jra0bzFs%2Fo6JA4lU0OO2x%2F4DZazUBAyCApJ4mip%2FrrSda4Gx9tkg0G9PrFOuPGdPher01oX&verifyFp=verify_ms8t8zc9_PZ6dqsmI_Xda8_4fQc_8D7r_n6oSRuBLZwa4&fp=verify_ms8t8zc9_PZ6dqsmI_Xda8_4fQc_8D7r_n6oSRuBLZwa4",
+            "https://www.douyin.com/webcast/moment/latest_replay/?device_platform=webapp&aid=6383&channel=channel_pc_web&source=channel_pc_web&max_time=0&uid=7420762851923133500&version=1&pc_client_type=1&pc_libra_divert=Windows&update_version_code=170400&support_h265=1&support_dash=1&version_code=170400&version_name=17.4.0&cookie_enabled=true&screen_width=2560&screen_height=1440&browser_language=zh-CN&browser_platform=Win32&browser_name=Edge&browser_version=151.0.0.0&browser_online=true&engine_name=Blink&engine_version=151.0.0.0&os_name=Windows&os_version=10&cpu_core_num=12&device_memory=16&platform=PC&downlink=10&effective_type=4g&round_trip_time=0&webid=7668639081891530250&uifid=9909fc4602c90e11cbb1ca2fa8411678673d4386b8d7ca05c125f9fb0905826bb7f7d3b473e7910a4c2bbe1f3aef4bc8c20a1787f141e4f9106d303be4da3e371d33ad9c1bc02c8bfaa117700b3ba3a2f35b9b68a65bda62c17038ea9c82c0b0a957092b5e3ec82498be414f0f0d4d5ed9c587d6cdb569cb8d76586249be9006faa55c4d8bab88be21f5424ec8a19da5707574f70a12058bb9e55135150f4a53&msToken=bvYErWxKkg1oo0bbxwnsACZ7emlNUS0SUoRLNyeQhi4kClmhKf0SettqVykxFIprnylcDgQP002JgaKKdXo6tatXoS8eC9jF5eYDVtYxP8cZsgvQfagmjbf95FvDz9P9LnZRGulkBGXeWgElMuFxKjIYm-VxZPzBQ51fnkMUzrU9&a_bogus=xX0fkFUjQNRjFVFSYcnRt43UiA6ANP8yDBToWz2TeOYpaXzPuWNGQxCkcxLKRAyM2upihF37AjMAbdxc8zUsZFHpzmpvSkzbETAC9UvL8qN3YtJBDHR2CLmL9JrO0c0FzAobJI4Ul0Oc2EC4L3rwUBl9eAkEsmJpKqajdn4GP9ef6FT9BNqouOGDO7tt0W5X&verifyFp=verify_ms8t8zc9_PZ6dqsmI_Xda8_4fQc_8D7r_n6oSRuBLZwa4&fp=verify_ms8t8zc9_PZ6dqsmI_Xda8_4fQc_8D7r_n6oSRuBLZwa4"
+          ]
+        },
+        {
+          "platform": "weibo",
+          "owner": "贺嘉述",
+          "role": "individual",
+          "post_url": "https://weibo.com/8348577978/R3bb27FOJ",
+          "post_id": "R3bb27FOJ",
+          "published_at": "2026-06-08T16:57:00+08:00",
+          "published_at_raw": "2026-06-08 16:57",
+          "title": null,
+          "text": "一点天津的小碎片\n祝今天的你也有开心的一天\n#明星v放送# 贺嘉述的微博视频 ​​​",
+          "media_type": "video",
+          "public_ip_region": "北京",
+          "location_text": null,
+          "extra_json": "{\"source_device\": \"来自 微博视频号\", \"is_repost\": false, \"retweet_text\": null, \"engagement_raw\": \"4288,2846,2万\", \"repost_count_raw\": \"4288\", \"comment_count_raw\": \"2846\", \"like_count_raw\": \"2万\", \"view_count_raw\": \"41.1万\", \"video_duration_raw\": \"16:57\", \"video_direct_urls_ephemeral\": [], \"extraction_mode\": \"desktop_profile_card\", \"numeric_alias_url\": \"https://weibo.com/8348577978/5307579521829045\", \"public_ip_region_source\": \"weibo_detail_target_article_header\", \"detail_source_html_path\": \"E:\\\\fajia-timeline\\\\fajia-timeline-data\\\\data\\\\raw\\\\details\\\\weibo\\\\贺嘉述\\\\R3bb27FOJ.html.gz\", \"detail_final_url\": \"https://weibo.com/8348577978/5307579521829045\", \"detail_attempt_url\": \"https://weibo.com/8348577978/5307579521829045\", \"detail_enriched_at\": \"2026-08-08T11:06:56+00:00\", \"detail_enrichment_success\": true}",
+          "relation_type": "retrospective",
+          "link_confidence": "high",
+          "link_note": "6月8日后续公开“一点天津的小碎片”；确认天津，但不自动断言全部画面拍摄于5月18日",
+          "image_urls": [
+            "https://wx4.sinaimg.cn/orj480/0096ZMvwly1idy06hfbpqj31hc0u0tam.jpg"
+          ],
+          "video_urls": [
+            "https://video.weibo.com/show?fid=1034:5307578809253954&mark_id=followtopweibo",
+            "https://video.weibo.com/show?fid=1034:5307578809253954&mark_id=999_reallog_mark_ad%3A999%7CWeiboADNatural",
+            "https://f.video.weibocdn.com/o0/FyA9tJB8lx08ygX0m9oA01041203xg8H0E020.mp4?label=mp4_720p&template=1280x720.25.0&media_id=5307578809253954&tp=8x8A3El:YTkl0eM8&us=0&ori=1&bf=2&ot=h&lp=1605AQh8EoMCvNlah0AXec&ps=mZ6WB&uid=5AhNVg&ab=17399-g1,15568-g4,8012-g2,3601-g43,8013-g0&Expires=1786190818&ssig=sgQgpBE836&KID=unistore,video"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "evd_abeb0f2326c2",
+          "event_id": "evt_20260518_tianjin_ferris_live",
+          "evidence_type": "secondary_public_record",
+          "source_url": "https://www.sina.cn/news/detail/5300051216700510.html",
+          "source_post_url": null,
+          "note": "二手公开记录确认5月18日存在摩天轮直播及澄清内容。",
+          "confidence": "high",
+          "observed_at": null,
+          "created_at": "2026-08-09T10:14:08+00:00"
+        },
+        {
+          "evidence_id": "evd_1a723e44839f",
+          "event_id": "evt_20260518_tianjin_ferris_live",
+          "evidence_type": "secondary_replay",
+          "source_url": "https://search.bilibili.com/all?keyword=%E6%B3%95%E5%AE%A3%E9%98%81%E8%B4%BA%E5%98%89%E8%BF%B00518%E7%9B%B4%E6%92%AD",
+          "source_post_url": null,
+          "note": "Bilibili回放索引可辅助确认5月18日摩天轮直播。",
+          "confidence": "high",
+          "observed_at": null,
+          "created_at": "2026-08-09T10:14:08+00:00"
+        },
+        {
+          "evidence_id": "evd_aad4ed066f53",
+          "event_id": "evt_20260518_tianjin_ferris_live",
+          "evidence_type": "manual_note",
+          "source_url": null,
+          "source_post_url": null,
+          "note": "直播中出现约30秒黑屏；档案只记录黑屏事实，不推断黑屏期间发生了什么。",
+          "confidence": "confirmed",
+          "observed_at": null,
+          "created_at": "2026-08-09T10:14:09+00:00"
+        }
+      ],
+      "media_assets": [
+        {
+          "asset_id": "asset_03aaabba82ce",
+          "event_id": "evt_20260518_tianjin_ferris_live",
+          "post_url": null,
+          "asset_type": "screenshot",
+          "asset_url": null,
+          "local_path": "media/2026/05/0518_tianjin_ferris_live/cover.JPG",
+          "caption": "5月18日摩天轮直播画面",
+          "source_platform": "manual_archive",
+          "source_owner": null,
+          "captured_at": null,
+          "notes": "2026年5月章节素材；仅使用本人/公开直播材料。私人行程站拍素材不入档。",
+          "extra_json": "{\"display_role\": \"cover\", \"is_cover\": true, \"sort_order\": 1, \"rights_status\": \"not_recorded\", \"chapter\": \"PART03\"}",
+          "created_at": "2026-08-09T10:14:09+00:00",
+          "updated_at": "2026-08-09T10:14:09+00:00"
+        }
+      ],
+      "display_mode": "live_record"
+    },
+    {
+      "event_id": "evt_20260519_station_private",
+      "title": "天津→北京 · 双人返程",
+      "event_type": "private_itinerary",
+      "occurred_at_start": "2026-05-19",
+      "occurred_at_end": null,
+      "date_precision": "exact",
+      "confidence": "high",
+      "location_text": "天津→北京",
+      "description": "5月19日，两人由天津返回北京。该行程与5月18日天津摩天轮直播形成连续的天津行程簇。档案仅保留城市级路线与日期，不展示非公开站拍、具体车站、车次和精确时刻。",
+      "evidence_note": "语义校正：原“双方高铁站出行”改为“天津→北京·双人返程”。不把当天无关社交平台内容强行挂到该行程。",
+      "status": "confirmed",
+      "created_at": "2026-08-09T10:14:08+00:00",
+      "updated_at": "2026-08-09T10:14:08+00:00",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "tags": [
+        "PART03",
+        "2026年5月",
+        "私人行程",
+        "高铁站",
+        "仅文本",
+        "不展示跟拍素材",
+        "display:text_only_sensitive"
+      ],
+      "linked_posts": [],
+      "evidence": [
+        {
+          "evidence_id": "evd_661abd8cadf2",
+          "event_id": "evt_20260519_station_private",
+          "evidence_type": "manual_archive",
+          "source_url": null,
+          "source_post_url": null,
+          "note": "已人工确认5月19日双人在高铁站出行；与当日两人社交平台发布内容不匹配，因此不建立帖子关联。",
+          "confidence": "high",
+          "observed_at": null,
+          "created_at": "2026-08-09T10:14:09+00:00"
+        }
+      ],
+      "media_assets": [],
+      "display_mode": "text_only_sensitive"
+    },
+    {
+      "event_id": "evt_20260520_21_bar_walk",
+      "title": "小酒馆共饮与凌晨散步",
+      "event_type": "public_moment",
+      "occurred_at_start": "2026-05-20",
+      "occurred_at_end": "2026-05-21",
+      "date_precision": "range",
+      "confidence": "high",
+      "location_text": null,
+      "description": "5月20日晚至21日凌晨，两人公开限时日常记录了小酒馆共饮与夜间散步。",
+      "evidence_note": "事件跨午夜，因此以日期范围记录；本地保存的两段限时日常作为公开材料归档。视频文件容器时间不作为原始拍摄时间证据。",
+      "status": "confirmed",
+      "created_at": "2026-08-09T10:14:08+00:00",
+      "updated_at": "2026-08-09T10:14:08+00:00",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "tags": [
+        "PART03",
+        "2026年5月",
+        "限时日常",
+        "公开日常",
+        "小酒馆",
+        "散步",
+        "跨午夜",
+        "display:original_post"
+      ],
+      "linked_posts": [],
+      "evidence": [
+        {
+          "evidence_id": "evd_c77173c92bcc",
+          "event_id": "evt_20260520_21_bar_walk",
+          "evidence_type": "manual_media_review",
+          "source_url": null,
+          "source_post_url": null,
+          "note": "两份本人公开限时日常分别记录小酒馆场景与夜间道路双人影子，可支持5月20日晚至21日凌晨这一公开日常节点。",
+          "confidence": "high",
+          "observed_at": null,
+          "created_at": "2026-08-09T10:14:09+00:00"
+        },
+        {
+          "evidence_id": "evd_2e5494aafe01",
+          "event_id": "evt_20260520_21_bar_walk",
+          "evidence_type": "secondary_public_record",
+          "source_url": "https://www.sina.cn/news/detail/5300819504138905.html",
+          "source_post_url": null,
+          "note": "5月21日凌晨二手公开记录描述520当晚喝酒后散步与双人影子限时日常。",
+          "confidence": "medium_high",
+          "observed_at": null,
+          "created_at": "2026-08-09T10:14:09+00:00"
+        }
+      ],
+      "media_assets": [
+        {
+          "asset_id": "asset_f29fb4d7d9fd",
+          "event_id": "evt_20260520_21_bar_walk",
+          "post_url": null,
+          "asset_type": "video",
+          "asset_url": null,
+          "local_path": "media/2026/05/0520-21_bar_walk/01_bar.mp4",
+          "caption": "5月20日晚小酒馆限时日常",
+          "source_platform": "manual_archive",
+          "source_owner": null,
+          "captured_at": null,
+          "notes": "2026年5月章节素材；仅使用本人/公开直播材料。私人行程站拍素材不入档。",
+          "extra_json": "{\"display_role\": \"gallery\", \"is_cover\": true, \"sort_order\": 1, \"rights_status\": \"not_recorded\", \"chapter\": \"PART03\"}",
+          "created_at": "2026-08-09T10:14:09+00:00",
+          "updated_at": "2026-08-09T10:14:09+00:00"
+        },
+        {
+          "asset_id": "asset_c9022e1ca49c",
+          "event_id": "evt_20260520_21_bar_walk",
+          "post_url": null,
+          "asset_type": "video",
+          "asset_url": null,
+          "local_path": "media/2026/05/0520-21_bar_walk/02_walk.mp4",
+          "caption": "5月21日凌晨散步限时日常",
+          "source_platform": "manual_archive",
+          "source_owner": null,
+          "captured_at": null,
+          "notes": "2026年5月章节素材；仅使用本人/公开直播材料。私人行程站拍素材不入档。",
+          "extra_json": "{\"display_role\": \"gallery\", \"is_cover\": false, \"sort_order\": 2, \"rights_status\": \"not_recorded\", \"chapter\": \"PART03\"}",
+          "created_at": "2026-08-09T10:14:09+00:00",
+          "updated_at": "2026-08-09T10:14:09+00:00"
+        }
+      ],
+      "display_mode": "original_post"
+    },
+    {
+      "event_id": "evt_20260523_youtube_live",
+      "title": "《双程》法宣阁×贺嘉述 YouTube 双人直播",
+      "event_type": "live",
+      "occurred_at_start": "2026-05-23T20:00:00+08:00",
+      "occurred_at_end": null,
+      "date_precision": "exact",
+      "confidence": "confirmed",
+      "location_text": "线上 · YouTube",
+      "description": "5月23日20:00，《双程》官方 YouTube 账号相关双人直播。",
+      "evidence_note": "月历整理与公开回放/直播排期交叉确认。",
+      "status": "confirmed",
+      "created_at": "2026-08-09T10:14:08+00:00",
+      "updated_at": "2026-08-09T10:14:08+00:00",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "tags": [
+        "PART03",
+        "2026年5月",
+        "直播",
+        "双人",
+        "YouTube",
+        "display:live_record"
+      ],
+      "linked_posts": [],
+      "evidence": [
+        {
+          "evidence_id": "evd_1f277eb3d118",
+          "event_id": "evt_20260523_youtube_live",
+          "evidence_type": "manual_archive",
+          "source_url": null,
+          "source_post_url": null,
+          "note": "月历整理与公开直播回放/排期交叉确认：5月23日20:00双人YouTube直播。",
+          "confidence": "confirmed",
+          "observed_at": null,
+          "created_at": "2026-08-09T10:14:09+00:00"
+        }
+      ],
+      "media_assets": [],
+      "display_mode": "live_record"
+    },
+    {
+      "event_id": "evt_20260524_music_festival",
+      "title": "大眼音乐节 · 放风游园会",
+      "event_type": "offline_event",
+      "occurred_at_start": "2026-05-24",
+      "occurred_at_end": null,
+      "date_precision": "exact",
+      "confidence": "confirmed",
+      "location_text": "北京 · 大眼音乐节",
+      "description": "5月24日两人出席大眼音乐节·放风游园会。",
+      "evidence_note": "两人当天微博均发布活动相关内容，可与现场公开记录交叉确认。",
+      "status": "confirmed",
+      "created_at": "2026-08-09T10:14:08+00:00",
+      "updated_at": "2026-08-09T10:14:08+00:00",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "tags": [
+        "PART03",
+        "2026年5月",
+        "线下活动",
+        "音乐节",
+        "北京",
+        "display:live_record"
+      ],
+      "linked_posts": [
+        {
+          "platform": "weibo",
+          "owner": "法宣阁",
+          "role": "individual",
+          "post_url": "https://weibo.com/1118449424/R0TyXbOMw",
+          "post_id": "R0TyXbOMw",
+          "published_at": "2026-05-24T16:26:00+08:00",
+          "published_at_raw": "2026-05-24 16:26",
+          "title": null,
+          "text": "来喽~#大眼音乐节放风游园会# ​​​#大眼音乐节# ​​​\n查看翻译",
+          "media_type": "video",
+          "public_ip_region": "北京",
+          "location_text": null,
+          "extra_json": "{\"source_device\": \"来自 iPhone 16 Pro Max\", \"is_repost\": false, \"retweet_text\": null, \"engagement_raw\": \"4364,1920,1.1万\", \"repost_count_raw\": \"4364\", \"comment_count_raw\": \"1920\", \"like_count_raw\": \"1.1万\", \"view_count_raw\": null, \"video_duration_raw\": \"16:26\", \"video_direct_urls_ephemeral\": [\"https://livephoto.us.sinaimg.cn/001Dlj00jx08xSZnzeso0h04110027y10k01.mov?Expires=1786190061&ssig=7gwGReRptI&KID=unistore,video\"], \"extraction_mode\": \"desktop_profile_card\", \"numeric_alias_url\": \"https://weibo.com/1118449424/5302135872816816\", \"public_ip_region_source\": \"weibo_detail_target_article_header\", \"detail_source_html_path\": \"E:\\\\fajia-timeline\\\\fajia-timeline-data\\\\data\\\\raw\\\\details\\\\weibo\\\\法宣阁\\\\R0TyXbOMw.html.gz\", \"detail_final_url\": \"https://weibo.com/1118449424/5302135872816816\", \"detail_attempt_url\": \"https://weibo.com/1118449424/5302135872816816\", \"detail_enriched_at\": \"2026-08-08T10:55:43+00:00\", \"detail_enrichment_success\": true}",
+          "relation_type": "documents",
+          "link_confidence": "confirmed",
+          "link_note": "法宣阁大眼音乐节当日微博",
+          "image_urls": [
+            "https://wx2.sinaimg.cn/orj360/42aa2f10ly1idgmq2dckoj20wr0f444t.jpg"
+          ],
+          "video_urls": [
+            "https://livephoto.us.sinaimg.cn/001Dlj00jx08xSZnzeso0h04110027y10k01.mov?Expires=1786190061&ssig=7gwGReRptI&KID=unistore,video",
+            "https://livephoto.us.sinaimg.cn/001Dlj00jx08xSZnzeso0h04110027y10k01.mov?Expires=1786190146&ssig=uD7zUlmPBS&KID=unistore,video"
+          ]
+        },
+        {
+          "platform": "weibo",
+          "owner": "贺嘉述",
+          "role": "individual",
+          "post_url": "https://weibo.com/8348577978/R0U6e65zq",
+          "post_id": "R0U6e65zq",
+          "published_at": "2026-05-24T17:48:00+08:00",
+          "published_at_raw": "2026-05-24 17:48",
+          "title": null,
+          "text": "来听🎵#大眼音乐节放风游园会##大眼音乐节# ​​​",
+          "media_type": "video",
+          "public_ip_region": "北京",
+          "location_text": null,
+          "extra_json": "{\"source_device\": null, \"is_repost\": false, \"retweet_text\": null, \"engagement_raw\": \"2922,1772,1.4万\", \"repost_count_raw\": \"2922\", \"comment_count_raw\": \"1772\", \"like_count_raw\": \"1.4万\", \"view_count_raw\": null, \"video_duration_raw\": \"17:48\", \"video_direct_urls_ephemeral\": [\"https://livephoto.us.sinaimg.cn/000RFgqDjx08xT50LVsr0h0411003I4E0k01.mov?Expires=1786190716&ssig=DQ2LJOab1N&KID=unistore,video\"], \"extraction_mode\": \"desktop_profile_card\", \"numeric_alias_url\": \"https://weibo.com/8348577978/5302156501451384\", \"public_ip_region_source\": \"weibo_detail_target_article_header\", \"detail_source_html_path\": \"E:\\\\fajia-timeline\\\\fajia-timeline-data\\\\data\\\\raw\\\\details\\\\weibo\\\\贺嘉述\\\\R0U6e65zq.html.gz\", \"detail_final_url\": \"https://weibo.com/8348577978/5302156501451384\", \"detail_attempt_url\": \"https://weibo.com/8348577978/5302156501451384\", \"detail_enriched_at\": \"2026-08-08T11:07:09+00:00\", \"detail_enrichment_success\": true}",
+          "relation_type": "documents",
+          "link_confidence": "confirmed",
+          "link_note": "贺嘉述大眼音乐节当日微博",
+          "image_urls": [
+            "https://wx1.sinaimg.cn/orj360/0096ZMvwly1idgp2telvxj30wr0f47ab.jpg",
+            "https://wx3.sinaimg.cn/orj360/0096ZMvwly1idgp2qhcncj32ds1s81kx.jpg"
+          ],
+          "video_urls": [
+            "https://livephoto.us.sinaimg.cn/000RFgqDjx08xT50LVsr0h0411003I4E0k01.mov?Expires=1786190716&ssig=DQ2LJOab1N&KID=unistore,video",
+            "https://livephoto.us.sinaimg.cn/000RFgqDjx08xT50LVsr0h0411003I4E0k01.mov?Expires=1786190831&ssig=gX7RegGHG6&KID=unistore,video"
+          ]
+        }
+      ],
+      "evidence": [],
+      "media_assets": [],
+      "display_mode": "live_record"
+    },
+    {
+      "event_id": "evt_20260525_double_live",
+      "title": "法宣阁×贺嘉述双人直播",
+      "event_type": "live",
+      "occurred_at_start": "2026-05-25T20:00:00+08:00",
+      "occurred_at_end": null,
+      "date_precision": "exact",
+      "confidence": "confirmed",
+      "location_text": "线上",
+      "description": "5月25日20:00双人直播。",
+      "evidence_note": "《双程》官方公开直播预告与回放索引可交叉确认。",
+      "status": "confirmed",
+      "created_at": "2026-08-09T10:14:08+00:00",
+      "updated_at": "2026-08-09T10:14:08+00:00",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "tags": [
+        "PART03",
+        "2026年5月",
+        "直播",
+        "双人",
+        "display:live_record"
+      ],
+      "linked_posts": [],
+      "evidence": [
+        {
+          "evidence_id": "evd_559791d57053",
+          "event_id": "evt_20260525_double_live",
+          "evidence_type": "external_public_source",
+          "source_url": "https://www.instagram.com/p/DYobl12NdId/",
+          "source_post_url": null,
+          "note": "《双程》官方公开直播预告确认5月25日20:00双人直播。",
+          "confidence": "confirmed",
+          "observed_at": null,
+          "created_at": "2026-08-09T10:14:09+00:00"
+        }
+      ],
+      "media_assets": [],
+      "display_mode": "live_record"
+    },
+    {
+      "event_id": "evt_20260529_youtube_drop",
+      "title": "YouTube 空降互动",
+      "event_type": "online_interaction",
+      "occurred_at_start": "2026-05-29",
+      "occurred_at_end": null,
+      "date_precision": "exact",
+      "confidence": "medium_high",
+      "location_text": "线上 · YouTube",
+      "description": "5月29日存在双人 YouTube 空降互动节点。",
+      "evidence_note": "用户已人工核验粉丝整理微博；当前仍缺少已入库的官方原始排期，因此保留 medium_high 可信度，后续若补到官方源可直接升级。",
+      "status": "confirmed",
+      "created_at": "2026-08-09T10:14:08+00:00",
+      "updated_at": "2026-08-09T10:14:08+00:00",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "tags": [
+        "PART03",
+        "2026年5月",
+        "线上互动",
+        "YouTube",
+        "空降",
+        "待官方源",
+        "display:original_post"
+      ],
+      "linked_posts": [],
+      "evidence": [
+        {
+          "evidence_id": "evd_04a2a827055e",
+          "event_id": "evt_20260529_youtube_drop",
+          "evidence_type": "fan_archive_reviewed",
+          "source_url": "https://weibo.com/7184455090/5304019586131318",
+          "source_post_url": null,
+          "note": "用户已人工核验该粉丝整理微博，确认5月29日存在YouTube空降互动；后续补到官方原始源后可升级证据层级。",
+          "confidence": "medium_high",
+          "observed_at": null,
+          "created_at": "2026-08-09T10:14:09+00:00"
+        }
+      ],
+      "media_assets": [],
+      "display_mode": "original_post"
+    },
+    {
+      "event_id": "evt_20260531_double_live",
+      "title": "法宣阁×贺嘉述双人直播",
+      "event_type": "live",
+      "occurred_at_start": "2026-05-31T21:00:00+08:00",
+      "occurred_at_end": null,
+      "date_precision": "exact",
+      "confidence": "confirmed",
+      "location_text": "线上",
+      "description": "5月31日21:00双人直播。",
+      "evidence_note": "公开直播排期与当日回放可交叉确认。",
+      "status": "confirmed",
+      "created_at": "2026-08-09T10:14:08+00:00",
+      "updated_at": "2026-08-09T10:14:08+00:00",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "tags": [
+        "PART03",
+        "2026年5月",
+        "直播",
+        "双人",
+        "display:live_record"
+      ],
+      "linked_posts": [],
+      "evidence": [
+        {
+          "evidence_id": "evd_0b4440837ac9",
+          "event_id": "evt_20260531_double_live",
+          "evidence_type": "external_public_source",
+          "source_url": "https://www.instagram.com/p/DY7FCUrS5jd/",
+          "source_post_url": null,
+          "note": "公开直播排期确认5月31日21:00双人直播。",
+          "confidence": "confirmed",
+          "observed_at": null,
+          "created_at": "2026-08-09T10:14:09+00:00"
+        },
+        {
+          "evidence_id": "evd_86b67a475e89",
+          "event_id": "evt_20260531_double_live",
+          "evidence_type": "secondary_replay",
+          "source_url": "https://www.youtube.com/watch?v=d5udzzybwr4",
+          "source_post_url": null,
+          "note": "当日直播回放可辅助确认。",
+          "confidence": "high",
+          "observed_at": null,
+          "created_at": "2026-08-09T10:14:09+00:00"
+        }
+      ],
+      "media_assets": [],
+      "display_mode": "live_record"
     },
     {
       "event_id": "evt_20260601_thesis_ack",
@@ -2072,7 +3119,7 @@
       "evidence_note": "当前能精确确认的是 2026-06-01 22:39 的公开时间；论文致谢实际写作时间早于公开时间，具体日期暂未确认。",
       "status": "confirmed",
       "created_at": "2026-08-09T05:58:50+00:00",
-      "updated_at": "2026-08-09T06:34:48+00:00",
+      "updated_at": "2026-08-09T09:55:04+00:00",
       "participants": [
         "法宣阁",
         "贺嘉述"
@@ -2101,7 +3148,7 @@
           "extra_json": "{\"source_device\": null, \"is_repost\": false, \"retweet_text\": null, \"engagement_raw\": \"6576,5996,4.7万\", \"repost_count_raw\": \"6576\", \"comment_count_raw\": \"5996\", \"like_count_raw\": \"4.7万\", \"view_count_raw\": null, \"video_duration_raw\": \"22:39\", \"video_direct_urls_ephemeral\": [], \"extraction_mode\": \"desktop_profile_card\", \"numeric_alias_url\": \"https://weibo.com/8348577978/5305128904299166\", \"public_ip_region_source\": \"weibo_detail_target_article_header\", \"detail_source_html_path\": \"E:\\\\fajia-timeline\\\\fajia-timeline-data\\\\data\\\\raw\\\\details\\\\weibo\\\\贺嘉述\\\\R29qqi2po.html.gz\", \"detail_final_url\": \"https://weibo.com/8348577978/5305128904299166\", \"detail_attempt_url\": \"https://weibo.com/8348577978/5305128904299166\", \"detail_enriched_at\": \"2026-08-08T11:07:01+00:00\", \"detail_enrichment_success\": true}",
           "relation_type": "original_post",
           "link_confidence": "confirmed",
-          "link_note": "2026-06-01 22:39 贺嘉述微博首次公开毕业论文致谢页面。",
+          "link_note": "2026-06-01 22:39 贺嘉述微博首次公开毕业论文致谢页面",
           "image_urls": [
             "https://wx3.sinaimg.cn/orj360/0096ZMvwgy1idq6px12dxj31o0280u0z.jpg",
             "https://wx2.sinaimg.cn/orj360/0096ZMvwgy1idq6q3t0k1j33402c01l1.jpg",
@@ -2202,7 +3249,7 @@
       "evidence_note": null,
       "status": "confirmed",
       "created_at": "2026-08-09T03:23:15+00:00",
-      "updated_at": "2026-08-09T05:58:50+00:00",
+      "updated_at": "2026-08-09T09:55:04+00:00",
       "participants": [
         "法宣阁",
         "贺嘉述"
@@ -2431,7 +3478,7 @@
       "evidence_note": null,
       "status": "confirmed",
       "created_at": "2026-08-09T05:58:50+00:00",
-      "updated_at": "2026-08-09T05:58:50+00:00",
+      "updated_at": "2026-08-09T09:55:04+00:00",
       "participants": [
         "法宣阁",
         "贺嘉述"
@@ -2667,7 +3714,7 @@
       "evidence_note": "直播发生时间可确认；翻转拍立得的拍摄时间未知，已从本事件的现实时间线中拆出。",
       "status": "confirmed",
       "created_at": "2026-08-09T05:58:50+00:00",
-      "updated_at": "2026-08-09T06:34:48+00:00",
+      "updated_at": "2026-08-09T09:55:04+00:00",
       "participants": [
         "法宣阁",
         "贺嘉述"
@@ -2693,7 +3740,7 @@
           "notes": "2026年6月章节素材",
           "extra_json": "{\"display_role\": \"cover\", \"is_cover\": true, \"sort_order\": 1, \"rights_status\": \"not_recorded\"}",
           "created_at": "2026-08-09T05:58:50+00:00",
-          "updated_at": "2026-08-09T06:34:48+00:00"
+          "updated_at": "2026-08-09T06:54:54+00:00"
         }
       ],
       "display_mode": "live_record"
@@ -2711,7 +3758,7 @@
       "evidence_note": null,
       "status": "confirmed",
       "created_at": "2026-08-09T05:58:50+00:00",
-      "updated_at": "2026-08-09T06:34:48+00:00",
+      "updated_at": "2026-08-09T09:55:04+00:00",
       "participants": [
         "法宣阁",
         "贺嘉述"
@@ -2847,7 +3894,7 @@
       "evidence_note": "这里只记录平台公开显示的 IP 属地变化，不把 IP 属地直接等同于本人真实行程。",
       "status": "confirmed",
       "created_at": "2026-08-09T05:58:50+00:00",
-      "updated_at": "2026-08-09T05:58:50+00:00",
+      "updated_at": "2026-08-09T09:55:04+00:00",
       "participants": [
         "法宣阁",
         "贺嘉述"
@@ -2950,7 +3997,7 @@
       "evidence_note": null,
       "status": "confirmed",
       "created_at": "2026-08-09T05:58:50+00:00",
-      "updated_at": "2026-08-09T05:58:50+00:00",
+      "updated_at": "2026-08-09T09:55:04+00:00",
       "participants": [
         "法宣阁",
         "贺嘉述"
@@ -3042,7 +4089,7 @@
       "evidence_note": "现阶段根据公开采访、行程与后续物料综合推定拍摄时间为 6 月 16—17 日；不写成确定事实。",
       "status": "confirmed",
       "created_at": "2026-08-08T17:53:25+00:00",
-      "updated_at": "2026-08-09T05:58:50+00:00",
+      "updated_at": "2026-08-09T09:55:04+00:00",
       "participants": [
         "法宣阁",
         "贺嘉述"
@@ -3147,7 +4194,7 @@
       "evidence_note": "素材文件同时记录了当时公开 IP 属地为天津；IP 属地仅作为公开线索。",
       "status": "confirmed",
       "created_at": "2026-08-09T05:58:50+00:00",
-      "updated_at": "2026-08-09T05:58:50+00:00",
+      "updated_at": "2026-08-09T09:55:04+00:00",
       "participants": [
         "法宣阁",
         "贺嘉述"
@@ -3220,7 +4267,7 @@
       "evidence_note": null,
       "status": "confirmed",
       "created_at": "2026-08-09T03:30:47+00:00",
-      "updated_at": "2026-08-09T05:58:50+00:00",
+      "updated_at": "2026-08-09T09:55:04+00:00",
       "participants": [
         "法宣阁",
         "贺嘉述"
@@ -3276,7 +4323,7 @@
       "evidence_note": "为避免把尚未核准的称呼写成正式事件名，当前使用中性标题“6月21日直播”。",
       "status": "confirmed",
       "created_at": "2026-08-09T05:58:50+00:00",
-      "updated_at": "2026-08-09T05:58:50+00:00",
+      "updated_at": "2026-08-09T09:55:04+00:00",
       "participants": [
         "法宣阁",
         "贺嘉述"
@@ -3332,7 +4379,7 @@
       "evidence_note": "这是一次公开互动事件，事件本身与被看见发生在同一公开时间层。",
       "status": "confirmed",
       "created_at": "2026-08-09T05:58:50+00:00",
-      "updated_at": "2026-08-09T06:34:48+00:00",
+      "updated_at": "2026-08-09T09:55:04+00:00",
       "participants": [
         "法宣阁",
         "贺嘉述"
@@ -3359,7 +4406,7 @@
           "public_ip_region": "北京",
           "location_text": null,
           "extra_json": "{\"source_device\": \"来自 微博视频号\", \"is_repost\": false, \"retweet_text\": null, \"engagement_raw\": \"6215,7076,5.7万\", \"repost_count_raw\": \"6215\", \"comment_count_raw\": \"7076\", \"like_count_raw\": \"5.7万\", \"view_count_raw\": \"81.4万\", \"video_duration_raw\": \"13:31\", \"video_direct_urls_ephemeral\": [\"https://f.video.weibocdn.com/o0/Y4PtriMvlx08yEDoB8hq01041201l4nw0E010.mp4?label=mp4_720p&template=1280x720.25.0&media_id=5312959711477853&tp=8x8A3El:YTkl0eM8&us=0&ori=1&bf=4&ot=h&lp=1605AQh8EoMCvNlah0AXec&ps=mZ6WB&uid=5AhNVg&ab=17399-g1,15568-g4,8012-g2,3601-g43,3601-g42,8013-g0&Expires=1786190716&ssig=Iv39t821SE&KID=unistore,video\"], \"extraction_mode\": \"desktop_profile_card\", \"numeric_alias_url\": \"https://weibo.com/8348577978/5312963495332516\", \"public_ip_region_source\": \"weibo_detail_target_article_header\", \"detail_source_html_path\": \"E:\\\\fajia-timeline\\\\fajia-timeline-data\\\\data\\\\raw\\\\details\\\\weibo\\\\贺嘉述\\\\R5reRmnek.html.gz\", \"detail_final_url\": \"https://weibo.com/8348577978/5312963495332516\", \"detail_attempt_url\": \"https://weibo.com/8348577978/5312963495332516\", \"detail_enriched_at\": \"2026-08-08T11:06:37+00:00\", \"detail_enrichment_success\": true}",
-          "relation_type": "documents",
+          "relation_type": "original_post",
           "link_confidence": "high",
           "link_note": "贺嘉述微博视频《答案》",
           "image_urls": [
@@ -3418,7 +4465,7 @@
       "evidence_note": null,
       "status": "confirmed",
       "created_at": "2026-08-09T05:58:50+00:00",
-      "updated_at": "2026-08-09T05:58:50+00:00",
+      "updated_at": "2026-08-09T09:55:04+00:00",
       "participants": [
         "法宣阁",
         "贺嘉述"
@@ -3902,7 +4949,7 @@
       "evidence_note": null,
       "status": "confirmed",
       "created_at": "2026-08-09T05:58:50+00:00",
-      "updated_at": "2026-08-09T05:58:50+00:00",
+      "updated_at": "2026-08-09T09:55:04+00:00",
       "participants": [
         "法宣阁",
         "贺嘉述"
@@ -7159,7 +8206,9 @@
         "blob:https://www.instagram.com/e2b78026-2a8d-4f7c-a5f9-91d8ca37a56f",
         "blob:https://www.instagram.com/6ef99e1b-1eff-4d6e-ace2-80c2ee32216a"
       ],
-      "linked_event_ids": []
+      "linked_event_ids": [
+        "evt_20260508_double_helix_premiere"
+      ]
     },
     {
       "platform": "weibo",
@@ -7430,7 +8479,9 @@
         "https://wx4.sinaimg.cn/orj360/42aa2f10ly1iczpxlzfx8j246c2rax6q.jpg"
       ],
       "video_urls": [],
-      "linked_event_ids": []
+      "linked_event_ids": [
+        "evt_20260510_thesis_stage"
+      ]
     },
     {
       "platform": "instagram",
@@ -7532,7 +8583,9 @@
         "https://livephoto.us.sinaimg.cn/002kzqM8jx08xwJflEVa0h0411001xHJ0k01.mov?Expires=1786190720&ssig=8AOdUD%2FT6G&KID=unistore,video",
         "https://livephoto.us.sinaimg.cn/002kzqM8jx08xwJflEVa0h0411001xHJ0k01.mov?Expires=1786190847&ssig=NOQjkhhdMw&KID=unistore,video"
       ],
-      "linked_event_ids": []
+      "linked_event_ids": [
+        "evt_20260510_thesis_stage"
+      ]
     },
     {
       "platform": "instagram",
@@ -8083,7 +9136,9 @@
       "extra_json": "{\"source_device\": \"来自 iPhone 16\", \"is_repost\": false, \"retweet_text\": null, \"engagement_raw\": \"138,396,1928\", \"repost_count_raw\": \"138\", \"comment_count_raw\": \"396\", \"like_count_raw\": \"1928\", \"view_count_raw\": null, \"video_duration_raw\": \"10:30\", \"video_direct_urls_ephemeral\": [], \"extraction_mode\": \"desktop_profile_card\", \"numeric_alias_url\": \"https://weibo.com/1118449424/5298422391243587\", \"public_ip_region_source\": \"weibo_detail_target_article_header\", \"detail_source_html_path\": \"E:\\\\fajia-timeline\\\\fajia-timeline-data\\\\data\\\\raw\\\\details\\\\weibo\\\\法宣阁\\\\QFipN5dvR.html.gz\", \"detail_final_url\": \"https://weibo.com/1118449424/5298422391243587\", \"detail_attempt_url\": \"https://weibo.com/1118449424/5298422391243587\", \"detail_enriched_at\": \"2026-08-08T10:55:49+00:00\", \"detail_enrichment_success\": true}",
       "image_urls": [],
       "video_urls": [],
-      "linked_event_ids": []
+      "linked_event_ids": [
+        "evt_20260514_little_hero_release"
+      ]
     },
     {
       "platform": "weibo",
@@ -8101,7 +9156,9 @@
       "extra_json": "{\"source_device\": null, \"is_repost\": false, \"retweet_text\": null, \"engagement_raw\": \"102,331,2205\", \"repost_count_raw\": \"102\", \"comment_count_raw\": \"331\", \"like_count_raw\": \"2205\", \"view_count_raw\": null, \"video_duration_raw\": \"10:30\", \"video_direct_urls_ephemeral\": [], \"extraction_mode\": \"desktop_profile_card\", \"numeric_alias_url\": \"https://weibo.com/8348577978/5298422497936265\", \"public_ip_region_source\": \"weibo_detail_target_article_header\", \"detail_source_html_path\": \"E:\\\\fajia-timeline\\\\fajia-timeline-data\\\\data\\\\raw\\\\details\\\\weibo\\\\贺嘉述\\\\QFipXxiAh.html.gz\", \"detail_final_url\": \"https://weibo.com/8348577978/5298422497936265\", \"detail_attempt_url\": \"https://weibo.com/8348577978/5298422497936265\", \"detail_enriched_at\": \"2026-08-08T11:07:19+00:00\", \"detail_enrichment_success\": true}",
       "image_urls": [],
       "video_urls": [],
-      "linked_event_ids": []
+      "linked_event_ids": [
+        "evt_20260514_little_hero_release"
+      ]
     },
     {
       "platform": "instagram",
@@ -9049,7 +10106,9 @@
         "https://live.douyin.com/webcast/web/live/watermark/?watermark_key_list=%5B%7B%22watermark_uniq_idx%22%3A%22v4u%22%2C%22watermark_key%22%3A%22u_101690810124%22%2C%22algorithm%22%3A%22v4u%22%7D%2C%7B%22watermark_uniq_idx%22%3A%22v5p%22%2C%22watermark_key%22%3A%22u_101690810124%22%2C%22algorithm%22%3A%22v5p%22%7D%5D&device_info=%7B%22DeviceType%22%3A%22%22%2C%22OsType%22%3A%22Windows%22%2C%22OsVersion%22%3A%2210%22%2C%22BrowserType%22%3A%22Edge%22%2C%22BrowserVersion%22%3A%22151.0.0.0%22%2C%22ScreenModel%22%3A%222560*1440%22%7D&ignoreToast=true&device_platform=web&aid=6383&channel=channel_pc_web&live_id=1&app_name=douyin_web&language=zh-CN&cookie_enabled=true&screen_width=2560&screen_height=1440&browser_language=zh-CN&browser_platform=Win32&browser_name=Edge&browser_version=151.0.0.0&browser_online=true&engine_name=Blink&engine_version=151.0.0.0&os_name=Windows&os_version=10&cpu_core_num=12&device_memory=16&platform=PC&downlink=10&effective_type=4g&round_trip_time=0&msToken=bvYErWxKkg1oo0bbxwnsACZ7emlNUS0SUoRLNyeQhi4kClmhKf0SettqVykxFIprnylcDgQP002JgaKKdXo6tatXoS8eC9jF5eYDVtYxP8cZsgvQfagmjbf95FvDz9P9LnZRGulkBGXeWgElMuFxKjIYm-VxZPzBQ51fnkMUzrU9&a_bogus=O7U5k7W7mpRVPdFbmOnStfVUcW2ArTSypaiQSeITCNTNaXzaYmNJQPaprxLFmC6MouBzhoVHWj0lYxdcuzUiZKnpLmkDuZ0WgGAA9WXohqidYUkBLqfKCu8o9Jra0bzFs%2Fo6JA4lU0OO2x%2F4DZazUBAyCApJ4mip%2FrrSda4Gx9tkg0G9PrFOuPGdPher01oX&verifyFp=verify_ms8t8zc9_PZ6dqsmI_Xda8_4fQc_8D7r_n6oSRuBLZwa4&fp=verify_ms8t8zc9_PZ6dqsmI_Xda8_4fQc_8D7r_n6oSRuBLZwa4",
         "https://www.douyin.com/webcast/moment/latest_replay/?device_platform=webapp&aid=6383&channel=channel_pc_web&source=channel_pc_web&max_time=0&uid=7420762851923133500&version=1&pc_client_type=1&pc_libra_divert=Windows&update_version_code=170400&support_h265=1&support_dash=1&version_code=170400&version_name=17.4.0&cookie_enabled=true&screen_width=2560&screen_height=1440&browser_language=zh-CN&browser_platform=Win32&browser_name=Edge&browser_version=151.0.0.0&browser_online=true&engine_name=Blink&engine_version=151.0.0.0&os_name=Windows&os_version=10&cpu_core_num=12&device_memory=16&platform=PC&downlink=10&effective_type=4g&round_trip_time=0&webid=7668639081891530250&uifid=9909fc4602c90e11cbb1ca2fa8411678673d4386b8d7ca05c125f9fb0905826bb7f7d3b473e7910a4c2bbe1f3aef4bc8c20a1787f141e4f9106d303be4da3e371d33ad9c1bc02c8bfaa117700b3ba3a2f35b9b68a65bda62c17038ea9c82c0b0a957092b5e3ec82498be414f0f0d4d5ed9c587d6cdb569cb8d76586249be9006faa55c4d8bab88be21f5424ec8a19da5707574f70a12058bb9e55135150f4a53&msToken=bvYErWxKkg1oo0bbxwnsACZ7emlNUS0SUoRLNyeQhi4kClmhKf0SettqVykxFIprnylcDgQP002JgaKKdXo6tatXoS8eC9jF5eYDVtYxP8cZsgvQfagmjbf95FvDz9P9LnZRGulkBGXeWgElMuFxKjIYm-VxZPzBQ51fnkMUzrU9&a_bogus=xX0fkFUjQNRjFVFSYcnRt43UiA6ANP8yDBToWz2TeOYpaXzPuWNGQxCkcxLKRAyM2upihF37AjMAbdxc8zUsZFHpzmpvSkzbETAC9UvL8qN3YtJBDHR2CLmL9JrO0c0FzAobJI4Ul0Oc2EC4L3rwUBl9eAkEsmJpKqajdn4GP9ef6FT9BNqouOGDO7tt0W5X&verifyFp=verify_ms8t8zc9_PZ6dqsmI_Xda8_4fQc_8D7r_n6oSRuBLZwa4&fp=verify_ms8t8zc9_PZ6dqsmI_Xda8_4fQc_8D7r_n6oSRuBLZwa4"
       ],
-      "linked_event_ids": []
+      "linked_event_ids": [
+        "evt_20260518_tianjin_ferris_live"
+      ]
     },
     {
       "platform": "instagram",
@@ -9298,7 +10357,9 @@
         "https://livephoto.us.sinaimg.cn/001Dlj00jx08xSZnzeso0h04110027y10k01.mov?Expires=1786190061&ssig=7gwGReRptI&KID=unistore,video",
         "https://livephoto.us.sinaimg.cn/001Dlj00jx08xSZnzeso0h04110027y10k01.mov?Expires=1786190146&ssig=uD7zUlmPBS&KID=unistore,video"
       ],
-      "linked_event_ids": []
+      "linked_event_ids": [
+        "evt_20260524_music_festival"
+      ]
     },
     {
       "platform": "weibo",
@@ -9322,7 +10383,9 @@
         "https://livephoto.us.sinaimg.cn/000RFgqDjx08xT50LVsr0h0411003I4E0k01.mov?Expires=1786190716&ssig=DQ2LJOab1N&KID=unistore,video",
         "https://livephoto.us.sinaimg.cn/000RFgqDjx08xT50LVsr0h0411003I4E0k01.mov?Expires=1786190831&ssig=gX7RegGHG6&KID=unistore,video"
       ],
-      "linked_event_ids": []
+      "linked_event_ids": [
+        "evt_20260524_music_festival"
+      ]
     },
     {
       "platform": "instagram",
@@ -10292,7 +11355,9 @@
         "https://video.weibo.com/show?fid=1034:5307578809253954&mark_id=999_reallog_mark_ad%3A999%7CWeiboADNatural",
         "https://f.video.weibocdn.com/o0/FyA9tJB8lx08ygX0m9oA01041203xg8H0E020.mp4?label=mp4_720p&template=1280x720.25.0&media_id=5307578809253954&tp=8x8A3El:YTkl0eM8&us=0&ori=1&bf=2&ot=h&lp=1605AQh8EoMCvNlah0AXec&ps=mZ6WB&uid=5AhNVg&ab=17399-g1,15568-g4,8012-g2,3601-g43,8013-g0&Expires=1786190818&ssig=sgQgpBE836&KID=unistore,video"
       ],
-      "linked_event_ids": []
+      "linked_event_ids": [
+        "evt_20260518_tianjin_ferris_live"
+      ]
     },
     {
       "platform": "douyin",
@@ -14913,5 +15978,126 @@
       ],
       "linked_event_ids": []
     }
-  ]
+  ],
+  "public_interactions": [
+    {
+      "interaction_id": "int_20260503_douyin_flower_reply",
+      "occurred_at": "2026-05-03",
+      "platform": "douyin",
+      "title": "“好漂亮啊 / 你的了 / 我说花很漂亮”公开互动",
+      "interaction_type": "comment_reply_chain",
+      "summary": "公开互动截图中，贺嘉述评论“好漂亮啊”，法宣阁回复“你的了”，贺嘉述再回复“我说花很漂亮😜”。",
+      "source_url": null,
+      "source_post_url": null,
+      "confidence": "confirmed_from_user_capture",
+      "status": "confirmed",
+      "created_at": "2026-08-09T11:28:04+00:00",
+      "updated_at": "2026-08-09T11:28:04+00:00",
+      "participants": [
+        "贺嘉述",
+        "法宣阁"
+      ],
+      "metadata": {
+        "public_location_hint": {
+          "贺嘉述": "浙江",
+          "法宣阁": "北京"
+        },
+        "boundary": "公开位置只作城市/省级线索，不推断精确地址。",
+        "display_level": "minor_note"
+      },
+      "event_links": [
+        {
+          "event_id": "evt_46e423c24de9",
+          "relation_type": "prelude_clue",
+          "confidence": "medium",
+          "note": "仅作为05.04行程的前序公开线索，不证明因果关系。"
+        }
+      ]
+    },
+    {
+      "interaction_id": "int_20260514_bixuanti_airdrop",
+      "occurred_at": "2026-05-14",
+      "platform": "JOOX / Weibo evidence",
+      "title": "《必选题》空降互动",
+      "interaction_type": "airdrop_interaction",
+      "summary": "05.14存在《必选题》空降相关公开记录。该节点进入 PUBLIC INTERACTION 层，不单独冒充现实出行/拍摄事件。",
+      "source_url": "https://weibo.com/7931965714/5298605724533995",
+      "source_post_url": null,
+      "confidence": "confirmed_from_user_source",
+      "status": "confirmed",
+      "created_at": "2026-08-09T11:28:04+00:00",
+      "updated_at": "2026-08-09T11:28:04+00:00",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "metadata": {
+        "display_level": "minor_node",
+        "note": "来源为用户提供的公开微博记录；不额外推断现实同处地点。"
+      },
+      "event_links": []
+    },
+    {
+      "interaction_id": "int_20260515_airdrop_recap",
+      "occurred_at": "2026-05-15",
+      "platform": "weibo",
+      "title": "空降互动合集",
+      "interaction_type": "interaction_recap",
+      "summary": "05.15公开“空降合集”记录。按 recap/整理层保存，与现实事件和原始空降互动分开。",
+      "source_url": "https://weibo.com/7931965714/5299171781511941",
+      "source_post_url": null,
+      "confidence": "confirmed_from_user_source",
+      "status": "confirmed",
+      "created_at": "2026-08-09T11:28:04+00:00",
+      "updated_at": "2026-08-09T11:28:04+00:00",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "metadata": {
+        "display_level": "minor_note",
+        "relation_hint": "recap"
+      },
+      "event_links": [
+        {
+          "event_id": "evt_20260515_joox_comment_drop",
+          "relation_type": "recap_of",
+          "confidence": "high",
+          "note": "05.15微博为该空降相关合集/整理记录。"
+        }
+      ]
+    },
+    {
+      "interaction_id": "int_20260529_youtube_replies",
+      "occurred_at": "2026-05-29",
+      "platform": "youtube",
+      "title": "YouTube 空降回复互动",
+      "interaction_type": "reply_collection",
+      "summary": "YouTube空降期间的公开回复合集；作为互动层保存，不拆成十余个现实事件。",
+      "source_url": "https://weibo.com/7184455090/5304019586131318",
+      "source_post_url": null,
+      "confidence": "medium_high",
+      "status": "confirmed",
+      "created_at": "2026-08-09T11:28:04+00:00",
+      "updated_at": "2026-08-09T11:28:04+00:00",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "metadata": {
+        "display_level": "expandable_note",
+        "boundary": "只记录公开回复，不延伸推断私人关系事实。"
+      },
+      "event_links": [
+        {
+          "event_id": "evt_20260529_youtube_drop",
+          "relation_type": "interaction_record",
+          "confidence": "high",
+          "note": "公开回复合集作为05.29空降互动的细节层。"
+        }
+      ]
+    }
+  ],
+  "semantic_patch_version": "0.6.1.1",
+  "generated_at_after_semantic_patch": "2026-08-09T11:28:04+00:00"
 }

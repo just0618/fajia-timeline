@@ -48,6 +48,21 @@ def main() -> int:
         return 2
 
     data = json.loads(source_json.read_text(encoding="utf-8"))
+
+    # V0.6.2: PUBLIC INTERACTION is a separate semantic layer.
+    # Prefer the dedicated export when it exists so a later generic dual_timeline
+    # regeneration cannot silently drop comment/reply/air-drop notes.
+    interactions_source = repo_root / "data" / "export" / "public_interactions.json"
+    if interactions_source.exists():
+        try:
+            interaction_doc = json.loads(interactions_source.read_text(encoding="utf-8"))
+            interaction_items = interaction_doc.get("items") if isinstance(interaction_doc, dict) else interaction_doc
+            if isinstance(interaction_items, list):
+                data["public_interactions"] = interaction_items
+                data.setdefault("stats", {})["public_interactions"] = len(interaction_items)
+        except Exception as exc:
+            print(f"WARNING: 无法读取公开互动层：{interactions_source} ({exc})")
+
     events = list(data.get("experience_timeline") or [])
     posts = list(data.get("release_timeline") or [])
     may_events = [e for e in events if str(e.get("occurred_at_start") or "").startswith("2026-05")]
@@ -55,7 +70,8 @@ def main() -> int:
 
     print("法嘉时间档案 · 数据同步检查")
     print(f"源文件：{source_json}")
-    print(f"事件：{len(events)} ｜ 五月：{len(may_events)} ｜ 六月：{len(june_events)} ｜ 公开记录：{len(posts)}")
+    interactions = list(data.get("public_interactions") or [])
+    print(f"事件：{len(events)} ｜ 五月：{len(may_events)} ｜ 六月：{len(june_events)} ｜ 公开记录：{len(posts)} ｜ 公开互动：{len(interactions)}")
 
     # The formal May V1 importer should leave far more than the old single May node.
     if len(may_events) < 12:
