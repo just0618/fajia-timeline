@@ -1,0 +1,12 @@
+V0.8.2 main-ready deployment package
+
+Upload the CONTENTS of this folder to the repository root (not the outer folder itself).
+Required for the website:
+- index.html
+- prototype_v082.css
+- prototype_v082.js
+- favicon.svg
+- media/
+
+media/_future contains currently unused July assets copied from the previous main branch for safekeeping.
+It does not affect page rendering and may be omitted if you want the smallest public deployment.

@@ -1,104 +1,123 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="theme-color" content="#FF8AA1" />
-  <title>法嘉时间档案 · V0.6</title>
-  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#fff9f1">
+  <title>法嘉时间档案 · May / June / July</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="prototype_v082.css">
 </head>
-<body data-chapter="hub">
-  <div class="ambient ambient-a"></div>
-  <div class="ambient ambient-b"></div>
+<body>
+<main>
+  <section id="closed" class="closed-stage">
+    <button id="openBook" class="cover" aria-label="打开法嘉时间档案">
+      <span class="tiny">FAJIA · TIME ARCHIVE</span>
+      <h1>法嘉<br>时间档案</h1>
+      <span class="heart">♡</span>
+      <span class="tape t1"></span><span class="tape t2"></span>
+      <span class="doodle d1">✿</span><span class="doodle d2">☆</span><span class="doodle d3">♡</span>
+      <span class="chibi">(｡•ᴗ•｡)♡</span>
+      <p>May ↔ June ↔ July 已接通<br>第三个月开始验证真正的跨月档案</p>
+      <small>V0.8.2 · JULY SKELETON</small>
+      <b>翻开看看 ↗</b>
+    </button>
+    <div class="page-shadow"></div>
+  </section>
 
-  <main class="app" id="app">
-    <section class="landing" id="landing" aria-label="打开法嘉时间档案">
-      <div class="closed-book" id="closedBook">
-        <div class="book-shadow"></div>
-        <button class="cover cover-v05" id="openBook" type="button" aria-label="打开时间档案">
-          <span class="cover-thread"></span>
-          <span class="cover-kicker">FAJIA · TIME ARCHIVE</span>
-          <span class="cover-index">01 — 05</span>
-          <span class="cover-title">法嘉<br>时间档案</span>
-          <span class="cover-subtitle">五段时间 · 一条现实主轴</span>
-          <span class="cover-line" aria-hidden="true"></span>
-          <span class="cover-stamp">2025.10 → 2026.07</span>
-          <span class="cover-note">OPEN THE ARCHIVE ↗</span>
-          <span class="cover-tabs" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
-        </button>
-        <div class="page-block"></div>
-      </div>
-    </section>
+  <section id="opened" class="opened hidden" aria-live="polite">
+    <div class="book">
+      <aside class="tabs" aria-label="档案视图">
+        <button data-view="month" class="active">按月总览</button>
+        <button data-view="day">按日视图</button>
+        <button data-view="public">公开档案</button>
+      </aside>
 
-    <section class="reader" id="reader" aria-hidden="true">
-      <header class="reader-bar">
-        <div>
-          <div class="tiny-label">FAJIA TIME ARCHIVE · V0.6.2</div>
-          <h1>法嘉时间档案</h1>
+      <section class="page left">
+        <div class="paper-grid"></div>
+
+        <div class="spread-view" data-spread="month">
+          <nav class="month-nav" aria-label="月份切换">
+            <button id="prevMonth" class="month-arrow" type="button">←</button>
+            <div id="monthTabs" class="month-tabs"></div>
+            <button id="nextMonth" class="month-arrow" type="button">→</button>
+          </nav>
+
+          <header class="month-head">
+            <span id="monthNum" class="num">05</span>
+            <div>
+              <strong id="monthName">May</strong>
+              <em id="monthYear">2026</em>
+              <p id="monthLead">多月份时间档案正在加载。</p>
+            </div>
+          </header>
+
+          <div class="month-progress">
+            <div><b id="eventCount">0</b><span>已落位时间节点</span></div>
+            <div><b id="archiveCount">0</b><span>待归档公开碎片</span></div>
+            <div><b id="mediaCount">0</b><span>已接入真实素材</span></div>
+          </div>
+
+          <div id="monthSpecial" class="month-special"></div>
+          <div id="calendar" class="calendar"></div>
+          <footer class="legend"><span>● 已进入手账主轴</span><span>○ A 公开档案日期</span><span>↩ 跨月公开回声</span></footer>
+          <p id="monthRule" class="rule"></p>
+          <button id="chapterTurn" class="chapter-turn hidden" type="button"></button>
+          <span id="cornerNote" class="corner-note">May notes ✎</span>
         </div>
-        <div class="reader-actions">
-          <button class="ghost-btn" id="chaptersBtn" type="button" hidden>章节总览</button>
-          <button class="ghost-btn" id="indexBtn" type="button" hidden>本章事件</button>
-          <button class="ghost-btn" id="closeBook" type="button">合上档案</button>
-        </div>
-      </header>
 
-      <div class="book-shell" id="bookShell">
-        <div class="book-edge left-edge"></div>
-        <div class="book-edge right-edge"></div>
-        <div class="book-spine"></div>
-
-        <div class="spread" id="spread" aria-live="polite">
-          <article class="paper-page left-page" id="leftPage"></article>
-          <article class="paper-page right-page" id="rightPage"></article>
-          <div class="flip-sheet" id="flipSheet" aria-hidden="true"></div>
+        <div class="spread-view hidden" data-spread="day">
+          <div id="dayLeft" class="dynamic-day"></div>
         </div>
 
-        <button class="page-nav prev" id="prevBtn" type="button" aria-label="上一页">‹</button>
-        <button class="page-nav next" id="nextBtn" type="button" aria-label="下一页">›</button>
-      </div>
-
-      <div class="mobile-tabs" id="mobileTabs" aria-label="移动端页面切换">
-        <button type="button" class="active" data-side="left">章节说明</button>
-        <button type="button" data-side="right">五章总览</button>
-      </div>
-
-      <footer class="timeline-rail">
-        <div class="rail-copy">
-          <span id="pageCounter">01 / 02</span>
-          <span id="rangeLabel">ARCHIVE MAP · 05 PARTS</span>
+        <div class="spread-view hidden" data-spread="public">
+          <div id="archiveLeft"></div>
         </div>
-        <div class="rail-track" id="railTrack"></div>
-      </footer>
-    </section>
-  </main>
+      </section>
 
-  <dialog class="drawer" id="postDrawer">
-    <div class="drawer-head">
-      <div>
-        <span class="tiny-label">RELEASE ARCHIVE</span>
-        <h2 id="drawerTitle">相关公开记录</h2>
-      </div>
-      <button class="drawer-close" id="drawerClose" type="button">×</button>
+      <div class="gutter"></div>
+
+      <section class="page right">
+        <div class="paper-grid"></div>
+
+        <div class="spread-view" data-spread="month">
+          <header class="ribbon">
+            <small>MULTI-MONTH ARCHIVE · 多月份时间档案</small>
+            <h2 id="monthRightTitle">May + June + July</h2>
+          </header>
+
+          <article class="intro-card">
+            <span class="crown">♕</span>
+            <h3 id="monthIntroTitle">多月份结构正在加载。</h3>
+            <p id="monthIntroText">May、June 与 July 会在同一本手账中切换。</p>
+            <button id="seeCurrentEvent" type="button">翻到当前选中的手账页 →</button>
+          </article>
+
+          <div class="mode-legend compact">
+            <article><b>REAL EVENT</b><span>现实活动 / 出行 / 现场</span></article>
+            <article><b>PUBLIC POST</b><span>公开发布 / 宣传内容</span></article>
+            <article><b>PUBLIC INTERACTION</b><span>评论 / 回复 / 空降互动</span></article>
+            <article><b>PUBLIC CLUE</b><span>可见线索，但不自动升级为现实行程</span></article>
+          </div>
+
+          <div class="chapter-intro">
+            <small>THIS MONTH'S CHAPTERS</small>
+            <h3 id="chapterTitle">本月章节</h3>
+          </div>
+          <div id="chapterRail" class="chapter-rail"></div>
+        </div>
+
+        <div class="spread-view hidden" data-spread="day">
+          <div id="dayRight" class="dynamic-day"></div>
+        </div>
+
+        <div class="spread-view hidden" data-spread="public">
+          <div id="archiveRight"></div>
+        </div>
+      </section>
     </div>
-    <div class="drawer-list" id="drawerList"></div>
-  </dialog>
-
-  <dialog class="index-dialog" id="indexDialog">
-    <div class="drawer-head">
-      <div>
-        <span class="tiny-label">CHAPTER INDEX</span>
-        <h2>本章主轴与公开互动</h2>
-      </div>
-      <button class="drawer-close" id="indexClose" type="button">×</button>
-    </div>
-    <div class="index-list" id="indexList"></div>
-  </dialog>
-
-  <script src="data/timeline-data.js"></script>
-  <script src="data/chapters.js"></script>
-  <script src="data/media-assets.js"></script>
-  <script src="app.js"></script>
+  </section>
+</main>
+<script src="prototype_v082.js"></script>
 </body>
 </html>
