@@ -1,0 +1,42 @@
+{
+  "ui_schema_version": "0.8.2-july-skeleton",
+  "months": [
+    "2026-05",
+    "2026-06",
+    "2026-07"
+  ],
+  "structure_status": "three_months_connected",
+  "july_source": "july_verification_v2 + user manual confirmations",
+  "key_relations": [
+    {
+      "from": "2026-06-08 V中文拍摄",
+      "to": "2026-07-14 V正式公开",
+      "type": "later_public_of"
+    },
+    {
+      "from": "2026-06-10 杂志拍摄",
+      "to": "2026-07-15 首饰盒杂志花絮",
+      "type": "later_public_of"
+    },
+    {
+      "from": "2026-06-11 露营素材拍摄",
+      "to": "2026-07-05 露营日记",
+      "type": "later_public_of"
+    },
+    {
+      "from": "2026-06-25/27 青岛拍摄",
+      "to": "2026-07-03 / 07-17",
+      "type": "later_public_of"
+    },
+    {
+      "from": "2026-07-27/28 外出物料拍摄",
+      "to": "2026-08-09 视频公开",
+      "type": "future_later_public"
+    }
+  ],
+  "excluded_from_mainline": [
+    "2026-07-07 政治要求类转发",
+    "V中文粉丝数据准备型预热"
+  ],
+  "next_phase": "freeze architecture, fill media and refine visual system"
+}
