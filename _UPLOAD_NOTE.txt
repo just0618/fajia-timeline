@@ -1,18 +1,14 @@
-法嘉时间档案 V0.8.3 · Reading Mode main-ready
+V0.8.4 GitHub main-ready
 
-用于直接替换 GitHub Pages main 根目录的前端文件。
-
-保留：
+建议先删除 main 根目录中旧版前端文件，再上传本包全部内容：
 - index.html
-- prototype_v083.css
-- prototype_v083.js
-- favicon.svg
+- prototype_v084.css
+- prototype_v084.js
 - media/
+- favicon.svg（如存在）
 
-V0.8.3 重点：
-- PC：继续双页书本；左页故事，右页档案注释。
-- 手机：单页电子手账流；月份先看目录，事件先看故事。
-- node_type / evidence_mode / confidence / 时间锚点等默认折叠在“查看档案依据”。
-- 05.03 / 06.11 / 07.18 是三种复杂度的重点阅读样板。
-
-如果 main 仍有旧 app.js / styles.css / index_test.html / scripts/ 等文件，它们已不是本版运行所需，可删除。
+本版改动：
+1. PC 按月总览 = 单页完整日历，不再显示右侧手账目录。
+2. 手机端继续保留纵向手账目录。
+3. 默认阅读文案只讲事件事实，考据说明收进“查看档案依据”。
+4. 接入新整理的 5/6/7 月素材；无明确对应关系的素材不强塞。
