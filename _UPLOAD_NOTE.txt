@@ -1,12 +1,18 @@
-V0.8.2 main-ready deployment package
+法嘉时间档案 V0.8.3 · Reading Mode main-ready
 
-Upload the CONTENTS of this folder to the repository root (not the outer folder itself).
-Required for the website:
+用于直接替换 GitHub Pages main 根目录的前端文件。
+
+保留：
 - index.html
-- prototype_v082.css
-- prototype_v082.js
+- prototype_v083.css
+- prototype_v083.js
 - favicon.svg
 - media/
 
-media/_future contains currently unused July assets copied from the previous main branch for safekeeping.
-It does not affect page rendering and may be omitted if you want the smallest public deployment.
+V0.8.3 重点：
+- PC：继续双页书本；左页故事，右页档案注释。
+- 手机：单页电子手账流；月份先看目录，事件先看故事。
+- node_type / evidence_mode / confidence / 时间锚点等默认折叠在“查看档案依据”。
+- 05.03 / 06.11 / 07.18 是三种复杂度的重点阅读样板。
+
+如果 main 仍有旧 app.js / styles.css / index_test.html / scripts/ 等文件，它们已不是本版运行所需，可删除。

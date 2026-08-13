@@ -2,11 +2,11 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#fff9f1">
-  <title>法嘉时间档案 · May / June / July</title>
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="prototype_v082.css">
+  <link rel="icon" href="favicon.svg">
+  <title>法嘉时间档案 V0.8.3 · Reading Mode 阅读模式样板</title>
+  <link rel="stylesheet" href="prototype_v083.css">
 </head>
 <body>
 <main>
@@ -18,8 +18,8 @@
       <span class="tape t1"></span><span class="tape t2"></span>
       <span class="doodle d1">✿</span><span class="doodle d2">☆</span><span class="doodle d3">♡</span>
       <span class="chibi">(｡•ᴗ•｡)♡</span>
-      <p>May ↔ June ↔ July 已接通<br>第三个月开始验证真正的跨月档案</p>
-      <small>V0.8.2 · JULY SKELETON</small>
+      <p>May · June · July<br>把三个月的故事慢慢收进一本手账</p>
+      <small>V0.8.3 · READING MODE</small>
       <b>翻开看看 ↗</b>
     </button>
     <div class="page-shadow"></div>
@@ -51,6 +51,8 @@
               <p id="monthLead">多月份时间档案正在加载。</p>
             </div>
           </header>
+
+          <section id="mobileMonthReader" class="mobile-month-reader" aria-label="手机端月份阅读目录"></section>
 
           <div class="month-progress">
             <div><b id="eventCount">0</b><span>已落位时间节点</span></div>
@@ -93,11 +95,9 @@
             <button id="seeCurrentEvent" type="button">翻到当前选中的手账页 →</button>
           </article>
 
-          <div class="mode-legend compact">
-            <article><b>REAL EVENT</b><span>现实活动 / 出行 / 现场</span></article>
-            <article><b>PUBLIC POST</b><span>公开发布 / 宣传内容</span></article>
-            <article><b>PUBLIC INTERACTION</b><span>评论 / 回复 / 空降互动</span></article>
-            <article><b>PUBLIC CLUE</b><span>可见线索，但不自动升级为现实行程</span></article>
+          <div class="reader-principle">
+            <span>READING MODE</span>
+            <p>默认只留下日期、故事和照片。需要考据时，再展开每页的「档案依据」。</p>
           </div>
 
           <div class="chapter-intro">
@@ -118,6 +118,6 @@
     </div>
   </section>
 </main>
-<script src="prototype_v082.js"></script>
+<script src="prototype_v083.js"></script>
 </body>
 </html>
