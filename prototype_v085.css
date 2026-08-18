@@ -51,6 +51,14 @@ button{font:inherit;color:inherit}.hidden{display:none!important}main{min-height
 .day.archive-only{background:linear-gradient(180deg,#fffdf7,#f7fbff);border-style:dashed}
 .day.archive-only time{color:#6f8dab}
 .day.archive-only .mark.archive{background:#eef6ff;color:#5a7a9a}
+
+.day .event-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-top:8px;background:#d77a90}
+.day .event-dot.node-real_event{background:#dc748c}
+.day .event-dot.node-public_post{background:#d5a83d}
+.day .event-dot.node-public_interaction{background:#7198b7}
+.day .event-dot.node-public_clue{background:#8e8e8e}
+.day .archive-chip{display:inline-block;margin-top:7px;padding:3px 7px;border-radius:999px;background:#eef6ff;color:#5a7a9a;font-size:9px;font-weight:800}
+
 .gallery-strip{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .gallery-photo{position:relative;background:#fff;padding:10px 10px 14px;border:1px solid #eddad5;border-radius:4px;box-shadow:0 8px 16px #71414b0d}
 .gallery-photo img{display:block;width:100%;height:170px;object-fit:cover;border-radius:3px}
@@ -139,3 +147,111 @@ button{font:inherit;color:inherit}.hidden{display:none!important}main{min-height
 .future-relation-box{padding:16px 17px;border-radius:18px;background:linear-gradient(135deg,#fff9e9,#fff7fb);border:1px dashed #e7c97c;color:#6d5a45;line-height:1.75}
 .future-relation-box b{display:block;color:#9a6b35;font:900 19px/1.25 var(--hand);margin-bottom:6px}
 .future-relation-box span{display:block}
+
+/* ============================================================
+   V0.8.3 · READING MODE
+   Keep the archive model underneath; show the story first.
+   ============================================================ */
+.reader-principle{margin:20px 0;padding:17px 18px;border:1px dashed #e6c2cb;border-radius:18px;background:linear-gradient(135deg,#fffafb,#fffdf4)}
+.reader-principle span{display:block;color:#bd6d80;font-size:10px;font-weight:900;letter-spacing:.16em}
+.reader-principle p{margin:7px 0 0;color:#765a61;line-height:1.75}
+.reader-special small{display:block;margin-bottom:6px;color:#c17385;font-size:10px;font-weight:900;letter-spacing:.14em}.reader-special b{font-size:24px}.reader-special span{display:block;margin-top:7px}
+.reader-card .reader-kind{display:inline-block;margin-bottom:5px;color:#b96b7d;font-size:10px;font-weight:900;letter-spacing:.12em}.reader-card p{padding-right:70px}
+
+.reader-page,.reader-archive-page{position:relative;z-index:1;display:grid;gap:18px}
+.reader-top{display:flex;align-items:center;justify-content:space-between;gap:12px}.reader-top>span{padding:7px 12px;border-radius:999px;background:#fff3f6;color:#aa586d;font-size:11px;font-weight:900}
+.reader-header{display:grid;grid-template-columns:145px 1fr;align-items:end;gap:20px;border-bottom:1px solid #f0dfe0;padding-bottom:18px}
+.reader-date b{display:block;font:900 88px/.82 Georgia,serif;color:#df718a}.reader-date small{display:block;margin-top:8px;color:#9d6a77;font-size:11px;font-weight:900;letter-spacing:.12em}
+.reader-header>div:last-child>small{display:block;color:#c47487;font-size:10px;font-weight:900;letter-spacing:.13em}.reader-header h1{margin:6px 0 0;font:900 38px/1.18 var(--hand)}
+.reader-story{margin:0;font:700 18px/1.9 var(--hand);color:#64494f}
+.reader-note{position:relative;margin:2px 0;padding:17px 18px 17px 22px;border-radius:18px;background:linear-gradient(135deg,#fff7fa,#fffdf0);border:1px dashed #e5bdc8}.reader-note:before{content:"";position:absolute;left:0;top:18px;width:5px;height:42px;border-radius:999px;background:linear-gradient(#f27e9a,#ffe06a)}.reader-note small{display:block;color:#b65c74;font-weight:900;letter-spacing:.1em}.reader-note p{margin:7px 0 0;color:#654d54;line-height:1.75}
+.reader-quote{margin:0;padding:12px 18px;text-align:center;color:#b36b7c;font:900 17px/1.6 var(--hand);transform:rotate(-1deg)}
+.reader-nav{display:flex;gap:10px;justify-content:space-between;margin-top:4px}
+.reader-peers{padding:16px 17px;border-radius:18px;border:1px dashed #e3c4cc;background:#fffaf8}.reader-peers>small{display:block;color:#bc7080;font-size:10px;font-weight:900;letter-spacing:.13em;margin-bottom:9px}.reader-peers>div{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.reader-peers button{display:flex;flex-direction:column;align-items:flex-start;gap:3px;border:1px solid #ead6da;background:#fff;border-radius:14px;padding:10px 12px;text-align:left;cursor:pointer}.reader-peers button span{font-size:9px;color:#b67382;font-weight:900}.reader-peers button b{font-size:13px;color:#634d53}
+.reader-relations{display:grid;gap:10px}.reader-relation{padding:14px 16px;border-radius:16px;border:1px dashed #e2c8ce;background:#fffaf8}.reader-relation small{display:block;color:#b46679;font-size:10px;font-weight:900;letter-spacing:.1em}.reader-relation b{display:block;margin-top:5px;color:#624b52}.reader-relation span{display:block;margin-top:5px;color:#816870;line-height:1.65;font-size:13px}.reader-relation.future{background:#fffbed;border-color:#e5d48a}.reader-relation.later{background:#f7fbff;border-color:#cddde8}
+.reader-archive-page>header{padding:4px 0 12px;border-bottom:1px solid #f0dfe0}.reader-archive-page>header small{color:#bf7082;font-size:10px;font-weight:900;letter-spacing:.15em}.reader-archive-page>header h2{margin:8px 0 8px;font:900 32px/1.22 var(--hand)}.reader-archive-page>header p{margin:0;color:#70555c;line-height:1.8}
+.reader-details{border:1px solid #ead5da;border-radius:20px;background:#fffdfa;overflow:hidden}.reader-details>summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:12px;align-items:center;padding:16px 18px;color:#a44d64;font-weight:900}.reader-details>summary::-webkit-details-marker{display:none}.reader-details>summary:after{content:"＋";flex:0 0 auto;font-size:21px;color:#c16f82}.reader-details[open]>summary:after{content:"－"}.reader-details>summary span{display:block}.reader-details>summary small{font-size:10px;color:#9a7a82;font-weight:700}.reader-detail-body{padding:0 18px 18px;border-top:1px dashed #ead5da}.reader-detail-body .time-anchors{margin-top:16px}.reader-detail-body .context-box{margin-top:14px}.reader-detail-body .evidence-card{margin-top:14px}
+.debug-details{margin-top:16px;border-top:1px dashed #ead8da;padding-top:12px}.debug-details>summary{cursor:pointer;color:#aa8b92;font-size:11px;font-weight:800}.debug-grid{display:grid;grid-template-columns:auto 1fr;gap:7px 14px;margin-top:10px;font-size:11px}.debug-grid span{color:#b59aa0}.debug-grid b{word-break:break-all;color:#846870}
+.mobile-archive-details{display:none}
+.mobile-month-reader{display:none}
+.mobile-calendar-toggle{display:none}
+
+/* Keep desktop book, but make month pages reader-facing rather than debug-facing. */
+.mode-legend,.chapter-meta,.status-line{display:none!important}
+.month-progress span{font-size:11px}.month-progress div:nth-child(2) span:after{content:""}
+
+@media (max-width:1050px){
+  .reader-header{grid-template-columns:120px 1fr}.reader-date b{font-size:76px}.reader-header h1{font-size:34px}
+}
+
+@media (max-width:700px){
+  html{background:#fff8f1}body{background:linear-gradient(180deg,#fff5d8 0,#fffaf5 15%,#fff7f4 100%);overflow-x:hidden}
+  main{display:block;min-height:100svh;padding:0}
+  .closed-stage{width:min(92vw,430px);margin:8vh auto 0;aspect-ratio:.76}
+  .cover{padding:30px 26px}.cover h1{font-size:56px}.cover .tiny{margin-bottom:34px}.cover p{left:24px;right:24px;bottom:86px;font-size:12px}.cover small{left:24px;bottom:30px}.cover>b{right:24px}
+  .opened{width:100%;perspective:none}.book{display:block;width:100%;transform:none!important;opacity:1!important;animation:none!important}
+  .gutter{display:none!important}.page{min-height:0;padding:28px 20px 112px;border:0;border-radius:0!important;box-shadow:none;overflow:visible;background:linear-gradient(180deg,#fffdfa,#fff9f5)}
+  .paper-grid{position:fixed;inset:0;z-index:-1;opacity:.35}
+  .opened.view-month .page.right,.opened.view-day .page.right{display:none!important}
+  .opened.view-month .page.left,.opened.view-day .page.left{margin:0}
+  .tabs{position:fixed;z-index:50;left:50%;right:auto;bottom:calc(12px + env(safe-area-inset-bottom));top:auto;transform:translateX(-50%);display:flex;flex-direction:row;gap:5px;padding:5px;border:1px solid #efdde0;border-radius:999px;background:#fffdf8e8;backdrop-filter:blur(18px);box-shadow:0 12px 30px #6f4d551e}
+  .tabs button{writing-mode:horizontal-tb;width:auto;padding:9px 13px;border:0;background:transparent;box-shadow:none;border-radius:999px;font-size:12px}.tabs button.active{background:linear-gradient(135deg,#ffdce6,#fff0bd)}
+
+  /* Month becomes a single vertical notebook index. */
+  .month-head,.month-progress,.month-special,.legend,.rule,.chapter-turn,.corner-note{display:none!important}
+  .mobile-month-reader{display:block;position:relative;z-index:1}
+  .mobile-month-cover{position:relative;padding:22px 20px 24px;margin-bottom:18px;border:1px solid #eed8d6;border-radius:26px;background:linear-gradient(145deg,#fff9fb,#fffdf2);box-shadow:0 12px 30px #7848510d}
+  .mobile-month-cover:after{content:"✎";position:absolute;right:18px;top:18px;color:#e0a0ad;font-size:22px;transform:rotate(-9deg)}
+  .mobile-month-cover small{display:block;color:#c16e81;font-size:10px;font-weight:900;letter-spacing:.14em}.mobile-month-cover h2{margin:9px 0 10px;font:900 31px/1.24 var(--hand)}.mobile-month-cover p{margin:0;padding-right:10px;color:#765d63;line-height:1.8;font-size:15px}.mobile-month-count{display:flex;align-items:baseline;gap:7px;margin-top:17px;color:#a95369}.mobile-month-count b{font:900 31px/1 Georgia,serif}.mobile-month-count span{font-size:12px;font-weight:800}
+  .mobile-chapter-list{display:grid;gap:12px}.mobile-chapter-card{display:grid;grid-template-columns:62px 1fr 18px;gap:13px;align-items:start;width:100%;padding:15px 14px;border:1px solid #ebd8d3;border-radius:20px;background:#fffdfa;text-align:left;box-shadow:0 7px 18px #7048500a;cursor:pointer}.mobile-chapter-card time{display:grid;place-items:center;min-height:60px;border-radius:16px;background:linear-gradient(145deg,#ffcbd8,#fff0bc);font:900 24px/1 Georgia,serif;color:#a9455e}.mobile-chapter-card small{display:block;color:#c07384;font-size:9px;font-weight:900;letter-spacing:.1em}.mobile-chapter-card h3{margin:4px 0 5px;font:900 20px/1.3 var(--hand)}.mobile-chapter-card p{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin:0;color:#80676e;font-size:12px;line-height:1.6}.mobile-chapter-card>span{align-self:center;color:#bf6a7e;font-size:20px}
+  .mobile-calendar-toggle{display:block;width:100%;margin-top:16px;border:1px dashed #e5bbc6;border-radius:18px;background:#fffaf8;padding:13px;color:#a65267;font-weight:900}
+  .calendar{display:none;margin-top:16px;grid-template-columns:repeat(7,minmax(78px,1fr));overflow-x:auto;padding-bottom:8px}.show-mobile-calendar .calendar{display:grid}.show-mobile-calendar .legend{display:flex!important}.show-mobile-calendar .rule{display:block!important}.show-mobile-calendar .chapter-turn{display:block!important}
+  .month-nav{position:sticky;top:0;z-index:20;margin:-28px -20px 22px;padding:14px 18px 11px;background:#fffdf9e8;backdrop-filter:blur(16px);border-bottom:1px solid #f0dfe0}.month-tabs{flex-wrap:nowrap;overflow:auto;justify-content:flex-start;scrollbar-width:none}.month-tabs::-webkit-scrollbar{display:none}.month-tab{white-space:nowrap;padding:8px 13px}.month-arrow{flex:0 0 auto}
+
+  /* Day = one mobile notebook page. */
+  .reader-page{gap:15px}
+  .reader-top{position:sticky;top:0;z-index:18;margin:-28px -20px 6px;padding:14px 20px 10px;background:#fffdf9e8;backdrop-filter:blur(16px);border-bottom:1px solid #f2e4e2}.reader-top .back-btn{padding:8px 12px;font-size:12px}.reader-top>span{font-size:10px}
+  .reader-header{display:block;border:0;padding:4px 0 0}.reader-date{display:flex;align-items:baseline;gap:10px}.reader-date b{font-size:62px}.reader-date small{margin:0;font-size:10px}.reader-header>div:last-child{margin-top:8px}.reader-header>div:last-child>small{font-size:9px}.reader-header h1{font-size:31px;line-height:1.18}
+  .reader-story{font-size:17px;line-height:1.85}
+  .polaroid{margin:3px 6px 7px;padding:10px 10px 14px;transform:rotate(-1deg)}.polaroid img,.fake-photo{height:auto;min-height:0;max-height:none;aspect-ratio:auto;object-fit:contain}.polaroid figcaption{font-size:11px}
+  .gallery-strip{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;overflow:auto}.gallery-photo{min-width:0;padding:7px}.gallery-photo img{height:150px}.gallery-photo figcaption{font-size:10px}
+  .reader-note{padding:15px 15px 15px 19px}.reader-note p{font-size:14px}.reader-quote{font-size:15px;padding:8px 12px}
+  .reader-peers{padding:14px}.reader-peers>div{grid-template-columns:1fr}.reader-peers button{padding:10px 12px}
+  .reader-relations{gap:8px}.reader-relation{padding:12px 14px}.reader-relation span{font-size:12px}
+  .mobile-archive-details{display:block}.reader-details{border-radius:18px}.reader-details>summary{padding:14px 15px}.reader-details>summary small{display:none}.reader-detail-body{padding:0 14px 14px}.reader-detail-body .time-anchor{padding:11px 12px}.reader-detail-body .context-box{padding:14px}.reader-detail-body .evidence-card{padding:14px}.reader-detail-body .postcard-art,.reader-detail-body .faux-video{min-height:110px}
+  .reader-nav{padding-bottom:12px}.reader-nav .nav-btn{flex:1;padding:11px 12px}
+
+  /* Old technical surfaces stay hidden in default mobile reading. */
+  .chapter-rail,.chapter-intro,.intro-card,.reader-principle,.ribbon{display:none!important}
+}
+
+
+/* V0.8.5 desktop month view: keep the book metaphor, but let the calendar be the whole monthly overview.
+   The hand-journal directory remains a mobile reading aid instead of occupying the desktop right page. */
+@media (min-width:701px){
+  .opened.view-month{width:min(92vw,1180px)}
+  .opened.view-month .book{grid-template-columns:1fr;max-width:1180px;margin:0 auto}
+  .opened.view-month .gutter,
+  .opened.view-month .page.right{display:none!important}
+  .opened.view-month .page.left{border-radius:22px;min-height:760px;padding:38px 42px 52px}
+  .opened.view-month .month-head{align-items:center;margin-bottom:20px}
+  .opened.view-month .month-head p{display:none}
+  .opened.view-month .month-progress,
+  .opened.view-month .month-special,
+  .opened.view-month .legend,
+  .opened.view-month .rule,
+  .opened.view-month .chapter-turn,
+  .opened.view-month .corner-note{display:none!important}
+  .opened.view-month .calendar{grid-template-columns:repeat(7,minmax(0,1fr));gap:10px}
+  .opened.view-month .day{min-height:112px}
+  .opened.view-month .day label{font-size:12px;line-height:1.35}
+  .opened.view-month .day.has-template::after{display:none}
+}
+
+/* V0.8.5: screenshots/documents should be readable as complete records instead of being cropped like photos. */
+.polaroid.media-frame-contain,.gallery-photo.media-frame-contain{background:#fffdf9}
+.polaroid img.media-contain{height:auto;max-height:620px;object-fit:contain;background:#fff}
+.gallery-photo img.media-contain{height:auto;max-height:480px;object-fit:contain;background:#fff}
+@media (max-width:700px){
+  .polaroid img.media-contain,.gallery-photo img.media-contain{height:auto!important;max-height:none!important;object-fit:contain!important}
+}
