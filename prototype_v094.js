@@ -2,7 +2,7 @@ const modeConfig = {
   later_public: {cardLabel:'后续公开记录',small:'LATER PUBLIC · 后续公开',heading:'后来，这件事又被看见了。',summary:'现实里先发生，之后才在社交平台再次被看见。',chip:'现实日 ≠ 公开日'},
   same_day_public: {cardLabel:'当日公开记录',small:'SAME-DAY PUBLIC · 当日公开',heading:'这件事在当天就公开了。',summary:'现实发生或互动发生与公开可见基本同步。',chip:'节点日 ≈ 公开日'},
   ephemeral_story: {cardLabel:'限时日常记录',small:'EPHEMERAL STORY · 限时日常',heading:'这件事主要留在限时日常里。',summary:'不是没有记录，而是公开痕迹主要存在于短时内容。',chip:'限时 / 非长期挂载'},
-  archive_only: {cardLabel:'待归档公开碎片',small:'PUBLIC ARCHIVE · 待归档',heading:'这部分先不要急着贴回现实日期。',summary:'只知道何时公开，不知道应该贴回哪一天时，先收在档案袋。',chip:'暂不回贴'}
+  archive_only: {cardLabel:'补充记录',small:'PUBLIC RECORD · 补充记录',heading:'这条记录先单独留下。',summary:'只知道何时公开、还不能确认实际发生日期时，先不强行放回某一天。',chip:'日期待确认'}
 };
 
 const nodeTypeConfig = {
@@ -14,11 +14,17 @@ const nodeTypeConfig = {
 
 
 const readerMonthMeta = {
+  '2026-04':{
+    eyebrow:'CHAPTER 04 · APRIL',
+    title:'四月 · 日子开始变得密起来',
+    lead:'一日店长、外出、酒馆与地铁、官宣、评论互动和第一条双人共创，让四月第一次适合用一整张月历来看。',
+    note:'四月开始适合用一整张日历阅读；较轻的补充记录不会抢在主事件前面。'
+  },
   '2026-05':{
     eyebrow:'CHAPTER 05 · MAY',
     title:'五月 · 夏天开始有了形状',
     lead:'从一些很轻的小互动、直播和出行开始，五月慢慢被贴成了第一章。',
-    note:'这一章先读故事；不确定的时间关系会留在「档案依据」里。'
+    note:'这一章先读故事；不确定的时间关系会留在「记录依据」里。'
   },
   '2026-06':{
     eyebrow:'CHAPTER 06 · JUNE',
@@ -84,15 +90,24 @@ function readerFactualStory(e){
 }
 
 function readerProfile(e){
-  const custom=readerProfiles[e.key]||{};
+  const custom=readerProfiles[e.reader_profile_key||e.key]||{};
+  const masterStory=e.master_record?`${e.master_record.date_label||rangeLabel(e)}，${e.master_record.summary||e.master_record.title}。`.replace(/。。$/,'。'):'';
   return {
-    story:custom.story||readerFactualStory(e),
+    story:custom.story||masterStory||readerFactualStory(e),
     note:custom.note||readerEssentialNote(e),
     quote:custom.quote||''
   };
 }
 
 function readerEssentialNote(e){
+  if(e.master_relations?.length){
+    const source=e.master_relations.find(r=>r.type==='later_public_of');
+    if(source) return `${rangeLabel(e)} 是这条公开内容的时间；它回连 ${source.date} 的「${source.title}」。`;
+    const later=e.master_relations.filter(r=>r.type==='later_public');
+    if(later.length) return `${rangeLabel(e)} 是现实事件时间；${later.map(r=>`${r.date}「${r.title}」`).join('、')}作为后续公开记录。`;
+    const interaction=e.master_relations.find(r=>r.type==='interaction_on');
+    if(interaction) return `${rangeLabel(e)} 记录互动发生时间；互动发生在「${interaction.title}」相关公开内容下。`;
+  }
   const unknown=(e.time_anchors||[]).find(a=>/unknown|未知|待确认|不.*推|不可/.test(`${a.value||''} ${a.note||''}`));
   if(unknown) return `${unknown.label}：${unknown.value}。${unknown.note||''}`;
   if(e.evidence_mode==='later_public'){
@@ -192,7 +207,7 @@ const mayData = {
     {
       key:'barwalk_20260520_21',node_type:'real_event',chapter:'PART 06',layout_type:'night_walk_spread',evidence_mode:'ephemeral_story',title:'小酒馆 · 凌晨散步',short_title:'小酒馆 / 散步',tagline:'跨夜现实事件 + 限时日常',priority:'P0',range:[20,21],year:2026,
       hero:{type:'image',src:'media/2026/05/0520-21_bar_walk/bar_frame.jpg',caption:'05.20 · 小酒馆夜晚记录'},
-      gallery:[{src:'media/2026/05/0520-21_bar_walk/walk_frame.jpg',caption:'05.21 凌晨散步'},{src:'media/2026/05/0520-21_bar_walk/blue-story.jpg',caption:'同晚限时氛围截图'}],
+      gallery:[{src:'media/2026/05/0520-21_bar_walk/walk_frame.jpg',caption:'05.21 凌晨散步'}],
       left_intro:'现实里跨夜发生的小事件，公开痕迹主要存在于限时日常。',
       time_anchors:[{label:'现实发生时间',value:'05.20–05.21',note:'跨零点但视作同一篇夜间记录。',tone:'pink'},{label:'公开方式',value:'限时日常',note:'story-like 内容。',tone:'yellow'}],
       fact_memos:[{type:'pink',title:'现实主轴：',text:'小酒馆 → 凌晨散步。'},{type:'blue',title:'素材：',text:'已接入酒馆、散步与蓝调限时图。'}],
@@ -359,15 +374,15 @@ const juneData = {
       reading_logic:'把“公开”与“拍摄”分开，是六月对五月时间模型的第一次真正压力测试。'
     },
     {
-      key:'magazine_shoot_20260610',node_type:'real_event',chapter:'JUN 05C',layout_type:'shooting_spread',evidence_mode:'later_public',title:'杂志拍摄 · 具体刊物暂不强绑',short_title:'06.10 杂志拍摄',tagline:'同日节点 ③ · later-public 在 07.15',priority:'P0',range:[10],year:2026,status:'confirmed',date_precision:'exact',confidence:'confirmed',
-      hero:{type:'placeholder',stamp:'MAG',caption:'06.10 · 杂志拍摄（骨架先落位）'},
-      left_intro:'根据最新人工核对，07.15 首饰盒发布的杂志拍摄花絮实际拍于 06.10。这里新增一个独立 REAL EVENT，但暂时不强行绑定具体刊物名称。',
+      key:'magazine_shoot_20260610',node_type:'real_event',chapter:'JUN 05C',layout_type:'shooting_spread',evidence_mode:'later_public',title:'屁桃拍摄 · 具体物料待核',short_title:'06.10 屁桃拍摄',tagline:'同日节点 ③ · later-public 在 07.15',priority:'P0',range:[10],year:2026,status:'confirmed',date_precision:'exact',confidence:'confirmed',
+      hero:{type:'placeholder',stamp:'PITAO',caption:'06.10 · 屁桃拍摄'},
+      left_intro:'此前这一页误标为“杂志拍摄”。根据本轮人工核对，06.10 更适合记录为屁桃相关拍摄；具体物料名称继续留待后续确认。',
       time_anchors:[{label:'现实拍摄时间',value:'06.10',note:'人工核对确认。',tone:'pink'},{label:'后续公开',value:'07.15',note:'首饰盒“滴~花絮加载完毕”。',tone:'yellow'}],
-      fact_memos:[{type:'pink',title:'新增关系：',text:'06.10 杂志拍摄 → 07.15 首饰盒杂志花絮。'},{type:'blue',title:'谨慎处理：',text:'具体刊物身份暂不强绑，避免和 06.08 V中文拍摄混淆。'}],
-      real_timeline:[{date:'06.10',title:'杂志拍摄',text:'现实拍摄节点确认。'},{date:'07.15',title:'首饰盒花絮公开',text:'作为 later-public 回挂。',soft:true,tag:'LATER PUBLIC'}],
+      fact_memos:[{type:'pink',title:'关系：',text:'06.10 屁桃拍摄 → 07.15 首饰盒相关花絮。'},{type:'blue',title:'谨慎处理：',text:'具体物料名称暂不强绑；先修正“不是杂志拍摄”这一事实。'}],
+      real_timeline:[{date:'06.10',title:'屁桃拍摄',text:'现实拍摄节点。'},{date:'07.15',title:'首饰盒花絮公开',text:'作为 later-public 回挂。',soft:true,tag:'LATER PUBLIC'}],
       left_note:'shoot first, bts later ✎',
-      public_evidence:[{published_at:'2026-07-15',platform:'小发夹的首饰盒',title:'滴~花絮加载完毕',relation:'later public',text:'07.15 公开的杂志花絮，素材拍摄于 06.10。',art:'postcard'}],
-      reading_logic:'新增一个 06.10 的现实拍摄节点，使 07.15 的花絮可以有正确的现实来源。'
+      public_evidence:[{published_at:'2026-07-15',platform:'小发夹的首饰盒',title:'滴~花絮加载完毕',relation:'later public',text:'07.15 公开的屁桃相关拍摄花絮，素材拍摄于 06.10。',art:'postcard'}],
+      reading_logic:'06.10 先按屁桃相关拍摄记录；07.15 的公开花絮作为 later-public 回挂。'
     },
     {
       key:'life_love_live_20260611',node_type:'real_event',chapter:'JUN 06A',layout_type:'live_spread',evidence_mode:'same_day_public',title:'“生命自由爱”直播',short_title:'生命自由爱直播',tagline:'同日节点 ① · 现实直播',priority:'P0',range:[11],year:2026,status:'confirmed',date_precision:'exact',confidence:'confirmed',
@@ -549,7 +564,7 @@ const julyData = {
     {key:'shu_post_20260712',node_type:'public_post',chapter:'JUL 10',layout_type:'daily_post_spread',evidence_mode:'same_day_public',title:'shu_coming · 好久不见🍃',short_title:'shu_coming 日常',tagline:'当日实时发生 / 发布',priority:'P0',range:[12],year:2026,status:'confirmed',date_precision:'exact',confidence:'confirmed',hero:{type:'placeholder',stamp:'SHU',caption:'07.12 · 好久不见🍃'},left_intro:'这条微博被人工确认是当日实时发生 / 发布，所以可以直接把 07.12 当作节点时间。',time_anchors:[{label:'现实 / 公开时间',value:'07.12',note:'当日实时。',tone:'pink'}],real_timeline:[{date:'07.12',title:'实时日常发布',text:'当天发生并公开。'}],left_note:'same-day diary 🍃',public_evidence:[{published_at:'2026-07-12',platform:'WEIBO · shu_coming',title:'好久不见🍃',relation:'same-day public',text:'当日实时节点。',art:'postcard'}],reading_logic:'当现实与公开能确认在同一天时，可直接放在同一章节。'},
     {key:'v_public_20260714',node_type:'public_post',chapter:'JUL 11A',layout_type:'magazine_release_spread',evidence_mode:'later_public',title:'V Generation《情愫四序》正式公开 / 开售 / 采访',short_title:'V 正式公开',tagline:'同日节点 ① · later-public of 06.08',priority:'P0',range:[14],year:2026,status:'confirmed',date_precision:'exact',confidence:'confirmed',hero:{type:'image',src:'media/2026/07/0714_v_public/fxg-repost.jpg',caption:'07.14 · V Generation 相关公开 · 法宣阁转发'},gallery:[{src:'media/2026/07/0714_v_public/hjs-repost.jpg',caption:'07.14 · 贺嘉述转发'}],left_intro:'不单列面向粉丝的数据准备 / 预热；跨月关系从 06.08 拍摄直接连接到 07.14 正式公开。',time_anchors:[{label:'现实拍摄',value:'06.08',note:'V中文拍摄节点。',tone:'yellow'},{label:'正式公开',value:'07.14',note:'封面 / 开售 / 采访集中公开。',tone:'pink'}],fact_memos:[{type:'pink',title:'正式闭环：',text:'06.08 REAL EVENT → 07.14 PUBLIC POST。'}],real_timeline:[{date:'06.08',title:'V中文拍摄',text:'现实素材生成。'},{date:'07.14',title:'正式公开',text:'later-public。',soft:true,tag:'LATER PUBLIC'}],left_note:'June shoot → July cover ✦',context_box:{small:'CROSS-MONTH · 跨月闭环',title:'V中文这一条现在正式接通。',text:'06.08 的拍摄不再写“July 待整理”；07.14 成为明确的 later-public 节点。',items:[{label:'来源章节',value:'June · 06.08 V中文拍摄'},{label:'公开章节',value:'July · 07.14 正式公开'}]},public_evidence:[{published_at:'2026-07-14',platform:'V中文 / WEIBO',title:'情愫四序正式公开',relation:'later public',text:'回挂 06.08 V中文拍摄。',art:'postcard'}],reading_logic:'只保留真正正式公开，不把宣发准备预热做成独立主节点。'},
     {key:'live_20260714',node_type:'real_event',chapter:'JUL 11B',layout_type:'live_spread',evidence_mode:'same_day_public',title:'07.14 双人直播',short_title:'07.14 直播',tagline:'同日节点 ② · 现实直播',priority:'P0',range:[14],year:2026,status:'confirmed',date_precision:'exact',confidence:'confirmed',hero:{type:'image',src:'media/2026/07/0714_live/cover.JPG',caption:'07.14 · 双人直播'},left_intro:'V 正式公开当天同时还有一场直播，因此 07.14 使用同日多节点而不是合并。',time_anchors:[{label:'直播发生时间',value:'07.14',note:'confirmed。',tone:'pink'}],real_timeline:[{date:'07.14',title:'双人直播',text:'现实直播节点。'}],left_note:'same date, another node ✦',public_evidence:[{published_at:'2026-07-14',platform:'LIVE',title:'双人直播',relation:'same-day public',text:'直播同步公开。',art:'video'}],reading_logic:'07.14 的杂志公开与直播是两个独立节点。'},
-    {key:'mag_bts_20260715',node_type:'public_post',chapter:'JUL 12',layout_type:'bts_spread',evidence_mode:'later_public',title:'首饰盒 · 杂志拍摄花絮',short_title:'杂志花絮',tagline:'实拍 06.10 · 07.15 后续公开',priority:'P0',range:[15],year:2026,status:'confirmed',date_precision:'exact',confidence:'confirmed',hero:{type:'image',src:'media/2026/07/0715_mag_bts/box-post.jpg',caption:'07.15 · 首饰盒杂志拍摄花絮原帖'},gallery:[{src:'media/2026/07/0715_mag_bts/video-frame.jpg',caption:'07.15 · 花絮视频画面'},{src:'media/2026/07/0715_mag_bts/hjs-post.jpg',caption:'07.15 · 贺嘉述同日微博'}],left_intro:'花絮公开在 07.15，但素材实际拍摄于 06.10；具体刊物暂时不强绑，避免误并到 06.08 V中文。',time_anchors:[{label:'实际拍摄时间',value:'06.10',note:'人工核对确认。',tone:'yellow'},{label:'花絮公开时间',value:'07.15',note:'首饰盒发布。',tone:'pink'}],real_timeline:[{date:'06.10',title:'杂志拍摄',text:'现实节点。'},{date:'07.15',title:'花絮公开',text:'later-public。',soft:true,tag:'LATER PUBLIC'}],left_note:'June 10 → July 15 ✎',public_evidence:[{published_at:'2026-07-15',platform:'小发夹的首饰盒',title:'滴~花絮加载完毕',relation:'later public',text:'素材拍摄于 06.10。',art:'video'}],reading_logic:'建立 06.10 杂志拍摄与 07.15 花絮的跨月关系。'},
+    {key:'mag_bts_20260715',node_type:'public_post',chapter:'JUL 12',layout_type:'bts_spread',evidence_mode:'later_public',title:'首饰盒 · 屁桃拍摄花絮',short_title:'屁桃花絮',tagline:'实拍 06.10 · 07.15 后续公开',priority:'P0',range:[15],year:2026,status:'confirmed',date_precision:'exact',confidence:'confirmed',hero:{type:'image',src:'media/2026/07/0715_mag_bts/box-post.jpg',caption:'07.15 · 首饰盒屁桃拍摄花絮原帖'},gallery:[{src:'media/2026/07/0715_mag_bts/video-frame.jpg',caption:'07.15 · 花絮视频画面'},{src:'media/2026/07/0715_mag_bts/hjs-post.jpg',caption:'07.15 · 贺嘉述同日微博'}],left_intro:'花絮公开在 07.15，但素材实际拍摄于 06.10；本轮已从“杂志拍摄”校正为屁桃相关拍摄。',time_anchors:[{label:'实际拍摄时间',value:'06.10',note:'人工核对确认。',tone:'yellow'},{label:'花絮公开时间',value:'07.15',note:'首饰盒发布。',tone:'pink'}],real_timeline:[{date:'06.10',title:'屁桃拍摄',text:'现实节点。'},{date:'07.15',title:'花絮公开',text:'later-public。',soft:true,tag:'LATER PUBLIC'}],left_note:'June 10 → July 15 ✎',public_evidence:[{published_at:'2026-07-15',platform:'小发夹的首饰盒',title:'滴~花絮加载完毕',relation:'later public',text:'素材拍摄于 06.10。',art:'video'}],reading_logic:'建立 06.10 屁桃拍摄与 07.15 花絮的跨月关系。'},
     {key:'qingdao_teaser_20260717',node_type:'public_post',chapter:'JUL 13A',layout_type:'shortfilm_spread',evidence_mode:'later_public',title:'青岛小短片预告 / 两人同主题微博',short_title:'青岛短片预告',tagline:'同日节点 ① · 实拍 06.25–27',priority:'P0',range:[17],year:2026,status:'confirmed',date_precision:'exact',confidence:'confirmed',hero:{type:'image',src:'media/2026/07/0717_qingdao_teaser/fxg-weibo.jpg',caption:'07.17 · 法宣阁青岛小短片预告'},gallery:[{src:'media/2026/07/0717_qingdao_teaser/hjs-weibo.jpg',caption:'07.17 · 贺嘉述青岛短片预告'}],left_intro:'两人的短片预告属于青岛小短片，实际拍摄在 06.25–27 青岛拍摄期。',time_anchors:[{label:'拍摄区间',value:'06.25–06.27',note:'青岛。',tone:'yellow'},{label:'预告公开',value:'07.17',note:'两人同主题微博。',tone:'pink'}],real_timeline:[{date:'06.25–27',title:'青岛拍摄',text:'现实素材生成。'},{date:'07.17',title:'短片预告',text:'later-public。',soft:true,tag:'LATER PUBLIC'}],left_note:'Qingdao teaser ↩',public_evidence:[{published_at:'2026-07-17',platform:'WEIBO / SHORT TEASER',title:'两人短片预告',relation:'later public',text:'来自青岛拍摄期。',art:'video'}],reading_logic:'青岛拍摄形成一个跨月素材源，7 月可以有多条 later-public。'},
     {key:'workday_post_20260717',node_type:'public_post',chapter:'JUL 13B',layout_type:'daily_post_spread',evidence_mode:'same_day_public',title:'首饰盒 · 是一个普通的工作日',short_title:'普通工作日',tagline:'同日节点 ② · 拍摄日 unknown',priority:'P0',range:[17],year:2026,status:'confirmed',date_precision:'exact',confidence:'confirmed',hero:{type:'placeholder',stamp:'WORK',caption:'07.17 · 是一个普通的工作日'},left_intro:'公开日在 07.17，但实际拍摄日无法确认，所以不和青岛短片预告自动绑定。',time_anchors:[{label:'公开时间',value:'07.17',note:'confirmed。',tone:'pink'},{label:'实际拍摄',value:'unknown',note:'不强行归到青岛或 07.17。',tone:'blue'}],real_timeline:[{date:'07.17',title:'工作日内容公开',text:'公开节点。'}],left_note:'unknown shoot stays unknown ✎',public_evidence:[{published_at:'2026-07-17',platform:'小发夹的首饰盒',title:'是一个普通的工作日',relation:'same-day public node',text:'只锁公开日。',art:'postcard'}],reading_logic:'同日出现的两条内容也不意味着它们来自同一拍摄日。'},
     {key:'birthday_mall_20260718',node_type:'real_event',chapter:'JUL 14A',layout_type:'event_spread',evidence_mode:'same_day_public',title:'法宣阁生日粉丝应援 · 商场现场',short_title:'生日应援现场',tagline:'同日节点 ① · 现实活动',priority:'P0',range:[18],year:2026,status:'confirmed',date_precision:'exact',confidence:'confirmed',hero:{type:'placeholder',stamp:'BDAY',caption:'07.18 · 粉丝生日应援现场'},left_intro:'粉丝为法宣阁布置生日应援商场；两人先给粉丝购买约 50 杯奶茶，下午到现场。',time_anchors:[{label:'现实发生时间',value:'07.18',note:'confirmed。',tone:'pink'},{label:'同日晚间动线',value:'北京 → 杭州',note:'仅保存城市级 P1。',tone:'yellow'}],fact_memos:[{type:'pink',title:'现场前：',text:'两人给粉丝购买约 50 杯奶茶。'},{type:'blue',title:'隐私边界：',text:'航班与精确时刻不进入手账。'}],real_timeline:[{date:'07.18',title:'生日应援商场现场',text:'下午到达粉丝布置现场。'},{date:'07.18 later',title:'北京 → 杭州',text:'只保留城市级 P1。',soft:true,tag:'P1'}],left_note:'birthday day ♡',public_evidence:[{published_at:'2026-07-18',platform:'PUBLIC / FAN EVENT',title:'生日应援现场公开记录',relation:'same-day public',text:'现实活动节点。',art:'postcard'}],reading_logic:'把粉丝应援现场作为现实节点，交通只做 P1 背景。'},
@@ -578,10 +593,291 @@ const julyData = {
   public_archive:[]
 };
 
-const monthStore = {'2026-05':mayData,'2026-06':juneData,'2026-07':julyData};
-const monthOrder = ['2026-05','2026-06','2026-07'];
-let currentMonthKey='2026-05';
-let currentEventKey=mayData.events[0].key;
+
+/* --------------------------------------------------------------------------
+   V0.8.8 · MASTER-DATA CALENDAR ADAPTER
+   April 2026 is generated at runtime from window.FAJIA_TIMELINE_MASTER.
+   May–July deliberately remain on the stable legacy renderer in phase 2.
+   -------------------------------------------------------------------------- */
+function masterDateDays(e, periodKey){
+  const parse=v=>{const m=String(v||'').match(/^(\d{4})-(\d{2})-(\d{2})$/);return m?{y:+m[1],m:+m[2],d:+m[3]}:null;};
+  const a=parse(e.date_start),b=parse(e.date_end)||a;
+  const pm=String(periodKey).match(/^(\d{4})-(\d{2})$/); if(!a||!pm)return [];
+  const y=+pm[1],m=+pm[2]; if(a.y!==y||a.m!==m)return [];
+  const end=(b&&b.y===y&&b.m===m)?b.d:a.d; const out=[];
+  for(let d=a.d;d<=end;d++)out.push(d); return out;
+}
+function masterKindToLegacy(kind){
+  if(kind==='real_event')return 'real_event';
+  if(kind==='public_interaction')return 'public_interaction';
+  if(kind==='public_clue')return 'public_clue';
+  return 'public_post';
+}
+function masterRelationLabel(type){
+  return ({later_public:'后来公开',later_public_of:'来自此前事件',interaction_on:'互动发生在',paired_publication:'关联公开',event_update:'信息更新',later_public_inferred:'后来公开（推定）'})[type]||type||'关联';
+}
+function masterEventById(id){return (window.FAJIA_TIMELINE_MASTER?.events||[]).find(x=>x.id===id);}
+function masterResolvedRelations(e){
+  return (e.relations||[]).map(r=>{const t=masterEventById(r.target);return t?{type:r.type,target_id:r.target,title:t.title,date:t.date_label,period_key:t.period_key}:null;}).filter(Boolean);
+}
+function masterMediaFit(m){return m?.fit==='contain'||/(微博|抖音|小红书|母帖|截图|页面|论文|海报|公开帖|评论|行程|总览|日历)/.test(String(m?.caption||''))?'contain':'';}
+function masterBalancedSocial(local=[]){
+  if(local.length!==2)return false;
+  const caps=local.map(m=>String(m?.caption||''));
+  const social=caps.every(c=>/(微博|抖音|小红书|Instagram|IG)/i.test(c));
+  const both=caps.some(c=>/法宣阁/.test(c))&&caps.some(c=>/贺嘉述/.test(c));
+  return social&&both;
+}
+function masterEventToLegacy(e, idx, periodKey){
+  const days=masterDateDays(e,periodKey); const node=masterKindToLegacy(e.kind);
+  const sources=(e.sources||[]).filter(x=>x.url);
+  const rels=masterResolvedRelations(e);
+  const laterSource=rels.find(r=>r.type==='later_public_of');
+  const mode=(e.subtype==='later_public'||laterSource)?'later_public':'same_day_public';
+  const dateText=e.date_label||String(e.date_start||'').slice(5).replace('-','.');
+  const monthNo=String(periodKey||'').slice(5,7), monthCode=({04:'APR',05:'MAY',06:'JUN',07:'JUL',08:'AUG'})[monthNo]||'LOG';
+  const sourceEvidence=[];
+  const relationRows=rels.map(r=>({date:r.date,title:`${masterRelationLabel(r.type)} · ${r.title}`,text:'与当前节点存在时间关联。',soft:true,tag:masterRelationLabel(r.type)}));
+  const anchors=[{label:e.kind==='real_event'?'发生日期':'公开 / 互动日期',value:dateText,note:e.date_precision==='exact'?'日期可确认。':`精度：${e.date_precision||'unknown'}。`,tone:'pink'}];
+  if(e.location_general)anchors.push({label:'地点 / 动线',value:e.location_general,note:'只保留公开可确认的概括层级。',tone:'yellow'});
+  if(e.confidence && e.confidence!=='confirmed')anchors.push({label:'置信度',value:e.confidence,note:'保留不确定性，不写成确定事实。',tone:'blue'});
+  const local=e.local_media||[];
+  const heroMedia=local.find(m=>m.role==='hero')||local[0];
+  const hero=heroMedia?{type:'image',src:heroMedia.src,caption:heroMedia.caption||`${dateText} · ${e.title}`,...(masterMediaFit(heroMedia)?{fit:'contain'}:{})}:{type:'placeholder',stamp:node==='real_event'?monthCode:'NOTE',caption:`${dateText} · ${e.title}`};
+  const gallery=local.filter(m=>m!==heroMedia).map(m=>({src:m.src,caption:m.caption||'',...(masterMediaFit(m)?{fit:'contain'}:{})}));
+  const balanced_social=masterBalancedSocial(local);
+  return {
+    key:e.id,node_type:node,chapter:`${monthCode} ${String(idx+1).padStart(2,'0')}`,layout_type:'master_calendar_spread',evidence_mode:mode,
+    title:e.title,short_title:e.title,tagline:e.subtype||'',priority:'P0',range:days,year:+String(periodKey).slice(0,4),
+    status:e.confidence==='confirmed'?'confirmed':'draft',date_precision:e.date_precision||'exact',confidence:e.confidence||'confirmed',
+    hero, ...(gallery.length?{gallery}:{}),
+    left_intro:e.summary||`${dateText}，${e.title}。`,time_anchors:anchors,
+    fact_memos:[],real_timeline:[{date:dateText,title:e.title,text:e.summary||''},...relationRows],
+    left_note:'from master data ✦',public_evidence:sourceEvidence,
+    reading_logic:'这一页先保留已确认事实；来源、关系与不确定项放进记录依据。',
+    master_sources:sources,master_relations:rels,master_record:e,media_policy:e.media_policy||'',balanced_social,
+    related_events:rels.map(r=>({type:r.type,title:r.title,date:r.date,target_id:r.target_id,period_key:r.period_key})),
+    future_relation:undefined
+  };
+}
+function buildMasterMonthData(periodKey){
+  const master=window.FAJIA_TIMELINE_MASTER||{periods:[],events:[]};
+  const period=(master.periods||[]).find(p=>p.key===periodKey);
+  if(!period)return null;
+  const raw=(master.events||[]).filter(e=>e.period_key===periodKey&&e.display_mode!=='hidden_dev');
+  const main=raw.filter(e=>e.default_visible).sort((a,b)=>String(a.date_start).localeCompare(String(b.date_start))||a.title.localeCompare(b.title));
+  const archive=raw.filter(e=>!e.default_visible).sort((a,b)=>String(a.date_start).localeCompare(String(b.date_start)));
+  const events=main.map((e,i)=>masterEventToLegacy(e,i,periodKey)).filter(e=>e.range.length);
+  const public_archive=archive.map(e=>({published_at:e.date_start||'',platform:e.kind==='public_clue'?'公开线索':'补充记录',title:e.title,text:e.summary||'',url:e.sources?.[0]?.url||'',master_id:e.id}));
+  return {
+    month:{year:+period.start.slice(0,4),month:+period.start.slice(5,7),title:period.label},
+    meta:{key:periodKey,name:'April',num:'04',year:+period.start.slice(0,4),title:period.label,
+      lead:'四月开始进入单月高密度阶段。',rule:'先看主要事件；较轻的公开记录、城市级线索与待确认内容不会抢在前面。',corner:'April notes ✎',
+      rightTitle:'April 2026',introTitle:'April 2026',introText:'四月开始进入适合按月阅读的阶段。',chapterTitle:'April 手账目录',source_mode:'master'},
+    events,public_archive,source_mode:'master'
+  };
+}
+const aprilMasterData=buildMasterMonthData('2026-04');
+
+/* V0.8.9 · PHASE 3 — MAY MASTER CALENDAR + PRESENTATION OVERLAY
+   Facts come from timeline-master.js. Existing May layouts/media remain only as a presentation layer. */
+const mayPresentationMap={
+  site_comment_20260503:'comment_20260503',
+  site_study_20260510:'study_20260510',
+  site_littlehero_20260514:'littlehero_20260514',
+  site_live_20260514:'live_20260514',
+  site_live_20260517:'live_20260517',
+  site_tianjin_20260518_19:'tianjin_20260518_19',
+  site_barwalk_20260520_21:'barwalk_20260520_21',
+  site_live_20260523:'live_20260523',
+  site_festival_20260524:'festival_20260524',
+  site_live_20260525:'live_20260525',
+  site_youtube_20260529:'youtube_20260529',
+  site_live_20260531:'live_20260531'
+};
+function mayRichPresentation(e){
+  const legacyKey=mayPresentationMap[e.id];
+  return legacyKey?(mayData.events||[]).find(x=>x.key===legacyKey):null;
+}
+function mayEventToLegacy(e,idx){
+  const base=masterEventToLegacy(e,idx,'2026-05');
+  const rich=mayRichPresentation(e);
+  if(!rich)return base;
+  // Rich page controls visuals/layout only. Master Data controls identity, date, title, status, relations and sources.
+  const merged={...base,...rich};
+  merged.key=e.id;
+  merged.reader_profile_key=rich.key;
+  merged.chapter=`MAY ${String(idx+1).padStart(2,'0')}`;
+  merged.title=e.title; merged.short_title=e.title;
+  merged.tagline=e.subtype||rich.tagline||'';
+  merged.range=base.range; merged.year=base.year;
+  merged.status=base.status; merged.date_precision=base.date_precision; merged.confidence=base.confidence;
+  merged.master_sources=base.master_sources; merged.master_relations=base.master_relations; merged.master_record=e;
+  merged.related_events=base.related_events;
+  merged.media_policy=base.media_policy||''; merged.balanced_social=base.balanced_social||false;
+  // Prefer Master Data's local-media list when present, so the database remains the asset source of truth.
+  if((e.local_media||[]).length){
+    const local=e.local_media, heroMedia=local.find(m=>m.role==='hero')||local[0];
+    merged.hero={type:'image',src:heroMedia.src,caption:heroMedia.caption||rich.hero?.caption||'',...(masterMediaFit(heroMedia)?{fit:'contain'}:{})};
+    const gallery=local.filter(m=>m!==heroMedia).map(m=>({src:m.src,caption:m.caption||'',...(masterMediaFit(m)?{fit:'contain'}:{})}));
+    merged.media_policy=e.media_policy||base.media_policy||'';
+    merged.balanced_social=masterBalancedSocial(local);
+    if(gallery.length)merged.gallery=gallery; else delete merged.gallery;
+  }
+  return merged;
+}
+function buildMayMasterData(){
+  const master=window.FAJIA_TIMELINE_MASTER||{periods:[],events:[]};
+  const period=(master.periods||[]).find(p=>p.key==='2026-05'); if(!period)return null;
+  const raw=(master.events||[]).filter(e=>e.period_key==='2026-05'&&e.display_mode!=='hidden_dev');
+  const main=raw.filter(e=>e.default_visible).sort((a,b)=>String(a.date_start).localeCompare(String(b.date_start))||String(a.date_end||'').localeCompare(String(b.date_end||''))||a.title.localeCompare(b.title));
+  const archive=raw.filter(e=>!e.default_visible).sort((a,b)=>String(a.date_start).localeCompare(String(b.date_start)));
+  const events=main.map((e,i)=>mayEventToLegacy(e,i)).filter(e=>e.range.length);
+  const public_archive=archive.map(e=>({published_at:e.date_start||'',platform:e.kind==='public_clue'?'公开线索':'补充记录',title:e.title,text:e.summary||'',url:e.sources?.[0]?.url||'',master_id:e.id}));
+  return {
+    month:{year:2026,month:5,title:'May 2026'},
+    meta:{key:'2026-05',name:'May',num:'05',year:2026,title:'May 2026',
+      lead:'五月开始进入高密度现实事件、公开互动与后续释出并行的阶段。',
+      rule:'按已确认的日期阅读；已有照片与手账版式继续保留。',corner:'May notes ✎',
+      rightTitle:'May 2026',introTitle:'May 2026',introText:'五月的日期、故事与照片会在同一章里继续展开。',chapterTitle:'May 手账目录',source_mode:'master+presentation'},
+    events,public_archive,source_mode:'master+presentation'
+  };
+}
+const mayMasterData=buildMayMasterData();
+
+/* V0.9.0 · PHASE 4 — JUNE MASTER CALENDAR + PRESENTATION OVERLAY
+   Facts come from timeline-master.js. Existing June layouts/media remain only as a presentation layer. */
+const junePresentationMap={
+  site_thesis_ack_20260601:'thesis_ack_20260601',
+  site_tolerance_live_20260603:'tolerance_live_20260603',
+  site_meet_live_20260606:'meet_live_20260606',
+  site_vshoot_20260608:'vshoot_20260608',
+  site_live_20260610:'live_20260610',
+  site_magazine_shoot_20260610:'magazine_shoot_20260610',
+  site_polaroid_post_20260610:'polaroid_post_20260610',
+  site_camping_material_20260611:'camping_material_20260611',
+  site_life_love_live_20260611:'life_love_live_20260611',
+  site_life_love_posts_20260611:'life_love_posts_20260611',
+  site_ip_clue_20260612:'ip_clue_20260612',
+  site_hangzhou_live_20260614:'hangzhou_live_20260614',
+  site_arena_shoot_20260616_17:'arena_shoot_20260616_17',
+  site_story_back_20260617:'story_back_20260617',
+  site_perfume_live_20260619:'perfume_live_20260619',
+  site_live_20260621:'live_20260621',
+  site_answer_you_20260623:'answer_you_20260623',
+  site_qingdao_live_20260625:'qingdao_live_20260625',
+  site_qingdao_shoot_20260625_27:'qingdao_shoot_20260625_27',
+  site_qingdao_walk_20260626:'qingdao_walk_20260626'
+};
+function juneRichPresentation(e){
+  const legacyKey=junePresentationMap[e.id];
+  return legacyKey?(juneData.events||[]).find(x=>x.key===legacyKey):null;
+}
+function juneEventToLegacy(e,idx){
+  const base=masterEventToLegacy(e,idx,'2026-06');
+  const rich=juneRichPresentation(e);
+  if(!rich)return base;
+  const merged={...base,...rich};
+  merged.key=e.id;
+  merged.reader_profile_key=rich.key;
+  merged.chapter=`JUN ${String(idx+1).padStart(2,'0')}`;
+  merged.title=e.title; merged.short_title=e.title;
+  merged.tagline=e.subtype||rich.tagline||'';
+  merged.range=base.range; merged.year=base.year;
+  merged.status=base.status; merged.date_precision=base.date_precision; merged.confidence=base.confidence;
+  merged.master_sources=base.master_sources; merged.master_relations=base.master_relations; merged.master_record=e;
+  merged.related_events=base.related_events;
+  merged.media_policy=base.media_policy||''; merged.balanced_social=base.balanced_social||false;
+  // Master Data remains the asset source of truth; rich June layouts only decide composition.
+  if((e.local_media||[]).length){
+    const local=e.local_media, heroMedia=local.find(m=>m.role==='hero')||local[0];
+    merged.hero={type:'image',src:heroMedia.src,caption:heroMedia.caption||rich.hero?.caption||'',...(masterMediaFit(heroMedia)?{fit:'contain'}:{})};
+    const gallery=local.filter(m=>m!==heroMedia).map(m=>({src:m.src,caption:m.caption||'',...(masterMediaFit(m)?{fit:'contain'}:{})}));
+    merged.media_policy=e.media_policy||base.media_policy||'';
+    merged.balanced_social=masterBalancedSocial(local);
+    if(gallery.length)merged.gallery=gallery; else delete merged.gallery;
+  }
+  return merged;
+}
+function buildJuneMasterData(){
+  const master=window.FAJIA_TIMELINE_MASTER||{periods:[],events:[]};
+  const period=(master.periods||[]).find(p=>p.key==='2026-06'); if(!period)return null;
+  const raw=(master.events||[]).filter(e=>e.period_key==='2026-06'&&e.display_mode!=='hidden_dev');
+  const main=raw.filter(e=>e.default_visible).sort((a,b)=>String(a.date_start).localeCompare(String(b.date_start))||String(a.date_end||'').localeCompare(String(b.date_end||''))||a.title.localeCompare(b.title));
+  const archive=raw.filter(e=>!e.default_visible).sort((a,b)=>String(a.date_start).localeCompare(String(b.date_start)));
+  const events=main.map((e,i)=>juneEventToLegacy(e,i)).filter(e=>e.range.length);
+  const public_archive=archive.map(e=>({published_at:e.date_start||'',platform:e.kind==='public_clue'?'公开线索':'补充记录',title:e.title,text:e.summary||'',url:e.sources?.[0]?.url||'',master_id:e.id}));
+  return {
+    month:{year:2026,month:6,title:'June 2026'},
+    meta:{key:'2026-06',name:'June',num:'06',year:2026,title:'June 2026',
+      lead:'六月开始把现实拍摄、直播、公开互动和七月后续公开真正连成一张关系网。',
+      rule:'六月发生的素材与七月的后续公开会分开记录，再用关系连接起来。',corner:'June notes ✎',
+      rightTitle:'June 2026',introTitle:'June 2026',introText:'这一章会同时看到真实发生与后来公开的时间差。',chapterTitle:'June 手账目录',source_mode:'public'},
+    events,public_archive,source_mode:'master+presentation'
+  };
+}
+const juneMasterData=buildJuneMasterData();
+
+/* V0.9.3 · PHASE 5 — MATERIAL PLACEMENT · PASS 2 CALENDAR + PRESENTATION OVERLAY
+   Facts come from timeline-master.js. The existing July scrapbook layouts/media remain only as a presentation layer.
+   This completes the April→July Master Calendar migration. */
+function julyRichPresentation(e){
+  const legacyKey=String(e.id||'').replace(/^site_/, '');
+  return (julyData.events||[]).find(x=>x.key===legacyKey)||null;
+}
+function julyEventToLegacy(e,idx){
+  const base=masterEventToLegacy(e,idx,'2026-07');
+  const rich=julyRichPresentation(e);
+  if(!rich)return base;
+  const merged={...base,...rich};
+  // Master Data owns identity/facts; rich July data only supplies composition and already-curated visuals.
+  merged.key=e.id;
+  merged.reader_profile_key=rich.key;
+  merged.chapter=`JUL ${String(idx+1).padStart(2,'0')}`;
+  merged.title=e.title; merged.short_title=e.title;
+  merged.tagline=e.subtype||rich.tagline||'';
+  merged.range=base.range; merged.year=base.year;
+  merged.status=base.status; merged.date_precision=base.date_precision; merged.confidence=base.confidence;
+  merged.master_sources=base.master_sources; merged.master_relations=base.master_relations; merged.master_record=e;
+  merged.related_events=base.related_events;
+  merged.media_policy=base.media_policy||''; merged.balanced_social=base.balanced_social||false;
+  // Prefer media declared in Master Data. Screenshot-like evidence stays uncropped.
+  if((e.local_media||[]).length){
+    const local=e.local_media, heroMedia=local.find(m=>m.role==='hero')||local[0];
+    merged.hero={type:'image',src:heroMedia.src,caption:heroMedia.caption||rich.hero?.caption||'',...(masterMediaFit(heroMedia)?{fit:'contain'}:{})};
+    const gallery=local.filter(m=>m!==heroMedia).map(m=>({src:m.src,caption:m.caption||'',...(masterMediaFit(m)?{fit:'contain'}:{})}));
+    merged.media_policy=e.media_policy||base.media_policy||'';
+    merged.balanced_social=masterBalancedSocial(local);
+    if(gallery.length)merged.gallery=gallery; else delete merged.gallery;
+  }
+  // Never let a legacy page hide the Master-derived relationship layer.
+  merged.master_relations=base.master_relations;
+  merged.related_events=base.related_events;
+  return merged;
+}
+function buildJulyMasterData(){
+  const master=window.FAJIA_TIMELINE_MASTER||{periods:[],events:[]};
+  const period=(master.periods||[]).find(p=>p.key==='2026-07'); if(!period)return null;
+  const raw=(master.events||[]).filter(e=>e.period_key==='2026-07'&&e.display_mode!=='hidden_dev');
+  const main=raw.filter(e=>e.default_visible).sort((a,b)=>String(a.date_start).localeCompare(String(b.date_start))||String(a.date_end||'').localeCompare(String(b.date_end||''))||a.title.localeCompare(b.title));
+  const archive=raw.filter(e=>!e.default_visible).sort((a,b)=>String(a.date_start).localeCompare(String(b.date_start)));
+  const events=main.map((e,i)=>julyEventToLegacy(e,i)).filter(e=>e.range.length);
+  const public_archive=archive.map(e=>({published_at:e.date_start||'',platform:e.kind==='public_clue'?'公开线索':'补充记录',title:e.title,text:e.summary||'',url:e.sources?.[0]?.url||'',master_id:e.id}));
+  return {
+    month:{year:2026,month:7,title:'July 2026'},
+    meta:{key:'2026-07',name:'July',num:'07',year:2026,title:'July 2026',
+      lead:'七月的直播、品牌、生日与出行更密集，也能看到六月素材在这个月继续被公开。',
+      rule:'按事件发生时间阅读；后续公开内容会保留回到源头事件的关系。',corner:'July notes ✎',
+      rightTitle:'July 2026',introTitle:'July 2026',introText:'同一天可以有不止一件事，跨月公开也会继续留下回声。',chapterTitle:'July 手账目录',source_mode:'public'},
+    events,public_archive,source_mode:'master+presentation'
+  };
+}
+const julyMasterData=buildJulyMasterData();
+const monthStore = {'2026-04':aprilMasterData,'2026-05':mayMasterData,'2026-06':juneMasterData,'2026-07':julyMasterData};
+const monthOrder = ['2026-04','2026-05','2026-06','2026-07'];
+let currentMonthKey='2026-04';
+let currentEventKey=aprilMasterData?.events[0]?.key||mayMasterData?.events[0]?.key||juneMasterData?.events[0]?.key||julyMasterData?.events[0]?.key||mayData.events[0].key;
+
 
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
@@ -597,7 +893,7 @@ function spread(mode){
   $$('.spread-view').forEach(v=>v.classList.toggle('hidden',v.dataset.spread!==mode));
   $$('.tabs button').forEach(b=>b.classList.toggle('active',b.dataset.view===mode));
   const opened=$('#opened');
-  if(opened){opened.classList.remove('view-month','view-day','view-public');opened.classList.add(`view-${mode}`);}
+  if(opened){opened.classList.remove('view-guide','view-month','view-day','view-public','view-timeline');opened.classList.add(`view-${mode}`);}
   window.scrollTo({top:0,behavior:'smooth'});
 }
 function countMediaAssets(data){let n=0;data.events.forEach(e=>{if(e.hero?.type==='image')n++;if(e.gallery)n+=e.gallery.length;});return n;}
@@ -664,7 +960,7 @@ function renderCalendar(){
   const data=currentData(),cal=$('#calendar'),{year,month}=data.month;
   cal.innerHTML=['MON','TUE','WED','THU','FRI','SAT','SUN'].map(x=>`<div class="weekday">${x}</div>`).join('');
   for(let i=0;i<mondayOffset(year,month);i++)cal.insertAdjacentHTML('beforeend','<div class="day blank"></div>');
-  const archiveByDay=Object.fromEntries(data.public_archive.map(a=>[parseInt(String(a.published_at).split('-')[2]),a]));
+  const archiveByDay={}; data.public_archive.forEach(a=>{const d=parseInt(String(a.published_at||'').split('-')[2]);if(!Number.isFinite(d))return;(archiveByDay[d] ||= []).push(a);});
   for(let d=1;d<=daysInMonth(year,month);d++){
     const matches=data.events.filter(e=>e.range.includes(d));
     const echoes=crossMonthEchoesForDay(d);
@@ -675,8 +971,9 @@ function renderCalendar(){
       cal.insertAdjacentHTML('beforeend',`<button class="day has-p0 has-template" data-event="${e.key}"><time>${String(d).padStart(2,'0')}</time><span class="event-dot node-${e.node_type}" aria-hidden="true"></span><label>${esc(e.short_title)}</label>${status}${echoHtml}</button>`);
     } else if(matches.length>1){
       cal.insertAdjacentHTML('beforeend',`<div class="day multi-day has-template"><time>${String(d).padStart(2,'0')}</time><span class="multi-count">${matches.length} 件</span><div class="node-stack">${matches.map(e=>`<button data-event="${e.key}" class="mini-node node-${e.node_type}">${esc(e.short_title)}</button>`).join('')}</div>${echoHtml}</div>`);
-    } else if(archiveByDay[d]){
-      cal.insertAdjacentHTML('beforeend',`<button class="day archive-only" data-archive-day="${d}"><time>${String(d).padStart(2,'0')}</time><span class="archive-chip">待归档</span><label>${esc(archiveByDay[d].title)}</label>${echoHtml}</button>`);
+    } else if(archiveByDay[d]?.length){
+      const arr=archiveByDay[d],label=arr.length>1?`${arr.length} 条补充记录`:arr[0].title;
+      cal.insertAdjacentHTML('beforeend',`<button class="day archive-only" data-archive-day="${d}"><time>${String(d).padStart(2,'0')}</time><span class="archive-chip">补充</span><label>${esc(label)}</label>${echoHtml}</button>`);
     } else if(echoes.length){
       cal.insertAdjacentHTML('beforeend',`<div class="day"><time>${String(d).padStart(2,'0')}</time>${echoHtml}</div>`);
     } else cal.insertAdjacentHTML('beforeend',`<button class="day"><time>${String(d).padStart(2,'0')}</time></button>`);
@@ -693,11 +990,22 @@ function renderChapterRail(){
 
 function renderHero(h){if(h?.type==='image')return `<figure class="polaroid ${h.fit==='contain'?'media-frame-contain':''}"><span class="photo-tape"></span><img class="${h.fit==='contain'?'media-contain':''}" src="${h.src}" alt="${esc(h.caption)}" loading="lazy" decoding="async"><figcaption>${esc(h.caption)}</figcaption></figure>`;return `<figure class="polaroid"><span class="photo-tape"></span><div class="fake-photo"><div><b>${esc(h?.stamp||'NOTE')}</b><span>${esc(h?.caption||'')}</span></div></div><figcaption>${esc(h?.caption||'placeholder')}</figcaption></figure>`;}
 function renderGallery(g=[]){return !g.length?'':`<div class="gallery-strip">${g.map(i=>`<figure class="gallery-photo ${i.fit==='contain'?'media-frame-contain':''}"><img class="${i.fit==='contain'?'media-contain':''}" src="${i.src}" alt="${esc(i.caption)}" loading="lazy" decoding="async"><figcaption>${esc(i.caption)}</figcaption></figure>`).join('')}</div>`;}
+function renderBalancedSocial(e){
+  const items=[e.hero,...(e.gallery||[])].filter(x=>x&&x.type!=='placeholder'&&x.src);
+  if(!items.length)return '';
+  return `<div class="balanced-social-grid">${items.map(i=>`<figure class="balanced-social-card"><img src="${i.src}" alt="${esc(i.caption||'')}" loading="lazy" decoding="async"><figcaption>${esc(i.caption||'')}</figcaption></figure>`).join('')}</div>`;
+}
+function renderEventMedia(e){
+  if(e.media_policy==='text_only')return `<div class="text-only-record"><small>TEXT RECORD · 文字记录</small><p>这一节点不设置图片占位，避免把私人行程做成视觉重点。</p></div>`;
+  if(e.balanced_social)return renderBalancedSocial(e);
+  return `${renderHero(e.hero)}${renderGallery(e.gallery)}`;
+}
 function renderTimeAnchors(a=[]){return !a.length?'':`<div class="time-anchors">${a.map(i=>`<div class="time-anchor tone-${i.tone||'pink'}"><div class="ta-label">${esc(i.label)}</div><div class="ta-value">${esc(i.value)}${i.note?`<span class="ta-note">${esc(i.note)}</span>`:''}</div></div>`).join('')}</div>`;}
 function renderMemos(a=[]){return a.map(m=>`<div class="memo memo-${m.type||'pink'}"><b>${esc(m.title)}</b><span>${esc(m.text)}</span></div>`).join('');}
 function renderTimeline(a=[]){return a.map(i=>`<div class="${i.soft?'soft':''}"><time>${esc(i.date)}</time><p><b>${esc(i.title)}</b><br>${esc(i.text)}</p>${i.tag?`<span>${esc(i.tag)}</span>`:''}</div>`).join('');}
 function evidenceArt(type){return type==='postcard'?`<div class="postcard-art"><div><span>PUBLIC</span><i>record note</i><em>♡</em></div></div>`:`<div class="faux-video"><div><span>▶</span><small>PUBLIC CLIP</small></div></div>`;}
-function renderEvidence(a=[]){return !a.length?`<div class="no-evidence"><b>这页暂时没有更多公开记录。</b><span>框架先保留，后面补素材时再继续长出来。</span></div>`:a.map(i=>`<article class="evidence-card"><span class="pin">●</span><div class="e-date"><b>${esc(fmtMonthDay(i.published_at)||i.published_at)}</b><small>${esc(i.platform)}</small></div>${evidenceArt(i.art)}<h3>${esc(i.title)}</h3><p>${esc(i.text)}</p><footer><b>${esc(i.relation)}</b></footer></article>`).join('');}
+function renderEvidence(a=[]){return !a.length?`<div class="no-evidence"><b>这页暂时没有更多公开记录。</b><span>框架先保留，后面补素材时再继续长出来。</span></div>`:a.map(i=>`<article class="evidence-card"><span class="pin">●</span><div class="e-date"><b>${esc(fmtMonthDay(i.published_at)||i.published_at)}</b><small>${esc(i.platform)}</small></div>${evidenceArt(i.art)}<h3>${esc(i.title)}</h3><p>${esc(i.text)}</p><footer><b>${esc(i.relation)}</b>${i.url?`<a href="${esc(i.url)}" target="_blank" rel="noopener noreferrer">打开来源 ↗</a>`:''}</footer></article>`).join('');}
+function renderMasterSources(e){const a=e.master_sources||[];if(!a.length)return '';return `<section class="master-source-box"><small>PUBLIC SOURCES · 公开来源</small><div>${a.map((s,i)=>`<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer"><b>${i+1}. ${esc(s.label||'公开来源')}</b><span>打开原始链接 ↗</span></a>`).join('')}</div></section>`;}
 function renderContextBox(b){return !b?'':`<div class="context-box"><div class="context-head"><small>${esc(b.small)}</small><h3>${esc(b.title)}</h3><p>${esc(b.text)}</p></div><div class="source-grid">${(b.items||[]).map(i=>`<div class="source-item"><b>${esc(i.label)}</b><span>${esc(i.value)}</span></div>`).join('')}</div>${b.note?`<div class="context-note">${esc(b.note)}</div>`:''}</div>`;}
 function sameDayNeighbors(evt){return currentData().events.filter(e=>e.key!==evt.key&&e.range.some(d=>evt.range.includes(d)));}
 function renderSameDayLinks(evt){const peers=sameDayNeighbors(evt);if(!peers.length)return '';return `<div class="same-day-box"><small>SAME DAY / OVERLAP · 同日还有</small><div>${peers.map(e=>`<button data-peer="${e.key}">${esc((nodeTypeConfig[e.node_type]||nodeTypeConfig.public_post).short)} · ${esc(e.short_title)}</button>`).join('')}</div></div>`;}
@@ -714,8 +1022,7 @@ function renderFutureRelation(evt){
 
 
 function renderReaderArchiveDetails(e){
-  const n=nodeTypeConfig[e.node_type]||nodeTypeConfig.public_post,m=modeConfig[e.evidence_mode];
-  return `<details class="reader-details"><summary><span>查看档案依据</span><small>时间、来源与不确定项</small></summary><div class="reader-detail-body">${renderTimeAnchors(e.time_anchors)}${renderContextBox(e.context_box)}${renderEvidence(e.public_evidence)}${e.real_timeline?.length?`<div class="mini-timeline">${renderTimeline(e.real_timeline)}</div>`:''}<details class="debug-details"><summary>开发字段</summary><div class="debug-grid"><span>node_type</span><b>${esc(e.node_type||'')}</b><span>evidence_mode</span><b>${esc(e.evidence_mode||'')}</b><span>layout</span><b>${esc(e.layout_type||'')}</b><span>status</span><b>${esc(e.status||'—')}</b><span>confidence</span><b>${esc(e.confidence||'—')}</b></div></details></div></details>`;
+  return `<details class="reader-details"><summary><span>查看记录依据</span><small>时间与公开来源</small></summary><div class="reader-detail-body">${renderTimeAnchors(e.time_anchors)}${renderContextBox(e.context_box)}${e.master_sources?.length?'':renderEvidence(e.public_evidence)}${renderMasterSources(e)}${e.real_timeline?.length?`<div class="mini-timeline">${renderTimeline(e.real_timeline)}</div>`:''}</div></details>`;
 }
 
 function renderReaderPeers(e){
@@ -725,6 +1032,7 @@ function renderReaderPeers(e){
 
 function renderReaderRelations(e){
   const parts=[];
+  if(e.related_events?.length){const rs=e.related_events.filter(r=>['later_public','later_public_of','interaction_on','paired_publication'].includes(r.type)).slice(0,4);if(rs.length)parts.push(`<div class="reader-relation master-link"><small>关联</small><b>${rs.map(r=>`${esc(r.date)} · ${esc(r.title)}`).join(' / ')}</b><span>这几条记录在时间上彼此关联。</span></div>`);}
   if(e.future_relation) parts.push(`<div class="reader-relation future"><small>后来</small><b>${esc(e.future_relation.title)}</b><span>${esc(e.future_relation.text||'')}</span></div>`);
   if(e.evidence_mode==='later_public' && (e.public_evidence||[]).length){
     const p=e.public_evidence[0]; parts.push(`<div class="reader-relation later"><small>后来被看见</small><b>${esc(fmtMonthDay(p.published_at)||p.published_at)} · ${esc(p.title)}</b><span>${esc(p.text||'')}</span></div>`);
@@ -738,16 +1046,30 @@ function renderDaySpread(){
   const e=findEvent(currentEventKey);if(!e)return;
   const data=currentData(),rp=readerProfile(e);
   const dateLabel=e.range.length>1?`${String(e.range[0]).padStart(2,'0')}–${String(e.range.at(-1)).padStart(2,'0')}`:String(e.range[0]).padStart(2,'0');
-  $('#dayLeft').innerHTML=`<article class="reader-page"><div class="reader-top"><button class="back-btn" id="backToMonth">← ${data.meta.name} 总览</button><span>${esc(readerKind(e))}</span></div><header class="reader-header"><div class="reader-date"><b>${dateLabel}</b><small>${data.meta.name.toUpperCase()} ${e.year}</small></div><div><small>${esc(e.chapter)}</small><h1>${esc(e.title)}</h1></div></header><p class="reader-story">${esc(rp.story)}</p>${renderHero(e.hero)}${renderGallery(e.gallery)}<aside class="reader-note"><small>时间备注</small><p>${esc(rp.note)}</p></aside>${rp.quote?`<p class="reader-quote">${esc(rp.quote)}</p>`:''}${renderReaderPeers(e)}${renderReaderRelations(e)}<div class="mobile-archive-details">${renderReaderArchiveDetails(e)}</div><nav class="reader-nav"><button class="nav-btn" id="prevEvent">← 上一页</button><button class="nav-btn" id="nextEvent">下一页 →</button></nav></article>`;
-  $('#dayRight').innerHTML=`<article class="reader-archive-page"><header><small>ARCHIVE NOTE · 档案注释</small><h2>${esc(e.title)}</h2><p>${esc(rp.note)}</p></header>${renderReaderRelations(e)}${renderReaderArchiveDetails(e)}<div class="stamp-round">${data.meta.name.toUpperCase()}<br>LOG</div></article>`;
+  $('#dayLeft').innerHTML=`<article class="reader-page"><div class="reader-top"><button class="back-btn" id="backToMonth">← ${data.meta.name} 总览</button><span>${esc(readerKind(e))}</span></div><header class="reader-header"><div class="reader-date"><b>${dateLabel}</b><small>${data.meta.name.toUpperCase()} ${e.year}</small></div><div><small>${esc(e.chapter)}</small><h1>${esc(e.title)}</h1></div></header><p class="reader-story">${esc(rp.story)}</p>${renderEventMedia(e)}<aside class="reader-note"><small>时间备注</small><p>${esc(rp.note)}</p></aside>${rp.quote?`<p class="reader-quote">${esc(rp.quote)}</p>`:''}${renderReaderPeers(e)}${renderReaderRelations(e)}<div class="mobile-archive-details">${renderReaderArchiveDetails(e)}</div><nav class="reader-nav"><button class="nav-btn" id="prevEvent">← 上一页</button><button class="nav-btn" id="nextEvent">下一页 →</button></nav></article>`;
+  $('#dayRight').innerHTML=`<article class="reader-archive-page"><header><small>RECORD NOTE · 记录注释</small><h2>${esc(e.title)}</h2><p>${esc(rp.note)}</p></header>${renderReaderRelations(e)}${renderReaderArchiveDetails(e)}<div class="stamp-round">${data.meta.name.toUpperCase()}<br>LOG</div></article>`;
   $('#backToMonth').onclick=()=>spread('month');$('#prevEvent').onclick=()=>stepEvent(-1);$('#nextEvent').onclick=()=>stepEvent(1);
   $$('#dayLeft [data-peer], #dayRight [data-peer]').forEach(btn=>btn.onclick=()=>{currentEventKey=btn.dataset.peer;renderChapterRail();renderDaySpread();window.scrollTo({top:0,behavior:'smooth'});});
 }
 
 function renderArchive(){
   const data=currentData();
-  $('#archiveLeft').innerHTML=`<header class="archive-head"><small>PUBLIC ARCHIVE · ${data.meta.name.toUpperCase()}</small><h2>先收好，<br>不急着塞回现实日期。</h2></header><div class="archive-envelope"><span class="seal">⌁</span><p>${data.public_archive.length?`本月还有 ${data.public_archive.length} 条尚未稳妥归位的公开碎片。`:'本月目前没有额外 archive-only 条目；这不代表以后不会新增。'}</p><ul><li>知道“什么时候发”不等于知道“什么时候拍”</li><li>互动节点可独立存在</li><li>later-public 可跨月回挂</li></ul></div>`;
-  $('#archiveRight').innerHTML=`<header class="ribbon"><small>PUBLIC ARCHIVE · ${data.meta.name.toUpperCase()}</small><h2>${data.public_archive.length?'只留下当前仍不能稳妥归位的碎片。':'当前没有必须留在档案袋里的条目。'}</h2></header><div class="archive-stack">${data.public_archive.length?data.public_archive.map(i=>`<article class="archive-card"><time>${esc(fmtMonthDay(i.published_at))}</time><span class="platform">${esc(i.platform)}</span><h4>${esc(i.title)}</h4><p>${esc(i.text)}</p></article>`).join(''):`<article class="archive-card"><time>—</time><span class="platform">EMPTY FOR NOW</span><h4>这一页先留白</h4><p>如果后续出现“发布时间明确、真实发生时间未知”的六月内容，就继续放进这里。</p></article>`}</div><div class="archive-rule"><b>档案袋的作用：</b>公开档案现在也是按月份切换的；later-public 关系则允许跨月份链接，不需要把所有东西塞在同一个月。</div>`;
+  $('#archiveLeft').innerHTML=`<header class="archive-head"><small>PUBLIC RECORDS · ${data.meta.name.toUpperCase()}</small><h2>公开的时刻，<br>先按它本来的日期留下。</h2></header><div class="archive-envelope"><span class="seal">⌁</span><p>${data.public_archive.length?`本月还有 ${data.public_archive.length} 条只确认了公开日期的补充记录。`:'本月目前没有额外的补充记录。'}</p><ul><li>发布日和拍摄日可以不是同一天</li><li>评论、回复也可以单独成为一个日期节点</li><li>后来公开的内容会回连到更早的真实事件</li></ul></div>`;
+  $('#archiveRight').innerHTML=`<header class="ribbon"><small>PUBLIC RECORDS · ${data.meta.name.toUpperCase()}</small><h2>${data.public_archive.length?'这些内容先按公开日期收好。':'这一页暂时很轻。'}</h2></header><div class="archive-stack">${data.public_archive.length?data.public_archive.map(i=>`<article class="archive-card"><time>${esc(fmtMonthDay(i.published_at))}</time><span class="platform">${esc(i.platform)}</span><h4>${esc(i.title)}</h4><p>${esc(i.text)}</p></article>`).join(''):`<article class="archive-card"><time>—</time><span class="platform">NO EXTRA RECORDS</span><h4>这里先留白</h4><p>之后如果出现“公开日期明确、实际拍摄时间还不确定”的内容，再继续补进来。</p></article>`}</div><div class="archive-rule"><b>阅读提示：</b>这里只处理“什么时候公开”；真实发生时间仍以事件本身的证据为准。</div>`;
+}
+
+
+function renderGuideBindings(){
+  $$('[data-guide-quarter]').forEach(btn=>btn.onclick=()=>{
+    currentQuarterKey=btn.dataset.guideQuarter;
+    quarterArchiveExpanded=false;
+    renderQuarterTimeline();
+    spread('timeline');
+  });
+  $$('[data-guide-month]').forEach(btn=>btn.onclick=()=>{
+    const key=btn.dataset.guideMonth;
+    if(monthStore[key]) switchMonth(key);
+  });
 }
 
 $('#openBook').onclick=()=>{
@@ -760,9 +1082,10 @@ $('#openBook').onclick=()=>{
     o.classList.add('revealed');
     try{
       renderAllMonth();
-      spread('month');
+      renderGuideBindings();
+      spread('guide');
     }catch(err){
-      console.error('V0.8.3 render error:',err);
+      console.error('V0.9.3 render error:',err);
       const rail=$('#chapterRail');
       if(rail) rail.innerHTML='<article class="no-evidence"><b>页面渲染遇到错误</b><span>书页已正常打开，请检查控制台中的数据错误。</span></article>';
     }
@@ -771,7 +1094,7 @@ $('#openBook').onclick=()=>{
 $('#seeCurrentEvent').onclick=()=>{renderDaySpread();spread('day');};
 $('#prevMonth').onclick=()=>{const i=monthOrder.indexOf(currentMonthKey);if(i>0)switchMonth(monthOrder[i-1]);};
 $('#nextMonth').onclick=()=>{const i=monthOrder.indexOf(currentMonthKey);if(i<monthOrder.length-1)switchMonth(monthOrder[i+1]);};
-$$('.tabs button').forEach(btn=>btn.onclick=()=>{if(btn.dataset.view==='day')renderDaySpread();if(btn.dataset.view==='public')renderArchive();spread(btn.dataset.view);});
+$$('.tabs button').forEach(btn=>btn.onclick=()=>{if(btn.dataset.view==='guide')renderGuideBindings();if(btn.dataset.view==='day')renderDaySpread();if(btn.dataset.view==='public')renderArchive();spread(btn.dataset.view);});
 
 function renderAllMonth(){renderMonthHeader();renderCalendar();renderChapterRail();renderArchive();}
 renderAllMonth();
@@ -788,5 +1111,121 @@ if(__previewParams.get('preview')){
   $('#opened')?.classList.remove('hidden');
   $('#opened')?.classList.add('revealed');
   renderAllMonth();
-  if(ev){renderDaySpread();spread('day');} else spread('month');
+  if(__previewParams.get('guide')){renderGuideBindings();spread('guide');}
+  else if(ev){renderDaySpread();spread('day');} else spread('month');
 }
+
+
+/* --------------------------------------------------------------------------
+   V0.9.3 · MASTER-DATA QUARTER TIMELINE RENDERER
+   2025 Q4 + 2026 Q1 are rendered directly from data/timeline-master.js.
+   April + May + June + July now all use Master Calendar adapters; Phase 5 completes the month-renderer migration through July.
+   -------------------------------------------------------------------------- */
+const masterTimeline = window.FAJIA_TIMELINE_MASTER || {periods:[],events:[],relations:[]};
+const quarterPeriods = (masterTimeline.periods||[]).filter(p=>p.primary_view==='timeline' && p.status==='data_ready');
+let currentQuarterKey = quarterPeriods[0]?.key || '2025-Q4';
+let quarterArchiveExpanded = false;
+
+const quarterKindLabels = {
+  real_event:'现实节点', public_post:'公开内容', public_interaction:'公开互动',
+  public_clue:'公开线索', context:'阶段背景'
+};
+const quarterMonthNames = {
+  '01':['JAN','一月'],'02':['FEB','二月'],'03':['MAR','三月'],'04':['APR','四月'],
+  '05':['MAY','五月'],'06':['JUN','六月'],'07':['JUL','七月'],'08':['AUG','八月'],
+  '09':['SEP','九月'],'10':['OCT','十月'],'11':['NOV','十一月'],'12':['DEC','十二月']
+};
+function quarterPeriod(){return quarterPeriods.find(p=>p.key===currentQuarterKey)||quarterPeriods[0];}
+function quarterMasterEventById(id){return (masterTimeline.events||[]).find(e=>e.id===id);}
+function quarterEvents(includeArchive=quarterArchiveExpanded){
+  return (masterTimeline.events||[])
+    .filter(e=>e.period_key===currentQuarterKey && e.display_mode!=='hidden_dev' && (includeArchive || e.default_visible))
+    .sort((a,b)=>(a.date_start||'').localeCompare(b.date_start||'') || (a.date_end||'').localeCompare(b.date_end||'') || (a.title||'').localeCompare(b.title||''));
+}
+function quarterMonthKey(e){
+  const m=String(e.date_start||'').match(/^\d{4}-(\d{2})/); return m?m[1]:'00';
+}
+function quarterGroups(events){
+  const map=new Map();
+  events.forEach(e=>{const k=quarterMonthKey(e); if(!map.has(k))map.set(k,[]); map.get(k).push(e);});
+  return [...map.entries()].map(([month,items])=>({month,items}));
+}
+function quarterConfidence(e){
+  if(e.confidence==='confirmed')return '';
+  if(e.confidence==='high')return '<span class="qt-confidence high">高可信推定</span>';
+  if(e.confidence==='medium')return '<span class="qt-confidence medium">推定</span>';
+  return e.confidence?`<span class="qt-confidence">${esc(e.confidence)}</span>`:'';
+}
+function quarterSource(e){
+  const src=(e.sources||[]).find(s=>s.url);
+  return src?`<a class="qt-source" href="${esc(src.url)}" target="_blank" rel="noopener noreferrer">公开来源 ↗</a>`:'';
+}
+function quarterRelationChips(e){
+  const rels=(masterTimeline.relations||[]).filter(r=>r.from===e.id && ['later_public','event_update','evidence_for'].includes(r.type)).slice(0,2);
+  if(!rels.length)return '';
+  return `<div class="qt-relations">${rels.map(r=>{const t=quarterMasterEventById(r.to); if(!t)return ''; const lab=r.type==='later_public'?'后来公开':r.type==='event_update'?'后续更新':'关联证据'; return `<span><b>${lab}</b> → ${esc(t.date_label||'')} ${esc(t.title||'')}</span>`;}).join('')}</div>`;
+}
+function quarterItem(e){
+  const kind=e.subtype==='timeline_context'?'阶段背景':(quarterKindLabels[e.kind]||'时间节点');
+  const archive=e.display_mode==='archive_detail';
+  return `<article class="qt-item kind-${esc(e.kind||'event')} ${e.subtype==='timeline_context'?'context':''} ${archive?'archive-detail':''}">
+    <span class="qt-dot" aria-hidden="true"></span>
+    <div class="qt-card">
+      <div class="qt-meta"><time>${esc(e.date_label||'')}</time><span class="qt-kind">${esc(kind)}</span>${quarterConfidence(e)}${archive?'<span class="qt-archive-badge">补充</span>':''}</div>
+      <h3>${esc(e.title||'')}</h3>
+      <p>${esc(e.summary||'')}</p>
+      ${quarterRelationChips(e)}
+      <footer>${quarterSource(e)}</footer>
+    </div>
+  </article>`;
+}
+function quarterGroup(g, period){
+  const names=quarterMonthNames[g.month]||[g.month,`${g.month}月`];
+  return `<section class="qt-month-block">
+    <header class="qt-month-head"><span>${names[0]}</span><b>${names[1]}</b><i>${esc(String(period.start||'').slice(0,4))}</i></header>
+    <div class="qt-line">${g.items.map(quarterItem).join('')}</div>
+  </section>`;
+}
+function quarterNav(){
+  return `<nav class="qt-period-nav" aria-label="季度时间线切换">${quarterPeriods.map(p=>`<button data-quarter="${esc(p.key)}" class="${p.key===currentQuarterKey?'active':''}"><b>${esc(p.label)}</b><small>${esc(p.subtitle||'')}</small></button>`).join('')}</nav>`;
+}
+function quarterHeader(period, count){
+  const extra=quarterEvents(true).length-count;
+  return `<header class="qt-hero">
+    <small>QUARTER TIMELINE · 长时间线</small>
+    <h1>${esc(period.label)}</h1>
+    <p>${esc(period.subtitle||'')}</p>
+    <div class="qt-summary"><span><b>${count}</b> 个阅读节点</span><span>${esc(period.start)} → ${esc(period.end)}</span></div>
+    ${extra>0?`<button id="qtArchiveToggle" class="qt-archive-toggle" type="button">${quarterArchiveExpanded?'收起补充记录':`展开 ${extra} 条补充记录`}</button>`:''}
+  </header>`;
+}
+function renderQuarterTimeline(){
+  const left=$('#timelineLeft'),right=$('#timelineRight'); if(!left||!right||!quarterPeriods.length)return;
+  const p=quarterPeriod(),events=quarterEvents(),groups=quarterGroups(events);
+  const mobile=window.matchMedia('(max-width:700px)').matches;
+  // Desktop: split on a month boundary across the open book. Mobile: one continuous vertical notebook stream.
+  const split=Math.min(2,Math.max(1,groups.length-1));
+  const leftGroups=mobile?groups:groups.slice(0,split),rightGroups=mobile?[]:groups.slice(split);
+  left.innerHTML=`${quarterNav()}${quarterHeader(p,events.length)}<div class="qt-page-label">BEGIN · ${esc(p.start)}</div>${leftGroups.map(g=>quarterGroup(g,p)).join('')}${mobile?`<div class="qt-end"><b>END OF ${esc(p.label)}</b><span>${esc(p.end)}</span></div>`:'<div class="qt-continue">翻过书脊，时间继续 →</div>'}`;
+  right.innerHTML=mobile?'':`<div class="qt-right-top"><small>CONTINUED · 续页</small><h2>${esc(p.label)} · ${esc(p.subtitle||'')}</h2><p>同一条时间线继续向后展开。</p></div>${rightGroups.map(g=>quarterGroup(g,p)).join('')}<div class="qt-end"><b>END OF ${esc(p.label)}</b><span>${esc(p.end)}</span></div>`;
+  $$('[data-quarter]').forEach(btn=>btn.onclick=()=>{currentQuarterKey=btn.dataset.quarter;quarterArchiveExpanded=false;renderQuarterTimeline();window.scrollTo({top:0,behavior:'smooth'});});
+  const toggle=$('#qtArchiveToggle'); if(toggle)toggle.onclick=()=>{quarterArchiveExpanded=!quarterArchiveExpanded;renderQuarterTimeline();};
+}
+
+// Rebind only the new timeline tab; existing month/day/archive behavior stays unchanged.
+const quarterTab=document.querySelector('.tabs button[data-view="timeline"]');
+if(quarterTab) quarterTab.onclick=()=>{renderQuarterTimeline();spread('timeline');};
+
+// Deep-link helper: ?preview=1&timeline=2025-Q4 or ?preview=1&timeline=2026-Q1
+const __quarterParams=new URLSearchParams(location.search);
+if(__quarterParams.get('timeline')){
+  const q=__quarterParams.get('timeline');
+  if(quarterPeriods.some(p=>p.key===q))currentQuarterKey=q;
+  $('#closed')?.classList.add('hidden');
+  $('#opened')?.classList.remove('hidden');
+  $('#opened')?.classList.add('revealed');
+  renderQuarterTimeline();spread('timeline');
+}
+
+let __qtMobileState=window.matchMedia('(max-width:700px)').matches;
+window.addEventListener('resize',()=>{const now=window.matchMedia('(max-width:700px)').matches;if(now!==__qtMobileState){__qtMobileState=now;if(document.querySelector('#opened')?.classList.contains('view-timeline'))renderQuarterTimeline();}});
