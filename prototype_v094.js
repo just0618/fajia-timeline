@@ -937,12 +937,64 @@ function renderMonthSpecial(){
   box.innerHTML=`<article class="special-card reader-special"><small>${esc(r.eyebrow||'MONTH CHAPTER')}</small><b>${esc(r.title||currentData().meta.title)}</b><span>${esc(r.note||'')}</span></article>`;
 }
 
+function buildMobileArchiveByDay(data){
+  const archiveByDay={};
+  data.public_archive.forEach(a=>{const d=parseInt(String(a.published_at||'').split('-')[2]);if(!Number.isFinite(d))return;(archiveByDay[d] ||= []).push(a);});
+  return archiveByDay;
+}
+function mobileMiniDayTarget(day){
+  const card=[...$$('[data-mobile-days]')].find(el=>(el.dataset.mobileDays||'').split(',').includes(String(day)));
+  if(card)return card;
+  return null;
+}
+function buildMobileMiniCalendar(data){
+  const {year,month}=data.month;
+  const archiveByDay=buildMobileArchiveByDay(data);
+  const cells=[];
+  ['一','二','三','四','五','六','日'].forEach(w=>cells.push(`<div class="mini-weekday">${w}</div>`));
+  for(let i=0;i<mondayOffset(year,month);i++)cells.push('<div class="mini-day blank"></div>');
+  for(let d=1;d<=daysInMonth(year,month);d++){
+    const matches=data.events.filter(e=>e.range.includes(d));
+    const echoes=crossMonthEchoesForDay(d);
+    const hasReal=matches.some(e=>e.node_type==='real_event');
+    const hasPublic=matches.some(e=>e.node_type!=='real_event');
+    const archiveOnly=!matches.length && !!archiveByDay[d]?.length;
+    const echoOnly=!matches.length && !archiveOnly && echoes.length;
+    const cls=['mini-day'];
+    if(matches.length) cls.push('active');
+    else if(archiveOnly) cls.push('archive-only','active');
+    else if(echoOnly) cls.push('echo-only');
+    else cls.push('empty');
+    const symbols=[];
+    if(hasReal) symbols.push('<span class="mini-symbol real">●</span>');
+    if(hasPublic) symbols.push('<span class="mini-symbol public">✦</span>');
+    if(echoes.length) symbols.push('<span class="mini-symbol echo">↩</span>');
+    if(archiveOnly) symbols.push('<span class="mini-symbol archive">○</span>');
+    const label = matches.length ? esc(matches.slice(0,2).map(e=>e.short_title).join(' / ')) : archiveOnly ? '补充记录' : echoOnly ? '跨月回声' : '';
+    const action = matches.length ? ` data-mini-day="${d}"` : archiveOnly ? ` data-mini-archive="${d}"` : '';
+    cells.push(`<button type="button" class="${cls.join(' ')}"${action} title="${label}"><time>${String(d).padStart(2,'0')}</time>${matches.length>1?`<span class="mini-count">${matches.length}</span>`:''}<div class="mini-symbols">${symbols.join('')}</div><div class="mini-label">${label}</div></button>`);
+  }
+  return `<section class="mobile-mini-block"><div class="mobile-mini-head"><small>MONTH MAP · 手机端月历</small><h3>${esc(data.meta.name)} 月先看这里</h3><p>先看这个月哪些日期有记录，再往下翻具体手账页。</p></div><div class="mobile-mini-legend"><span class="real"><i>●</i>现实事件</span><span class="public"><i>✦</i>公开记录 / 互动</span><span class="echo"><i>↩</i>跨月回声</span><span class="archive"><i>○</i>补充记录</span></div><div class="mobile-mini-calendar">${cells.join('')}</div></section>`;
+}
+function bindMobileMiniCalendar(){
+  $$('[data-mini-day]').forEach(btn=>btn.onclick=()=>{
+    const day=btn.dataset.miniDay;
+    const target=[...$$('[data-mobile-days]')].find(el=>(el.dataset.mobileDays||'').split(',').includes(String(day)));
+    if(target){
+      target.scrollIntoView({behavior:'smooth',block:'center'});
+      target.classList.remove('flash');
+      void target.offsetWidth;
+      target.classList.add('flash');
+    }
+  });
+  $$('[data-mini-archive]').forEach(btn=>btn.onclick=()=>spread('public'));
+}
 function renderMobileMonthReader(){
   const box=$('#mobileMonthReader'); if(!box)return;
   const data=currentData(),r=readerMonthMeta[currentMonthKey]||{};
-  box.innerHTML=`<div class="mobile-month-cover"><small>${esc(r.eyebrow||'MONTH CHAPTER')}</small><h2>${esc(r.title||data.meta.title)}</h2><p>${esc(r.lead||'')}</p><div class="mobile-month-count"><b>${data.events.length}</b><span>篇记录</span></div></div><div class="mobile-chapter-list">${data.events.map(e=>`<button data-mobile-event="${e.key}" class="mobile-chapter-card"><time>${rangeLabel(e)}</time><div><small>${esc(readerKind(e))}</small><h3>${esc(e.title)}</h3><p>${esc(readerProfile(e).story)}</p></div><span>→</span></button>`).join('')}</div><button id="mobileCalendarToggle" class="mobile-calendar-toggle" type="button">查看完整月历</button>`;
+  box.innerHTML=`<div class="mobile-month-cover"><small>${esc(r.eyebrow||'MONTH CHAPTER')}</small><h2>${esc(r.title||data.meta.title)}</h2><p>${esc(r.lead||'')}</p><div class="mobile-month-count"><b>${data.events.length}</b><span>篇记录</span></div></div>${buildMobileMiniCalendar(data)}<div class="mobile-chapter-list">${data.events.map(e=>`<button data-mobile-event="${e.key}" data-mobile-days="${e.range.join(',')}" class="mobile-chapter-card"><time>${rangeLabel(e)}</time><div><small>${esc(readerKind(e))}</small><h3>${esc(e.title)}</h3><p>${esc(readerProfile(e).story)}</p></div><span>→</span></button>`).join('')}</div>`;
   $$('[data-mobile-event]').forEach(btn=>btn.onclick=()=>{currentEventKey=btn.dataset.mobileEvent;renderChapterRail();renderDaySpread();spread('day');});
-  const toggle=$('#mobileCalendarToggle'); if(toggle)toggle.onclick=()=>{document.body.classList.toggle('show-mobile-calendar');toggle.textContent=document.body.classList.contains('show-mobile-calendar')?'收起完整月历':'查看完整月历';};
+  bindMobileMiniCalendar();
 }
 
 function switchMonth(key){

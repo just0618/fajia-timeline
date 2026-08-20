@@ -197,16 +197,17 @@ button{font:inherit;color:inherit}.hidden{display:none!important}main{min-height
   .tabs{position:fixed;z-index:50;left:50%;right:auto;bottom:calc(12px + env(safe-area-inset-bottom));top:auto;transform:translateX(-50%);display:flex;flex-direction:row;gap:5px;padding:5px;border:1px solid #efdde0;border-radius:999px;background:#fffdf8e8;backdrop-filter:blur(18px);box-shadow:0 12px 30px #6f4d551e}
   .tabs button{writing-mode:horizontal-tb;width:auto;padding:9px 13px;border:0;background:transparent;box-shadow:none;border-radius:999px;font-size:12px}.tabs button.active{background:linear-gradient(135deg,#ffdce6,#fff0bd)}
 
-  /* Month becomes a single vertical notebook index. */
+  /* Month becomes a compact mobile notebook index. */
   .month-head,.month-progress,.month-special,.legend,.rule,.chapter-turn,.corner-note{display:none!important}
   .mobile-month-reader{display:block;position:relative;z-index:1}
-  .mobile-month-cover{position:relative;padding:22px 20px 24px;margin-bottom:18px;border:1px solid #eed8d6;border-radius:26px;background:linear-gradient(145deg,#fff9fb,#fffdf2);box-shadow:0 12px 30px #7848510d}
-  .mobile-month-cover:after{content:"✎";position:absolute;right:18px;top:18px;color:#e0a0ad;font-size:22px;transform:rotate(-9deg)}
-  .mobile-month-cover small{display:block;color:#c16e81;font-size:10px;font-weight:900;letter-spacing:.14em}.mobile-month-cover h2{margin:9px 0 10px;font:900 31px/1.24 var(--hand)}.mobile-month-cover p{margin:0;padding-right:10px;color:#765d63;line-height:1.8;font-size:15px}.mobile-month-count{display:flex;align-items:baseline;gap:7px;margin-top:17px;color:#a95369}.mobile-month-count b{font:900 31px/1 Georgia,serif}.mobile-month-count span{font-size:12px;font-weight:800}
+  .mobile-month-cover{position:relative;padding:18px 18px 20px;margin-bottom:14px;border:1px solid #eed8d6;border-radius:24px;background:linear-gradient(145deg,#fff9fb,#fffdf2);box-shadow:0 12px 30px #7848510d}
+  .mobile-month-cover:after{content:"✎";position:absolute;right:16px;top:16px;color:#e0a0ad;font-size:20px;transform:rotate(-9deg)}
+  .mobile-month-cover small{display:block;color:#c16e81;font-size:10px;font-weight:900;letter-spacing:.14em}.mobile-month-cover h2{margin:7px 0 8px;font:900 28px/1.22 var(--hand)}.mobile-month-cover p{margin:0;padding-right:10px;color:#765d63;line-height:1.75;font-size:14px}.mobile-month-count{display:flex;align-items:baseline;gap:7px;margin-top:14px;color:#a95369}.mobile-month-count b{font:900 28px/1 Georgia,serif}.mobile-month-count span{font-size:12px;font-weight:800}
+  .mobile-mini-block{display:block;margin-bottom:18px;padding:16px 15px 18px;border:1px solid #edd9d4;border-radius:24px;background:linear-gradient(145deg,#fffdf8,#fff8fb);box-shadow:0 9px 22px #7346500a}
   .mobile-chapter-list{display:grid;gap:12px}.mobile-chapter-card{display:grid;grid-template-columns:62px 1fr 18px;gap:13px;align-items:start;width:100%;padding:15px 14px;border:1px solid #ebd8d3;border-radius:20px;background:#fffdfa;text-align:left;box-shadow:0 7px 18px #7048500a;cursor:pointer}.mobile-chapter-card time{display:grid;place-items:center;min-height:60px;border-radius:16px;background:linear-gradient(145deg,#ffcbd8,#fff0bc);font:900 24px/1 Georgia,serif;color:#a9455e}.mobile-chapter-card small{display:block;color:#c07384;font-size:9px;font-weight:900;letter-spacing:.1em}.mobile-chapter-card h3{margin:4px 0 5px;font:900 20px/1.3 var(--hand)}.mobile-chapter-card p{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin:0;color:#80676e;font-size:12px;line-height:1.6}.mobile-chapter-card>span{align-self:center;color:#bf6a7e;font-size:20px}
-  .mobile-calendar-toggle{display:block;width:100%;margin-top:16px;border:1px dashed #e5bbc6;border-radius:18px;background:#fffaf8;padding:13px;color:#a65267;font-weight:900}
-  .calendar{display:none;margin-top:16px;grid-template-columns:repeat(7,minmax(78px,1fr));overflow-x:auto;padding-bottom:8px}.show-mobile-calendar .calendar{display:grid}.show-mobile-calendar .legend{display:flex!important}.show-mobile-calendar .rule{display:block!important}.show-mobile-calendar .chapter-turn{display:block!important}
-  .month-nav{position:sticky;top:0;z-index:20;margin:-28px -20px 22px;padding:14px 18px 11px;background:#fffdf9e8;backdrop-filter:blur(16px);border-bottom:1px solid #f0dfe0}.month-tabs{flex-wrap:nowrap;overflow:auto;justify-content:flex-start;scrollbar-width:none}.month-tabs::-webkit-scrollbar{display:none}.month-tab{white-space:nowrap;padding:8px 13px}.month-arrow{flex:0 0 auto}
+  .mobile-calendar-toggle{display:none!important}
+  .calendar{display:none!important}
+  .month-nav{position:sticky;top:0;z-index:20;margin:-28px -20px 18px;padding:14px 18px 11px;background:#fffdf9e8;backdrop-filter:blur(16px);border-bottom:1px solid #f0dfe0}.month-tabs{flex-wrap:nowrap;overflow:auto;justify-content:flex-start;scrollbar-width:none}.month-tabs::-webkit-scrollbar{display:none}.month-tab{white-space:nowrap;padding:8px 13px}.month-arrow{flex:0 0 auto}
 
   /* Day = one mobile notebook page. */
   .reader-page{gap:15px}
@@ -365,6 +366,17 @@ button{font:inherit;color:inherit}.hidden{display:none!important}main{min-height
 .guide-reading-modes b{font:900 19px/1.2 var(--hand)}.guide-reading-modes p{margin:4px 0 0;color:#82656c;font-size:12px;line-height:1.55}
 .guide-note{margin-top:16px;padding:14px 16px;border:1px dashed #e6c2cb;border-radius:16px;background:#fffaf5;color:#795d64;font-size:12px;line-height:1.75}
 
+
+.guide-mobile-extra{display:none}
+.mobile-mini-block{display:none}
+.mobile-mini-head small{display:block;color:#c16e81;font-size:10px;font-weight:900;letter-spacing:.14em}
+.mobile-mini-head h3{margin:7px 0 6px;font:900 27px/1.2 var(--hand)}
+.mobile-mini-head p{margin:0;color:#7a6168;line-height:1.7;font-size:13px}
+.mobile-mini-legend{display:flex;flex-wrap:wrap;gap:8px 10px;margin:12px 0 14px}.mobile-mini-legend span{display:inline-flex;align-items:center;gap:5px;padding:5px 8px;border-radius:999px;background:#fff;border:1px solid #efe0db;color:#8a6770;font-size:10px;font-weight:800}.mobile-mini-legend i{font-style:normal;font-weight:900}.mobile-mini-legend .real i{color:#d86d89}.mobile-mini-legend .public i{color:#c69900}.mobile-mini-legend .echo i{color:#6b8faa}.mobile-mini-legend .archive i{color:#9d8b8f}
+.mobile-mini-calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}.mini-weekday{display:grid;place-items:center;color:#b06c7d;font-size:10px;font-weight:900;letter-spacing:.08em;padding-bottom:2px}.mini-day{position:relative;min-height:76px;border:1px solid #eeddda;border-radius:16px;background:#fff;padding:8px 7px;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;text-align:left}.mini-day.blank{visibility:hidden}.mini-day.empty{background:#fffdfb}.mini-day.active{background:#fff8fa;border-color:#f2ccd6;box-shadow:0 6px 16px #7346500a;cursor:pointer}.mini-day.archive-only{background:#f8fbff;border-style:dashed;border-color:#d7e5ef}.mini-day.echo-only{background:#fffdf6;border-style:dashed;border-color:#eee0ab}.mini-day time{font:900 17px/1 Georgia,serif;color:#cf6c84}.mini-day.archive-only time,.mini-day.echo-only time{color:#6f8fa5}.mini-symbols{display:flex;flex-wrap:wrap;gap:4px}.mini-symbol{display:grid;place-items:center;min-width:18px;height:18px;padding:0 4px;border-radius:999px;background:#fff;font-size:10px;font-weight:900;line-height:1;border:1px solid #f0dfdb}.mini-symbol.real{color:#d86d89;background:#fff2f5}.mini-symbol.public{color:#bb8b00;background:#fff8d6}.mini-symbol.echo{color:#6b8faa;background:#eef6ff}.mini-symbol.archive{color:#9d8b8f;background:#f6f1f2}.mini-day .mini-count{position:absolute;right:7px;top:7px;min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:#fff0b9;color:#7d6200;font-size:10px;font-weight:900;display:grid;place-items:center}.mini-day .mini-label{font-size:10px;line-height:1.35;color:#8a6a72;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:26px}.mini-day.active:hover{transform:translateY(-1px)}
+.mobile-chapter-card.flash{animation:flashCard 1.25s ease}
+@keyframes flashCard{0%{box-shadow:0 0 0 0 #ffd76700;border-color:#ebd8d3}20%{box-shadow:0 0 0 4px #ffe07a66;border-color:#e7bd54}100%{box-shadow:0 7px 18px #7048500a;border-color:#ebd8d3}}
+
 /* public demo: internal/debug UI stays out of the reading surface */
 .debug-details{display:none!important}
 
@@ -377,11 +389,13 @@ button{font:inherit;color:inherit}.hidden{display:none!important}main{min-height
   .tabs button{flex:0 0 auto;white-space:nowrap}
 }
 @media (max-width:700px){
+  .opened.view-guide .page.right{display:none!important}
   .guide-page{min-height:0}
   .guide-hero{padding-top:2px;margin-bottom:18px}.guide-hero h2{font-size:36px}.guide-hero p{font-size:14px}
   .guide-period-grid,.guide-period-grid-right{grid-template-columns:1fr 1fr;gap:10px}
   .guide-era{min-height:128px;padding:15px 14px}.guide-era b{font-size:21px}.guide-era span{font-size:11px}.guide-era em{margin-top:10px}
   .guide-reading-modes article{padding:12px}.guide-note{margin-bottom:50px}
+  .guide-mobile-extra{display:block;margin-top:16px}.guide-mobile-grid{margin-bottom:18px}.guide-reading-modes-mobile{margin-bottom:8px}
   .tabs button{font-size:11px;padding:8px 10px}
 }
 @media (max-width:430px){
