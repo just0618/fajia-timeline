@@ -402,3 +402,10 @@ button{font:inherit;color:inherit}.hidden{display:none!important}main{min-height
   .guide-period-grid,.guide-period-grid-right{grid-template-columns:1fr}
   .guide-era{min-height:112px}
 }
+
+
+/* V0.9.5.2 · Mobile reading hotfix: final cascade overrides. */
+@media (max-width:700px){
+  .guide-mobile-extra{display:block!important}
+  .mobile-mini-block{display:block!important}
+}
