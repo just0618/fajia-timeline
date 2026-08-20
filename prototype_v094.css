@@ -412,3 +412,25 @@ button{font:inherit;color:inherit}.hidden{display:none!important}main{min-height
 
 /* V0.9.5.3: guide month cards must remain visible on mobile; avoid .calendar class collision. */
 @media (max-width:700px){.opened.view-guide .guide-era.month-entry{display:block!important}}
+
+
+/* V0.9.5.4: mobile mini-calendar = date + icons only; richer legend. */
+@media (max-width:700px){
+  .mobile-mini-legend{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px 8px;margin:12px 0 15px}
+  .mobile-mini-legend span{min-width:0;justify-content:flex-start;padding:6px 7px;font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mobile-mini-legend i{display:grid;place-items:center;flex:0 0 20px;width:20px;height:20px;border-radius:999px;background:#fff;border:1px solid #f0dfdb;font-size:10px}
+  .mobile-mini-legend .live i,.mini-symbol.live{color:#c95f78;background:#fff0f4}
+  .mobile-mini-legend .shoot i,.mini-symbol.shoot{color:#a36f8d;background:#fbf2fa}
+  .mobile-mini-legend .onsite i,.mini-symbol.onsite{color:#5f8992;background:#eff8f7}
+  .mobile-mini-legend .real i,.mini-symbol.real{color:#d86d89;background:#fff2f5}
+  .mobile-mini-legend .interaction i,.mini-symbol.interaction{color:#9a6b99;background:#f8f1fb}
+  .mobile-mini-legend .public i,.mini-symbol.public{color:#b68700;background:#fff8d6}
+  .mobile-mini-legend .echo i,.mini-symbol.echo{color:#6b8faa;background:#eef6ff}
+  .mobile-mini-legend .archive i,.mini-symbol.archive{color:#9d8b8f;background:#f6f1f2}
+  .mobile-mini-calendar{gap:7px}
+  .mini-day{min-height:63px;padding:8px 6px;align-items:center;justify-content:flex-start;gap:8px}
+  .mini-day time{font-size:17px;align-self:flex-start}
+  .mini-symbols{width:100%;justify-content:center;align-items:center;gap:4px;margin-top:auto;margin-bottom:2px}
+  .mini-symbol{min-width:19px;width:19px;height:19px;padding:0;font-size:9px;border-radius:999px}
+  .mini-label,.mini-count{display:none!important}
+}

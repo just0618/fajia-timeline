@@ -947,6 +947,27 @@ function mobileMiniDayTarget(day){
   if(card)return card;
   return null;
 }
+const mobileMiniLegend = [
+  {key:'live',icon:'▶',label:'直播 / 随播'},
+  {key:'shoot',icon:'◎',label:'拍摄 / 录制'},
+  {key:'onsite',icon:'⌖',label:'出行 / 线下活动'},
+  {key:'real',icon:'●',label:'其他现实事件'},
+  {key:'interaction',icon:'↔',label:'评论 / 公开互动'},
+  {key:'public',icon:'✦',label:'公开发布 / 共创'},
+  {key:'echo',icon:'↩',label:'后续公开 / 跨月回声'},
+  {key:'archive',icon:'○',label:'补充记录'}
+];
+function mobileMiniCategory(e){
+  const hay=`${e.title||''} ${e.short_title||''} ${e.chapter||''} ${readerProfile(e).story||''}`;
+  if(e.node_type==='public_interaction'||/评论|回复|互动/.test(hay)) return 'interaction';
+  if(e.node_type==='real_event'){
+    if(/直播|随播|空降/.test(hay)) return 'live';
+    if(/拍摄|录制|约拍|RE录|RE|物料拍|拍立得/.test(hay)) return 'shoot';
+    if(/出行|外出|行程|机场|高铁|地铁|北京|杭州|天津|青岛|曼谷|酒馆|散步|见面会|一日店长|音乐节|演唱会|应援|商场|聚会|话剧|活动/.test(hay)) return 'onsite';
+    return 'real';
+  }
+  return 'public';
+}
 function buildMobileMiniCalendar(data){
   const {year,month}=data.month;
   const archiveByDay=buildMobileArchiveByDay(data);
@@ -956,8 +977,6 @@ function buildMobileMiniCalendar(data){
   for(let d=1;d<=daysInMonth(year,month);d++){
     const matches=data.events.filter(e=>e.range.includes(d));
     const echoes=crossMonthEchoesForDay(d);
-    const hasReal=matches.some(e=>e.node_type==='real_event');
-    const hasPublic=matches.some(e=>e.node_type!=='real_event');
     const archiveOnly=!matches.length && !!archiveByDay[d]?.length;
     const echoOnly=!matches.length && !archiveOnly && echoes.length;
     const cls=['mini-day'];
@@ -965,16 +984,25 @@ function buildMobileMiniCalendar(data){
     else if(archiveOnly) cls.push('archive-only','active');
     else if(echoOnly) cls.push('echo-only');
     else cls.push('empty');
-    const symbols=[];
-    if(hasReal) symbols.push('<span class="mini-symbol real">●</span>');
-    if(hasPublic) symbols.push('<span class="mini-symbol public">✦</span>');
-    if(echoes.length) symbols.push('<span class="mini-symbol echo">↩</span>');
-    if(archiveOnly) symbols.push('<span class="mini-symbol archive">○</span>');
-    const label = matches.length ? esc(matches.slice(0,2).map(e=>e.short_title).join(' / ')) : archiveOnly ? '补充记录' : echoOnly ? '跨月回声' : '';
+
+    const categories=[];
+    matches.forEach(e=>{const cat=mobileMiniCategory(e);if(!categories.includes(cat))categories.push(cat);});
+    const hasLaterPublic=echoes.length||matches.some(e=>e.evidence_mode==='later_public'||(e.master_relations||[]).some(r=>r.type==='later_public_of'));
+    if(hasLaterPublic&&!categories.includes('echo')) categories.push('echo');
+    if(archiveOnly&&!categories.includes('archive')) categories.push('archive');
+    const symbols=categories.slice(0,4).map(cat=>{
+      const item=mobileMiniLegend.find(x=>x.key===cat);
+      return item?`<span class="mini-symbol ${cat}" aria-label="${item.label}">${item.icon}</span>`:'';
+    }).join('');
+    const titleParts=matches.map(e=>e.short_title||e.title);
+    if(archiveOnly) titleParts.push('补充记录');
+    if(echoOnly) titleParts.push('跨月回声');
+    const title=esc(titleParts.join(' / '));
     const action = matches.length ? ` data-mini-day="${d}"` : archiveOnly ? ` data-mini-archive="${d}"` : '';
-    cells.push(`<button type="button" class="${cls.join(' ')}"${action} title="${label}"><time>${String(d).padStart(2,'0')}</time>${matches.length>1?`<span class="mini-count">${matches.length}</span>`:''}<div class="mini-symbols">${symbols.join('')}</div><div class="mini-label">${label}</div></button>`);
+    cells.push(`<button type="button" class="${cls.join(' ')}"${action} title="${title}"><time>${String(d).padStart(2,'0')}</time><div class="mini-symbols">${symbols}</div></button>`);
   }
-  return `<section class="mobile-mini-block"><div class="mobile-mini-head"><small>MONTH MAP · 手机端月历</small><h3>${esc(data.meta.name)} 月先看这里</h3><p>先看这个月哪些日期有记录，再往下翻具体手账页。</p></div><div class="mobile-mini-legend"><span class="real"><i>●</i>现实事件</span><span class="public"><i>✦</i>公开记录 / 互动</span><span class="echo"><i>↩</i>跨月回声</span><span class="archive"><i>○</i>补充记录</span></div><div class="mobile-mini-calendar">${cells.join('')}</div></section>`;
+  const legend=mobileMiniLegend.map(i=>`<span class="${i.key}"><i>${i.icon}</i>${i.label}</span>`).join('');
+  return `<section class="mobile-mini-block"><div class="mobile-mini-head"><small>MONTH MAP · 手机端月历</small><h3>${esc(data.meta.name)} 月先看这里</h3><p>月历格里只留日期和图标；点日期后，会直接滑到下面对应的记录。</p></div><div class="mobile-mini-legend">${legend}</div><div class="mobile-mini-calendar">${cells.join('')}</div></section>`;
 }
 function bindMobileMiniCalendar(){
   $$('[data-mini-day]').forEach(btn=>btn.onclick=()=>{
@@ -1120,7 +1148,14 @@ function renderGuideBindings(){
   });
   $$('[data-guide-month]').forEach(btn=>btn.onclick=()=>{
     const key=btn.dataset.guideMonth;
-    if(monthStore[key]) switchMonth(key);
+    if(!monthStore[key]) return;
+    if(key===currentMonthKey){
+      renderAllMonth();
+      spread('month');
+      window.scrollTo({top:0,behavior:'smooth'});
+    }else{
+      switchMonth(key);
+    }
   });
 }
 
@@ -1137,7 +1172,7 @@ $('#openBook').onclick=()=>{
       renderGuideBindings();
       spread('guide');
     }catch(err){
-      console.error('V0.9.3 render error:',err);
+      console.error('V0.9.5.4 render error:',err);
       const rail=$('#chapterRail');
       if(rail) rail.innerHTML='<article class="no-evidence"><b>页面渲染遇到错误</b><span>书页已正常打开，请检查控制台中的数据错误。</span></article>';
     }
