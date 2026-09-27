@@ -1,6 +1,6 @@
 window.FAJIA_TIMELINE_MASTER = {
   "schema_version": "1.0.0",
-  "generated_at": "2026-08-19",
+  "generated_at": "2026-09-28",
   "principles": [
     "现实时间线优先；能确认拍摄/发生日期的物料按实际日期排列。",
     "公开日期不自动等同于拍摄日期。",
@@ -69,8 +69,17 @@ window.FAJIA_TIMELINE_MASTER = {
       "start": "2026-08-01",
       "end": "2026-08-31",
       "primary_view": "calendar",
-      "subtitle": "待继续整理",
-      "status": "skeleton"
+      "subtitle": "上海 / 直播 / 曼谷回声 / 澳门官宣",
+      "status": "data_ready"
+    },
+    {
+      "key": "2026-09",
+      "label": "September 2026",
+      "start": "2026-09-01",
+      "end": "2026-09-30",
+      "primary_view": "calendar",
+      "subtitle": "澳门见面会 / 直播 / LEECN双叙",
+      "status": "data_ready"
     }
   ],
   "events": [
@@ -5636,6 +5645,349 @@ window.FAJIA_TIMELINE_MASTER = {
       "notes": "先锁公开日期；若以后确认拍摄来源，再建立 later-public 关系。"
     },
     {
+      "id": "context_bangkok_material_20260725_26",
+      "period_key": "2026-07",
+      "date_start": "2026-07-25",
+      "date_end": "2026-07-26",
+      "date_label": "07.25–07.26",
+      "date_precision": "range",
+      "kind": "real_event",
+      "subtype": "material_source",
+      "title": "曼谷行程素材来源区间",
+      "summary": "用于承接八月后来公开的曼谷行程素材；具体拍摄时刻未进一步锁定。",
+      "confidence": "medium-high",
+      "default_visible": false,
+      "display_mode": "hidden_dev",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "曼谷",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [],
+      "local_media": [],
+      "relations": [],
+      "notes": "不在前台单独成页，只作为 later-public 的来源锚点。"
+    },
+    {
+      "id": "context_daily_material_20260815",
+      "period_key": "2026-08",
+      "date_start": "2026-08-15",
+      "date_end": "2026-08-15",
+      "date_label": "08.15",
+      "date_precision": "exact",
+      "kind": "real_event",
+      "subtype": "material_source",
+      "title": "08.15 日常素材来源",
+      "summary": "08.16、08.17公开内容实际拍摄于08.15。",
+      "confidence": "confirmed",
+      "default_visible": false,
+      "display_mode": "hidden_dev",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [],
+      "local_media": [],
+      "relations": [],
+      "notes": "只作为素材日期锚点，不单独做公开手账页。"
+    },
+    {
+      "id": "context_photo_material_20260911",
+      "period_key": "2026-09",
+      "date_start": "2026-09-11",
+      "date_end": "2026-09-11",
+      "date_label": "09.11",
+      "date_precision": "inferred",
+      "kind": "real_event",
+      "subtype": "material_source",
+      "title": "见面会相关照片拍摄（推定）",
+      "summary": "09.12公开的相关照片现阶段推定拍摄于09.11。",
+      "confidence": "medium-high",
+      "default_visible": false,
+      "display_mode": "hidden_dev",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [],
+      "local_media": [],
+      "relations": [],
+      "notes": "用户以“应该”为判断，因此保留推定状态。"
+    },
+    {
+      "id": "site_augsep_20260803_01",
+      "period_key": "2026-08",
+      "date_start": "2026-08-03",
+      "date_end": "2026-08-03",
+      "date_label": "08.03",
+      "date_precision": "exact",
+      "kind": "public_post",
+      "subtype": "promo_public",
+      "title": "集草活动官宣",
+      "summary": "08.03，集草相关活动正式官宣。官宣后，围绕双人呈现方式出现了较集中的粉丝讨论。",
+      "confidence": "confirmed",
+      "default_visible": true,
+      "display_mode": "main",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [
+        {
+          "label": "微博/活动官宣",
+          "url": "https://weibo.com/7740550352/5327730720899661"
+        }
+      ],
+      "local_media": [],
+      "relations": [],
+      "notes": "舆论强度作为粉丝社区语境记录，不把具体动机或情绪当作客观事实。 后续公开/回声：同日下午语音厅直播回应相关讨论",
+      "sort_order": 1
+    },
+    {
+      "id": "site_augsep_20260803_02",
+      "period_key": "2026-08",
+      "date_start": "2026-08-03",
+      "date_end": "2026-08-03",
+      "date_label": "08.03",
+      "date_precision": "exact",
+      "kind": "real_event",
+      "subtype": "live",
+      "title": "贺嘉述语音厅直播",
+      "summary": "同日下午，贺嘉述开启语音厅直播；当时的公开讨论仍集中在集草活动的双人呈现方式。",
+      "confidence": "high",
+      "default_visible": true,
+      "display_mode": "main",
+      "privacy_level": "public",
+      "participants": [
+        "贺嘉述"
+      ],
+      "location_general": "",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [
+        {
+          "label": "语音厅/直播",
+          "url": "https://weibo.com/7740550352/5327730720899661"
+        }
+      ],
+      "local_media": [],
+      "relations": [
+        {
+          "type": "context_from",
+          "target": "site_augsep_20260803_01"
+        }
+      ],
+      "notes": "“回应相关讨论”依据用户整理；不进一步推断直播者主观心理状态。 源头/关联：08.03 集草相关活动官宣 后续公开/回声：08.05 双人直播仍有后续讨论背景",
+      "sort_order": 2
+    },
+    {
+      "id": "site_augsep_20260805_01",
+      "period_key": "2026-08",
+      "date_start": "2026-08-05",
+      "date_end": "2026-08-05",
+      "date_label": "08.05",
+      "date_precision": "exact",
+      "kind": "real_event",
+      "subtype": "live",
+      "title": "双人直播 · 小游戏",
+      "summary": "08.05，两人进行双人直播并玩了小游戏。部分观众把这场直播与08.03之后的讨论放在一起回看。",
+      "confidence": "high",
+      "default_visible": true,
+      "display_mode": "main",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [
+        {
+          "label": "直播",
+          "url": "https://weibo.com/2/detail/5337966358039098"
+        }
+      ],
+      "local_media": [],
+      "relations": [],
+      "notes": "用户补充：部分粉丝反馈其当场表现较平时低落；与法宣阁拥抱时画面中出现擦眼部/疑似抹泪动作。这里只记录公开观察与粉丝反馈，不据此下结论判断其真实情绪状态。 源头/关联：08.03 集草相关活动官宣 / 语音厅讨论",
+      "sort_order": 3
+    },
+    {
+      "id": "site_augsep_20260805_02",
+      "period_key": "2026-08",
+      "date_start": "2026-08-05",
+      "date_end": "2026-08-05",
+      "date_label": "08.05",
+      "date_precision": "exact",
+      "kind": "public_post",
+      "subtype": "later_public",
+      "title": "曼谷碎片",
+      "summary": "08.05，贺嘉述公开一组曼谷碎片；影像来自此前的曼谷行程。",
+      "confidence": "confirmed",
+      "default_visible": true,
+      "display_mode": "main",
+      "privacy_level": "public",
+      "participants": [
+        "贺嘉述"
+      ],
+      "location_general": "曼谷",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [
+        {
+          "label": "微博",
+          "url": "https://www.sina.cn/media/8348577978"
+        }
+      ],
+      "local_media": [],
+      "relations": [
+        {
+          "type": "later_public_of",
+          "target": "context_bangkok_material_20260725_26"
+        }
+      ],
+      "notes": "属于7月曼谷事件的后续公开，不新建现实事件。 源头/关联：7月曼谷行程 后续公开/回声：later-public",
+      "sort_order": 4
+    },
+    {
+      "id": "site_augsep_20260807_01",
+      "period_key": "2026-08",
+      "date_start": "2026-08-07",
+      "date_end": "2026-08-10",
+      "date_label": "08.07–08.10",
+      "date_precision": "inferred",
+      "kind": "real_event",
+      "subtype": "travel_context",
+      "title": "北京 → 上海 · 集草活动行程",
+      "summary": "08.07–08.10为上海行程背景；08.08的集草双人直播发生在上海。具体往返日期按现有线索保留推定。",
+      "confidence": "medium-high",
+      "default_visible": false,
+      "display_mode": "archive_only",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "上海",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [],
+      "local_media": [],
+      "relations": [],
+      "notes": "属于行程上下文，不作为视觉重点；08.07航班日期仍保留“应该/大概率”的不确定性。 核对状态：用户推定 源头/关联：08.08 集草双人直播｜上海",
+      "media_policy": "text_only",
+      "sort_order": 5
+    },
+    {
+      "id": "site_augsep_20260808_01",
+      "period_key": "2026-08",
+      "date_start": "2026-08-08",
+      "date_end": "2026-08-08",
+      "date_label": "08.08",
+      "date_precision": "exact",
+      "kind": "real_event",
+      "subtype": "live",
+      "title": "集草双人直播｜上海",
+      "summary": "08.08，两人在上海进行集草双人直播。",
+      "confidence": "high",
+      "default_visible": true,
+      "display_mode": "main",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "上海",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [
+        {
+          "label": "上海/集草双人直播",
+          "url": "https://weibo.com/2/detail/5337966358039098"
+        }
+      ],
+      "local_media": [],
+      "relations": [],
+      "notes": "直播地点确认补充为上海。 源头/关联：08.07–08.10 上海行程",
+      "sort_order": 6
+    },
+    {
+      "id": "site_augsep_20260808_02",
+      "period_key": "2026-08",
+      "date_start": "2026-08-08",
+      "date_end": "2026-08-08",
+      "date_label": "08.08",
+      "date_precision": "exact",
+      "kind": "public_post",
+      "subtype": "public_post",
+      "title": "一些瞬间",
+      "summary": "08.08，同日还有“一些瞬间”等公开内容。",
+      "confidence": "confirmed",
+      "default_visible": true,
+      "display_mode": "main",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [
+        {
+          "label": "微博/首饰盒",
+          "url": "https://www.sina.cn/media/8348577978"
+        }
+      ],
+      "local_media": [],
+      "relations": [
+        {
+          "type": "paired_publication",
+          "target": "site_augsep_20260808_01"
+        }
+      ],
+      "notes": "与直播同日，适合并页。 源头/关联：08.08 集草双人直播",
+      "sort_order": 7
+    },
+    {
+      "id": "site_augsep_20260809_01",
+      "period_key": "2026-08",
+      "date_start": "2026-08-09",
+      "date_end": "2026-08-09",
+      "date_label": "08.09",
+      "date_precision": "exact",
+      "kind": "real_event",
+      "subtype": "live",
+      "title": "上海酒馆双人直播 · 真心话",
+      "summary": "08.09，两人在上海酒馆直播，并在直播中玩了真心话。",
+      "confidence": "high",
+      "default_visible": true,
+      "display_mode": "main",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "上海",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [
+        {
+          "label": "上海/酒馆直播",
+          "url": "https://weibo.com/2/detail/5337966358039098"
+        }
+      ],
+      "local_media": [],
+      "relations": [],
+      "notes": "地点与主要互动内容已由用户确认。 源头/关联：08.07–08.10 上海行程",
+      "sort_order": 8
+    },
+    {
       "id": "future_20260809_material_release",
       "period_key": "2026-08",
       "date_start": "2026-08-09",
@@ -5644,19 +5996,24 @@ window.FAJIA_TIMELINE_MASTER = {
       "date_precision": "exact",
       "kind": "public_post",
       "subtype": "later_public",
-      "title": "07.27–28外出物料对应视频公开",
-      "summary": "07.27–28拍摄的外出物料在08.09公开。",
-      "confidence": "confirmed",
+      "title": "后来我们有了夏天",
+      "summary": "08.09，“后来我们有了夏天”公开；这组内容回连到07.27–07.28的外出物料拍摄。",
+      "confidence": "medium-high",
       "default_visible": true,
-      "display_mode": "calendar_secondary",
+      "display_mode": "main",
       "privacy_level": "public",
       "participants": [
         "法宣阁",
         "贺嘉述"
       ],
       "location_general": "",
-      "source_basis": "user_confirmed_20260818",
-      "sources": [],
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [
+        {
+          "label": "微博",
+          "url": "https://www.sina.cn/media/8348577978"
+        }
+      ],
       "local_media": [],
       "relations": [
         {
@@ -5664,7 +6021,1078 @@ window.FAJIA_TIMELINE_MASTER = {
           "target": "site_material_shoot_20260727_28"
         }
       ],
-      "notes": "August正式页面尚未搭建；先作为跨月关系终点落入底层表。"
+      "notes": "现实拍摄日与公开日分开记。 核对状态：待用户复核关联 源头/关联：07.27–07.28 外出物料拍摄 后续公开/回声：later-public",
+      "sort_order": 9
+    },
+    {
+      "id": "site_augsep_20260810_01",
+      "period_key": "2026-08",
+      "date_start": "2026-08-10",
+      "date_end": "2026-08-10",
+      "date_label": "08.10",
+      "date_precision": "exact",
+      "kind": "public_post",
+      "subtype": "brand_public",
+      "title": "LEECN莉肯 · 新序美学大使官宣",
+      "summary": "08.10，LEECN莉肯公开双人合作，两人成为新序美学大使；这条商务线在九月继续延伸。",
+      "confidence": "confirmed",
+      "default_visible": true,
+      "display_mode": "main",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [
+        {
+          "label": "微博/商务",
+          "url": "https://www.sina.cn/media/8348577978"
+        }
+      ],
+      "local_media": [],
+      "relations": [
+        {
+          "type": "campaign_followup",
+          "target": "site_augsep_20260921_01"
+        },
+        {
+          "type": "campaign_followup",
+          "target": "site_augsep_20260922_01"
+        },
+        {
+          "type": "campaign_followup",
+          "target": "site_augsep_20260923_01"
+        }
+      ],
+      "notes": "商务主线，建议独立手账页。 后续公开/回声：9月「双叙」香水系列继续公开",
+      "sort_order": 10
+    },
+    {
+      "id": "site_augsep_20260810_02",
+      "period_key": "2026-08",
+      "date_start": "2026-08-10",
+      "date_end": "2026-08-10",
+      "date_label": "08.10",
+      "date_precision": "exact",
+      "kind": "public_clue",
+      "subtype": "archive_note",
+      "title": "私人行程安全声明",
+      "summary": "08.10，官方就当日私人行程中的安全问题发布声明。",
+      "confidence": "confirmed",
+      "default_visible": false,
+      "display_mode": "archive_only",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [
+        {
+          "label": "官方声明",
+          "url": "https://sina.cn/news/detail/5339415338551342.html"
+        }
+      ],
+      "local_media": [],
+      "relations": [],
+      "notes": "按此前规则：私人行程只做文字/档案注记，不做视觉重点。",
+      "media_policy": "text_only",
+      "sort_order": 11
+    },
+    {
+      "id": "site_augsep_20260814_01",
+      "period_key": "2026-08",
+      "date_start": "2026-08-14",
+      "date_end": "2026-08-14",
+      "date_label": "08.14",
+      "date_precision": "exact",
+      "kind": "public_post",
+      "subtype": "later_public",
+      "title": "一起森呼吸",
+      "summary": "08.14，“一起森呼吸”公开；影像来自此前的曼谷行程。",
+      "confidence": "confirmed",
+      "default_visible": true,
+      "display_mode": "main",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [
+        {
+          "label": "微博",
+          "url": "https://www.sina.cn/media/8348577978"
+        }
+      ],
+      "local_media": [],
+      "relations": [
+        {
+          "type": "later_public_of",
+          "target": "context_bangkok_material_20260725_26"
+        }
+      ],
+      "notes": "用户确认：该组微博影像拍摄于此前泰国曼谷行程，并非08.14当天拍摄。 源头/关联：泰国曼谷行程素材（具体拍摄日待锁） 后续公开/回声：later-public",
+      "sort_order": 12
+    },
+    {
+      "id": "site_augsep_20260815_01",
+      "period_key": "2026-08",
+      "date_start": "2026-08-15",
+      "date_end": "2026-08-15",
+      "date_label": "08.15",
+      "date_precision": "exact",
+      "kind": "real_event",
+      "subtype": "live",
+      "title": "餐吧双人直播",
+      "summary": "08.15，两人在餐吧进行双人直播；现场环境较吵。",
+      "confidence": "high",
+      "default_visible": true,
+      "display_mode": "main",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "餐吧",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [
+        {
+          "label": "餐吧/直播",
+          "url": "https://weibo.com/2/detail/5337966358039098"
+        }
+      ],
+      "local_media": [],
+      "relations": [],
+      "notes": "地点与现场噪声情况由用户补充；08.16、08.17公开内容均回链08.15拍摄。",
+      "sort_order": 13
+    },
+    {
+      "id": "site_augsep_20260816_01",
+      "period_key": "2026-08",
+      "date_start": "2026-08-16",
+      "date_end": "2026-08-16",
+      "date_label": "08.16",
+      "date_precision": "exact",
+      "kind": "public_post",
+      "subtype": "later_public",
+      "title": "记录游玩的小半天",
+      "summary": "08.16，“记录游玩的小半天”公开；内容实际拍摄于08.15。",
+      "confidence": "confirmed",
+      "default_visible": true,
+      "display_mode": "main",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [
+        {
+          "label": "微博/微博故事",
+          "url": "https://www.sina.cn/media/8348577978"
+        }
+      ],
+      "local_media": [],
+      "relations": [
+        {
+          "type": "later_public_of",
+          "target": "context_daily_material_20260815"
+        }
+      ],
+      "notes": "用户确认：该组内容实际拍摄于08.15，08.16公开。 源头/关联：08.15 当日活动/户外双人直播 后续公开/回声：later-public",
+      "sort_order": 14
+    },
+    {
+      "id": "site_augsep_20260817_01",
+      "period_key": "2026-08",
+      "date_start": "2026-08-17",
+      "date_end": "2026-08-17",
+      "date_label": "08.17",
+      "date_precision": "exact",
+      "kind": "public_post",
+      "subtype": "later_public",
+      "title": "🍃 日常",
+      "summary": "08.17，一组日常内容公开；素材实际拍摄于08.15。",
+      "confidence": "confirmed",
+      "default_visible": true,
+      "display_mode": "main",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [
+        {
+          "label": "微博",
+          "url": "https://www.sina.cn/media/8348577978"
+        }
+      ],
+      "local_media": [],
+      "relations": [
+        {
+          "type": "later_public_of",
+          "target": "context_daily_material_20260815"
+        }
+      ],
+      "notes": "用户确认：该组内容实际拍摄于08.15，08.17公开。 源头/关联：08.15 当日活动/户外双人直播 后续公开/回声：later-public",
+      "sort_order": 15
+    },
+    {
+      "id": "site_augsep_20260819_01",
+      "period_key": "2026-08",
+      "date_start": "2026-08-19",
+      "date_end": "2026-08-19",
+      "date_label": "08.19",
+      "date_precision": "exact",
+      "kind": "real_event",
+      "subtype": "live",
+      "title": "七夕摩天轮复刻直播",
+      "summary": "08.19，两人进行了七夕摩天轮复刻直播。",
+      "confidence": "high",
+      "default_visible": true,
+      "display_mode": "main",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [
+        {
+          "label": "摩天轮/随播",
+          "url": "https://www.bilibili.com/video/BV1zq3T6nEyP/"
+        }
+      ],
+      "local_media": [],
+      "relations": [],
+      "notes": "用户此前已说明最高点开播等细节，后续可补素材。 核对状态：待用户核对",
+      "sort_order": 16
+    },
+    {
+      "id": "site_augsep_20260819_02",
+      "period_key": "2026-08",
+      "date_start": "2026-08-19",
+      "date_end": "2026-08-19",
+      "date_label": "08.19",
+      "date_precision": "exact",
+      "kind": "public_post",
+      "subtype": "public_post",
+      "title": "沿途摘摘花",
+      "summary": "08.19，“沿途摘摘花”等内容在同日公开，素材也拍摄于当天。",
+      "confidence": "confirmed",
+      "default_visible": true,
+      "display_mode": "main",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [
+        {
+          "label": "微博",
+          "url": "https://www.sina.cn/media/8348577978"
+        }
+      ],
+      "local_media": [],
+      "relations": [
+        {
+          "type": "paired_publication",
+          "target": "site_augsep_20260819_01"
+        }
+      ],
+      "notes": "用户确认：微博素材即08.19当天拍摄并公开。 源头/关联：08.19 七夕摩天轮复刻直播",
+      "sort_order": 17
+    },
+    {
+      "id": "site_augsep_20260822_01",
+      "period_key": "2026-08",
+      "date_start": "2026-08-22",
+      "date_end": "2026-08-22",
+      "date_label": "08.22",
+      "date_precision": "exact",
+      "kind": "public_post",
+      "subtype": "event_announcement",
+      "title": "澳门见面会官宣",
+      "summary": "08.22，9月12日澳门双人见面会正式官宣。",
+      "confidence": "confirmed",
+      "default_visible": true,
+      "display_mode": "main",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "澳门",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [
+        {
+          "label": "微博/活动",
+          "url": "https://www.sina.cn/media/8348577978"
+        }
+      ],
+      "local_media": [],
+      "relations": [
+        {
+          "type": "announcement_for",
+          "target": "site_augsep_20260912_01"
+        }
+      ],
+      "notes": "强跨月主线：8月官宣 → 9月落地。 后续公开/回声：09.12 澳门见面会",
+      "sort_order": 18
+    },
+    {
+      "id": "site_augsep_20260824_01",
+      "period_key": "2026-08",
+      "date_start": "2026-08-24",
+      "date_end": "2026-08-24",
+      "date_label": "08.24",
+      "date_precision": "exact",
+      "kind": "real_event",
+      "subtype": "live",
+      "title": "居家双人直播",
+      "summary": "08.24，两人进行居家双人直播。",
+      "confidence": "high",
+      "default_visible": true,
+      "display_mode": "main",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "室内",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [
+        {
+          "label": "居家/双人直播",
+          "url": "https://www.bilibili.com/video/BV1zq3T6nEyP/"
+        }
+      ],
+      "local_media": [],
+      "relations": [],
+      "notes": "用户确认：08.24本场只应作为居家双人直播记录，不与“真心话特供”绑定。部分观众当时认为两人的互动观感不如平时轻松；该内容仅按观众反馈记录，不作为客观心理状态判断。 后续公开/回声：直播后出现对06.21直播前情况的回溯讨论",
+      "sort_order": 19
+    },
+    {
+      "id": "site_augsep_20260824_02",
+      "period_key": "2026-08",
+      "date_start": "2026-08-24",
+      "date_end": "2026-08-24",
+      "date_label": "08.24",
+      "date_precision": "exact",
+      "kind": "public_clue",
+      "subtype": "archive_note",
+      "title": "08.24 直播后讨论 · 回溯 06.21",
+      "summary": "08.24直播结束后，出现了对06.21直播前情况的回溯讨论；其中也夹杂未经证实的私人关系传言。",
+      "confidence": "mixed",
+      "default_visible": false,
+      "display_mode": "archive_only",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [],
+      "local_media": [],
+      "relations": [
+        {
+          "type": "context_from",
+          "target": "site_live_20260621"
+        }
+      ],
+      "notes": "经纪人协助调灯作为回溯性说法记录；“分居”属于未经证实的私人关系传言，只保留为舆论背景，不进入事实时间线。 核对状态：用户补充待证据 源头/关联：06.21 直播前",
+      "media_policy": "text_only",
+      "sort_order": 20
+    },
+    {
+      "id": "site_augsep_20260825_01",
+      "period_key": "2026-08",
+      "date_start": "2026-08-25",
+      "date_end": "2026-08-25",
+      "date_label": "08.25",
+      "date_precision": "exact",
+      "kind": "public_post",
+      "subtype": "later_public",
+      "title": "上一站很美好，我们下一站见",
+      "summary": "08.25，“上一站很美好，我们下一站见”公开；视频拍摄于此前的曼谷行程。",
+      "confidence": "confirmed",
+      "default_visible": true,
+      "display_mode": "main",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [
+        {
+          "label": "微博/微博故事",
+          "url": "https://www.sina.cn/media/8348577978"
+        }
+      ],
+      "local_media": [],
+      "relations": [
+        {
+          "type": "later_public_of",
+          "target": "context_bangkok_material_20260725_26"
+        }
+      ],
+      "notes": "用户确认：视频拍摄于此前曼谷行程，08.25为后续公开。 源头/关联：泰国曼谷行程素材（具体拍摄日待锁） 后续公开/回声：later-public",
+      "sort_order": 21
+    },
+    {
+      "id": "site_augsep_20260829_01",
+      "period_key": "2026-08",
+      "date_start": "2026-08-29",
+      "date_end": "2026-08-29",
+      "date_label": "08.29",
+      "date_precision": "exact",
+      "kind": "real_event",
+      "subtype": "live",
+      "title": "户外餐厅双人直播",
+      "summary": "08.29，两人在户外餐厅进行双人直播。",
+      "confidence": "high",
+      "default_visible": true,
+      "display_mode": "main",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "户外餐厅",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [
+        {
+          "label": "户外餐厅/直播",
+          "url": "https://weibo.com/2/detail/5337378541536442"
+        }
+      ],
+      "local_media": [],
+      "relations": [],
+      "notes": "用户补充：与08.24相比，部分观众认为当晚两人的互动观感更自然、氛围更轻松。按观众反馈记录，不作为客观心理状态判断。",
+      "sort_order": 22
+    },
+    {
+      "id": "site_augsep_20260830_01",
+      "period_key": "2026-08",
+      "date_start": "2026-08-30",
+      "date_end": "2026-08-30",
+      "date_label": "08.30",
+      "date_precision": "exact",
+      "kind": "public_post",
+      "subtype": "public_post",
+      "title": "直播后公开 · 我也很爱你们 / 那几天",
+      "summary": "08.30，直播之后继续有“我也很爱你们”“那几天”等公开内容。",
+      "confidence": "confirmed",
+      "default_visible": true,
+      "display_mode": "main",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [
+        {
+          "label": "微博",
+          "url": "https://www.sina.cn/media/8348577978"
+        }
+      ],
+      "local_media": [],
+      "relations": [
+        {
+          "type": "paired_publication",
+          "target": "site_augsep_20260829_01"
+        }
+      ],
+      "notes": "可作为8月收尾。 源头/关联：08.29 双人直播",
+      "sort_order": 23
+    },
+    {
+      "id": "site_augsep_20260902_01",
+      "period_key": "2026-09",
+      "date_start": "2026-09-02",
+      "date_end": "2026-09-02",
+      "date_label": "09.02",
+      "date_precision": "exact",
+      "kind": "public_post",
+      "subtype": "public_post",
+      "title": "解锁这些天",
+      "summary": "09.02，“解锁这些天”公开；现阶段推定这组内容大概率拍摄于当天。",
+      "confidence": "medium",
+      "default_visible": true,
+      "display_mode": "main",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [
+        {
+          "label": "微博",
+          "url": "https://www.sina.cn/media/8348577978"
+        }
+      ],
+      "local_media": [],
+      "relations": [],
+      "notes": "用户判断“解锁这些天”大概率为09.02当天拍摄。另有一条09.02公开内容被用户指出来自曼谷行程，当前草案尚未明确其具体题名，暂记入Research Notes待对应。 核对状态：用户推定 源头/关联：09.02 当日拍摄（用户推定）",
+      "sort_order": 24
+    },
+    {
+      "id": "site_augsep_20260904_01",
+      "period_key": "2026-09",
+      "date_start": "2026-09-04",
+      "date_end": "2026-09-04",
+      "date_label": "09.04",
+      "date_precision": "exact",
+      "kind": "public_post",
+      "subtype": "later_public",
+      "title": "咔嚓咔嚓",
+      "summary": "09.04，“咔嚓咔嚓”公开，是09.02四宫格同组素材的高清版本。",
+      "confidence": "confirmed",
+      "default_visible": true,
+      "display_mode": "main",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [
+        {
+          "label": "微博",
+          "url": "https://www.sina.cn/media/8348577978"
+        }
+      ],
+      "local_media": [],
+      "relations": [
+        {
+          "type": "later_public_of",
+          "target": "site_augsep_20260902_01"
+        }
+      ],
+      "notes": "用户确认：09.04内容是09.02四宫格素材的高清版本，因此拍摄日跟随09.02。 源头/关联：09.02 四宫格同组素材 后续公开/回声：later-public",
+      "sort_order": 25
+    },
+    {
+      "id": "site_augsep_20260905_01",
+      "period_key": "2026-09",
+      "date_start": "2026-09-05",
+      "date_end": "2026-09-05",
+      "date_label": "09.05",
+      "date_precision": "exact",
+      "kind": "public_post",
+      "subtype": "public_post",
+      "title": "法宣阁｜日常公开",
+      "summary": "09.05，法宣阁公开一组日常内容。",
+      "confidence": "confirmed",
+      "default_visible": true,
+      "display_mode": "main",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁"
+      ],
+      "location_general": "",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [
+        {
+          "label": "微博",
+          "url": "https://www.sina.cn/media/1118449424"
+        }
+      ],
+      "local_media": [],
+      "relations": [],
+      "notes": "是否并入主日历可由你决定。",
+      "sort_order": 26
+    },
+    {
+      "id": "site_augsep_20260906_01",
+      "period_key": "2026-09",
+      "date_start": "2026-09-06",
+      "date_end": "2026-09-06",
+      "date_label": "09.06",
+      "date_precision": "exact",
+      "kind": "real_event",
+      "subtype": "live",
+      "title": "双人直播",
+      "summary": "09.06，两人进行双人直播。",
+      "confidence": "confirmed",
+      "default_visible": true,
+      "display_mode": "main",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [
+        {
+          "label": "直播",
+          "url": "https://weibo.com/2/detail/5340277913163667"
+        }
+      ],
+      "local_media": [],
+      "relations": [],
+      "notes": "澳门见面会前的重要直播节点。",
+      "sort_order": 27
+    },
+    {
+      "id": "site_augsep_20260907_01",
+      "period_key": "2026-09",
+      "date_start": "2026-09-07",
+      "date_end": "2026-09-07",
+      "date_label": "09.07",
+      "date_precision": "exact",
+      "kind": "public_post",
+      "subtype": "public_post",
+      "title": "法宣阁｜🐕🐕🐈🐈",
+      "summary": "09.07，法宣阁公开一组日常图文。",
+      "confidence": "confirmed",
+      "default_visible": true,
+      "display_mode": "main",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁"
+      ],
+      "location_general": "",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [
+        {
+          "label": "微博",
+          "url": "https://www.sina.cn/media/1118449424"
+        }
+      ],
+      "local_media": [],
+      "relations": [],
+      "notes": "拍摄时间未锁定。",
+      "sort_order": 28
+    },
+    {
+      "id": "site_augsep_20260908_01",
+      "period_key": "2026-09",
+      "date_start": "2026-09-08",
+      "date_end": "2026-09-08",
+      "date_label": "09.08",
+      "date_precision": "exact",
+      "kind": "public_post",
+      "subtype": "promo_public",
+      "title": "澳门见面会ID影片公开",
+      "summary": "09.08，澳门见面会相关ID影片与宣传内容公开。",
+      "confidence": "medium-high",
+      "default_visible": true,
+      "display_mode": "main",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "澳门",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [
+        {
+          "label": "活动宣传",
+          "url": "https://www.sina.cn/media/8361894259"
+        }
+      ],
+      "local_media": [],
+      "relations": [
+        {
+          "type": "announcement_for",
+          "target": "site_augsep_20260912_01"
+        }
+      ],
+      "notes": "适合作为活动宣传回声，而非独立现实事件。 核对状态：待用户核对 源头/关联：08.22 澳门见面会官宣 后续公开/回声：09.12 澳门见面会",
+      "sort_order": 29
+    },
+    {
+      "id": "site_augsep_20260909_01",
+      "period_key": "2026-09",
+      "date_start": "2026-09-09",
+      "date_end": "2026-09-09",
+      "date_label": "09.09",
+      "date_precision": "exact",
+      "kind": "public_post",
+      "subtype": "interview_public",
+      "title": "澳门见面会相关采访公开",
+      "summary": "09.09，澳门见面会宣传周期中的相关采访内容公开。",
+      "confidence": "medium",
+      "default_visible": true,
+      "display_mode": "main",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "澳门",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [
+        {
+          "label": "采访/微博",
+          "url": "https://sina.cn/news/detail/5339495765643620.html"
+        }
+      ],
+      "local_media": [],
+      "relations": [
+        {
+          "type": "context_from",
+          "target": "site_augsep_20260912_01"
+        }
+      ],
+      "notes": "实际采访拍摄日期未确认。 核对状态：待用户核对 源头/关联：澳门见面会宣传周期 后续公开/回声：09.12 澳门见面会",
+      "sort_order": 30
+    },
+    {
+      "id": "site_augsep_20260911_01",
+      "period_key": "2026-09",
+      "date_start": "2026-09-11",
+      "date_end": "2026-09-11",
+      "date_label": "09.11",
+      "date_precision": "exact",
+      "kind": "real_event",
+      "subtype": "live",
+      "title": "见面会前夜双人直播",
+      "summary": "09.11，澳门见面会前夜，两人进行双人直播。",
+      "confidence": "confirmed",
+      "default_visible": true,
+      "display_mode": "main",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [
+        {
+          "label": "直播",
+          "url": "https://www.bilibili.com/video/BV1zq3T6nEyP/"
+        }
+      ],
+      "local_media": [],
+      "relations": [
+        {
+          "type": "pre_event",
+          "target": "site_augsep_20260912_01"
+        }
+      ],
+      "notes": "建议与次日见面会形成连续章节。 后续公开/回声：09.12 澳门见面会",
+      "sort_order": 31
+    },
+    {
+      "id": "site_augsep_20260912_01",
+      "period_key": "2026-09",
+      "date_start": "2026-09-12",
+      "date_end": "2026-09-12",
+      "date_label": "09.12",
+      "date_precision": "exact",
+      "kind": "real_event",
+      "subtype": "event",
+      "title": "澳门见面会 · 宣之於口，嘉許於心",
+      "summary": "09.12，澳门双人见面会正式举行。",
+      "confidence": "confirmed",
+      "default_visible": true,
+      "display_mode": "main",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "澳门",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [
+        {
+          "label": "澳门/线下见面会",
+          "url": "https://weibo.com/2/detail/5334736022536453"
+        }
+      ],
+      "local_media": [],
+      "relations": [
+        {
+          "type": "later_public",
+          "target": "site_augsep_20260917_01"
+        },
+        {
+          "type": "later_public",
+          "target": "site_augsep_20260920_01"
+        }
+      ],
+      "notes": "9月核心现实事件。 同日公开照片另拆一条，拍摄日推定为09.11；见面会本身仍记09.12现实发生。 源头/关联：08.22 澳门见面会官宣 后续公开/回声：09.17–09.20 后续官方/首饰盒素材",
+      "sort_order": 32
+    },
+    {
+      "id": "site_augsep_20260912_02",
+      "period_key": "2026-09",
+      "date_start": "2026-09-12",
+      "date_end": "2026-09-12",
+      "date_label": "09.12",
+      "date_precision": "exact",
+      "kind": "public_post",
+      "subtype": "public_post",
+      "title": "见面会同日公开照片",
+      "summary": "09.12，同日公开了一组相关照片；现阶段推定照片拍摄于09.11。",
+      "confidence": "medium-high",
+      "default_visible": true,
+      "display_mode": "main",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [],
+      "local_media": [],
+      "relations": [
+        {
+          "type": "later_public_of",
+          "target": "context_photo_material_20260911"
+        }
+      ],
+      "notes": "拍摄日期使用“应该”为推定，不与09.12见面会现实发生日期混为一谈。 核对状态：用户推定 源头/关联：09.11 见面会前夜 后续公开/回声：09.12 澳门见面会",
+      "sort_order": 33
+    },
+    {
+      "id": "site_augsep_20260917_01",
+      "period_key": "2026-09",
+      "date_start": "2026-09-17",
+      "date_end": "2026-09-17",
+      "date_label": "09.17",
+      "date_precision": "exact",
+      "kind": "public_post",
+      "subtype": "later_public",
+      "title": "澳门见面会后续公开 · 大合照 / 彩排",
+      "summary": "09.17，澳门见面会的大合照、彩排等后续素材继续公开。",
+      "confidence": "high",
+      "default_visible": true,
+      "display_mode": "main",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "澳门",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [
+        {
+          "label": "活动后续",
+          "url": "https://sina.cn/news/detail/5342366916674794.html"
+        }
+      ],
+      "local_media": [],
+      "relations": [
+        {
+          "type": "later_public_of",
+          "target": "site_augsep_20260912_01"
+        }
+      ],
+      "notes": "不新建现实事件，作为09.12后续公开。 源头/关联：09.12 澳门见面会 后续公开/回声：later-public",
+      "sort_order": 34
+    },
+    {
+      "id": "site_augsep_20260919_01",
+      "period_key": "2026-09",
+      "date_start": "2026-09-19",
+      "date_end": "2026-09-19",
+      "date_label": "09.19",
+      "date_precision": "exact",
+      "kind": "real_event",
+      "subtype": "live",
+      "title": "双人直播",
+      "summary": "09.19，两人进行双人直播。",
+      "confidence": "confirmed",
+      "default_visible": true,
+      "display_mode": "main",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [
+        {
+          "label": "直播",
+          "url": "https://weibo.com/2/detail/5344849700324654"
+        }
+      ],
+      "local_media": [],
+      "relations": [],
+      "notes": "见面会后一周的直播节点。",
+      "sort_order": 35
+    },
+    {
+      "id": "site_augsep_20260920_01",
+      "period_key": "2026-09",
+      "date_start": "2026-09-20",
+      "date_end": "2026-09-20",
+      "date_label": "09.20",
+      "date_precision": "exact",
+      "kind": "public_post",
+      "subtype": "later_public",
+      "title": "存档澳门记忆",
+      "summary": "09.20，首饰盒继续公开澳门见面会相关影像。",
+      "confidence": "high",
+      "default_visible": true,
+      "display_mode": "main",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "澳门",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [
+        {
+          "label": "首饰盒/微博",
+          "url": "https://sina.cn/news/detail/5345295298724625.html"
+        }
+      ],
+      "local_media": [],
+      "relations": [
+        {
+          "type": "later_public_of",
+          "target": "site_augsep_20260912_01"
+        }
+      ],
+      "notes": "作为09.12回声。 源头/关联：09.12 澳门见面会 后续公开/回声：later-public",
+      "sort_order": 36
+    },
+    {
+      "id": "site_augsep_20260921_01",
+      "period_key": "2026-09",
+      "date_start": "2026-09-21",
+      "date_end": "2026-09-21",
+      "date_label": "09.21",
+      "date_precision": "exact",
+      "kind": "public_post",
+      "subtype": "brand_public",
+      "title": "LEECN「双叙」新香预告",
+      "summary": "09.21，LEECN开启「双叙」新香预告与相关线下宣传。",
+      "confidence": "confirmed",
+      "default_visible": true,
+      "display_mode": "main",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [
+        {
+          "label": "商务/微博",
+          "url": "https://www.sina.cn/media/8368682331"
+        }
+      ],
+      "local_media": [],
+      "relations": [
+        {
+          "type": "campaign_followup",
+          "target": "site_augsep_20260810_01"
+        },
+        {
+          "type": "campaign_followup",
+          "target": "site_augsep_20260923_01"
+        }
+      ],
+      "notes": "商务延续线。 源头/关联：08.10 LEECN新序美学大使 后续公开/回声：09.23 双叙正式开售",
+      "sort_order": 37
+    },
+    {
+      "id": "site_augsep_20260922_01",
+      "period_key": "2026-09",
+      "date_start": "2026-09-22",
+      "date_end": "2026-09-22",
+      "date_label": "09.22",
+      "date_precision": "exact",
+      "kind": "public_post",
+      "subtype": "brand_public",
+      "title": "LEECN · 香水预告 / 一日店长邀请函",
+      "summary": "09.22，LEECN继续发布香水预告，并公开杭州香水品鉴沙龙一日店长邀请信息。",
+      "confidence": "confirmed",
+      "default_visible": true,
+      "display_mode": "main",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [
+        {
+          "label": "商务/微博",
+          "url": "https://www.sina.cn/media/8368682331"
+        }
+      ],
+      "local_media": [],
+      "relations": [
+        {
+          "type": "campaign_followup",
+          "target": "site_augsep_20260810_01"
+        },
+        {
+          "type": "campaign_followup",
+          "target": "site_augsep_20260923_01"
+        }
+      ],
+      "notes": "实际一日店长活动并非9/22发生；此日只记公开信息。 源头/关联：09.21 双叙预告 后续公开/回声：10.11 线下见面",
+      "sort_order": 38
+    },
+    {
+      "id": "site_augsep_20260923_01",
+      "period_key": "2026-09",
+      "date_start": "2026-09-23",
+      "date_end": "2026-09-23",
+      "date_label": "09.23",
+      "date_precision": "exact",
+      "kind": "public_post",
+      "subtype": "brand_public",
+      "title": "LEECN「法嘉双叙」正式开售 / 拍摄花絮",
+      "summary": "09.23，LEECN「双叙」系列正式开售，并公开拍摄花絮与后续活动预告。",
+      "confidence": "confirmed",
+      "default_visible": true,
+      "display_mode": "main",
+      "privacy_level": "public",
+      "participants": [
+        "法宣阁",
+        "贺嘉述"
+      ],
+      "location_general": "",
+      "source_basis": "aug_sep_master_v4_20260928",
+      "sources": [
+        {
+          "label": "商务/微博",
+          "url": "https://www.sina.cn/media/8368682331"
+        }
+      ],
+      "local_media": [],
+      "relations": [
+        {
+          "type": "campaign_followup",
+          "target": "site_augsep_20260810_01"
+        }
+      ],
+      "notes": "截至9/27，这是9月下旬最明确的新商务主线。 源头/关联：08.10 LEECN新序美学大使 后续公开/回声：10.11 杭州一日限定活动",
+      "sort_order": 39
     }
   ],
   "relations": [
@@ -5827,6 +7255,146 @@ window.FAJIA_TIMELINE_MASTER = {
       "from": "future_20260809_material_release",
       "to": "site_material_shoot_20260727_28",
       "type": "later_public_of"
+    },
+    {
+      "from": "site_augsep_20260803_02",
+      "to": "site_augsep_20260803_01",
+      "type": "context_from"
+    },
+    {
+      "from": "site_augsep_20260805_02",
+      "to": "context_bangkok_material_20260725_26",
+      "type": "later_public_of"
+    },
+    {
+      "from": "site_augsep_20260808_02",
+      "to": "site_augsep_20260808_01",
+      "type": "paired_publication"
+    },
+    {
+      "from": "site_augsep_20260810_01",
+      "to": "site_augsep_20260921_01",
+      "type": "campaign_followup"
+    },
+    {
+      "from": "site_augsep_20260810_01",
+      "to": "site_augsep_20260922_01",
+      "type": "campaign_followup"
+    },
+    {
+      "from": "site_augsep_20260810_01",
+      "to": "site_augsep_20260923_01",
+      "type": "campaign_followup"
+    },
+    {
+      "from": "site_augsep_20260814_01",
+      "to": "context_bangkok_material_20260725_26",
+      "type": "later_public_of"
+    },
+    {
+      "from": "site_augsep_20260816_01",
+      "to": "context_daily_material_20260815",
+      "type": "later_public_of"
+    },
+    {
+      "from": "site_augsep_20260817_01",
+      "to": "context_daily_material_20260815",
+      "type": "later_public_of"
+    },
+    {
+      "from": "site_augsep_20260819_02",
+      "to": "site_augsep_20260819_01",
+      "type": "paired_publication"
+    },
+    {
+      "from": "site_augsep_20260822_01",
+      "to": "site_augsep_20260912_01",
+      "type": "announcement_for"
+    },
+    {
+      "from": "site_augsep_20260824_02",
+      "to": "site_live_20260621",
+      "type": "context_from"
+    },
+    {
+      "from": "site_augsep_20260825_01",
+      "to": "context_bangkok_material_20260725_26",
+      "type": "later_public_of"
+    },
+    {
+      "from": "site_augsep_20260830_01",
+      "to": "site_augsep_20260829_01",
+      "type": "paired_publication"
+    },
+    {
+      "from": "site_augsep_20260904_01",
+      "to": "site_augsep_20260902_01",
+      "type": "later_public_of"
+    },
+    {
+      "from": "site_augsep_20260908_01",
+      "to": "site_augsep_20260912_01",
+      "type": "announcement_for"
+    },
+    {
+      "from": "site_augsep_20260909_01",
+      "to": "site_augsep_20260912_01",
+      "type": "context_from"
+    },
+    {
+      "from": "site_augsep_20260911_01",
+      "to": "site_augsep_20260912_01",
+      "type": "pre_event"
+    },
+    {
+      "from": "site_augsep_20260912_01",
+      "to": "site_augsep_20260917_01",
+      "type": "later_public"
+    },
+    {
+      "from": "site_augsep_20260912_01",
+      "to": "site_augsep_20260920_01",
+      "type": "later_public"
+    },
+    {
+      "from": "site_augsep_20260912_02",
+      "to": "context_photo_material_20260911",
+      "type": "later_public_of"
+    },
+    {
+      "from": "site_augsep_20260917_01",
+      "to": "site_augsep_20260912_01",
+      "type": "later_public_of"
+    },
+    {
+      "from": "site_augsep_20260920_01",
+      "to": "site_augsep_20260912_01",
+      "type": "later_public_of"
+    },
+    {
+      "from": "site_augsep_20260921_01",
+      "to": "site_augsep_20260810_01",
+      "type": "campaign_followup"
+    },
+    {
+      "from": "site_augsep_20260921_01",
+      "to": "site_augsep_20260923_01",
+      "type": "campaign_followup"
+    },
+    {
+      "from": "site_augsep_20260922_01",
+      "to": "site_augsep_20260810_01",
+      "type": "campaign_followup"
+    },
+    {
+      "from": "site_augsep_20260922_01",
+      "to": "site_augsep_20260923_01",
+      "type": "campaign_followup"
+    },
+    {
+      "from": "site_augsep_20260923_01",
+      "to": "site_augsep_20260810_01",
+      "type": "campaign_followup"
     }
   ],
   "source_documents": [
@@ -5839,7 +7407,12 @@ window.FAJIA_TIMELINE_MASTER = {
       "name": "V0.8.5 current site data",
       "coverage": "2026-05 至 2026-07",
       "role": "current site nodes"
+    },
+    {
+      "name": "fajia_aug_sep_master_event_draft_v4_corrected_0824.xlsx",
+      "coverage": "2026-08 至 2026-09-23（当前草案截至 09.27）",
+      "role": "August–September verified working master"
     }
   ],
-  "version": "0.9.3"
+  "version": "0.9.6"
 };

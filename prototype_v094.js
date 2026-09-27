@@ -37,6 +37,18 @@ const readerMonthMeta = {
     title:'七月 · 工作与公开一页页展开',
     lead:'直播、杂志、品牌、生日与曼谷行程变得更密集；这一章更像一本不断打开的工作档案。',
     note:'同日多件事会并列保留，但每一页只先讲最重要的一件。'
+  },
+  '2026-08':{
+    eyebrow:'CHAPTER 08 · AUGUST',
+    title:'八月 · 上海、直播与后来被看见的夏天',
+    lead:'集草相关活动、上海直播、摩天轮、澳门见面会官宣与多组后来公开的素材，让八月同时有现实事件和跨月回声。',
+    note:'直播与活动按发生日阅读；曼谷、七月底物料等内容继续把“拍摄日”和“公开日”分开。'
+  },
+  '2026-09':{
+    eyebrow:'CHAPTER 09 · SEPTEMBER',
+    title:'九月 · 澳门见面会与新的商务线',
+    lead:'见面会前后的直播、澳门现场与LEECN「双叙」依次展开，九月开始像一章完整的活动档案。',
+    note:'当前时间线整理截至09.27；现有已知节点落到09.23，之后如果补入新记录，只需继续追加。'
   }
 };
 
@@ -614,11 +626,22 @@ function masterKindToLegacy(kind){
   return 'public_post';
 }
 function masterRelationLabel(type){
-  return ({later_public:'后来公开',later_public_of:'来自此前事件',interaction_on:'互动发生在',paired_publication:'关联公开',event_update:'信息更新',later_public_inferred:'后来公开（推定）'})[type]||type||'关联';
+  return ({
+    later_public:'后来公开',
+    later_public_of:'来自此前事件',
+    interaction_on:'互动发生在',
+    paired_publication:'同日关联',
+    event_update:'信息更新',
+    later_public_inferred:'后来公开（推定）',
+    announcement_for:'活动官宣 / 宣传',
+    campaign_followup:'商务线延续',
+    pre_event:'活动前置',
+    context_from:'背景关联'
+  })[type]||type||'关联';
 }
 function masterEventById(id){return (window.FAJIA_TIMELINE_MASTER?.events||[]).find(x=>x.id===id);}
 function masterResolvedRelations(e){
-  return (e.relations||[]).map(r=>{const t=masterEventById(r.target);return t?{type:r.type,target_id:r.target,title:t.title,date:t.date_label,period_key:t.period_key}:null;}).filter(Boolean);
+  return (e.relations||[]).map(r=>{const t=masterEventById(r.target);return t?{type:r.type,target_id:r.target,title:t.title,date:t.date_label,date_start:t.date_start,period_key:t.period_key}:null;}).filter(Boolean);
 }
 function masterMediaFit(m){return m?.fit==='contain'||/(微博|抖音|小红书|母帖|截图|页面|论文|海报|公开帖|评论|行程|总览|日历)/.test(String(m?.caption||''))?'contain':'';}
 function masterBalancedSocial(local=[]){
@@ -635,8 +658,11 @@ function masterEventToLegacy(e, idx, periodKey){
   const laterSource=rels.find(r=>r.type==='later_public_of');
   const mode=(e.subtype==='later_public'||laterSource)?'later_public':'same_day_public';
   const dateText=e.date_label||String(e.date_start||'').slice(5).replace('-','.');
-  const monthNo=String(periodKey||'').slice(5,7), monthCode=({04:'APR',05:'MAY',06:'JUN',07:'JUL',08:'AUG'})[monthNo]||'LOG';
-  const sourceEvidence=[];
+  const monthNo=String(periodKey||'').slice(5,7), monthCode=({'04':'APR','05':'MAY','06':'JUN','07':'JUL','08':'AUG','09':'SEP'})[monthNo]||'LOG';
+  const sourceEvidence=rels.filter(r=>r.type==='later_public' && r.date_start).map(r=>({
+    published_at:r.date_start,platform:'PUBLIC RECORD',title:r.title,relation:'later public',
+    text:'当前事件在之后留下了新的公开记录。',url:'',art:'postcard'
+  }));
   const relationRows=rels.map(r=>({date:r.date,title:`${masterRelationLabel(r.type)} · ${r.title}`,text:'与当前节点存在时间关联。',soft:true,tag:masterRelationLabel(r.type)}));
   const anchors=[{label:e.kind==='real_event'?'发生日期':'公开 / 互动日期',value:dateText,note:e.date_precision==='exact'?'日期可确认。':`精度：${e.date_precision||'unknown'}。`,tone:'pink'}];
   if(e.location_general)anchors.push({label:'地点 / 动线',value:e.location_general,note:'只保留公开可确认的概括层级。',tone:'yellow'});
@@ -649,7 +675,7 @@ function masterEventToLegacy(e, idx, periodKey){
   return {
     key:e.id,node_type:node,chapter:`${monthCode} ${String(idx+1).padStart(2,'0')}`,layout_type:'master_calendar_spread',evidence_mode:mode,
     title:e.title,short_title:e.title,tagline:e.subtype||'',priority:'P0',range:days,year:+String(periodKey).slice(0,4),
-    status:e.confidence==='confirmed'?'confirmed':'draft',date_precision:e.date_precision||'exact',confidence:e.confidence||'confirmed',
+    status:['confirmed','high'].includes(e.confidence)?'confirmed':'draft',date_precision:e.date_precision||'exact',confidence:e.confidence||'confirmed',
     hero, ...(gallery.length?{gallery}:{}),
     left_intro:e.summary||`${dateText}，${e.title}。`,time_anchors:anchors,
     fact_memos:[],real_timeline:[{date:dateText,title:e.title,text:e.summary||''},...relationRows],
@@ -665,15 +691,21 @@ function buildMasterMonthData(periodKey){
   const period=(master.periods||[]).find(p=>p.key===periodKey);
   if(!period)return null;
   const raw=(master.events||[]).filter(e=>e.period_key===periodKey&&e.display_mode!=='hidden_dev');
-  const main=raw.filter(e=>e.default_visible).sort((a,b)=>String(a.date_start).localeCompare(String(b.date_start))||a.title.localeCompare(b.title));
+  const main=raw.filter(e=>e.default_visible).sort((a,b)=>String(a.date_start).localeCompare(String(b.date_start))||((a.sort_order??9999)-(b.sort_order??9999))||a.title.localeCompare(b.title));
   const archive=raw.filter(e=>!e.default_visible).sort((a,b)=>String(a.date_start).localeCompare(String(b.date_start)));
   const events=main.map((e,i)=>masterEventToLegacy(e,i,periodKey)).filter(e=>e.range.length);
   const public_archive=archive.map(e=>({published_at:e.date_start||'',platform:e.kind==='public_clue'?'公开线索':'补充记录',title:e.title,text:e.summary||'',url:e.sources?.[0]?.url||'',master_id:e.id}));
+  const num=String(period.start||'').slice(5,7);
+  const names={'04':'April','05':'May','06':'June','07':'July','08':'August','09':'September'};
+  const name=names[num]||period.label;
   return {
-    month:{year:+period.start.slice(0,4),month:+period.start.slice(5,7),title:period.label},
-    meta:{key:periodKey,name:'April',num:'04',year:+period.start.slice(0,4),title:period.label,
-      lead:'四月开始进入单月高密度阶段。',rule:'先看主要事件；较轻的公开记录、城市级线索与待确认内容不会抢在前面。',corner:'April notes ✎',
-      rightTitle:'April 2026',introTitle:'April 2026',introText:'四月开始进入适合按月阅读的阶段。',chapterTitle:'April 手账目录',source_mode:'master'},
+    month:{year:+period.start.slice(0,4),month:+num,title:period.label},
+    meta:{key:periodKey,name,num,year:+period.start.slice(0,4),title:period.label,
+      lead:period.subtitle||`${name} 的时间记录。`,
+      rule:'先看主要事件；较轻的补充记录与不确定线索放在档案层。',
+      corner:`${name} notes ✎`,
+      rightTitle:period.label,introTitle:period.label,introText:period.subtitle||`${name} 的记录正在展开。`,
+      chapterTitle:`${name} 手账目录`,source_mode:'master'},
     events,public_archive,source_mode:'master'
   };
 }
@@ -873,8 +905,17 @@ function buildJulyMasterData(){
   };
 }
 const julyMasterData=buildJulyMasterData();
-const monthStore = {'2026-04':aprilMasterData,'2026-05':mayMasterData,'2026-06':juneMasterData,'2026-07':julyMasterData};
-const monthOrder = ['2026-04','2026-05','2026-06','2026-07'];
+const augustMasterData=buildMasterMonthData('2026-08');
+const septemberMasterData=buildMasterMonthData('2026-09');
+const monthStore = {
+  '2026-04':aprilMasterData,
+  '2026-05':mayMasterData,
+  '2026-06':juneMasterData,
+  '2026-07':julyMasterData,
+  '2026-08':augustMasterData,
+  '2026-09':septemberMasterData
+};
+const monthOrder = ['2026-04','2026-05','2026-06','2026-07','2026-08','2026-09'];
 let currentMonthKey='2026-04';
 let currentEventKey=aprilMasterData?.events[0]?.key||mayMasterData?.events[0]?.key||juneMasterData?.events[0]?.key||julyMasterData?.events[0]?.key||mayData.events[0].key;
 
@@ -1112,7 +1153,7 @@ function renderReaderPeers(e){
 
 function renderReaderRelations(e){
   const parts=[];
-  if(e.related_events?.length){const rs=e.related_events.filter(r=>['later_public','later_public_of','interaction_on','paired_publication'].includes(r.type)).slice(0,4);if(rs.length)parts.push(`<div class="reader-relation master-link"><small>关联</small><b>${rs.map(r=>`${esc(r.date)} · ${esc(r.title)}`).join(' / ')}</b><span>这几条记录在时间上彼此关联。</span></div>`);}
+  if(e.related_events?.length){const rs=e.related_events.filter(r=>['later_public','later_public_of','interaction_on','paired_publication','announcement_for','campaign_followup','pre_event','context_from'].includes(r.type)).slice(0,4);if(rs.length)parts.push(`<div class="reader-relation master-link"><small>关联</small><b>${rs.map(r=>`${esc(r.date)} · ${esc(r.title)}`).join(' / ')}</b><span>这几条记录在时间上彼此关联。</span></div>`);}
   if(e.future_relation) parts.push(`<div class="reader-relation future"><small>后来</small><b>${esc(e.future_relation.title)}</b><span>${esc(e.future_relation.text||'')}</span></div>`);
   if(e.evidence_mode==='later_public' && (e.public_evidence||[]).length){
     const p=e.public_evidence[0]; parts.push(`<div class="reader-relation later"><small>后来被看见</small><b>${esc(fmtMonthDay(p.published_at)||p.published_at)} · ${esc(p.title)}</b><span>${esc(p.text||'')}</span></div>`);
@@ -1172,7 +1213,7 @@ $('#openBook').onclick=()=>{
       renderGuideBindings();
       spread('guide');
     }catch(err){
-      console.error('V0.9.5.4 render error:',err);
+      console.error('V0.9.6 render error:',err);
       const rail=$('#chapterRail');
       if(rail) rail.innerHTML='<article class="no-evidence"><b>页面渲染遇到错误</b><span>书页已正常打开，请检查控制台中的数据错误。</span></article>';
     }
@@ -1206,7 +1247,7 @@ if(__previewParams.get('preview')){
 /* --------------------------------------------------------------------------
    V0.9.3 · MASTER-DATA QUARTER TIMELINE RENDERER
    2025 Q4 + 2026 Q1 are rendered directly from data/timeline-master.js.
-   April + May + June + July now all use Master Calendar adapters; Phase 5 completes the month-renderer migration through July.
+   April through September now read from the Master Calendar layer; August and September are added from the V4 working master.
    -------------------------------------------------------------------------- */
 const masterTimeline = window.FAJIA_TIMELINE_MASTER || {periods:[],events:[],relations:[]};
 const quarterPeriods = (masterTimeline.periods||[]).filter(p=>p.primary_view==='timeline' && p.status==='data_ready');
